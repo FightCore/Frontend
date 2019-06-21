@@ -34,6 +34,7 @@ export class PostService {
     post.author = faker.internet.userName();
     post.body = faker.lorem.paragraphs(2);
     post.votes = faker.random.number();
+    post.bannerUrl = 'https://i.imgur.com/aEwNXVn.jpg';
     return post;
   }
 }

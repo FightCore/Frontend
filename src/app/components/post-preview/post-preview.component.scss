@@ -1,11 +1,14 @@
 @import "src/styles/variables.scss";
 
+$post-border-radius: 1em;
+$post-border-radius: 0.5em;
+
 .post {
   // Sets the border to be a solid rounded line.
   border-style: solid;
   border-width: 0.25em;
   border-color: $light-primary-color;
-  border-radius: 1em;
+  border-radius: $post-border-radius;
 
   // This includes the title, subtitle and the avatar of the author.
   .post-header {
@@ -20,7 +23,7 @@
     // Give it a little padding to make the text distance itself.
     padding: 0.4em;
     background-color: $primary-color;
-    border-radius: 0.5em;
+    border-radius: $post-border-radius;
     // Align the text in the center middle.
     vertical-align: middle;
     .post-title {
@@ -44,6 +47,15 @@
       /* round the edges to a circle with border radius 1/2 container size */
       border-radius: 50%;
     }
+
+    .post-banner {
+      width: 102%;
+      height: 101%;
+      margin-left: -1%;
+      margin-top: -1%;
+      border-top-left-radius: 0.5em;
+      border-top-right-radius: 0.5em;
+    }
   }
 
   .post-content {
@@ -52,7 +64,7 @@
 
     .post-bottom-bar {
       color: $primary-text-color;
-      margin-top: 1em;
+      margin-top: $post-border-radius;
     }
   }
 }
