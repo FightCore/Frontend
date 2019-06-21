@@ -11,6 +11,9 @@ export class PostService {
 
   constructor() { }
 
+  /**
+   * Gets a list of all posts made to FightCore.
+   */
   public getPosts(): Post[] | Observable<Post> {
     if (environment.mocking) {
       return this.generatePostList(10);
@@ -19,6 +22,10 @@ export class PostService {
     return null;
   }
 
+  /**
+   * Add or Removes a like from a post if the user is logged in.
+   * @param id the id of the post wanting to like or remove a like from.
+   */
   public likePost(id: number): Observable<never> {
     if (environment.mocking) {
       return new Observable(observer => {
