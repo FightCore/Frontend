@@ -1,16 +1,29 @@
-<div class="container-fluid">
-  <br/>
-    <div *ngIf="loading else postDisplay">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </div>
-    <ng-template #postDisplay>
-      <div class="row">
-          <div class="col-lg-4" *ngFor="let post of posts">
-              <app-post-preview [post]="post"></app-post-preview>
-              <br/>
-            </div>
+<div class="container-fluid toolbar-container">
+  <div class="row">
+    <div class="col-lg-10">
+      <div class="create-button">
+          <button mat-raised-button color="accent">Create new post</button>
       </div>
-    </ng-template>
+    </div>
+
+    <div class="col-lg-2 col-xs-12">
+      <mat-form-field class="right-search-bar">
+        <input matInput name="search" placeholder="Search" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
 </div>
 
-
+<div class="container-fluid">
+  <div *ngIf="loading; else postDisplay">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <ng-template #postDisplay>
+    <div class="row">
+      <div class="col-lg-4" *ngFor="let post of posts">
+        <app-post-preview class="post-preview" [post]="post"></app-post-preview>
+      </div>
+    </div>
+  </ng-template>
+</div>
