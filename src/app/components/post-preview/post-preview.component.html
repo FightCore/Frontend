@@ -4,25 +4,19 @@
         <div class="post-avatar"></div>
     </div>
     <div class="col-lg-10 col-xs-12">
-        <h4 class="post-title">Lorem ipsum dolor sit amet</h4>
-        <h6 class="post-subtitle">By Bort</h6>
+        <h4 class="post-title">{{ post.title }}</h4>
+        <h6 class="post-subtitle">By {{ post.author }}</h6>
     </div>
   </div>
   <div class="post-content">
-    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-    praesentium voluptatum deleniti atque corrupti quos dolores et quas
-    molestias excepturi sint occaecati cupiditate non provident, similique sunt
-    in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
-    fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero
-    tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus
-    id quod.
+    {{ post.body }}
     <div class="post-bottom-bar row">
       <div class="col-7">
         <button mat-raised-button color="warn">View</button>
       </div>
 
       <div class="like-button col-2">
-        <fa-icon class="like-button" size="2x" icon="heart"></fa-icon> 16
+        <fa-icon class="like-button" size="2x" icon="heart"></fa-icon> {{post.votes}}
       </div>
       <div class="col-lg-3 col-xs-12">
           <mat-chip-list class="game-tag">
