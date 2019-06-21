@@ -20,7 +20,7 @@ export class PostPreviewComponent implements OnInit {
   ngOnInit() {
   }
 
-  likePost(heartIcon: HTMLElement) {
+  likePost(heartIcon: HTMLElement): void {
     this.postService.likePost(0).subscribe(() => {
       heartIcon.style.color = Theme.accentColor;
       this.toastrService.success('Post has been liked successfully.');
@@ -28,5 +28,8 @@ export class PostPreviewComponent implements OnInit {
       this.toastrService.error('Failed to like post, try refreshing');
     });
   }
-
+  viewPost(id: number): void {
+    // TODO Properly implement viewing
+    console.log(`Viewing post ${id}`);
+  }
 }

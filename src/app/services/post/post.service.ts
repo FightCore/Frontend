@@ -42,6 +42,7 @@ export class PostService {
 
   private generatePost(): Post {
     const post = new Post();
+    post.id = faker.random.number();
     post.title = faker.lorem.sentence();
     post.author = faker.internet.userName();
     post.body = faker.lorem.paragraphs(2);
