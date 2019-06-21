@@ -1,0 +1,58 @@
+@import "src/styles/variables.scss";
+
+.post {
+  // Sets the border to be a solid rounded line.
+  border-style: solid;
+  border-width: 0.25em;
+  border-color: $light-primary-color;
+  border-radius: 1em;
+
+  // This includes the title, subtitle and the avatar of the author.
+  .post-header {
+    // We expand the width and height so that it goes over the containing border
+    width: 102%;
+    height: 101%;
+
+    // Offsets so the width and height are overlapped properly.
+    margin-left: -1%;
+    margin-top: -1%;
+
+    // Give it a little padding to make the text distance itself.
+    padding: 0.4em;
+    background-color: $primary-color;
+    border-radius: 0.5em;
+    // Align the text in the center middle.
+    vertical-align: middle;
+    .post-title {
+      color: $text-color;
+    }
+    .post-subtitle {
+      color: $divider-color;
+    }
+    .post-avatar {
+      // Rather well stolen than made badly: https://stackoverflow.com/a/26681130.
+      /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
+      background-image: url("https://www.pngkit.com/png/detail/220-2201655_fox-shine-png-smash-bros-fox-shine-png.png");
+      background-color: white;
+      /* make a square container */
+      width: 4em;
+      height: 4em;
+      /* fill the container, preserving aspect ratio, and cropping to fit */
+      background-size: cover;
+      /* center the image vertically and horizontally */
+      background-position: top center;
+      /* round the edges to a circle with border radius 1/2 container size */
+      border-radius: 50%;
+    }
+  }
+
+  .post-content {
+    color: $secondary-text-color;
+    margin: 1em;
+
+    .post-bottom-bar {
+      color: $primary-text-color;
+      margin-top: 1em;
+    }
+  }
+}
