@@ -10,6 +10,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { PostComponent } from './pages/post/post.component';
+import { ToastrModule } from 'ngx-toastr';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
 // Import FontAwesome icons where needed.
 
@@ -26,7 +27,8 @@ import { PostPreviewComponent } from './components/post-preview/post-preview.com
     BrowserAnimationsModule,
     MaterialModules,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

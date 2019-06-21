@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from 'src/app/models/post';
+import { PostService } from 'src/app/services/post/post.service';
+import { Theme } from 'src/styles/fightcore-theme';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-preview',
@@ -9,9 +12,21 @@ import { Post } from 'src/app/models/post';
 export class PostPreviewComponent implements OnInit {
   @Input() post: Post;
 
-  constructor() { }
+  constructor(
+    private postService: PostService,
+    private toastrService: ToastrService
+    ) { }
 
   ngOnInit() {
+  }
+
+  likePost(heartIcon: HTMLElement) {
+    this.postService.likePost(0).subscribe(() => {
+      heartIcon.style.color = Theme.accentColor;
+      this.toastrService.success('Post has been liked successfully.');
+    }, () => {
+      this.toastrService.error('Failed to like post, try refreshing');
+    });
   }
 
 }

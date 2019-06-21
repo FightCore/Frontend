@@ -32,20 +32,23 @@ $post-border-radius: 0.5em;
     .post-subtitle {
       color: $divider-color;
     }
-    .post-avatar {
-      // Rather well stolen than made badly: https://stackoverflow.com/a/26681130.
-      /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
-      background-image: url("https://www.pngkit.com/png/detail/220-2201655_fox-shine-png-smash-bros-fox-shine-png.png");
-      background-color: white;
-      /* make a square container */
-      width: 4em;
-      height: 4em;
-      /* fill the container, preserving aspect ratio, and cropping to fit */
-      background-size: cover;
-      /* center the image vertically and horizontally */
-      background-position: top center;
-      /* round the edges to a circle with border radius 1/2 container size */
-      border-radius: 50%;
+    .post-avatar-container {
+      align-self: center;
+      .post-avatar {
+        // Rather well stolen than made badly: https://stackoverflow.com/a/26681130.
+        /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
+        background-image: url("https://www.pngkit.com/png/detail/220-2201655_fox-shine-png-smash-bros-fox-shine-png.png");
+        background-color: white;
+        /* make a square container */
+        width: 4em;
+        height: 4em;
+        /* fill the container, preserving aspect ratio, and cropping to fit */
+        background-size: cover;
+        /* center the image vertically and horizontally */
+        background-position: top center;
+        /* round the edges to a circle with border radius 1/2 container size */
+        border-radius: 50%;
+      }
     }
 
     .post-banner {
@@ -65,6 +68,23 @@ $post-border-radius: 0.5em;
     .post-bottom-bar {
       color: $primary-text-color;
       margin-top: $post-border-radius;
+      .like-button {
+        position: relative;
+        top: 0.5em;
+        left: 0.5em;
+        margin-right: 0.5em;
+      }
+      .game-chip {
+        position: relative;
+        top: 0.5em;
+        mat-chip {
+          max-width: 50em;
+          width: 100%;
+          text-align: center;
+          display: inline;
+          padding-top: 0.4em;
+        }
+      }
     }
   }
 }

@@ -1,9 +1,9 @@
 <div class="post">
   <div class="post-header row">
     <div>
-      <img class="post-banner" [src]="post.bannerUrl"/>
+      <img class="post-banner" alt="Post Banner" [src]="post.bannerUrl"/>
     </div>
-    <div class="d-none d-sm-block  col-lg-2">
+    <div class="d-none d-sm-block post-avatar-container col-lg-2">
         <div class="post-avatar"></div>
     </div>
     <div class="col-lg-10 col-xs-12">
@@ -14,15 +14,12 @@
   <div class="post-content">
     {{ post.body }}
     <div class="post-bottom-bar row">
-      <div class="col-7">
+      <div class="col-9">
         <button mat-raised-button color="accent">View</button>
-      </div>
-
-      <div class="like-button col-2">
-        <fa-icon class="like-button" size="2x" icon="heart"></fa-icon> {{post.votes}}
+        <fa-icon (click)="likePost($event.currentTarget)" class="like-button" size="2x" icon="heart"></fa-icon> {{post.votes}}
       </div>
       <div class="col-lg-3 col-xs-12">
-          <mat-chip-list class="game-tag">
+          <mat-chip-list class="game-chip">
               <mat-chip color="primary" selected>Ultimate</mat-chip>
           </mat-chip-list>
       </div>

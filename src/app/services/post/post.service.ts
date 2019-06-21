@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of, never } from 'rxjs';
 import { Post } from 'src/app/models/post';
 import * as faker from 'faker';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,18 @@ export class PostService {
   public getPosts(): Post[] | Observable<Post> {
     if (environment.mocking) {
       return this.generatePostList(10);
+    }
+
+    return null;
+  }
+
+  public likePost(id: number): Observable<never> {
+    if (environment.mocking) {
+      return new Observable(observer => {
+        setTimeout(() => {
+          observer.next();
+        }, 200);
+      });
     }
 
     return null;
