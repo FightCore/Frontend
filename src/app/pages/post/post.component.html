@@ -20,7 +20,7 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
   <ng-template #postDisplay>
-    <div class="row">
+    <div class="row equal">
       <div class="col-lg-4" *ngFor="let post of posts">
         <app-post-preview class="post-preview" [post]="post"></app-post-preview>
       </div>

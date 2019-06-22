@@ -1,6 +1,6 @@
 <div class="post">
   <div class="post-header row">
-    <div>
+    <div *ngIf="post.bannerUrl">
       <img class="post-banner" alt="Post Banner" [src]="post.bannerUrl" />
     </div>
     <div class="d-none d-sm-block post-avatar-container col-lg-2">
@@ -13,6 +13,7 @@
   </div>
   <div class="post-content">
     {{ post.body }}
+    <div class="fill-remaining-space"></div>
     <div class="post-bottom-bar row">
       <div class="col-9">
         <button (click)="viewPost(post.id)" mat-raised-button color="accent">

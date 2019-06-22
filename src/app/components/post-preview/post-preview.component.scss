@@ -9,12 +9,12 @@ $post-border-radius: 0.5em;
   border-width: 0.25em;
   border-color: $light-primary-color;
   border-radius: $post-border-radius;
+  height: 98%;
 
   // This includes the title, subtitle and the avatar of the author.
   .post-header {
     // We expand the width and height so that it goes over the containing border
     width: 102%;
-    height: 101%;
 
     // Offsets so the width and height are overlapped properly.
     margin-left: -1%;
@@ -64,8 +64,13 @@ $post-border-radius: 0.5em;
   .post-content {
     color: $secondary-text-color;
     margin: 1em;
+    flex: 0 1 auto;
+    .fill-remaining-space {
+      flex: 1 1 auto;
+    }
 
     .post-bottom-bar {
+      flex: 0 1 40px;
       color: $primary-text-color;
       margin-top: $post-border-radius;
       .like-button {
