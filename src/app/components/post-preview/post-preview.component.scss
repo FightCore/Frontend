@@ -64,15 +64,15 @@ $post-border-radius: 0.5em;
   .post-content {
     color: $secondary-text-color;
     margin: 1em;
-    flex: 0 1 auto;
     .fill-remaining-space {
-      flex: 1 1 auto;
+      height: 2.5em;
     }
-
     .post-bottom-bar {
-      flex: 0 1 40px;
+      width: 95%;
+      position: absolute;
+      bottom: 1.5em;
+      left: 2em;
       color: $primary-text-color;
-      margin-top: $post-border-radius;
       .like-button {
         position: relative;
         top: 0.5em;
