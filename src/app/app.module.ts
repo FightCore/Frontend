@@ -12,6 +12,7 @@ import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { PostComponent } from './pages/post/post.component';
 import { ToastrModule } from 'ngx-toastr';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
+import { AppRoutingModule } from './app-routing.module';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -28,7 +29,8 @@ import { PostPreviewComponent } from './components/post-preview/post-preview.com
     MaterialModules,
     FontAwesomeModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
