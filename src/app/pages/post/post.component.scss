@@ -1,0 +1,12 @@
+.toolbar-container {
+  margin-top: 1em;
+  .create-button {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  .right-search-bar {
+    max-width: 100%;
+    width: 100%;
+  }
+}
