@@ -1,3 +1,67 @@
-<p>
-  create-post works!
-</p>
+<div class="container-fluid">
+  <h2 i18n>
+    Create a new post
+  </h2>
+  <hr />
+  <div class="row">
+    <div class="col-lg-6 col-xs-12">
+      <mat-form-field>
+        <mat-label i18n>
+          Title
+        </mat-label>
+        <input matInput name="title" />
+      </mat-form-field>
+      <br />
+      <mat-form-field>
+        <mat-label i18n>Game</mat-label>
+        <select matNativeControl required>
+          <!-- To be replaced with the games gathered from the API. -->
+          <option value="n64">Super Smash Bros. 64</option>
+          <option value="melee">Super Smash Bros. Melee</option>
+          <option value="smash4">Super Smash Bros. For Wii U</option>
+          <option value="ultimate">Super Smash Bros. Ultimate</option>
+        </select>
+      </mat-form-field>
+      <br />
+      <mat-checkbox i18n>Private Post</mat-checkbox>
+    </div>
+    <div class="col-lg-6 col-xs-12">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title i18n>About making a post</mat-card-title>
+          <mat-card-subtitle i18n>
+            Everything you need to know before posting.
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p i18n>
+            Quis minim enim dolor officia. Quis minim dolore et proident amet eu
+            ad laboris ea quis fugiat nostrud amet. Aliqua adipisicing deserunt
+            ad proident adipisicing aliqua ea deserunt aliqua cupidatat enim.
+            <br /><br />
+
+            Culpa ad laborum dolore tempor est nostrud aliquip voluptate
+            cupidatat aliqua sunt. Eu laboris voluptate anim eu sit minim fugiat
+            culpa cupidatat elit do nisi adipisicing sint. Commodo ex sint
+            aliquip commodo est. Occaecat id ullamco eu excepteur eiusmod
+            adipisicing commodo exercitation dolore. Dolor ipsum fugiat nostrud
+            veniam proident reprehenderit culpa ad sit voluptate irure occaecat
+            ex. Voluptate ex commodo officia incididunt eu exercitation ea culpa
+            nostrud minim adipisicing quis velit nulla.<br /><br />
+
+            Mollit qui voluptate fugiat qui officia do. Ut adipisicing sit culpa
+            proident tempor officia irure duis irure et duis anim et mollit.
+            Officia cupidatat adipisicing sit qui cillum elit sit consequat.<br /><br />
+
+            Esse excepteur laborum duis proident velit aute ut laborum sunt et
+            ut. Ad consequat incididunt irure Lorem ut nulla sint ut magna
+            reprehenderit nisi nisi. Labore nisi sunt elit incididunt est
+            adipisicing ullamco quis irure est exercitation elit nostrud.<br /><br />
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<hr />
+<md-editor name="Post Content" required> </md-editor>

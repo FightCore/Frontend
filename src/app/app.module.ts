@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -32,7 +33,8 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    LMarkdownEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

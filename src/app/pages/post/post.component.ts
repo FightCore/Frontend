@@ -31,5 +31,4 @@ export class PostComponent implements OnInit {
   createPost() {
     this.router.navigate([`/${StaticRoutes.createPost}`]);
   }
-
 }
