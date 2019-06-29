@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-create-post',
@@ -10,6 +11,10 @@ export class CreatePostComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  createPost(post: Post) {
+
   }
 
 }

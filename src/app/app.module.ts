@@ -15,6 +15,7 @@ import { PostPreviewComponent } from './components/post-preview/post-preview.com
 import { AppRoutingModule } from './app-routing.module';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { LMarkdownEditorModule } from 'ngx-markdown-editor';
+import { GameSelectorComponent } from './components/game-selector/game-selector.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -24,7 +25,8 @@ import { LMarkdownEditorModule } from 'ngx-markdown-editor';
     NavBarComponent,
     PostComponent,
     PostPreviewComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    GameSelectorComponent
   ],
   imports: [
     BrowserModule,
