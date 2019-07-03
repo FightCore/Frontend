@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 import { GameSelectorComponent } from './components/game-selector/game-selector.component';
+import { FormsModule } from '@angular/forms';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -34,6 +35,7 @@ import { GameSelectorComponent } from './components/game-selector/game-selector.
     MaterialModules,
     AppRoutingModule,
     FontAwesomeModule,
+    FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     LMarkdownEditorModule

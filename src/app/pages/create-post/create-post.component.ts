@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from 'src/app/models/post';
+import { Post, CreatedPost } from 'src/app/models/post';
 
 @Component({
   selector: 'app-create-post',
@@ -9,12 +9,21 @@ import { Post } from 'src/app/models/post';
 export class CreatePostComponent implements OnInit {
 
   constructor() { }
+  markdownContent: string = '';
+  title: string;
+  isPrivate: boolean;
+
 
   ngOnInit() {
   }
 
-  createPost(post: Post) {
+  createPost() {
+    const post = new CreatedPost();
+    post.body = this.markdownContent;
+    post.title = this.title;
+    post.isPrivate = this.isPrivate;
 
+    console.log(post);
   }
 
 }

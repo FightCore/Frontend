@@ -6,3 +6,10 @@ export class Post {
     author: string;
     votes: number;
 }
+
+export class CreatedPost {
+    body: string;
+    title: string;
+    isPrivate: boolean;
+    game: string;
+}

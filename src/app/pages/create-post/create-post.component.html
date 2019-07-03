@@ -9,12 +9,17 @@
         <mat-label i18n>
           Title
         </mat-label>
-        <input matInput name="title" />
+        <input [(ngModel)]="title" matInput name="title" />
       </mat-form-field>
       <br />
       <app-game-selector></app-game-selector>
       <br />
-      <mat-checkbox i18n>Private Post</mat-checkbox>
+      <mat-checkbox [(ngModel)]="isPrivate" i18n>Private Post</mat-checkbox>
+      <br/>
+      <hr/>
+      <button mat-raised-button color="accent" (click)="createPost()" i18n>
+          Create post
+        </button>
     </div>
     <div class="col-lg-6 col-xs-12">
       <mat-card>
@@ -39,15 +44,6 @@
             veniam proident reprehenderit culpa ad sit voluptate irure occaecat
             ex. Voluptate ex commodo officia incididunt eu exercitation ea culpa
             nostrud minim adipisicing quis velit nulla.<br /><br />
-
-            Mollit qui voluptate fugiat qui officia do. Ut adipisicing sit culpa
-            proident tempor officia irure duis irure et duis anim et mollit.
-            Officia cupidatat adipisicing sit qui cillum elit sit consequat.<br /><br />
-
-            Esse excepteur laborum duis proident velit aute ut laborum sunt et
-            ut. Ad consequat incididunt irure Lorem ut nulla sint ut magna
-            reprehenderit nisi nisi. Labore nisi sunt elit incididunt est
-            adipisicing ullamco quis irure est exercitation elit nostrud.<br /><br />
           </p>
         </mat-card-content>
       </mat-card>
@@ -55,4 +51,10 @@
   </div>
 </div>
 <hr />
-<md-editor name="Post Content" required> </md-editor>
+<md-editor
+name="Post Content"
+[(ngModel)]="markdownContent"
+[height]="'30em'"
+required>
+</md-editor>
+
