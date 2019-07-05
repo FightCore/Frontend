@@ -1,60 +1,65 @@
-<div class="container-fluid">
-  <h2 i18n>
-    Create a new post
-  </h2>
-  <hr />
-  <div class="row">
-    <div class="col-lg-6 col-xs-12">
-      <mat-form-field>
-        <mat-label i18n>
-          Title
-        </mat-label>
-        <input [(ngModel)]="title" matInput name="title" />
-      </mat-form-field>
-      <br />
-      <app-game-selector></app-game-selector>
-      <br />
-      <mat-checkbox [(ngModel)]="isPrivate" i18n>Private Post</mat-checkbox>
-      <br/>
-      <hr/>
-      <button mat-raised-button color="accent" (click)="createPost()" i18n>
-          Create post
-        </button>
-    </div>
-    <div class="col-lg-6 col-xs-12">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title i18n>About making a post</mat-card-title>
-          <mat-card-subtitle i18n>
-            Everything you need to know before posting.
-          </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p i18n>
-            Quis minim enim dolor officia. Quis minim dolore et proident amet eu
-            ad laboris ea quis fugiat nostrud amet. Aliqua adipisicing deserunt
-            ad proident adipisicing aliqua ea deserunt aliqua cupidatat enim.
-            <br /><br />
-
-            Culpa ad laborum dolore tempor est nostrud aliquip voluptate
-            cupidatat aliqua sunt. Eu laboris voluptate anim eu sit minim fugiat
-            culpa cupidatat elit do nisi adipisicing sint. Commodo ex sint
-            aliquip commodo est. Occaecat id ullamco eu excepteur eiusmod
-            adipisicing commodo exercitation dolore. Dolor ipsum fugiat nostrud
-            veniam proident reprehenderit culpa ad sit voluptate irure occaecat
-            ex. Voluptate ex commodo officia incididunt eu exercitation ea culpa
-            nostrud minim adipisicing quis velit nulla.<br /><br />
-          </p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+<div class="d-md-block">
+    <div class="container-fluid">
+        <h2 i18n>
+          Create a new post
+        </h2>
+        <mat-form-field class="create-post-header">
+          <mat-label i18n>
+            Title
+          </mat-label>
+          <input [(ngModel)]="title" matInput name="title" required />
+        </mat-form-field>
+        <app-game-selector class="create-post-header"></app-game-selector>
+        <mat-checkbox class="create-post-header" [(ngModel)]="isPrivate" i18n
+          >Private Post</mat-checkbox
+        >
+        <div class="create-button">
+          <button mat-raised-button color="primary" i18n>
+            Show/Hide Preview
+          </button>
+          <button mat-raised-button color="primary" i18n>
+            Show Help
+          </button>
+          <button mat-raised-button color="accent" (click)="createPost()" i18n>
+            Create post
+          </button>
+        </div>
+      </div>
+      <hr />
+      <md-editor
+        name="Post Content"
+        [(ngModel)]="markdownContent"
+        [height]="'40em'"
+        required
+      >
+      </md-editor>
 </div>
-<hr />
-<md-editor
-name="Post Content"
-[(ngModel)]="markdownContent"
-[height]="'30em'"
-required>
-</md-editor>
 
+
+<ng-template #postHelp>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title i18n>About making a post</mat-card-title>
+      <mat-card-subtitle i18n>
+        Everything you need to know before posting.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p i18n>
+        Quis minim enim dolor officia. Quis minim dolore et proident amet eu ad
+        laboris ea quis fugiat nostrud amet. Aliqua adipisicing deserunt ad
+        proident adipisicing aliqua ea deserunt aliqua cupidatat enim.
+        <br /><br />
+
+        Culpa ad laborum dolore tempor est nostrud aliquip voluptate cupidatat
+        aliqua sunt. Eu laboris voluptate anim eu sit minim fugiat culpa
+        cupidatat elit do nisi adipisicing sint. Commodo ex sint aliquip commodo
+        est. Occaecat id ullamco eu excepteur eiusmod adipisicing commodo
+        exercitation dolore. Dolor ipsum fugiat nostrud veniam proident
+        reprehenderit culpa ad sit voluptate irure occaecat ex. Voluptate ex
+        commodo officia incididunt eu exercitation ea culpa nostrud minim
+        adipisicing quis velit nulla.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
