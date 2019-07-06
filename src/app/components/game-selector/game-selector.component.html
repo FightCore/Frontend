@@ -6,13 +6,11 @@
 <ng-template #selector>
     <mat-form-field class="game-dropdown">
         <mat-label i18n>Game</mat-label>
-        <select matNativeControl required>
-          <!-- To be replaced with the games gathered from the API. -->
-          <option value="n64">Super Smash Bros. 64</option>
-          <option value="melee">Super Smash Bros. Melee</option>
-          <option value="smash4">Super Smash Bros. For Wii U</option>
-          <option value="ultimate">Super Smash Bros. Ultimate</option>
-        </select>
+        <mat-select>
+          <mat-option *ngFor="let game of games" [value]="game.abbreviation">
+              {{ game.name }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 </ng-template>
 

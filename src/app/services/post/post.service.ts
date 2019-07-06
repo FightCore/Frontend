@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, never } from 'rxjs';
-import { Post } from 'src/app/models/post';
+import { Post, CreatedPost } from 'src/app/models/post';
 import * as faker from 'faker';
 import { environment } from 'src/environments/environment';
 
@@ -28,14 +28,20 @@ export class PostService {
    */
   public likePost(id: number): Observable<never> {
     if (environment.mocking) {
-      return new Observable(observer => {
-        setTimeout(() => {
-          observer.next();
-        }, 200);
-      });
+      return this.returnFakeObserver();
     }
 
     return null;
+  }
+
+  /**
+   * Create a post if the user has logged in.
+   * @param post the post that will be created for the current user.
+   */
+  public createPost(post: CreatedPost): Observable<never> {
+    if (environment.mocking) {
+      return this.returnFakeObserver();
+    }
   }
 
   private generatePostList(iterations: number): Post[] {
@@ -60,5 +66,12 @@ export class PostService {
     }
 
     return post;
+  }
+  private returnFakeObserver(): Observable<never> {
+    return new Observable(observer => {
+      setTimeout(() => {
+        observer.next();
+      }, 200);
+    });
   }
 }
