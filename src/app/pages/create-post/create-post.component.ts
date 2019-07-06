@@ -42,7 +42,7 @@ export class CreatePostComponent implements OnInit {
 
   openHelp() {
     this.dialog.open(PostHelpComponent, {
-      width: '250px',
+      width: '50%',
     });
   }
 
