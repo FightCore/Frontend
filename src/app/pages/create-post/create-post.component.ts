@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PostHelpComponent } from 'src/app/components/post-help/post-help.component';
+import { StaticRoutes } from 'src/app/routes/static-routes';
+import { PostText } from 'src/app/text/post.text';
 
 @Component({
   selector: 'app-create-post',
@@ -35,8 +37,8 @@ export class CreatePostComponent implements OnInit {
     post.isPrivate = this.isPrivate;
     this.isLoading = true;
     this.postService.createPost(post).subscribe((_) => {
-      this.toastrService.success('Post has been created');
-      this.router.navigate(['/post']);
+      this.toastrService.success(PostText.createdPost);
+      this.router.navigate([`/${StaticRoutes.posts}`]);
     });
   }
 
