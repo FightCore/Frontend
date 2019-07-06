@@ -3,6 +3,8 @@ import { Post, CreatedPost } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post/post.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { PostHelpComponent } from 'src/app/components/post-help/post-help.component';
 
 @Component({
   selector: 'app-create-post',
@@ -14,12 +16,13 @@ export class CreatePostComponent implements OnInit {
   constructor(
     private postService: PostService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) { }
-  markdownContent: string = '';
+  markdownContent = '';
   title: string;
   isPrivate: boolean;
-  isLoading: boolean = false;
+  isLoading = false;
 
 
   ngOnInit() {
@@ -35,7 +38,12 @@ export class CreatePostComponent implements OnInit {
       this.toastrService.success('Post has been created');
       this.router.navigate(['/post']);
     });
-    console.log(post);
+  }
+
+  openHelp() {
+    this.dialog.open(PostHelpComponent, {
+      width: '250px',
+    });
   }
 
 }

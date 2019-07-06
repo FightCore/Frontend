@@ -17,6 +17,7 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 import { GameSelectorComponent } from './components/game-selector/game-selector.component';
 import { FormsModule } from '@angular/forms';
+import { PostHelpComponent } from './components/post-help/post-help.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     PostComponent,
     PostPreviewComponent,
     CreatePostComponent,
-    GameSelectorComponent
+    GameSelectorComponent,
+    PostHelpComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,9 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     ToastrModule.forRoot(),
     LMarkdownEditorModule
+  ],
+  entryComponents: [
+    PostHelpComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

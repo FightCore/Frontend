@@ -17,7 +17,7 @@
           <button mat-raised-button color="primary" i18n>
             Show/Hide Preview
           </button>
-          <button mat-raised-button color="primary" i18n>
+          <button mat-raised-button color="primary" (click)="openHelp()" i18n>
             Show Help
           </button>
           <button [disabled]="isLoading" mat-raised-button color="accent" (click)="createPost()" i18n>
