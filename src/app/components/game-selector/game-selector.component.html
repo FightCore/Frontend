@@ -1,0 +1,16 @@
+<div *ngIf="loading else selector" i18n>
+    <mat-spinner [diameter]="20" class="loading-spinner"></mat-spinner>
+    Loading games..
+</div>
+
+<ng-template #selector>
+    <mat-form-field class="game-dropdown">
+        <mat-label i18n>Game</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let game of games" [value]="game.abbreviation">
+              {{ game.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+</ng-template>
+

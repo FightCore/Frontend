@@ -14,6 +14,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
+import { LMarkdownEditorModule } from 'ngx-markdown-editor';
+import { GameSelectorComponent } from './components/game-selector/game-selector.component';
+import { FormsModule } from '@angular/forms';
+import { PostHelpComponent } from './components/post-help/post-help.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -23,7 +27,9 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
     NavBarComponent,
     PostComponent,
     PostPreviewComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    GameSelectorComponent,
+    PostHelpComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +37,13 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
     MaterialModules,
     AppRoutingModule,
     FontAwesomeModule,
+    FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    LMarkdownEditorModule
+  ],
+  entryComponents: [
+    PostHelpComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
