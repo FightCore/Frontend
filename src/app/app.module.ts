@@ -19,7 +19,7 @@ import { GameSelectorComponent } from './components/game-selector/game-selector.
 import { FormsModule } from '@angular/forms';
 import { PostHelpComponent } from './components/post-help/post-help.component';
 import { OAuthModule } from 'angular-oauth2-oidc';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './pages/login/login.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 // Import FontAwesome icons where needed.
 
