@@ -4,14 +4,15 @@ import { Game } from 'src/app/models/game';
 import { environment } from 'src/environments/environment';
 import { BaseService } from '../base.service';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService extends BaseService {
 
-  constructor(private httpClient: HttpClient) {
-    super();
+  constructor(private httpClient: HttpClient, authService: AuthService) {
+    super(authService);
   }
 
   public getAllGames(): Game[] | Observable<Game[]> {
@@ -20,7 +21,7 @@ export class GameService extends BaseService {
       return this.createMockGames();
     }
 
-    return null;
+    return this.httpClient.get<Game[]>(environment.baseUrl + '/games');
   }
 
   private createMockGames(): Game[] {

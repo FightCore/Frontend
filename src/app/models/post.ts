@@ -5,11 +5,12 @@ export class Post {
     bannerUrl: string;
     author: string;
     votes: number;
+    game: string;
 }
 
 export class CreatedPost {
     body: string;
     title: string;
     isPrivate: boolean;
-    game: string;
+    gameId: number;
 }

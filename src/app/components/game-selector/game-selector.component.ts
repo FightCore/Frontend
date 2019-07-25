@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GameService } from 'src/app/services/game/game.service';
 import { Game } from 'src/app/models/game';
+import { MatSelectChange } from '@angular/material';
 
 @Component({
   selector: 'app-game-selector',
@@ -9,6 +10,7 @@ import { Game } from 'src/app/models/game';
 })
 export class GameSelectorComponent implements OnInit {
   constructor(private gameService: GameService) { }
+  @Output() selectionChange: EventEmitter<number> = new EventEmitter();
 
   loading: boolean = true;
   games: Game[];
@@ -26,5 +28,11 @@ export class GameSelectorComponent implements OnInit {
   private processGames(games: Game[]) {
     this.games = games;
     this.loading = false;
+  }
+
+  protected onSelectChange(change: MatSelectChange) {
+    if (this.selectionChange) {
+      this.selectionChange.emit(change.value);
+    }
   }
 }
