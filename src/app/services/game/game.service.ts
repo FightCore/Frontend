@@ -21,7 +21,7 @@ export class GameService extends BaseService {
       return this.createMockGames();
     }
 
-    return null;
+    return this.httpClient.get<Game[]>(environment.baseUrl + '/games');
   }
 
   private createMockGames(): Game[] {

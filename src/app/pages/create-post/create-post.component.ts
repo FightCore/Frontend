@@ -25,6 +25,7 @@ export class CreatePostComponent implements OnInit {
   title: string;
   isPrivate: boolean;
   isLoading = false;
+  gameId: number;
 
 
   ngOnInit() {
@@ -35,6 +36,7 @@ export class CreatePostComponent implements OnInit {
     post.body = this.markdownContent;
     post.title = this.title;
     post.isPrivate = this.isPrivate;
+    post.gameId = this.gameId;
     this.isLoading = true;
     this.postService.createPost(post).subscribe((_) => {
       this.toastrService.success(PostText.createdPost);
@@ -46,6 +48,10 @@ export class CreatePostComponent implements OnInit {
     this.dialog.open(PostHelpComponent, {
       width: '50%',
     });
+  }
+
+  onGameChange(id: number) {
+    this.gameId = id;
   }
 
 }
