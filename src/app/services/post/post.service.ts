@@ -3,23 +3,28 @@ import { Observable, of, never } from 'rxjs';
 import { Post, CreatedPost } from 'src/app/models/post';
 import * as faker from 'faker';
 import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
+import { BaseService } from '../base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
-
-  constructor() { }
+export class PostService extends BaseService {
+  private baseUrl: string = `${environment.baseUrl}/Posts`;
+  constructor(private httpClient: HttpClient, authService: AuthService) {
+    super(authService);
+  }
 
   /**
    * Gets a list of all posts made to FightCore.
    */
-  public getPosts(): Post[] | Observable<Post> {
+  public getPosts(): Post[] | Observable<Post[]> {
     if (environment.mocking) {
       return this.generatePostList(10);
     }
 
-    return null;
+    return this.httpClient.get<Post[]>(this.baseUrl, this.getDefaultHttpOptions());
   }
 
   /**
@@ -38,10 +43,12 @@ export class PostService {
    * Create a post if the user has logged in.
    * @param post the post that will be created for the current user.
    */
-  public createPost(post: CreatedPost): Observable<never> {
+  public createPost(post: CreatedPost): Observable<never> | Observable<null> {
     if (environment.mocking) {
       return this.returnFakeObserver();
     }
+
+    return this.httpClient.post<null>(this.baseUrl, post, this.getDefaultHttpOptions());
   }
 
   private generatePostList(iterations: number): Post[] {

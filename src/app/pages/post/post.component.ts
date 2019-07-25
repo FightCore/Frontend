@@ -24,7 +24,10 @@ export class PostComponent implements OnInit {
       this.posts = posts;
       this.loading = false;
     } else {
-      console.log('Not Mocking!');
+      posts.subscribe(postArray => {
+          this.posts = postArray;
+          this.loading = false;
+        });
     }
   }
 
