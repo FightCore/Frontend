@@ -18,9 +18,9 @@ import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 import { GameSelectorComponent } from './components/game-selector/game-selector.component';
 import { FormsModule } from '@angular/forms';
 import { PostHelpComponent } from './components/post-help/post-help.component';
-import { OAuthModule } from 'angular-oauth2-oidc';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { MarkdownModule } from 'ngx-markdown';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -46,7 +46,7 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
     HttpClientModule,
     ToastrModule.forRoot(),
     LMarkdownEditorModule,
-    OAuthModule.forRoot()
+    MarkdownModule.forRoot()
   ],
   entryComponents: [
     PostHelpComponent

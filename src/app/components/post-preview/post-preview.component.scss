@@ -64,6 +64,12 @@ $post-border-radius: 0.5em;
   .post-content {
     color: $secondary-text-color;
     margin: 1em;
+    .post-markdown-text {
+      max-height: 10em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .fill-remaining-space {
       height: 2.5em;
     }
