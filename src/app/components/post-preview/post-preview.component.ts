@@ -3,6 +3,9 @@ import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post/post.service';
 import { Theme } from 'src/styles/fightcore-theme';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { PostText } from 'src/app/text/post.text';
+import { StaticRoutes } from 'src/app/routes/static-routes';
 
 @Component({
   selector: 'app-post-preview',
@@ -14,22 +17,28 @@ export class PostPreviewComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router: Router
     ) { }
 
   ngOnInit() {
   }
 
-  likePost(heartIcon: HTMLElement): void {
-    this.postService.likePost(0).subscribe(() => {
-      heartIcon.style.color = Theme.accentColor;
-      this.toastrService.success('Post has been liked successfully.');
+  likePost(heartIcon: HTMLElement, post: Post): void {
+    this.postService.likePost(post.id).subscribe(() => {
+      // this.toastrService.success('Post has been liked successfully.');
+      if (post.liked) {
+        post.likes--;
+        post.liked = false;
+      } else {
+        post.likes++;
+        post.liked = true;
+      }
     }, () => {
-      this.toastrService.error('Failed to like post, try refreshing');
+      this.toastrService.error(PostText.failedPostLike);
     });
   }
   viewPost(id: number): void {
-    // TODO Properly implement viewing
-    console.log(`Viewing post ${id}`);
+    this.router.navigate([StaticRoutes.posts, id]);
   }
 }

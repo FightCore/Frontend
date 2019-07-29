@@ -1,6 +1,8 @@
-<div *ngIf="loading else selector" i18n>
-    <mat-spinner [diameter]="20" class="loading-spinner"></mat-spinner>
-    Loading games..
+<div *ngIf="loading else selector">
+  <div *ngIf="!failed else loadFail" i18n>
+      <mat-spinner [diameter]="20" class="loading-spinner"></mat-spinner>
+      Loading games..
+  </div>
 </div>
 
 <ng-template #selector>
@@ -14,3 +16,6 @@
       </mat-form-field>
 </ng-template>
 
+<ng-template #loadFail>
+  <p i18n>Loading games has failed. Try refreshing.</p>
+</ng-template>

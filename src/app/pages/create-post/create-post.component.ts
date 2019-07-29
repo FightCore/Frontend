@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Post, CreatedPost } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post/post.service';
 import { ToastrService } from 'ngx-toastr';
@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostHelpComponent } from 'src/app/components/post-help/post-help.component';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { PostText } from 'src/app/text/post.text';
+import { MarkdownEditorComponent } from 'ngx-markdown-editor';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-create-post',
@@ -15,11 +17,14 @@ import { PostText } from 'src/app/text/post.text';
 })
 export class CreatePostComponent implements OnInit {
 
+  @ViewChild('mdEditor', {static: false}) markdownEditor: MarkdownEditorComponent;
+
   constructor(
     private postService: PostService,
     private toastrService: ToastrService,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) { }
   markdownContent = '';
   title: string;
@@ -29,6 +34,9 @@ export class CreatePostComponent implements OnInit {
 
 
   ngOnInit() {
+    if (!this.authService.isAuthenticated()) {
+      this.authService.login();
+    }
   }
 
   createPost() {
@@ -41,6 +49,10 @@ export class CreatePostComponent implements OnInit {
     this.postService.createPost(post).subscribe((_) => {
       this.toastrService.success(PostText.createdPost);
       this.router.navigate([`/${StaticRoutes.posts}`]);
+    },
+    error => {
+      this.isLoading = false;
+      this.toastrService.error(PostText.failedCreatePost);
     });
   }
 
@@ -52,6 +64,10 @@ export class CreatePostComponent implements OnInit {
 
   onGameChange(id: number) {
     this.gameId = id;
+  }
+
+  togglePreview() {
+    this.markdownEditor.togglePreview();
   }
 
 }

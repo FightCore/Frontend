@@ -80,11 +80,20 @@ $post-border-radius: 0.5em;
       left: 2em;
       color: $primary-text-color;
       .like-button {
+        color: $primary-text-color;
         position: relative;
         top: 0.5em;
         left: 0.5em;
         margin-right: 0.5em;
       }
+      .liked-button {
+        color: $accent-color;
+        position: relative;
+        top: 0.5em;
+        left: 0.5em;
+        margin-right: 0.5em;
+      }
+
       .game-chip {
         position: relative;
         top: 0.5em;

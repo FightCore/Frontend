@@ -4,7 +4,8 @@ export class Post {
     body: string;
     bannerUrl: string;
     author: string;
-    votes: number;
+    likes: number;
+    liked: boolean;
     game: string;
 }
 
