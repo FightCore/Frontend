@@ -27,6 +27,10 @@ export class PostService extends BaseService {
     return this.httpClient.get<Post[]>(this.baseUrl, this.getDefaultHttpOptions());
   }
 
+  /**
+   * Gets a single post based on it's id.
+   * @param id the id of the post requested.
+   */
   public getPost(id: number): Post | Observable<Post> {
     if (environment.mocking) {
       return this.generatePost();

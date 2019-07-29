@@ -38,6 +38,7 @@ export class PostPreviewComponent implements OnInit {
       this.toastrService.error(PostText.failedPostLike);
     });
   }
+
   viewPost(id: number): void {
     this.router.navigate([StaticRoutes.posts, id]);
   }

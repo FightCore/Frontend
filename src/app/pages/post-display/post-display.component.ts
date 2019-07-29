@@ -43,7 +43,7 @@ export class PostDisplayComponent implements OnInit {
     }
 
   }
-  likePost() {
+  likePost(): void {
     this.postService.likePost(this.post.id).subscribe(_ => {
       console.log('Liked!');
     },

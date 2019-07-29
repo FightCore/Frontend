@@ -27,12 +27,12 @@ export class GameSelectorComponent implements OnInit {
     }
   }
 
-  private processGames(games: Game[]) {
+  private processGames(games: Game[]): void {
     this.games = games;
     this.loading = false;
   }
 
-  protected onSelectChange(change: MatSelectChange) {
+  protected onSelectChange(change: MatSelectChange): void {
     if (this.selectionChange) {
       this.selectionChange.emit(change.value);
     }
