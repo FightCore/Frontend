@@ -28,15 +28,27 @@ export class PostService extends BaseService {
   }
 
   /**
+   * Gets a single post based on it's id.
+   * @param id the id of the post requested.
+   */
+  public getPost(id: number): Post | Observable<Post> {
+    if (environment.mocking) {
+      return this.generatePost();
+    }
+
+    return this.httpClient.get<Post>(`${this.baseUrl}/${id}`, this.getDefaultHttpOptions());
+  }
+
+  /**
    * Add or Removes a like from a post if the user is logged in.
    * @param id the id of the post wanting to like or remove a like from.
    */
-  public likePost(id: number): Observable<never> {
+  public likePost(id: number): Observable<never> | Observable<null> {
     if (environment.mocking) {
       return this.returnFakeObserver();
     }
 
-    return null;
+    return this.httpClient.post<null>(`${this.baseUrl}/${id}`, null, this.getDefaultHttpOptions());
   }
 
   /**
@@ -66,7 +78,7 @@ export class PostService extends BaseService {
     post.title = faker.lorem.sentence();
     post.author = faker.internet.userName();
     post.body = faker.lorem.paragraphs(2);
-    post.votes = faker.random.number();
+    post.likes = faker.random.number();
 
     if (faker.random.boolean()) {
     post.bannerUrl = 'https://i.imgur.com/aEwNXVn.jpg';

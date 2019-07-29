@@ -13,6 +13,7 @@ export class GameSelectorComponent implements OnInit {
   @Output() selectionChange: EventEmitter<number> = new EventEmitter();
 
   loading: boolean = true;
+  failed: boolean;
   games: Game[];
 
   ngOnInit() {
@@ -21,16 +22,17 @@ export class GameSelectorComponent implements OnInit {
     if (allGames instanceof Array) {
       this.processGames(allGames);
     } else {
-      allGames.subscribe((games: Game[]) => this.processGames(games));
+      allGames.subscribe((games: Game[]) => this.processGames(games),
+      error => this.failed = true);
     }
   }
 
-  private processGames(games: Game[]) {
+  private processGames(games: Game[]): void {
     this.games = games;
     this.loading = false;
   }
 
-  protected onSelectChange(change: MatSelectChange) {
+  protected onSelectChange(change: MatSelectChange): void {
     if (this.selectionChange) {
       this.selectionChange.emit(change.value);
     }

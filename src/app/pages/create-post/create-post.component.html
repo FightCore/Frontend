@@ -14,7 +14,7 @@
           >Private Post</mat-checkbox
         >
         <div class="create-button">
-          <button mat-raised-button color="primary" i18n>
+          <button mat-raised-button color="primary" (click)="togglePreview()" i18n>
             Show/Hide Preview
           </button>
           <button mat-raised-button color="primary" (click)="openHelp()" i18n>
@@ -27,6 +27,7 @@
       </div>
       <hr />
       <md-editor
+      #mdEditor
         name="Post Content"
         [(ngModel)]="markdownContent"
         [height]="'40em'"

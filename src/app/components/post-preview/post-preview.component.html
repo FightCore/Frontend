@@ -23,12 +23,12 @@
           View
         </button>
         <fa-icon
-          (click)="likePost($event.currentTarget)"
-          class="like-button"
+          (click)="likePost($event.currentTarget, post)"
+          [class]="post.liked ? 'liked-button' : 'like-button'"
           size="2x"
           icon="heart"
         ></fa-icon>
-        {{ post.votes }}
+        {{ post.likes }}
       </div>
       <div class="col-lg-3 col-xs-12">
         <mat-chip-list class="game-chip">

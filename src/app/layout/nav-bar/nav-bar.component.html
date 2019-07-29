@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
       <span>FightCore</span>
+      <span [routerLink]="['/post']" i18n>Posts</span>
       <span class="spacer"></span>
       <div>
         <span *ngIf="isAuthenticated() else login">{{getUserName()}}</span>
