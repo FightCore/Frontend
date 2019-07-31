@@ -56,7 +56,7 @@ import { PostDisplayComponent } from "./pages/post-display/post-display.componen
           tables: true,
           breaks: false,
           pedantic: false,
-          sanitize: true, // enable marked built-in html sanitizer
+          sanitize: false, // enable marked built-in html sanitizer
           smartLists: true,
           smartypants: false
         }

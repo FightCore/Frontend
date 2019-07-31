@@ -27,8 +27,7 @@
       </div>
 
     </div>
-    <markdown>
-      {{ post.body }}
-    </markdown>
+    <div [innerHTML]="bodyHtml">
+    </div>
   </div>
 </ng-template>

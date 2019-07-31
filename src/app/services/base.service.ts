@@ -13,11 +13,11 @@ export class BaseService {
         if (this.authService.isAuthenticated()){
             token = this.authService.authorizationHeaderValue;
         }
-        console.log(token);
+
         return {
           headers: new HttpHeaders({
             'Content-Type':  'application/json',
-            'Authorization': token
+            authorization: token
           })
         };
     }

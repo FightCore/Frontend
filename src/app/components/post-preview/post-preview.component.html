@@ -12,8 +12,7 @@
     </div>
   </div>
   <div class="post-content">
-    <div markdown class="post-markdown-text">
-        {{ post.body }}
+    <div [innerHTML]="post.body" class="post-markdown-text">
     </div>
     <div class="fill-remaining-space"></div>
     <div class="fill-remaining-space .d-block .d-sm-none"></div>

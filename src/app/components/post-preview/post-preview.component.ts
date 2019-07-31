@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { PostText } from 'src/app/text/post.text';
 import { StaticRoutes } from 'src/app/routes/static-routes';
+import { MarkdownService } from 'ngx-markdown';
 
 @Component({
   selector: 'app-post-preview',
@@ -18,10 +19,12 @@ export class PostPreviewComponent implements OnInit {
   constructor(
     private postService: PostService,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private markdownService: MarkdownService
     ) { }
 
   ngOnInit() {
+    this.post.body = this.markdownService.compile(this.post.body);
   }
 
   likePost(heartIcon: HTMLElement, post: Post): void {
