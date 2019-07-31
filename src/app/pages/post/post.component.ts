@@ -20,15 +20,16 @@ export class PostComponent implements OnInit {
     ) { }
   loading: boolean = true;
   posts: Post[];
+  displayPosts: Post[];
 
   ngOnInit() {
     const posts = this.postService.getPosts();
     if (posts instanceof Array) {
-      this.posts = posts;
+      this.setupPosts(posts);
       this.loading = false;
     } else {
       posts.subscribe(postArray => {
-          this.posts = postArray;
+          this.setupPosts(postArray);
           this.loading = false;
         },
         error => {
@@ -36,6 +37,20 @@ export class PostComponent implements OnInit {
           this.toastrService.error(PostText.failedPostsLoad);
         });
     }
+  }
+
+  private setupPosts(posts: Post[]): void {
+    this.posts = posts;
+    this.displayPosts = posts;
+  }
+
+  onGameChange(gameId: number): void {
+    if (gameId === 0) {
+      this.displayPosts = this.posts;
+      return;
+    }
+
+    this.displayPosts = this.posts.filter(post => post.gameId === gameId);
   }
 
   createPost() {
