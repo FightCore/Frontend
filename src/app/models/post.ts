@@ -7,6 +7,7 @@ export class Post {
     likes: number;
     liked: boolean;
     game: string;
+    gameId: number;
 }
 
 export class CreatedPost {
