@@ -16,13 +16,9 @@
             <h4 class="subtitle" i18n>By {{ post.author }}</h4>
           </h2>
           <div class="col-lg-4 col-xs-12 like-button">
-              <fa-icon
-              (click)="likePost()"
-              class="like-button"
-              size="2x"
-              icon="heart"
-            ></fa-icon>
-            {{ post.likes }}
+            <app-like-button [postId]="post.id" [likes]="post.likes"
+              [liked]="post.liked">
+            </app-like-button>
           </div>
       </div>
 
