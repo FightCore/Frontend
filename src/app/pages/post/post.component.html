@@ -17,7 +17,7 @@
       </app-game-selector>
       <mat-form-field class="right-search-bar">
           <mat-label i18n>Search</mat-label>
-        <input matInput name="search" />
+        <input (input)="onSearchChange($event.target.value)" matInput name="search" />
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </div>
