@@ -1,0 +1,5 @@
+# Make docker ignore the folders that don't contain source code (or at least the big once)
+node_modules
+.git
+.vscode
+dist
