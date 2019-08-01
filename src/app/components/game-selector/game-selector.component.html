@@ -8,7 +8,7 @@
 <ng-template #selector>
     <mat-form-field class="game-dropdown">
         <mat-label i18n>Game</mat-label>
-        <mat-select (selectionChange)="onSelectChange($event)">
+        <mat-select [(value)]="selected" (selectionChange)="onSelectChange($event)">
           <mat-option *ngIf="addAllOptions" [value]="0" i18n>
             All
           </mat-option>

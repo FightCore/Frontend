@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { BaseService } from '../base.service';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,14 @@ export class PostService extends BaseService {
     return this.httpClient.post<null>(this.baseUrl, post, this.getDefaultHttpOptions());
   }
 
+  public updatePost(post: Post): Observable<never> | Observable<null> {
+    if (environment.mocking) {
+      return this.returnFakeObserver();
+    }
+
+    return this.httpClient.put<null>(this.baseUrl, post, this.getDefaultHttpOptions());
+  }
+
   private generatePostList(iterations: number): Post[] {
     const posts = [];
     for (let i = 0; i < iterations; i++) {
@@ -76,7 +85,8 @@ export class PostService extends BaseService {
     const post = new Post();
     post.id = faker.random.number();
     post.title = faker.lorem.sentence();
-    post.author = faker.internet.userName();
+    post.author = new User();
+    post.author.name = faker.internet.userName();
     post.body = faker.lorem.paragraphs(2);
     post.likes = faker.random.number();
 

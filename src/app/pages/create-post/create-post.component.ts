@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Post, CreatedPost } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post/post.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,7 @@ import { StaticRoutes } from 'src/app/routes/static-routes';
 import { PostText } from 'src/app/text/post.text';
 import { MarkdownEditorComponent } from 'ngx-markdown-editor';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-create-post',
@@ -18,6 +19,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class CreatePostComponent implements OnInit {
 
   @ViewChild('mdEditor', {static: false}) markdownEditor: MarkdownEditorComponent;
+  @Input() post: Post;
 
   constructor(
     private postService: PostService,
@@ -37,9 +39,24 @@ export class CreatePostComponent implements OnInit {
     if (!this.authService.isAuthenticated()) {
       this.authService.login();
     }
+
+    if (this.post === null) {
+      return;
+    }
+
+    console.log(this.post);
+    this.title = this.post.title;
+    this.isPrivate = this.post.isPrivate;
+    this.gameId = this.post.gameId;
+    this.markdownContent = this.post.body;
   }
 
   createPost() {
+    if (this.post != null) {
+      this.updatePost();
+      return;
+    }
+
     const post = new CreatedPost();
     post.body = this.markdownContent;
     post.title = this.title;
@@ -47,6 +64,22 @@ export class CreatePostComponent implements OnInit {
     post.gameId = this.gameId;
     this.isLoading = true;
     this.postService.createPost(post).subscribe((_) => {
+      this.toastrService.success(PostText.createdPost);
+      this.router.navigate([`/${StaticRoutes.posts}`]);
+    },
+    error => {
+      this.isLoading = false;
+      this.toastrService.error(PostText.failedCreatePost);
+    });
+  }
+
+  updatePost() {
+    this.post.body = this.markdownContent;
+    this.post.title = this.title;
+    this.post.isPrivate = this.isPrivate;
+    this.post.gameId = this.gameId;
+
+    this.postService.updatePost(this.post).subscribe((_) => {
       this.toastrService.success(PostText.createdPost);
       this.router.navigate([`/${StaticRoutes.posts}`]);
     },

@@ -1,13 +1,16 @@
+import { User } from './user';
+
 export class Post {
     id: number;
     title: string;
     body: string;
     bannerUrl: string;
-    author: string;
+    author: User;
     likes: number;
     liked: boolean;
     game: string;
     gameId: number;
+    isPrivate: boolean;
 }
 
 export class CreatedPost {

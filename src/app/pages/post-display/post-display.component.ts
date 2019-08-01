@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { PostText } from 'src/app/text/post.text';
 import { MarkdownService } from 'ngx-markdown';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-post-display',
@@ -22,7 +23,8 @@ export class PostDisplayComponent implements OnInit {
     private postService: PostService,
     private router: Router,
     private toastrService: ToastrService,
-    private markdownService: MarkdownService
+    private markdownService: MarkdownService,
+    private authService: AuthService
     ) { }
 
   ngOnInit() {
@@ -44,7 +46,14 @@ export class PostDisplayComponent implements OnInit {
         this.router.navigate([StaticRoutes.posts]);
       });
     }
+  }
 
+  isPostFromUser(): boolean {
+    return this.post.author.id === this.authService.id;
+  }
+
+  editPost() {
+    this.router.navigate([StaticRoutes.editPostNoId, this.post.id]);
   }
 
   setupPost(post: Post) {
