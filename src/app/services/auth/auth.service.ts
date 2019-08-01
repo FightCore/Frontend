@@ -7,6 +7,7 @@ import { catchError } from 'rxjs/operators';
 import { UserManager, UserManagerSettings, User } from 'oidc-client';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import * as faker from 'faker';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class AuthService {
   private user: User | null;
 
   constructor(private http: HttpClient) {
+    if (environment.mocking) {
+      return;
+    }
+
     this.manager.getUser().then(user => {
       this.user = user;
       this._authNavStatusSource.next(this.isAuthenticated());
@@ -28,6 +33,10 @@ export class AuthService {
   }
 
   login() {
+    if (environment.mocking) {
+      return;
+    }
+
     return this.manager.signinRedirect();
   }
 
@@ -37,28 +46,52 @@ export class AuthService {
   }
 
   register(userRegistration: any) {
+    if (environment.mocking) {
+      return;
+    }
+
     return this.http
       .post(environment.authentication.authUrl + '/account', userRegistration);
       //.pipe(catchError(this.handleError));
   }
 
   isAuthenticated(): boolean {
+    if (environment.mocking) {
+      return true;
+    }
+
     return this.user != null && !this.user.expired;
   }
 
   get authorizationHeaderValue(): string {
+    if (environment.mocking) {
+      return faker.random.alphaNumeric(50);
+    }
+
     return `${this.user.token_type} ${this.user.access_token}`;
   }
 
   get name(): string {
+    if (environment.mocking) {
+      return faker.internet.userName();
+    }
+
     return this.user != null ? this.user.profile.name : '';
   }
 
   get id(): number {
+    if (environment.mocking) {
+      return faker.random.number({ min: 1});
+    }
+
     return this.user != null ? parseFloat(this.user.profile.sub) : 0;
   }
 
   signout() {
+    if (environment.mocking) {
+      return;
+    }
+
     this.manager.signoutRedirect();
   }
 }
