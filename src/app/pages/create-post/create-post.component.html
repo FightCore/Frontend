@@ -24,7 +24,9 @@
             Show Help
           </button>
           <button [disabled]="isLoading" mat-raised-button color="accent" (click)="createPost()" i18n>
-            Create Post
+            <div *ngIf="this.post else createText">
+              Update Post
+            </div>
           </button>
         </div>
       </div>
@@ -38,3 +40,6 @@
       >
       </md-editor>
 </div>
+<ng-template #createText i18n>
+    Create Post
+</ng-template>

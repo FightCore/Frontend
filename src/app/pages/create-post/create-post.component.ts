@@ -44,7 +44,6 @@ export class CreatePostComponent implements OnInit {
       return;
     }
 
-    console.log(this.post);
     this.title = this.post.title;
     this.isPrivate = this.post.isPrivate;
     this.gameId = this.post.gameId;
@@ -62,6 +61,7 @@ export class CreatePostComponent implements OnInit {
     post.title = this.title;
     post.isPrivate = this.isPrivate;
     post.gameId = this.gameId;
+
     this.isLoading = true;
     this.postService.createPost(post).subscribe((_) => {
       this.toastrService.success(PostText.createdPost);
@@ -80,12 +80,12 @@ export class CreatePostComponent implements OnInit {
     this.post.gameId = this.gameId;
 
     this.postService.updatePost(this.post).subscribe((_) => {
-      this.toastrService.success(PostText.createdPost);
-      this.router.navigate([`/${StaticRoutes.posts}`]);
+      this.toastrService.success(PostText.updatedPost);
+      this.router.navigate([StaticRoutes.viewPostNoId, this.post.id]);
     },
     error => {
       this.isLoading = false;
-      this.toastrService.error(PostText.failedCreatePost);
+      this.toastrService.error(PostText.failedUpdatePost);
     });
   }
 

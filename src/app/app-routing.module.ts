@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: StaticRoutes.authCallback, component: AuthCallbackComponent},
   { path: StaticRoutes.posts, component: PostComponent},
   { path: StaticRoutes.editPost, component: EditPostComponent },
-  { path: 'post/:postId', component: PostDisplayComponent},
+  { path: StaticRoutes.viewPost, component: PostDisplayComponent},
   { path: '**', redirectTo: StaticRoutes.posts }
 ];
 
