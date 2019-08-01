@@ -8,8 +8,7 @@ matrix:
   include:
     - language: node_js
       node_js:
-        - "10"
-        - "node"
+        - 10.16.0
       before_script:
         - npm install -g @angular/cli
         - npm install
