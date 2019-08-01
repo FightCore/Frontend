@@ -1,0 +1,19 @@
+sudo: required
+git:
+  depth: false
+matrix:
+  include:
+    - language: node_js
+      node_js:
+        - "8"
+        - "10"
+        - "node"
+      before_script:
+        - npm install -g @angular/cli
+        - npm install
+      script:
+        - ng build --prod
+      # Uncomment once deployment environment is set up.
+      # deploy:
+      #   provider: script
+      #   script: bash docker_push
