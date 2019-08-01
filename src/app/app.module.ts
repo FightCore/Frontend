@@ -23,6 +23,7 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { PostDisplayComponent } from './pages/post-display/post-display.component';
 import { LikeButtonComponent } from './components/like-button/like-button.component';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -38,7 +39,8 @@ import { LikeButtonComponent } from './components/like-button/like-button.compon
     LoginComponent,
     AuthCallbackComponent,
     PostDisplayComponent,
-    LikeButtonComponent
+    LikeButtonComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,

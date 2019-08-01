@@ -54,6 +54,10 @@ export class AuthService {
     return this.user != null ? this.user.profile.name : '';
   }
 
+  get id(): number {
+    return this.user != null ? parseFloat(this.user.profile.sub) : 0;
+  }
+
   signout() {
     this.manager.signoutRedirect();
   }

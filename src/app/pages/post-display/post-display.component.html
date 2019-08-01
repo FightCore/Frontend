@@ -13,7 +13,7 @@
           </div>
           <h2 class="col-lg-4 col-xs-12 title">
             {{ post.title }}
-            <h4 class="subtitle" i18n>By {{ post.author }}</h4>
+            <h4 class="subtitle" i18n>By {{ post.author.name }}</h4>
           </h2>
           <div class="col-lg-4 col-xs-12 like-button">
             <app-like-button [postId]="post.id" [likes]="post.likes"
@@ -21,9 +21,11 @@
             </app-like-button>
           </div>
       </div>
-
     </div>
     <div [innerHTML]="bodyHtml">
     </div>
+    <button *ngIf="isPostFromUser()" (click)="editPost()" mat-raised-button color="accent" i18n>
+      Edit
+    </button>
   </div>
 </ng-template>

@@ -12,6 +12,7 @@ export class GameSelectorComponent implements OnInit {
   constructor(private gameService: GameService) { }
   @Output() selectionChange: EventEmitter<number> = new EventEmitter();
   @Input() addAllOptions: boolean = false;
+  @Input() selected: number;
 
   loading: boolean = true;
   failed: boolean;
