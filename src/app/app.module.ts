@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 import { GameSelectorComponent } from './components/game-selector/game-selector.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostHelpComponent } from './components/post-help/post-help.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
@@ -24,6 +24,7 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { PostDisplayComponent } from './pages/post-display/post-display.component';
 import { LikeButtonComponent } from './components/like-button/like-button.component';
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
+import { RegisterComponent } from './pages/register/register.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -40,7 +41,8 @@ import { EditPostComponent } from './pages/edit-post/edit-post.component';
     AuthCallbackComponent,
     PostDisplayComponent,
     LikeButtonComponent,
-    EditPostComponent
+    EditPostComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { EditPostComponent } from './pages/edit-post/edit-post.component';
     HttpClientModule,
     ToastrModule.forRoot(),
     LMarkdownEditorModule,
+    ReactiveFormsModule,
     MarkdownModule.forRoot({
       markedOptions: {
         provide: MarkedOptions,

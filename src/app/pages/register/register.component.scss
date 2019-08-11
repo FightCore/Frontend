@@ -1,0 +1,11 @@
+.register-container {
+  display: flex;
+  flex-direction: column;
+  form {
+      width: 100%;
+
+      mat-form-field {
+          width: 100%;
+      }
+  }
+}

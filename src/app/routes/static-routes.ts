@@ -7,4 +7,5 @@ export class StaticRoutes {
   public static viewPostNoId: string = 'post/';
   public static login: string = 'login';
   public static authCallback: string = 'auth-callback';
+  public static register: string = 'user/register';
 }
