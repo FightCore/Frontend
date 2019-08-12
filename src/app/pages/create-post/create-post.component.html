@@ -1,8 +1,8 @@
 <div class="d-md-block">
     <div class="container-fluid">
         <h2 i18n>
-          Create a new post
-        </h2>
+            Create a new post
+          </h2>
         <mat-form-field class="create-post-header">
           <mat-label i18n>
             Title
@@ -39,6 +39,18 @@
         required
       >
       </md-editor>
+
+      <div class="container-fluid">
+          <button mat-raised-button
+          [routerLink]="['/post']" color="primary" i18n>Back to posts.</button>
+
+          <button [disabled]="isLoading" mat-raised-button color="accent"
+            class="create-button" (click)="createPost()" i18n>
+              <div *ngIf="this.post else createText">
+                Update Post
+              </div>
+            </button>
+      </div>
 </div>
 <ng-template #createText i18n>
     Create Post

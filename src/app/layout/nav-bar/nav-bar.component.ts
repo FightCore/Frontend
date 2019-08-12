@@ -9,13 +9,18 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class NavBarComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
-
+  userName: string;
   ngOnInit() {
   }
 
   getUserName(): string {
+    if (this.userName) {
+      return this.userName;
+    }
+
     if (this.authService.isAuthenticated()) {
-      return this.authService.name;
+      this.userName = this.authService.name;
+      return this.userName;
     }
   }
 

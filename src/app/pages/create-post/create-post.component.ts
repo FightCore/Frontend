@@ -40,14 +40,12 @@ export class CreatePostComponent implements OnInit {
       this.authService.login();
     }
 
-    if (this.post === null) {
-      return;
+    if (this.post) {
+      this.title = this.post.title;
+      this.isPrivate = this.post.isPrivate;
+      this.gameId = this.post.gameId;
+      this.markdownContent = this.post.body;
     }
-
-    this.title = this.post.title;
-    this.isPrivate = this.post.isPrivate;
-    this.gameId = this.post.gameId;
-    this.markdownContent = this.post.body;
   }
 
   createPost() {
