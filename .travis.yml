@@ -1,3 +1,5 @@
+# Only build on master to prevent redundant builds.
+# Build will also be executed on PRs even if not stated here.
 branches:
   only:
     - master
