@@ -10,7 +10,7 @@ export class BaseService {
     public getDefaultHttpOptions() {
         let token = '';
 
-        if (this.authService.isAuthenticated()){
+        if (this.authService.isAuthenticated()) {
             token = this.authService.authorizationHeaderValue;
         }
 
