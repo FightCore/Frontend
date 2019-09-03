@@ -21,18 +21,13 @@ export class EditPostComponent implements OnInit {
     private router: Router,
     private toastrService: ToastrService,
     private markdownService: MarkdownService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const postId = this.route.snapshot.paramMap.get('postId');
 
-    const postResult = this.postService.getPost(parseFloat(postId));
-
-    if (postResult instanceof Post) {
-        this.post = postResult;
-        this.loading = false;
-    } else {
-      postResult.subscribe(post => {
+    this.postService.getPost(parseFloat(postId)).subscribe(
+      post => {
         this.post = post;
         this.loading = false;
       },
@@ -40,8 +35,7 @@ export class EditPostComponent implements OnInit {
         console.log(error);
         this.toastrService.error(PostText.postNotFound);
         this.router.navigate([StaticRoutes.posts]);
-      });
-    }
+      }
+    );
   }
-
 }
