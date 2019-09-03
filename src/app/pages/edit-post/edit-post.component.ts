@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { Post } from "src/app/models/post";
-import { ActivatedRoute, Router } from "@angular/router";
-import { PostService } from "src/app/services/post/post.service";
-import { ToastrService } from "ngx-toastr";
-import { MarkdownService } from "ngx-markdown";
-import { PostText } from "src/app/text/post.text";
-import { StaticRoutes } from "src/app/routes/static-routes";
+import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/app/models/post';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PostService } from 'src/app/services/post/post.service';
+import { ToastrService } from 'ngx-toastr';
+import { MarkdownService } from 'ngx-markdown';
+import { PostText } from 'src/app/text/post.text';
+import { StaticRoutes } from 'src/app/routes/static-routes';
 
 @Component({
-  selector: "app-edit-post",
-  templateUrl: "./edit-post.component.html",
-  styleUrls: ["./edit-post.component.scss"]
+  selector: 'app-edit-post',
+  templateUrl: './edit-post.component.html',
+  styleUrls: ['./edit-post.component.scss']
 })
 export class EditPostComponent implements OnInit {
   post: Post;
@@ -24,7 +24,7 @@ export class EditPostComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const postId = this.route.snapshot.paramMap.get("postId");
+    const postId = this.route.snapshot.paramMap.get('postId');
 
     this.postService.getPost(parseFloat(postId)).subscribe(
       post => {

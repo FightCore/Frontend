@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Post } from "src/app/models/post";
-import { PostService } from "src/app/services/post/post.service";
-import { ToastrService } from "ngx-toastr";
-import { StaticRoutes } from "src/app/routes/static-routes";
-import { PostText } from "src/app/text/post.text";
-import { MarkdownService } from "ngx-markdown";
-import { AuthService } from "src/app/services/auth/auth.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Post } from 'src/app/models/post';
+import { PostService } from 'src/app/services/post/post.service';
+import { ToastrService } from 'ngx-toastr';
+import { StaticRoutes } from 'src/app/routes/static-routes';
+import { PostText } from 'src/app/text/post.text';
+import { MarkdownService } from 'ngx-markdown';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
-  selector: "app-post-display",
-  templateUrl: "./post-display.component.html",
-  styleUrls: ["./post-display.component.scss"]
+  selector: 'app-post-display',
+  templateUrl: './post-display.component.html',
+  styleUrls: ['./post-display.component.scss']
 })
 export class PostDisplayComponent implements OnInit {
   post: Post;
@@ -27,7 +27,7 @@ export class PostDisplayComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const postId = this.route.snapshot.paramMap.get("postId");
+    const postId = this.route.snapshot.paramMap.get('postId');
 
     this.postService.getPost(parseFloat(postId)).subscribe(
       post => {
@@ -58,10 +58,10 @@ export class PostDisplayComponent implements OnInit {
   likePost(): void {
     this.postService.likePost(this.post.id).subscribe(
       _ => {
-        console.log("Liked!");
+        console.log('Liked!');
       },
       error => {
-        console.log("Something went wrong");
+        console.log('Something went wrong');
       }
     );
   }
