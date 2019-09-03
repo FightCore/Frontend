@@ -1,0 +1,31 @@
+<div class="character">
+  <div class="header row">
+    <div class="d-none d-sm-block col-lg-2">
+      <div class="avatar"></div>
+    </div>
+    <div class="col-lg-8">
+        <h3>{{character.name}}</h3>
+    </div>
+    <div class="col-lg-2">
+      <img src="https://www.ssbwiki.com/images/3/30/MarioSymbol.svg"
+      height="70em">
+    </div>
+  </div>
+
+  <div class="body">{{ character.description }}</div>
+  <div class="fill-remaining-space"></div>
+  <div class="post-bottom-bar row">
+    <div class="col-9">
+        <button mat-raised-button color="accent">
+            View
+        </button>
+    </div>
+    <div class="col-lg-3 col-xs-12">
+      <mat-chip-list class="game-chip">
+        <mat-chip color="primary" selected>{{
+          character.game.abbreviation
+        }}</mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</div>

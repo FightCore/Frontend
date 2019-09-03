@@ -24,6 +24,8 @@ import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { PostDisplayComponent } from './pages/post-display/post-display.component';
 import { LikeButtonComponent } from './components/like-button/like-button.component';
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
+import { CharacterPreviewComponent } from './components/character-preview/character-preview.component';
+import { CharacterComponent } from './pages/character/character.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -40,7 +42,9 @@ import { EditPostComponent } from './pages/edit-post/edit-post.component';
     AuthCallbackComponent,
     PostDisplayComponent,
     LikeButtonComponent,
-    EditPostComponent
+    EditPostComponent,
+    CharacterPreviewComponent,
+    CharacterComponent
   ],
   imports: [
     BrowserModule,
