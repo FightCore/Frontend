@@ -19,14 +19,9 @@ export class GameSelectorComponent implements OnInit {
   games: Game[];
 
   ngOnInit() {
-    const allGames = this.gameService.getAllGames();
-
-    if (allGames instanceof Array) {
-      this.processGames(allGames);
-    } else {
-      allGames.subscribe((games: Game[]) => this.processGames(games),
+    this.gameService.getAllGames().subscribe((games: Game[]) =>
+      this.processGames(games),
       error => this.failed = true);
-    }
   }
 
   private processGames(games: Game[]): void {

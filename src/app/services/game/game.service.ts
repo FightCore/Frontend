@@ -15,10 +15,10 @@ export class GameService extends BaseService {
     super(authService);
   }
 
-  public getAllGames(): Game[] | Observable<Game[]> {
+  public getAllGames(): Observable<Game[]> {
 
     if (environment.mocking) {
-      return this.createMockGames();
+      return new Observable(observer => observer.next(this.createMockGames()));
     }
 
     return this.httpClient.get<Game[]>(environment.baseUrl + '/games');
