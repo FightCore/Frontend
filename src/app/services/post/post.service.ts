@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { BaseService } from '../base.service';
 import { User } from 'src/app/models/user';
+import { Game } from 'src/app/models/game';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,9 @@ export class PostService extends BaseService {
   /**
    * Gets a list of all posts made to FightCore.
    */
-  public getPosts(): Post[] | Observable<Post[]> {
+  public getPosts(): Observable<Post[]> {
     if (environment.mocking) {
-      return this.generatePostList(10);
+      return new Observable(observer => observer.next(this.generatePostList(10)));
     }
 
     return this.httpClient.get<Post[]>(this.baseUrl, this.getDefaultHttpOptions());
@@ -89,6 +90,7 @@ export class PostService extends BaseService {
     post.author.name = faker.internet.userName();
     post.body = faker.lorem.paragraphs(2);
     post.likes = faker.random.number();
+    post.game = 'Ultimate';
 
     if (faker.random.boolean()) {
     post.bannerUrl = 'https://i.imgur.com/aEwNXVn.jpg';

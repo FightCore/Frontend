@@ -16,6 +16,9 @@ export class CharacterService extends BaseService {
 
   private baseUrl = `${environment.baseUrl}/characters`;
 
+  /**
+   * Gets all characters known in FightCore.
+   */
   public getAll(): Observable<Character[]> {
     return this.httpClient.get<Character[]>(this.baseUrl);
   }
