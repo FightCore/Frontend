@@ -3,6 +3,7 @@
       <img class="logo" src="assets/FC.png" alt="FightCore logo"/>
       <span>FightCore</span>
       <span [routerLink]="['/post']" i18n>Posts</span>
+      <span [routerLink]="['/character']" i18n>Characters</span>
       <span class="spacer"></span>
       <div>
         <span *ngIf="isAuthenticated() else login">{{getUserName()}}</span>

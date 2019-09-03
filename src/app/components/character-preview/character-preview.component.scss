@@ -1,0 +1,81 @@
+@import "src/styles/variables.scss";
+
+$post-border-radius: 1em;
+$post-border-radius: 0.5em;
+
+.character {
+    // Sets the border to be a solid rounded line.
+    border-style: solid;
+    border-width: 0.25em;
+    border-color: $light-primary-color;
+    border-radius: $post-border-radius;
+    height: 98%;
+
+    // This includes the title, subtitle and the avatar of the author.
+    .header {
+      // We expand the width and height so that it goes over the containing border
+      width: 102%;
+
+      // Offsets so the width and height are overlapped properly.
+      margin-left: -1%;
+      margin-top: -1%;
+
+      // Give it a little padding to make the text distance itself.
+      padding: 0.4em;
+      background-color: $primary-color;
+      border-radius: $post-border-radius;
+      // Align the text in the center middle.
+      vertical-align: middle;
+
+      color: $text-color;
+
+      .avatar {
+        // Rather well stolen than made badly: https://stackoverflow.com/a/26681130.
+        /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
+        background-image: url("https://www.smashbros.com/assets_v2/img/fighter/pict/daisy.png");
+        background-color: white;
+        /* make a square container */
+        width: 4em;
+        height: 4em;
+        /* fill the container, preserving aspect ratio, and cropping to fit */
+        background-size: cover;
+        /* center the image vertically and horizontally */
+        background-position: top center;
+        /* round the edges to a circle with border radius 1/2 container size */
+        border-radius: 50%;
+      }
+    }
+
+    .body {
+      margin: 1em;
+      .description {
+        color: $secondary-text-color;
+      }
+
+      .fill-remaining-space {
+        height: 5em;
+      }
+
+      .post-bottom-bar {
+        width: 95%;
+        position: absolute;
+        bottom: 1.5em;
+        left: 1.5em;
+        color: $primary-text-color;
+        button {
+          margin-left: 1em;
+        }
+        .game-chip {
+          position: relative;
+          top: 0.5em;
+          mat-chip {
+            max-width: 50em;
+            width: 100%;
+            text-align: center;
+            display: inline;
+            padding-top: 0.4em;
+          }
+        }
+      }
+    }
+}
