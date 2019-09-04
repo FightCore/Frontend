@@ -27,6 +27,7 @@ import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { CharacterPreviewComponent } from './components/character-preview/character-preview.component';
 import { CharacterComponent } from './pages/character/character.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { CharacterDisplayComponent } from './pages/character-display/character-display.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -46,7 +47,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     EditPostComponent,
     CharacterPreviewComponent,
     CharacterComponent,
-    LoadingComponent
+    LoadingComponent,
+    CharacterDisplayComponent
   ],
   imports: [
     BrowserModule,

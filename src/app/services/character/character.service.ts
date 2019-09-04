@@ -22,4 +22,8 @@ export class CharacterService extends BaseService {
   public getAll(): Observable<Character[]> {
     return this.httpClient.get<Character[]>(this.baseUrl);
   }
+
+  public get(id: number): Observable<Character> {
+    return this.httpClient.get<Character>(`${this.baseUrl}/${id}`);
+  }
 }
