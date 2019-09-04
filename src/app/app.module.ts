@@ -26,6 +26,7 @@ import { LikeButtonComponent } from './components/like-button/like-button.compon
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { CharacterPreviewComponent } from './components/character-preview/character-preview.component';
 import { CharacterComponent } from './pages/character/character.component';
+import { LoadingComponent } from './components/loading/loading.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -44,7 +45,8 @@ import { CharacterComponent } from './pages/character/character.component';
     LikeButtonComponent,
     EditPostComponent,
     CharacterPreviewComponent,
-    CharacterComponent
+    CharacterComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
