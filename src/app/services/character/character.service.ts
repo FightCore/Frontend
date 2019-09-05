@@ -23,6 +23,10 @@ export class CharacterService extends BaseService {
     return this.httpClient.get<Character[]>(this.baseUrl);
   }
 
+  /**
+   * Gets a character object based on it's Id.
+   * @param id the id of the character
+   */
   public get(id: number): Observable<Character> {
     return this.httpClient.get<Character>(`${this.baseUrl}/${id}`);
   }

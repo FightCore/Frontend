@@ -1,8 +1,5 @@
 @import "src/styles/variables.scss";
 
-$character-border-width: 0.1em;
-$post-border-radius: 0.5em;
-
 .main-container {
     padding: 3em;
     padding-top: 1em;
@@ -11,9 +8,9 @@ $post-border-radius: 0.5em;
 .header {
     padding: 1em;
     border-style: solid;
-    border-width: $character-border-width;
+    border-width: $card-border-width;
     border-color: $light-primary-color;
-    border-radius: $post-border-radius;
+    border-radius: $card-border-radius;
     text-align: center;
     background-color: $primary-color;
     color: $text-color;
@@ -22,9 +19,9 @@ $post-border-radius: 0.5em;
 .info-container {
     padding: 1em;
     border-style: solid;
-    border-width: $character-border-width;
+    border-width: $card-border-width;
     border-color: $light-primary-color;
-    border-radius: $post-border-radius;
+    border-radius: $card-border-radius;
 
     // Forced the container to always be full height, meaning that the same items
     // in the row have the same outline.

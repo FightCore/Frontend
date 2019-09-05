@@ -22,9 +22,8 @@ export class CharacterDisplayComponent implements OnInit {
     private characterService: CharacterService,
     private postService: PostService,
     private router: Router,
-    private sanitizer: DomSanitizer
-  ) {
-  }
+    private sanitizer: DomSanitizer) {
+    }
 
   ngOnInit() {
     const videos = this.youtubeVideos();
@@ -39,7 +38,6 @@ export class CharacterDisplayComponent implements OnInit {
     this.characterService.get(parseFloat(characterId)).subscribe(character => {
       this.character = character;
       this.loading = false;
-      console.log(this.character);
     });
   }
 
