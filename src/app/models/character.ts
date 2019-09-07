@@ -3,6 +3,6 @@ import { Game } from './game';
 export class Character {
     id: number;
     name: string;
-    description: string;
+    generalInformation: string;
     game?: Game;
 }

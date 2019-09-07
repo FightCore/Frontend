@@ -17,10 +17,6 @@ export class CharacterComponent implements OnInit {
   ngOnInit() {
     this.characterService.getAll().subscribe(characters => {
       this.characters = characters;
-      for (let i in this.characters) {
-          this.characters[i].description = faker.lorem.paragraph();
-      }
-
       this.loading = false;
     });
   }
