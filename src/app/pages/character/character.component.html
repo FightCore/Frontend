@@ -1,4 +1,5 @@
 <div class="container-fluid custom-container">
+  <app-game-selector [selected]="2" (selectionChange)="changeGameSelection($event)"></app-game-selector>
   <div *ngIf="loading; else characterDisplay">
     <app-loading></app-loading>
   </div>
@@ -6,7 +7,7 @@
 
 <ng-template #characterDisplay>
   <div class="row equal">
-    <div *ngFor="let character of characters" class="col-lg-4">
+    <div *ngFor="let character of displayedCharacters" class="col-lg-4">
       <app-character-preview class="character-display" [character]="character">
       </app-character-preview>
     </div>

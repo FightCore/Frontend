@@ -26,10 +26,6 @@ export class CharacterDisplayComponent implements OnInit {
     }
 
   ngOnInit() {
-    const videos = this.youtubeVideos();
-    videos.forEach(video => {
-      this.youtubeUrls.push(this.sanitizer.bypassSecurityTrustResourceUrl(video));
-    });
 
     const characterId = this.route.snapshot.paramMap.get('characterId');
     this.postService.getPosts().subscribe(posts =>
@@ -37,6 +33,10 @@ export class CharacterDisplayComponent implements OnInit {
 
     this.characterService.get(parseFloat(characterId)).subscribe(character => {
       this.character = character;
+      const videos = this.youtubeVideos();
+      videos.forEach(video => {
+        this.youtubeUrls.push(this.sanitizer.bypassSecurityTrustResourceUrl(video));
+      });
       this.loading = false;
     });
   }
@@ -46,11 +46,24 @@ export class CharacterDisplayComponent implements OnInit {
   }
 
   private youtubeVideos(): string[] {
-    return [
-      "https://www.youtube.com/embed/MyTg9PqCMac",
-      "https://www.youtube.com/embed/CN9Qnn9Zdq4",
-      "https://www.youtube.com/embed/6Lns6lSy0mQ",
-      "https://www.youtube.com/embed/8C5klDv-y_A"
-    ];
+    const videos = [];
+    this.character.videos.forEach(video => {
+      console.log(video);
+      videos.push(this.getEmbed(video.youtubeId));
+    });
+
+    return videos;
+  }
+
+  public getEmbed(youtubeId: string): string {
+    return 'https://www.youtube.com/embed/' + youtubeId;
+ }
+
+  seriesIcon(): string {
+    if (this.character.series) {
+      return this.character.series.gameIcon.url;
+    }
+
+    return 'https://www.stickpng.com/assets/images/5a4613ddd099a2ad03f9c994.png';
   }
 }

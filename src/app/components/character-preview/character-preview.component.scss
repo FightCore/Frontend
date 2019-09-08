@@ -24,25 +24,30 @@ $post-border-radius: 0.5em;
       padding: 0.4em;
       background-color: $primary-color;
       border-radius: $post-border-radius;
+
       // Align the text in the center middle.
       vertical-align: middle;
 
       color: $text-color;
 
+      .title {
+        line-height: 2em;
+        text-align: center;
+        vertical-align: middle;
+        height: 100%;
+      }
+
       .avatar {
         // Rather well stolen than made badly: https://stackoverflow.com/a/26681130.
-        /* This image is 687 wide by 1024 tall, similar to your aspect ratio */
-        background-image: url("https://www.smashbros.com/assets_v2/img/fighter/pict/daisy.png");
-        background-color: white;
+
         /* make a square container */
         width: 4em;
         height: 4em;
         /* fill the container, preserving aspect ratio, and cropping to fit */
         background-size: cover;
         /* center the image vertically and horizontally */
-        background-position: top center;
+        background-position: center;
         /* round the edges to a circle with border radius 1/2 container size */
-        border-radius: 50%;
       }
     }
 
@@ -50,6 +55,9 @@ $post-border-radius: 0.5em;
       margin: 1em;
       .description {
         color: $secondary-text-color;
+        max-height: 10.5em;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .fill-remaining-space {
