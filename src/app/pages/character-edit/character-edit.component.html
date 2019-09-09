@@ -1,0 +1,79 @@
+<div class="container-fluid">
+    <app-loading *ngIf="loading else editTemplate"></app-loading>
+</div>
+
+<ng-template #editTemplate>
+    <h2>{{ character.name }}</h2>
+    <form>
+        <div class="row">
+            <div class="col-12">
+                <h2>General Information</h2>
+                <mat-form-field class="general-information">
+                    <textarea matInput placeholder="General Information about the character."
+                    [(ngModel)]="character.generalInformation" type="textarea"
+                    name="generalInformation"></textarea>
+                </mat-form-field>
+            </div>
+            <hr/>
+            <div class="col-12">
+                <div class="title">
+                        <h2>Players</h2>
+                        <button class="create-button" mat-raised-button
+                        (click)="createPlayer()"
+                        color="primary" i18n>New Player</button>
+                </div>
+            </div>
+            <div class="col-12">
+                <div *ngFor="let player of character.notablePlayers" class="player">
+                    <mat-form-field class="name">
+                        <input matInput placeholder="Player's name"
+                        [(ngModel)]="player.name" type="input"
+                        [name]="'playerName' + player.id"
+                        required>
+                    </mat-form-field>
+                    <mat-form-field class="description">
+                            <input matInput placeholder="Player's description"
+                            [(ngModel)]="player.description" type="input"
+                            [name]="'playerDescription' + player.id"
+                            required>
+                        </mat-form-field>
+                        <button 
+                        class="delete-button"
+                        mat-raised-button color="accent"
+                        (click)="deletePlayer(player)" i18n>Delete</button>
+                    <hr/>
+                </div>
+            </div>
+            <div class="col-12">
+                    <div class="title">
+                            <h2>Videos</h2>
+                            <button class="create-button" mat-raised-button
+                            (click)="createPlayer()"
+                            color="primary" i18n>New Video</button>
+                    </div>
+                </div>
+            <div class="col-12">
+                    <div *ngFor="let video of character.videos" class="player">
+                        <mat-form-field class="name">
+                            <input matInput placeholder="Video's name"
+                            [(ngModel)]="video.name" type="input"
+                            [name]="'videoName' + video.id"
+                            required>
+                        </mat-form-field>
+                        <mat-form-field class="description">
+                                <input matInput placeholder="Video's YouTubeId"
+                                [(ngModel)]="video.youtubeId" type="input"
+                                [name]="'youtubeId' + video.id"
+                                required>
+                            </mat-form-field>
+                            <button 
+                            class="delete-button"
+                            mat-raised-button color="accent"
+                            (click)="deletePlayer(player)" i18n>Delete</button>
+                        <hr/>
+                    </div>
+                </div>
+        </div>
+        <button mat-raised-button color="accent" (click)="saveForm()">Save</button>
+    </form>
+</ng-template>

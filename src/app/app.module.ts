@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 import { GameSelectorComponent } from './components/game-selector/game-selector.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostHelpComponent } from './components/post-help/post-help.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
@@ -28,35 +28,20 @@ import { CharacterPreviewComponent } from './components/character-preview/charac
 import { CharacterComponent } from './pages/character/character.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { CharacterDisplayComponent } from './pages/character-display/character-display.component';
+import { CharacterEditComponent } from './pages/character-edit/character-edit.component';
+import { CommonModule } from '@angular/common';
 // Import FontAwesome icons where needed.
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SideNavComponent,
-    NavBarComponent,
-    PostComponent,
-    PostPreviewComponent,
-    CreatePostComponent,
-    GameSelectorComponent,
-    PostHelpComponent,
-    LoginComponent,
-    AuthCallbackComponent,
-    PostDisplayComponent,
-    LikeButtonComponent,
-    EditPostComponent,
-    CharacterPreviewComponent,
-    CharacterComponent,
-    LoadingComponent,
-    CharacterDisplayComponent
-  ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     MaterialModules,
     AppRoutingModule,
     FontAwesomeModule,
-    FormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     LMarkdownEditorModule,
@@ -74,6 +59,26 @@ import { CharacterDisplayComponent } from './pages/character-display/character-d
         }
       }
     })
+  ],
+  declarations: [
+    AppComponent,
+    SideNavComponent,
+    NavBarComponent,
+    PostComponent,
+    PostPreviewComponent,
+    CreatePostComponent,
+    GameSelectorComponent,
+    PostHelpComponent,
+    LoginComponent,
+    AuthCallbackComponent,
+    PostDisplayComponent,
+    LikeButtonComponent,
+    EditPostComponent,
+    CharacterPreviewComponent,
+    CharacterComponent,
+    LoadingComponent,
+    CharacterDisplayComponent,
+    CharacterEditComponent
   ],
   entryComponents: [PostHelpComponent],
   providers: [],
