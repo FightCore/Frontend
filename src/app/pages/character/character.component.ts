@@ -9,18 +9,17 @@ import * as faker from 'faker';
   styleUrls: ['./character.component.scss']
 })
 export class CharacterComponent implements OnInit {
-
-  constructor(private characterService: CharacterService) { }
+  constructor(private characterService: CharacterService) {}
   loading: boolean = true;
   characters: Character[];
   displayedCharacters: Character[];
-  selectedGame: number;
+  selectedGame: number = 6;
   searchedName: string;
 
   ngOnInit() {
     this.characterService.getAll().subscribe(characters => {
       this.characters = characters;
-      this.displayedCharacters = this.characters;
+      this.filterCharacters();
       this.loading = false;
     });
   }
@@ -35,13 +34,17 @@ export class CharacterComponent implements OnInit {
   }
 
   filterCharacters(): void {
-    this.displayedCharacters = this.characters.filter(character =>
-      character.game.id === this.selectedGame);
-    this.displayedCharacters = this.displayedCharacters.filter(character =>
-      character.name.toLowerCase().includes(this.searchedName.toLowerCase()));
+    this.displayedCharacters = this.characters.filter(
+      character => character.game.id === this.selectedGame
+    );
+    if (this.searchedName) {
+      this.displayedCharacters = this.displayedCharacters.filter(character =>
+        character.name.toLowerCase().includes(this.searchedName.toLowerCase())
+      );
+    }
 
     this.displayedCharacters.sort((characterOne, characterTwo) =>
-      (characterOne.name > characterTwo.name ? 1 : -1));
+      characterOne.name > characterTwo.name ? 1 : -1
+    );
   }
-
 }
