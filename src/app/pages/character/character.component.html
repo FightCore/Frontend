@@ -1,5 +1,12 @@
 <div class="container-fluid custom-container">
   <app-game-selector [selected]="2" (selectionChange)="changeGameSelection($event)"></app-game-selector>
+
+  <mat-form-field class="right-search-bar">
+    <mat-label i18n>Search</mat-label>
+  <input (input)="onSearchChange($event.target.value)" matInput name="search" />
+  <mat-icon matSuffix>search</mat-icon>
+
+</mat-form-field>
   <div *ngIf="loading; else characterDisplay">
     <app-loading></app-loading>
   </div>

@@ -15,6 +15,7 @@ export class CharacterComponent implements OnInit {
   characters: Character[];
   displayedCharacters: Character[];
   selectedGame: number;
+  searchedName: string;
 
   ngOnInit() {
     this.characterService.getAll().subscribe(characters => {
@@ -28,10 +29,16 @@ export class CharacterComponent implements OnInit {
     this.selectedGame = gameId;
     this.filterCharacters();
   }
+  onSearchChange(term: string): void {
+    this.searchedName = term;
+    this.filterCharacters();
+  }
 
-  filterCharacters() {
+  filterCharacters(): void {
     this.displayedCharacters = this.characters.filter(character =>
       character.game.id === this.selectedGame);
+    this.displayedCharacters = this.displayedCharacters.filter(character =>
+      character.name.toLowerCase().includes(this.searchedName.toLowerCase()));
 
     this.displayedCharacters.sort((characterOne, characterTwo) =>
       (characterOne.name > characterTwo.name ? 1 : -1));
