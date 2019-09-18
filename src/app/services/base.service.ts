@@ -1,5 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 export class BaseService {
     private authService: AuthService;
@@ -20,5 +21,12 @@ export class BaseService {
             authorization: token
           })
         };
+    }
+    protected returnFakeObserver(): Observable<never> {
+      return new Observable(observer => {
+        setTimeout(() => {
+          observer.next();
+        }, 200);
+      });
     }
 }

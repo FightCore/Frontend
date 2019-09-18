@@ -98,11 +98,4 @@ export class PostService extends BaseService {
 
     return post;
   }
-  private returnFakeObserver(): Observable<never> {
-    return new Observable(observer => {
-      setTimeout(() => {
-        observer.next();
-      }, 200);
-    });
-  }
 }

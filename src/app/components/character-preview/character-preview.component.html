@@ -1,14 +1,14 @@
 <div class="character">
   <div class="header row">
     <div class="d-none d-sm-block col-2">
-      <div class="avatar"></div>
+      <img class="avatar" alt="character profile shot" [src]="characterIcon()">
     </div>
     <div class="col-8">
-      <h3>{{ character.name }}</h3>
+      <h3 class="title">{{ character.name }}</h3>
     </div>
     <div class="col-2">
       <img
-        src="https://www.ssbwiki.com/images/3/30/MarioSymbol.svg"
+        [src]="seriesIcon()"
         alt="character-icon"
         height="70em"
       />

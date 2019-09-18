@@ -1,0 +1,25 @@
+.general-information {
+    width: 100%;
+}
+
+.player {
+    .name {
+        width: 20%;
+        margin-right: 1em;
+    }
+    .description {
+        width: 70%;
+    }
+    .delete-button {
+        margin-left: 1em;
+    }
+}
+.title {
+    margin-bottom: 1em;
+    .create-button {
+        float: right;
+    }
+    h2 {
+        float: left;
+    }
+}

@@ -9,6 +9,7 @@ import { PostDisplayComponent } from './pages/post-display/post-display.componen
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { CharacterComponent } from './pages/character/character.component';
 import { CharacterDisplayComponent } from './pages/character-display/character-display.component';
+import { CharacterEditComponent } from './pages/character-edit/character-edit.component';
 
 const routes: Routes = [
   { path: StaticRoutes.createPost, component: CreatePostComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: StaticRoutes.editPost, component: EditPostComponent },
   { path: StaticRoutes.viewPost, component: PostDisplayComponent},
   { path: StaticRoutes.characters, component: CharacterComponent },
+  { path: StaticRoutes.editCharacter, component: CharacterEditComponent },
   { path: StaticRoutes.viewCharacter, component: CharacterDisplayComponent },
   { path: '**', redirectTo: StaticRoutes.posts }
 ];

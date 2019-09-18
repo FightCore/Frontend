@@ -8,5 +8,6 @@ export class StaticRoutes {
   public static login: string = 'login';
   public static authCallback: string = 'auth-callback';
   public static characters: string = 'character';
+  public static editCharacter: string = 'character/edit/:characterId';
   public static viewCharacter: string = 'character/:characterId';
 }

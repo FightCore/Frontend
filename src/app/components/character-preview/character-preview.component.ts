@@ -19,4 +19,20 @@ export class CharacterPreviewComponent implements OnInit {
     console.log(id);
     this.router.navigate([StaticRoutes.characters, id]);
   }
+
+  characterIcon(): string {
+    if (this.character.stockIcon) {
+      return this.character.stockIcon.url;
+    }
+
+    return 'https://www.civhc.org/wp-content/uploads/2018/10/question-mark.png';
+  }
+
+  seriesIcon(): string {
+    if (this.character.series) {
+      return this.character.series.gameIcon.url;
+    }
+
+    return 'https://www.stickpng.com/assets/images/5a4613ddd099a2ad03f9c994.png';
+  }
 }

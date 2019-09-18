@@ -39,18 +39,6 @@
         required
       >
       </md-editor>
-
-      <div class="container-fluid">
-          <button mat-raised-button
-          [routerLink]="['/post']" color="primary" i18n>Back to posts.</button>
-
-          <button [disabled]="isLoading" mat-raised-button color="accent"
-            class="create-button" (click)="createPost()" i18n>
-              <div *ngIf="this.post else createText">
-                Update Post
-              </div>
-            </button>
-      </div>
 </div>
 <ng-template #createText i18n>
     Create Post

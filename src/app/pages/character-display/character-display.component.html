@@ -13,9 +13,9 @@
       </div>
       <div class="col-lg-2">
         <img
-          src="https://www.ssbwiki.com/images/3/30/MarioSymbol.svg"
+          [src]="seriesIcon()"
           alt="character-icon"
-          height="70em"
+          height="100em"
         />
       </div>
     </div>
@@ -24,10 +24,12 @@
     <div class="row">
       <div class="col-lg-3">
         <div class="info-container">
+          <!--Center this image.-->
           <img
-            src="https://www.ssbwiki.com/images/thumb/8/80/Falco_SSBU.png/1200px-Falco_SSBU.png"
+            [src]="character.characterImage.url"
             alt="character-portrait"
             height="370em"
+            class="profile-shot"
           />
         </div>
       </div>
@@ -45,9 +47,12 @@
       <div class="col-lg-12">
         <div class="info-container">
           <h2 class="title" i18n>Notable Players</h2>
-          <p class="text">
-            {{ lorem() }}
-          </p>
+          <h5 class="title" *ngIf="character.notablePlayers.length == 0" i18n>
+            No players yet!
+          </h5>
+            <div *ngFor="let player of character.notablePlayers">
+              <p class="text"><strong>{{player.name}}</strong>: {{player.description}}</p>
+            </div>
         </div>
       </div>
     </div>
@@ -69,6 +74,9 @@
       <div class="col-lg-12">
         <div class="info-container">
           <h2 class="title" i18n>Videos</h2>
+          <h5 class="title" *ngIf="youtubeUrls.length == 0" i18n>
+              No videos yet!
+            </h5>
           <div class="row">
             <div *ngFor="let video of youtubeUrls" class="col-lg-6">
               <div class="video">
