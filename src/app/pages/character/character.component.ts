@@ -13,6 +13,9 @@ export class CharacterComponent implements OnInit {
   loading: boolean = true;
   characters: Character[];
   displayedCharacters: Character[];
+
+  // 6 is the Id that ultimate has, as this is the most recent game, lets filter on this.
+  // This should become an user preference.
   selectedGame: number = 6;
   searchedName: string;
 

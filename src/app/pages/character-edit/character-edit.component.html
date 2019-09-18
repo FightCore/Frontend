@@ -7,7 +7,7 @@
     <form>
         <div class="row">
             <div class="col-12">
-                <h2>General Information</h2>
+                <h2 i18n>General Information</h2>
                 <mat-form-field class="general-information">
                     <textarea matInput placeholder="General Information about the character."
                     [(ngModel)]="character.generalInformation" type="textarea"
@@ -17,7 +17,7 @@
             <hr/>
             <div class="col-12">
                 <div class="title">
-                        <h2>Players</h2>
+                        <h2 i18n>Players</h2>
                         <button class="create-button" mat-raised-button
                         (click)="createPlayer()"
                         color="primary" i18n>New Player</button>
@@ -46,7 +46,7 @@
             </div>
             <div class="col-12">
                     <div class="title">
-                            <h2>Videos</h2>
+                            <h2 i18n>Videos</h2>
                             <button class="create-button" mat-raised-button
                             (click)="createPlayer()"
                             color="primary" i18n>New Video</button>
@@ -66,14 +66,14 @@
                                 [name]="'youtubeId' + video.id"
                                 required>
                             </mat-form-field>
-                            <button 
+                            <button
                             class="delete-button"
                             mat-raised-button color="accent"
-                            (click)="deletePlayer(player)" i18n>Delete</button>
+                            (click)="deletePlayer(video)" i18n>Delete</button>
                         <hr/>
                     </div>
                 </div>
         </div>
-        <button mat-raised-button color="accent" (click)="saveForm()">Save</button>
+        <button mat-raised-button color="accent" (click)="saveForm()" i18n>Save</button>
     </form>
 </ng-template>

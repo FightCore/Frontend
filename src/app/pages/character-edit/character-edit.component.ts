@@ -29,15 +29,15 @@ export class CharacterEditComponent implements OnInit {
     });
   }
 
-  createPlayer() {
+  createPlayer(): void {
     this.character.notablePlayers.push(new NotablePlayer());
   }
 
-  saveForm() {
+  saveForm(): void {
     console.log(this.character);
   }
 
-  deletePlayer(player: NotablePlayer) {
+  deletePlayer(player: NotablePlayer): void {
     const index = this.character.notablePlayers.indexOf(player, 0);
     if (index > -1) {
       this.character.notablePlayers.splice(index, 1);

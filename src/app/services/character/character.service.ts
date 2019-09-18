@@ -5,6 +5,7 @@ import { BaseService } from '../base.service';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import * as faker from 'faker';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class CharacterService extends BaseService {
    * Gets all characters known in FightCore.
    */
   public getAll(): Observable<Character[]> {
+    if (environment.mocking) {
+      return new Observable(observer => observer.next(this.generateCharacterList(20)));
+    }
+
     return this.httpClient.get<Character[]>(this.baseUrl);
   }
 
@@ -28,6 +33,28 @@ export class CharacterService extends BaseService {
    * @param id the id of the character
    */
   public get(id: number): Observable<Character> {
+    if (environment.mocking) {
+      return new Observable(observer => observer.next(this.generateCharacter()));
+    }
+
     return this.httpClient.get<Character>(`${this.baseUrl}/${id}`);
+  }
+
+  private generateCharacterList(amount: number): Character[] {
+    const characters = new Character[amount]();
+    for (let i = 0; i < amount; i++) {
+      characters[i] = this.generateCharacter();
+    }
+
+    return characters;
+  }
+
+  private generateCharacter(): Character {
+    const character = new Character();
+    character.generalInformation = faker.lorem.paragraphs();
+    character.name = faker.lorem.words(3);
+    character.id = faker.random.number(10000);
+
+    return character;
   }
 }
