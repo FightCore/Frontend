@@ -10,6 +10,7 @@ import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { CharacterComponent } from './pages/character/character.component';
 import { CharacterDisplayComponent } from './pages/character-display/character-display.component';
 import { CharacterEditComponent } from './pages/character-edit/character-edit.component';
+import { UserComponent } from './pages/user/user.component';
 
 const routes: Routes = [
   { path: StaticRoutes.createPost, component: CreatePostComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: StaticRoutes.characters, component: CharacterComponent },
   { path: StaticRoutes.editCharacter, component: CharacterEditComponent },
   { path: StaticRoutes.viewCharacter, component: CharacterDisplayComponent },
+  { path: StaticRoutes.viewUser, component: UserComponent },
   { path: '**', redirectTo: StaticRoutes.posts }
 ];
 

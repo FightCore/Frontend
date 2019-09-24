@@ -30,6 +30,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { CharacterDisplayComponent } from './pages/character-display/character-display.component';
 import { CharacterEditComponent } from './pages/character-edit/character-edit.component';
 import { CommonModule } from '@angular/common';
+import { UserComponent } from './pages/user/user.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -78,7 +79,8 @@ import { CommonModule } from '@angular/common';
     CharacterComponent,
     LoadingComponent,
     CharacterDisplayComponent,
-    CharacterEditComponent
+    CharacterEditComponent,
+    UserComponent
   ],
   entryComponents: [PostHelpComponent],
   providers: [],

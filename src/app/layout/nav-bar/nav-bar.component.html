@@ -6,7 +6,7 @@
       <span [routerLink]="['/character']" i18n>Characters</span>
       <span class="spacer"></span>
       <div>
-        <span *ngIf="isAuthenticated() else login">{{getUserName()}}</span>
+        <span *ngIf="isAuthenticated() else login" (click)="toUser()" >{{getUserName()}}</span>
         <span *ngIf="isAuthenticated()" (click)="logout()" i18n> Logout</span>
       </div>
     </mat-toolbar-row>

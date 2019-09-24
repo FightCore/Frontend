@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CharacterService } from 'src/app/services/character/character.service';
 import { Character } from 'src/app/models/character';
 import * as faker from 'faker';
+import { GameSeries } from 'src/app/models/gameSeries';
+import { GameService } from 'src/app/services/game/game.service';
+import { Game } from 'src/app/models/game';
 
 @Component({
   selector: 'app-character',
@@ -9,10 +12,13 @@ import * as faker from 'faker';
   styleUrls: ['./character.component.scss']
 })
 export class CharacterComponent implements OnInit {
-  constructor(private characterService: CharacterService) {}
+  constructor(
+    private characterService: CharacterService,
+    private gameService: GameService) {}
   loading: boolean = true;
   characters: Character[];
   displayedCharacters: Character[];
+  games: Game[];
 
   // 6 is the Id that ultimate has, as this is the most recent game, lets filter on this.
   // This should become an user preference.
@@ -20,11 +26,20 @@ export class CharacterComponent implements OnInit {
   searchedName: string;
 
   ngOnInit() {
+    this.gameService.getAllGames().subscribe(games => {
+      this.games = games;
+    });
+
     this.characterService.getAll().subscribe(characters => {
       this.characters = characters;
       this.filterCharacters();
       this.loading = false;
     });
+
+  }
+
+  getCurrentGame(): Game {
+    return this.games.find(game => game.id === this.selectedGame);
   }
 
   changeGameSelection(gameId: number): void {
