@@ -48,6 +48,7 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     HttpClientModule,
     ToastrModule.forRoot(),
     LMarkdownEditorModule,
+    ReactiveFormsModule,
     MarkdownModule.forRoot({
       markedOptions: {
         provide: MarkedOptions,
