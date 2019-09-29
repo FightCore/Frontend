@@ -11,6 +11,7 @@ import { CharacterComponent } from './pages/character/character.component';
 import { CharacterDisplayComponent } from './pages/character-display/character-display.component';
 import { CharacterEditComponent } from './pages/character-edit/character-edit.component';
 import { UserComponent } from './pages/user/user.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
   { path: StaticRoutes.createPost, component: CreatePostComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: StaticRoutes.editCharacter, component: CharacterEditComponent },
   { path: StaticRoutes.viewCharacter, component: CharacterDisplayComponent },
   { path: StaticRoutes.viewUser, component: UserComponent },
+  { path: StaticRoutes.register, component: RegisterComponent },
   { path: '**', redirectTo: StaticRoutes.posts }
 ];
 
