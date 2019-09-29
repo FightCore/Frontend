@@ -31,6 +31,8 @@ import { CharacterDisplayComponent } from './pages/character-display/character-d
 import { CharacterEditComponent } from './pages/character-edit/character-edit.component';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './pages/user/user.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -59,7 +61,8 @@ import { UserComponent } from './pages/user/user.component';
           smartypants: false
         }
       }
-    })
+    }),
+    MatPasswordStrengthModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -80,7 +83,8 @@ import { UserComponent } from './pages/user/user.component';
     LoadingComponent,
     CharacterDisplayComponent,
     CharacterEditComponent,
-    UserComponent
+    UserComponent,
+    RegisterComponent
   ],
   entryComponents: [PostHelpComponent],
   providers: [],
