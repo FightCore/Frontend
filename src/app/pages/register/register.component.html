@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container-fluid">
+  <h2 class="title" i18n>Create your account</h2>
   <form class="user-form">
     <mat-form-field appearance="outline">
       <mat-label i18n>Email</mat-label>
@@ -38,23 +39,6 @@
       }}</mat-error>
     </mat-form-field>
 
-    <!-- Password validations -->
-    <mat-hint align="end" aria-live="polite">
-      {{ password.value.length }} / 25
-    </mat-hint>
-    <mat-password-strength #passwordComponent [password]="password.value">
-    </mat-password-strength>
-    <mat-checkbox [(ngModel)]="showPasswordInfo" name="showPasswordInfo" i18n
-      >Show details
-    </mat-checkbox>
-    <mat-password-strength-info
-      *ngIf="showPasswordInfo"
-      [passwordComponent]="passwordComponent"
-    >
-    </mat-password-strength-info>
-    <!-- End Password Validation -->
-
-
     <mat-form-field appearance="outline">
       <mat-label i18n>Confirm password</mat-label>
       <input
@@ -67,7 +51,25 @@
       <mat-error *ngIf="confirmPassword.invalid">{{
         getErrorMessage(confirmPassword)
       }}</mat-error>
+
+
     </mat-form-field>
+    <!-- Password validations -->
+    <mat-hint align="end" aria-live="polite">
+        {{ password.value.length }} / 25
+      </mat-hint>
+      <mat-password-strength #passwordComponent [password]="password.value">
+      </mat-password-strength>
+      <mat-checkbox [(ngModel)]="showPasswordInfo" name="showPasswordInfo" i18n
+        >Show details
+      </mat-checkbox>
+      <mat-password-strength-info
+        *ngIf="showPasswordInfo"
+        [passwordComponent]="passwordComponent"
+      >
+      </mat-password-strength-info>
+      <!-- End Password Validation -->
+
     <button
       mat-raised-button
       color="primary"

@@ -3,6 +3,7 @@ import { CreateUser } from 'src/app/models/createUser';
 import { Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user/user.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit {
   confirmPassword = new FormControl('', [Validators.required]);
   showPasswordInfo: boolean;
   constructor(
+    public dialogRef: MatDialogRef<RegisterComponent>,
     private toastrService: ToastrService,
     private userService: UserService) {
   }

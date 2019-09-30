@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { RegisterComponent } from 'src/app/pages/register/register.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,8 +11,11 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private authService: AuthService,
-    private router: Router) { }
+  constructor(
+      private authService: AuthService,
+      private dialog: MatDialog,
+      private router: Router) { }
+
   userName: string;
   ngOnInit() {
   }
@@ -36,6 +41,12 @@ export class NavBarComponent implements OnInit {
 
   toUser() {
     this.router.navigate(['user', this.authService.id]);
+  }
+
+  register() {
+    let dialogRef = this.dialog.open(RegisterComponent, {
+      width: '25%'
+    });
   }
 
 }
