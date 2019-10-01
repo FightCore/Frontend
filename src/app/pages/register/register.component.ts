@@ -34,17 +34,31 @@ export class RegisterComponent implements OnInit {
             '';
   }
 
+  checkPassword(password:string) : boolean {
+    //password reqs : 1 upper, 1 lower, 1 digit, 1 special
+    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+    return strongRegex.test(password) ? true : false;
+    
+  }
+
   register(): void {
     console.log(this.password);
+    var validPassword = this.checkPassword(this.password.value);
+    if(!validPassword){
+      this.toastrService.error('Password must have at least : 1 upper case, 1 lower case, 1 digit ,1 special character');
+      return;
+    }
+    if(this.password.value !== this.confirmPassword.value){
+      this.toastrService.error('Passwords do not match');
+      return;
+    }
     if (this.email.invalid || this.password.invalid || this.confirmPassword.invalid
-      || this.username.invalid) {
+      || this.username.invalid ) {
         this.toastrService.error('There are invalid fields', 'Unable to register');
         return;
       }
 
-    if (this.password.value !== this.confirmPassword.value) {
-        return;
-      }
+    
 
     const user = new CreateUser();
     user.email = this.email.value;
