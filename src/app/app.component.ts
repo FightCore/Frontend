@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { UserOptions } from './options/userOptions';
+import { GameThemes } from 'src/styles/gameThemes';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,6 @@ import { UserOptions } from './options/userOptions';
 })
 export class AppComponent implements OnInit {
   title = 'FightCore';
-  themeDictionary: Map<number, string> = new Map([
-    [1, 'fightcore-theme'],
-    [2, 'melee-theme'],
-    [3, 'fightcore-theme'],
-    [4, 'fightcore-theme'],
-    [5, 'fightcore-theme'],
-    [6, 'fightcore-theme'],
-  ]);
 
   constructor(public overlayContainer: OverlayContainer) { }
   @HostBinding('class') componentCssClass;
@@ -33,6 +26,6 @@ export class AppComponent implements OnInit {
   }
 
   public getThemeForGameId(gameId: number) {
-    return this.themeDictionary.get(gameId);
+    return GameThemes.themeDictionary.get(gameId);
   }
 }

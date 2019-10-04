@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { PostText } from 'src/app/text/post.text';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { MarkdownService } from 'ngx-markdown';
+import { GameThemes } from 'src/styles/gameThemes';
 
 @Component({
   selector: 'app-post-preview',
@@ -15,14 +16,6 @@ import { MarkdownService } from 'ngx-markdown';
 })
 export class PostPreviewComponent implements OnInit {
   @Input() post: Post;
-  themeDictionary: Map<number, string> = new Map([
-    [1, 'fightcore-theme'],
-    [2, 'melee-theme'],
-    [3, 'fightcore-theme'],
-    [4, 'fightcore-theme'],
-    [5, 'fightcore-theme'],
-    [6, 'fightcore-theme'],
-  ]);
 
   constructor(
     private postService: PostService,
@@ -55,6 +48,6 @@ export class PostPreviewComponent implements OnInit {
   }
 
   getPostClass(): string {
-    return this.themeDictionary.get(this.post.gameId);
+    return GameThemes.themeDictionary.get(this.post.gameId);
   }
 }

@@ -23,6 +23,31 @@ $melee-app-accent:  mat-palette($mat-red, 800);
 
 $melee: mat-light-theme($melee-app-primary, $melee-app-accent);
 
+$ds-app-primary:  mat-palette($mat-red, 600);
+$ds-app-accent:  mat-palette($mat-blue, 900);
+
+$ds: mat-light-theme($ds-app-primary, $ds-app-accent);
+
+$smash-app-primary:  mat-palette($mat-amber, 800);
+$smash-app-accent:  mat-palette($mat-light-blue, 600);
+
+$smash: mat-light-theme($smash-app-primary, $smash-app-accent);
+
+$wiiu-app-primary:  mat-palette($mat-blue, 600);
+$wiiu-app-accent:  mat-palette($mat-red, 900);
+
+$wiiu: mat-light-theme($wiiu-app-primary, $wiiu-app-accent);
+
+$ultimate-app-primary:  mat-palette($mat-deep-purple, 500);
+$ultimate-app-accent:  mat-palette($mat-deep-orange, 500);
+
+$ultimate: mat-light-theme($ultimate-app-primary, $ultimate-app-accent);
+
+$brawl-app-primary:  mat-palette($mat-orange, 800);
+$brawl-app-accent:  mat-palette($mat-red, 800);
+
+$brawl: mat-light-theme($brawl-app-primary, $brawl-app-accent);
+
 @mixin background-theme($theme) {
     // Extract the palettes you need from the theme definition.
     $primary: map-get($theme, primary);
@@ -40,6 +65,31 @@ $melee: mat-light-theme($melee-app-primary, $melee-app-accent);
 .melee-theme {
     @include angular-material-theme($melee);
     @include background-theme($melee);
+}
+
+.ds-theme {
+  @include angular-material-theme($ds);
+  @include background-theme($ds);
+}
+
+.smash-theme {
+  @include angular-material-theme($smash);
+  @include background-theme($smash);
+}
+
+.wiiu-theme {
+@include angular-material-theme($wiiu);
+@include background-theme($wiiu);
+}
+
+.ultimate-theme {
+  @include angular-material-theme($ultimate);
+  @include background-theme($ultimate);
+}
+
+.brawl-theme {
+@include angular-material-theme($brawl);
+@include background-theme($brawl);
 }
 
 
