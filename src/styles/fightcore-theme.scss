@@ -18,8 +18,8 @@ $fightcore-app-warn:    mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
 $fightcore-app-theme: mat-light-theme($fightcore-app-primary, $fightcore-app-accent, $fightcore-app-warn);
 
-$melee-app-primary:  mat-palette($mat-red);
-$melee-app-accent:  mat-palette($mat-deep-purple);
+$melee-app-primary:  mat-palette($mat-gray, 800);
+$melee-app-accent:  mat-palette($mat-red, 800);
 
 $melee: mat-light-theme($melee-app-primary, $melee-app-accent);
 

@@ -20,7 +20,7 @@ export class TitlebarComponent implements OnInit {
   onSwitchingGame(gameId: number) {
     UserOptions.setCurrentGame(gameId);
 
-    this.appComponent.testTheme();
+    this.appComponent.setThemeForGame();
 
     if (this.selectionChange) {
       this.selectionChange.emit(gameId);

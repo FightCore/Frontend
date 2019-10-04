@@ -15,6 +15,14 @@ import { MarkdownService } from 'ngx-markdown';
 })
 export class PostPreviewComponent implements OnInit {
   @Input() post: Post;
+  themeDictionary: Map<number, string> = new Map([
+    [1, 'fightcore-theme'],
+    [2, 'melee-theme'],
+    [3, 'fightcore-theme'],
+    [4, 'fightcore-theme'],
+    [5, 'fightcore-theme'],
+    [6, 'fightcore-theme'],
+  ]);
 
   constructor(
     private postService: PostService,
@@ -44,5 +52,9 @@ export class PostPreviewComponent implements OnInit {
 
   viewPost(id: number): void {
     this.router.navigate([StaticRoutes.posts, id]);
+  }
+
+  getPostClass(): string {
+    return this.themeDictionary.get(this.post.gameId);
   }
 }
