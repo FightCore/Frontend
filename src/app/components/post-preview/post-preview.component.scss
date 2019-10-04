@@ -1,4 +1,5 @@
 @import "src/styles/variables.scss";
+@import "~@angular/material/theming";
 
 $post-border-radius: 1em;
 $post-border-radius: 0.5em;
@@ -22,7 +23,6 @@ $post-border-radius: 0.5em;
 
     // Give it a little padding to make the text distance itself.
     padding: 0.4em;
-    background-color: $primary-color;
     border-radius: $post-border-radius;
     // Align the text in the center middle.
     vertical-align: middle;
@@ -80,7 +80,7 @@ $post-border-radius: 0.5em;
       position: absolute;
       bottom: 1.5em;
       left: 2em;
-      color: $primary-text-color; 
+      color: $primary-text-color;
 
       .game-chip {
         position: relative;
