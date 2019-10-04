@@ -18,6 +18,15 @@ $fightcore-app-warn:    mat-palette($mat-red);
 // Create the theme object (a Sass map containing all of the palettes).
 $fightcore-app-theme: mat-light-theme($fightcore-app-primary, $fightcore-app-accent, $fightcore-app-warn);
 
+$melee-app-primary:  mat-palette($mat-red);
+$melee-app-accent:  mat-palette($mat-deep-purple);
+
+$melee: mat-light-theme($melee-app-primary, $melee-app-accent);
+
+.melee-theme {
+    @include angular-material-theme($melee)
+}
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
