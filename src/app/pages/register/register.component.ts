@@ -15,8 +15,11 @@ export class RegisterComponent implements OnInit {
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [
     Validators.required,
-    Validators.minLength(8)]);
-  confirmPassword = new FormControl('', [Validators.required]);
+    Validators.pattern(
+      "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+    )
+  ]);
+  confirmPassword = new FormControl('', [Validators.required, this.validateAreEqual.bind(this)]);
   showPasswordInfo: boolean;
   constructor(
     public dialogRef: MatDialogRef<RegisterComponent>,
@@ -35,7 +38,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    console.log(this.password);
     if (this.email.invalid || this.password.invalid || this.confirmPassword.invalid
       || this.username.invalid) {
         this.toastrService.error('There are invalid fields', 'Unable to register');
@@ -56,5 +58,11 @@ export class RegisterComponent implements OnInit {
     }, error => {
       this.toastrService.error('An error occurred while registering', 'Error');
     });
+  }
+
+  private validateAreEqual(fieldControl: FormControl) {
+    return fieldControl.value === this.password.value ? null : {
+        match: true
+    };
   }
 }
