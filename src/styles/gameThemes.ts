@@ -7,4 +7,12 @@ export class GameThemes {
         [5, 'wiiu-theme'],
         [6, 'ultimate-theme'],
       ]);
+
+  /**
+   * Gets the class name of the theme for a game.
+   * @param gameId the id of the game to get the theme for.
+   */
+  public static getThemeForGameId(gameId: number) {
+    return this.themeDictionary.get(gameId);
+  }
 }

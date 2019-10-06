@@ -15,14 +15,20 @@ export class AppComponent implements OnInit {
   @HostBinding('class') componentCssClass;
 
   ngOnInit(): void {
-   this.setThemeForGame();
+   this.setThemeForCurrentGame();
   }
 
-  public setThemeForGame() {
+  public setThemeForCurrentGame() {
     const gameId = UserOptions.getCurrentGame();
+    this.setThemeForGameId(gameId);
+  }
+
+  public setThemeForGameId(gameId: number) {
+    const transition = 'theme-transition';
+    this.overlayContainer.getContainerElement().classList.add(transition);
     const theme = this.getThemeForGameId(gameId);
     this.overlayContainer.getContainerElement().classList.add(theme);
-    this.componentCssClass = theme;
+    this.componentCssClass = theme + ' ' + transition;
   }
 
   public getThemeForGameId(gameId: number) {

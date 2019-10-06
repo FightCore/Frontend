@@ -5,6 +5,7 @@ import * as faker from 'faker';
 import { GameSeries } from 'src/app/models/gameSeries';
 import { GameService } from 'src/app/services/game/game.service';
 import { Game } from 'src/app/models/game';
+import { UserOptions } from 'src/app/options/userOptions';
 
 @Component({
   selector: 'app-character',
@@ -22,7 +23,7 @@ export class CharacterComponent implements OnInit {
 
   // 6 is the Id that ultimate has, as this is the most recent game, lets filter on this.
   // This should become an user preference.
-  selectedGame: number = 6;
+  selectedGame: number = UserOptions.getCurrentGame();
   searchedName: string;
 
   ngOnInit() {
@@ -53,7 +54,7 @@ export class CharacterComponent implements OnInit {
 
   filterCharacters(): void {
     this.displayedCharacters = this.characters.filter(
-      character => character.game.id === this.selectedGame
+      character => this.selectedGame === 0 ? true : character.game.id === this.selectedGame
     );
     if (this.searchedName) {
       this.displayedCharacters = this.displayedCharacters.filter(character =>
