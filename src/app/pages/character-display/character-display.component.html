@@ -1,11 +1,11 @@
-<div class="container-fluid main-container">
+<div [class]="'container-fluid main-container ' + getGameClass()">
   <div *ngIf="loading; else postDisplay">
     <app-loading></app-loading>
   </div>
 </div>
 
 <ng-template #postDisplay>
-  <div class="header">
+  <div class="header  background-color-primary">
     <div class="row equal">
       <div class="col-lg-2">{{ character.game.name }}</div>
       <div class="col-lg-8 nametag">

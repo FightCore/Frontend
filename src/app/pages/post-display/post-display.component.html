@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div [class]="'container-fluid ' + getGameClass()">
   <button mat-raised-button class="back-button"
     [routerLink]="['/post']" color="primary" i18n>Back to posts.</button>
   <div *ngIf="loading; else display"></div>
@@ -8,7 +8,7 @@
 
 <ng-template #display>
   <div class="post">
-    <div class="header">
+    <div class="header background-color-primary">
       <div class=row>
           <div class="col-lg-4 col-xs-12">
             <div class="game-chip">

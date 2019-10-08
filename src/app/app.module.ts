@@ -33,6 +33,7 @@ import { CommonModule } from '@angular/common';
 import { UserComponent } from './pages/user/user.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { TitlebarComponent } from './components/titlebar/titlebar.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -85,10 +86,11 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     CharacterDisplayComponent,
     CharacterEditComponent,
     UserComponent,
-    RegisterComponent
+    RegisterComponent,
+    TitlebarComponent
   ],
   entryComponents: [PostHelpComponent],
-  providers: [],
+  providers: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

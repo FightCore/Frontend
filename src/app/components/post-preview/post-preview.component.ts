@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { PostText } from 'src/app/text/post.text';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { MarkdownService } from 'ngx-markdown';
+import { GameThemes } from 'src/styles/gameThemes';
 
 @Component({
   selector: 'app-post-preview',
@@ -44,5 +45,9 @@ export class PostPreviewComponent implements OnInit {
 
   viewPost(id: number): void {
     this.router.navigate([StaticRoutes.posts, id]);
+  }
+
+  getPostClass(): string {
+    return GameThemes.getThemeForGameId(this.post.gameId);
   }
 }

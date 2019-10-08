@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { StaticRoutes } from "src/app/routes/static-routes";
 import { ToastrService } from "ngx-toastr";
 import { PostText } from "src/app/text/post.text";
+import { UserOptions } from 'src/app/options/userOptions';
 
 @Component({
   selector: "app-post",
@@ -21,7 +22,7 @@ export class PostComponent implements OnInit {
   posts: Post[];
   displayPosts: Post[];
   searchTerm: string;
-  gameId: number = 0;
+  gameId: number = UserOptions.getCurrentGame();
 
   ngOnInit() {
     this.postService.getPosts().subscribe(
@@ -39,6 +40,7 @@ export class PostComponent implements OnInit {
   private setupPosts(posts: Post[]): void {
     this.posts = posts;
     this.displayPosts = posts;
+    this.filterPosts();
   }
 
   onGameChange(gameId: number): void {

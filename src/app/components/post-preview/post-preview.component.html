@@ -1,5 +1,5 @@
-<div class="post">
-  <div class="post-header row">
+<div [class]="'post ' + getPostClass()">
+  <div class="post-header background-color-primary row">
     <div *ngIf="post.bannerUrl">
       <img class="post-banner" alt="Post Banner" [src]="post.bannerUrl" />
     </div>

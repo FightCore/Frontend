@@ -1,8 +1,5 @@
 <div class="container-fluid toolbar-container">
-  <h2 i18n>Posts</h2>
-  <h6 i18n>
-    Posts made by people from the community. This needs a longer description.
-  </h6>
+  <app-titlebar [title]="'Posts'" (selectionChange)="onGameChange($event)"></app-titlebar>
   <div class="row">
     <div class="col-lg-10">
       <div class="create-button">
@@ -13,8 +10,6 @@
     </div>
 
     <div class="col-lg-2 col-xs-12">
-      <app-game-selector (selectionChange)="onGameChange($event)" [addAllOptions]="true">
-      </app-game-selector>
       <mat-form-field class="right-search-bar">
           <mat-label i18n>Search</mat-label>
         <input (input)="onSearchChange($event.target.value)" matInput name="search" />

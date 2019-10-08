@@ -8,11 +8,10 @@
 .header {
     padding: 1em;
     border-style: solid;
-    border-width: $card-border-width;
+    border-width: 0px;
     border-color: $light-primary-color;
     border-radius: $card-border-radius;
     text-align: center;
-    background-color: $primary-color;
     color: $text-color;
 }
 

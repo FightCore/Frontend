@@ -7,6 +7,8 @@ import { StaticRoutes } from 'src/app/routes/static-routes';
 import { PostText } from 'src/app/text/post.text';
 import { MarkdownService } from 'ngx-markdown';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { AppComponent } from 'src/app/app.component';
+import { GameThemes } from 'src/styles/gameThemes';
 
 @Component({
   selector: 'app-post-display',
@@ -53,6 +55,10 @@ export class PostDisplayComponent implements OnInit {
   setupPost(post: Post) {
     this.post = post;
     this.bodyHtml = this.markdownService.compile(post.body);
+  }
+
+  getGameClass(): string {
+    return GameThemes.getThemeForGameId(this.post.gameId);
   }
 
   likePost(): void {

@@ -1,10 +1,8 @@
 <div class="container-fluid custom-container">
+  <app-titlebar title="Characters" (selectionChange)="changeGameSelection($event)"></app-titlebar>
   <div class="row">
-    <div class="col-lg-3 col-xs-12">
-        <app-game-selector class="right-search-bar" [selected]="6" (selectionChange)="changeGameSelection($event)"></app-game-selector>
-    </div>
-    <div class="col-lg-6"></div>
-    <div class="col-lg-3 col-xs-12">
+    <div class="col-lg-10"></div>
+    <div class="col-lg-2 col-xs-12">
         <mat-form-field class="right-search-bar">
             <mat-label i18n>Search</mat-label>
           <input (input)="onSearchChange($event.target.value)" matInput name="search" />
@@ -20,7 +18,7 @@
 
 <ng-template #characterDisplay>
   <div class="row equal">
-    <div *ngFor="let character of displayedCharacters" class="col-lg-4">
+    <div *ngFor="let character of displayedCharacters" class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
       <app-character-preview class="character-display" [character]="character">
       </app-character-preview>
     </div>
