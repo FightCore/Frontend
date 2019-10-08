@@ -13,13 +13,12 @@ export class TitlebarComponent implements OnInit {
   @Output() selectionChange: EventEmitter<number> = new EventEmitter();
 
   constructor(private appComponent: AppComponent) { }
-  ngOnInit() {
 
+  ngOnInit() {
   }
 
-  onSwitchingGame(gameId: number) {
+  onSwitchingGame(gameId: number): void {
     UserOptions.setCurrentGame(gameId);
-
     this.appComponent.setThemeForCurrentGame();
 
     if (this.selectionChange) {

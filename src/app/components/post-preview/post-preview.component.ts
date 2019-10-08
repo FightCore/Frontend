@@ -48,6 +48,6 @@ export class PostPreviewComponent implements OnInit {
   }
 
   getPostClass(): string {
-    return GameThemes.themeDictionary.get(this.post.gameId);
+    return GameThemes.getThemeForGameId(this.post.gameId);
   }
 }

@@ -18,20 +18,18 @@ export class AppComponent implements OnInit {
    this.setThemeForCurrentGame();
   }
 
-  public setThemeForCurrentGame() {
+  public setThemeForCurrentGame(): void {
     const gameId = UserOptions.getCurrentGame();
     this.setThemeForGameId(gameId);
   }
 
-  public setThemeForGameId(gameId: number) {
-    const transition = 'theme-transition';
-    this.overlayContainer.getContainerElement().classList.add(transition);
+  public setThemeForGameId(gameId: number): void {
     const theme = this.getThemeForGameId(gameId);
     this.overlayContainer.getContainerElement().classList.add(theme);
-    this.componentCssClass = theme + ' ' + transition;
+    this.componentCssClass = theme;
   }
 
-  public getThemeForGameId(gameId: number) {
+  public getThemeForGameId(gameId: number): string {
     return GameThemes.themeDictionary.get(gameId);
   }
 }
