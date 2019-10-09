@@ -34,6 +34,7 @@ import { UserComponent } from './pages/user/user.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { TitlebarComponent } from './components/titlebar/titlebar.component';
+import { CharacterPickerComponent } from './components/character-picker/character-picker.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -87,9 +88,12 @@ import { TitlebarComponent } from './components/titlebar/titlebar.component';
     CharacterEditComponent,
     UserComponent,
     RegisterComponent,
-    TitlebarComponent
+    TitlebarComponent,
+    CharacterPickerComponent
   ],
-  entryComponents: [PostHelpComponent],
+  entryComponents: [
+    PostHelpComponent,
+    RegisterComponent],
   providers: [AppComponent],
   bootstrap: [AppComponent]
 })
