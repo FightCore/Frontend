@@ -8,7 +8,8 @@
             All
           </mat-option>
           <mat-option *ngFor="let character of displayedCharacters | async" [value]="character">
-              <img *ngIf="character.stockIcon" aria-hidden [src]="character.stockIcon.url" height="25">
+              <img alt="character stock image"
+                *ngIf="character.stockIcon" aria-hidden [src]="character.stockIcon.url" height="25">
               <span> {{ character.name }}</span>
               <span *ngIf="gameId === 0"> || {{ character.game.abbreviation }}</span>
           </mat-option>
