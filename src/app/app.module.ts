@@ -91,7 +91,9 @@ import { CharacterPickerComponent } from './components/character-picker/characte
     TitlebarComponent,
     CharacterPickerComponent
   ],
-  entryComponents: [PostHelpComponent],
+  entryComponents: [
+    PostHelpComponent,
+    RegisterComponent],
   providers: [AppComponent],
   bootstrap: [AppComponent]
 })

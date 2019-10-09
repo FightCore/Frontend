@@ -2,14 +2,15 @@
 <ng-template #dropdown>
     <mat-form-field style="width: 100%" class="game-dropdown">
         <mat-label i18n>Character</mat-label>
-        <input matInput aria-label="Character" [matAutocomplete]="auto">
-        <mat-autocomplete #auto (selectionChange)="onSelectChange($event)">
+        <input matInput aria-label="Character" [matAutocomplete]="auto" [formControl]="characterFormControl">
+        <mat-autocomplete #auto (optionSelected)="onSelectChange($event)" [displayWith]="displayCharacter">
           <mat-option *ngIf="addAllOptions" [value]="0" i18n>
             All
           </mat-option>
-          <mat-option *ngFor="let character of displayedCharacters" [value]="character.id">
-              <img class="example-option-img" aria-hidden [src]="character.stockIcon.url" height="25">
+          <mat-option *ngFor="let character of displayedCharacters | async" [value]="character">
+              <img *ngIf="character.stockIcon" aria-hidden [src]="character.stockIcon.url" height="25">
               <span> {{ character.name }}</span>
+              <span *ngIf="gameId === 0"> || {{ character.game.abbreviation }}</span>
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
