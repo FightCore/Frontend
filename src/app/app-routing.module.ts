@@ -24,7 +24,6 @@ const routes: Routes = [
   { path: StaticRoutes.editCharacter, component: CharacterEditComponent },
   { path: StaticRoutes.viewCharacter, component: CharacterDisplayComponent },
   { path: StaticRoutes.viewUser, component: UserComponent },
-  { path: StaticRoutes.register, component: RegisterComponent },
   { path: '**', redirectTo: StaticRoutes.posts }
 ];
 

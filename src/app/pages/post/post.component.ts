@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { PostService } from "src/app/services/post/post.service";
 import { Post } from "src/app/models/post";
 import { Router } from "@angular/router";
@@ -6,6 +6,7 @@ import { StaticRoutes } from "src/app/routes/static-routes";
 import { ToastrService } from "ngx-toastr";
 import { PostText } from "src/app/text/post.text";
 import { UserOptions } from 'src/app/options/userOptions';
+import { CharacterPickerComponent } from 'src/app/components/character-picker/character-picker.component';
 
 @Component({
   selector: "app-post",
@@ -13,6 +14,7 @@ import { UserOptions } from 'src/app/options/userOptions';
   styleUrls: ["./post.component.scss"]
 })
 export class PostComponent implements OnInit {
+  @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
   constructor(
     private postService: PostService,
     private router: Router,
@@ -46,6 +48,7 @@ export class PostComponent implements OnInit {
   onGameChange(gameId: number): void {
     this.gameId = gameId;
     this.filterPosts();
+    this.characterPicker.updateGame(gameId);
   }
 
   onSearchChange(searchTerm: string): void {

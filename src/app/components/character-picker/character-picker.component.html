@@ -1,0 +1,16 @@
+<app-loading *ngIf="loading else dropdown"></app-loading>
+<ng-template #dropdown>
+    <mat-form-field style="width: 100%" class="game-dropdown">
+        <mat-label i18n>Character</mat-label>
+        <input matInput aria-label="Character" [matAutocomplete]="auto">
+        <mat-autocomplete #auto (selectionChange)="onSelectChange($event)">
+          <mat-option *ngIf="addAllOptions" [value]="0" i18n>
+            All
+          </mat-option>
+          <mat-option *ngFor="let character of displayedCharacters" [value]="character.id">
+              <img class="example-option-img" aria-hidden [src]="character.stockIcon.url" height="25">
+              <span> {{ character.name }}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+</ng-template>

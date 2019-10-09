@@ -11,5 +11,4 @@ export class StaticRoutes {
   public static editCharacter: string = 'character/edit/:characterId';
   public static viewCharacter: string = 'character/:characterId';
   public static viewUser: string = 'user/:userId';
-  public static register: string = 'register';
 }
