@@ -43,7 +43,7 @@ export class CharacterPickerComponent implements OnInit {
 
   updateGame(gameId: number): void {
     this.gameId = gameId;
-    this.gameCharacters = this.characters.filter(this.filterCharacterByGame);
+    this.gameCharacters = this.characters.filter(character => this.filterCharacterByGame(character, gameId));
     this.gameCharacters.sort(this.sortCharacters);
 
     // Basically resets the control so that the right characters from the right
@@ -72,7 +72,7 @@ export class CharacterPickerComponent implements OnInit {
   private _filter(name: string): Character[] {
     let characters = [];
     characters = this.gameCharacters.filter(character =>
-      this.filterCharacterByGame(character)
+      this.filterCharacterByGame(character, this.gameId)
       && character.name.includes(name));
     characters.sort(this.sortCharacters);
 
@@ -84,8 +84,11 @@ export class CharacterPickerComponent implements OnInit {
     return characterOne.name > characterTwo.name ? 1 : -1;
   }
 
-  private filterCharacterByGame(character: Character): ConstrainBoolean {
-    return this.gameId === 0 ? true : character.game.id === this.gameId
+  private filterCharacterByGame(character: Character, gameId: number): ConstrainBoolean {
+    if (character == null || character.game == null) {
+      return false;
+    }
+    return gameId === 0 ? true : character.game.id === gameId;
   }
   //#endregion Filters
 }
