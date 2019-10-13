@@ -1,16 +1,18 @@
 import { User } from './user';
+import { Character } from './character';
+import { Game } from './game';
 
 export class Post {
     id: number;
     title: string;
     body: string;
-    bannerUrl: string;
     author: User;
     likes: number;
     liked: boolean;
-    game: string;
+    game: Game;
     gameId: number;
     isPrivate: boolean;
+    character?: Character;
 }
 
 export class CreatedPost {

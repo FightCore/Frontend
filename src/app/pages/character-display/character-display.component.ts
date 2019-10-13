@@ -28,11 +28,11 @@ export class CharacterDisplayComponent implements OnInit {
 
   ngOnInit() {
 
-    const characterId = this.route.snapshot.paramMap.get('characterId');
-    this.postService.getPosts().subscribe(posts =>
+    const characterId = parseFloat(this.route.snapshot.paramMap.get('characterId'));
+    this.characterService.getPosts(characterId).subscribe(posts =>
       this.posts = posts);
 
-    this.characterService.get(parseFloat(characterId)).subscribe(character => {
+    this.characterService.get(characterId).subscribe(character => {
       this.character = character;
       const videos = this.youtubeVideos();
       videos.forEach(video => {
