@@ -10,15 +10,14 @@
           <input [(ngModel)]="title" matInput name="title" required />
         </mat-form-field>
         <app-game-selector
-          [selected]="gameId"
-          *ngIf="!this.post" (selectionChange)="onGameChange($event)" class="create-post-header">
-        </app-game-selector>
-        <app-game-selector *ngIf="this.post" [selected]="this.post.gameId" (selectionChange)="onGameChange($event)" class="create-post-header">
+          [selected]="getGameId()"
+          (selectionChange)="onGameChange($event)" class="create-post-header">
         </app-game-selector>
         <div class="character-picker">
-          <app-character-picker
+        <app-character-picker
+          [selected]="getCharacterId()"
           #characterPicker [gameId]="gameId"
-          ></app-character-picker>
+        ></app-character-picker>
         </div>
         <mat-checkbox class="create-post-header" [(ngModel)]="isPrivate" i18n>
           Private Post

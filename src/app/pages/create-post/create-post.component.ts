@@ -34,7 +34,7 @@ export class CreatePostComponent implements OnInit {
   title: string;
   isPrivate: boolean;
   isLoading = false;
-  gameId: number = UserOptions.getCurrentGame() === 0 ? -1 : UserOptions.getCurrentGame();
+  gameId: number = this.getGameId();
 
   @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
 
@@ -51,6 +51,20 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
+  getGameId(): number {
+    if (this.post) {
+      return this.post.gameId;
+    }
+
+    return UserOptions.getCurrentGame() === 0 ? -1 : UserOptions.getCurrentGame();
+  }
+  getCharacterId(): number {
+    if (this.post) {
+      return this.post.character.id;
+    }
+
+    return -1;
+  }
   createPost() {
     if (this.post != null) {
       this.updatePost();
