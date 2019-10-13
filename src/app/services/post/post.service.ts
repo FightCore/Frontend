@@ -90,11 +90,11 @@ export class PostService extends BaseService {
     post.author.name = faker.internet.userName();
     post.body = faker.lorem.paragraphs(2);
     post.likes = faker.random.number();
-    post.game = 'Ultimate';
+    // post.game = 'Ultimate';
 
-    if (faker.random.boolean()) {
-    post.bannerUrl = 'https://i.imgur.com/aEwNXVn.jpg';
-    }
+    // if (faker.random.boolean()) {
+    // post.bannerUrl = 'https://i.imgur.com/aEwNXVn.jpg';
+    // }
 
     return post;
   }

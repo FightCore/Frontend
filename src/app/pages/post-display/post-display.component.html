@@ -1,35 +1,93 @@
 <div [class]="'container-fluid ' + getGameClass()">
-  <button mat-raised-button class="back-button"
-    [routerLink]="['/post']" color="primary" i18n>Back to posts.</button>
+  <button
+    mat-raised-button
+    class="back-button"
+    [routerLink]="['/post']"
+    color="primary"
+    i18n
+  >
+    Back to posts.
+  </button>
   <div *ngIf="loading; else display"></div>
-  <button mat-raised-button class="back-button"
-    [routerLink]="['/post']" color="primary" i18n>Back to posts.</button>
+  <button
+    mat-raised-button
+    class="back-button"
+    [routerLink]="['/post']"
+    color="primary"
+    i18n
+  >
+    Back to posts.
+  </button>
 </div>
 
 <ng-template #display>
-  <div class="post">
-    <div class="header background-color-primary">
-      <div class=row>
-          <div class="col-lg-4 col-xs-12">
-            <div class="game-chip">
-              {{ post.game }}
+  <div class="row">
+    <div class="col-lg-10">
+      <div class="post">
+        <div class="header background-color-primary">
+          <div class="row">
+            <div class="col-lg-4 col-xs-12">
+              <div class="game-chip">
+                {{ post.game.abbreviation }}
+              </div>
+            </div>
+            <h2 class="col-lg-4 col-xs-12 title">
+              {{ post.title }}
+              <h4 class="subtitle" i18n>By {{ post.author.name }}</h4>
+            </h2>
+            <div class="col-lg-4 col-xs-12 like-button">
+              <app-like-button
+                [postId]="post.id"
+                [likes]="post.likes"
+                [liked]="post.liked"
+              >
+              </app-like-button>
             </div>
           </div>
-          <h2 class="col-lg-4 col-xs-12 title">
-            {{ post.title }}
-            <h4 class="subtitle" i18n>By {{ post.author.name }}</h4>
-          </h2>
-          <div class="col-lg-4 col-xs-12 like-button">
-            <app-like-button [postId]="post.id" [likes]="post.likes"
-              [liked]="post.liked">
-            </app-like-button>
-          </div>
+        </div>
+        <div [innerHTML]="bodyHtml"></div>
+        <button
+          *ngIf="isPostFromUser()"
+          (click)="editPost()"
+          mat-raised-button
+          color="accent"
+          i18n
+        >
+          Edit
+        </button>
       </div>
     </div>
-    <div [innerHTML]="bodyHtml">
+    <div class="col-lg-2">
+        <div class="post">
+            <div class="header background-color-primary">
+              <h4 class="title" i18n>
+                {{ post.game.name }}
+              </h4>
+              <img alt="Game banner" class="fit-image-width" [src]="post.game.bannerUrl">
+            </div>
+            <div>
+              <p>
+                Here is a little bit of a description about the game that this
+                post is about.
+              </p>
+            </div>
+        </div>
+        <div *ngIf="post.character" class="post">
+            <div class="header background-color-primary">
+              <h4 class="title" i18n>
+                {{ post.character.name }}
+              </h4>
+              <img
+              alt="Character stock icon"
+              class="fit-image-height"
+              [src]="post.character.stockIcon.url">
+            </div>
+            <div>
+              <p>
+                {{ post.character.generalInformation }}
+              </p>
+            </div>
+        </div>
     </div>
-    <button *ngIf="isPostFromUser()" (click)="editPost()" mat-raised-button color="accent" i18n>
-      Edit
-    </button>
   </div>
 </ng-template>
