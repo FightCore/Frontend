@@ -41,6 +41,14 @@ export class CharacterPickerComponent implements OnInit {
       );
   }
 
+  getValue(): number | null {
+    if (this.characterFormControl.value) {
+      return this.characterFormControl.value.id;
+    }
+
+    return null;
+  }
+
   updateGame(gameId: number): void {
     this.gameId = gameId;
     this.gameCharacters = this.characters.filter(character => this.filterCharacterByGame(character, gameId));

@@ -13,6 +13,7 @@ export class Post {
     gameId: number;
     isPrivate: boolean;
     character?: Character;
+    characterId?: number;
 }
 
 export class CreatedPost {
@@ -20,4 +21,5 @@ export class CreatedPost {
     title: string;
     isPrivate: boolean;
     gameId: number;
+    characterId?: number;
 }
