@@ -46,7 +46,7 @@ export class CharacterService extends BaseService {
    * @param characterId the id of the character to be looked for.
    */
   public getPosts(characterId: number): Observable<Post[]> {
-    return this.httpClient.get<Post[]>(`${this.baseUrl}/${characterId}/posts`);
+    return this.httpClient.get<Post[]>(`${this.baseUrl}/${characterId}/posts`, this.getDefaultHttpOptions());
   }
 
   private generateCharacterList(amount: number): Character[] {
