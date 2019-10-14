@@ -42,6 +42,7 @@
       <md-editor
       #mdEditor
         name="Post Content"
+        [options]="options"
         [(ngModel)]="markdownContent"
         [height]="'40em'"
         required
