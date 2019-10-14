@@ -61,7 +61,7 @@ import { CharacterPickerComponent } from './components/character-picker/characte
           pedantic: false,
           sanitize: false, // enable marked built-in html sanitizer
           smartLists: true,
-          smartypants: false
+          smartypants: false,
         }
       }
     }),

@@ -35,6 +35,14 @@ export class CreatePostComponent implements OnInit {
   isPrivate: boolean;
   isLoading = false;
   gameId: number = this.getGameId();
+  options = {
+    // Makes the editor scrollable itself.
+    scrollPastEnd: 1,
+    // Uses FontAwesome5
+    usingFontAwesome5: true,
+    // Hides the code icon as it's not needed for normal development.
+    hideIcons: ['Code']
+  };
 
   @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
 
@@ -59,7 +67,7 @@ export class CreatePostComponent implements OnInit {
     return UserOptions.getCurrentGame() === 0 ? -1 : UserOptions.getCurrentGame();
   }
   getCharacterId(): number {
-    if (this.post) {
+    if (this.post && this.post.character) {
       return this.post.character.id;
     }
 
