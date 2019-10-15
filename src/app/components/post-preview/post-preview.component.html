@@ -4,7 +4,7 @@
       <img class="post-banner" alt="Post Banner" [src]="post.game.bannerUrl" />
     </div>
     <div class="d-none d-sm-block post-avatar-container col-lg-2">
-      <div class="post-avatar"></div>
+      <ngx-avatar class="avatar-accent" [name]="post.author.name"></ngx-avatar>
     </div>
     <div class="col-lg-8 col-xs-12">
       <h4 class="post-title">{{ post.title }}</h4>

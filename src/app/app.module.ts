@@ -35,6 +35,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { TitlebarComponent } from './components/titlebar/titlebar.component';
 import { CharacterPickerComponent } from './components/character-picker/character-picker.component';
+import { AvatarModule } from 'ngx-avatar';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -65,6 +66,7 @@ import { CharacterPickerComponent } from './components/character-picker/characte
         }
       }
     }),
+    AvatarModule,
     MatPasswordStrengthModule.forRoot()
   ],
   declarations: [

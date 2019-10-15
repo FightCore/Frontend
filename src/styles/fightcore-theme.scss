@@ -64,7 +64,11 @@ $brawl: mat-light-theme($brawl-app-primary, $brawl-app-accent);
   .background-color-accent {
     background-color: mat-color($accent);
   }
-
+  .avatar-accent {
+    .avatar-content {
+        background-color: mat-color($accent) !important;
+    }
+  }
   .color-primary {
     color: mat-color($primary);
   }
