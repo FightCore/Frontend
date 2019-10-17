@@ -4,7 +4,7 @@ import { PostComponent } from './pages/post/post.component';
 import { StaticRoutes } from './routes/static-routes';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { LoginComponent } from './pages/login/login.component';
-import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { PostDisplayComponent } from './pages/post-display/post-display.component';
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { CharacterComponent } from './pages/character/character.component';
