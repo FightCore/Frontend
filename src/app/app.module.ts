@@ -19,7 +19,7 @@ import { GameSelectorComponent } from './components/game-selector/game-selector.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostHelpComponent } from './components/post-help/post-help.component';
 import { LoginComponent } from './pages/login/login.component';
-import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { PostDisplayComponent } from './pages/post-display/post-display.component';
 import { LikeButtonComponent } from './components/like-button/like-button.component';
