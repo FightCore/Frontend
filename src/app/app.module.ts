@@ -7,6 +7,11 @@ import { MaterialModules } from './material-modules';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faMugHot } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faDocker } from '@fortawesome/free-brands-svg-icons';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { PostComponent } from './pages/post/post.component';
@@ -41,6 +46,7 @@ import { TitleBarComponent } from './components/title-bar/title-bar.component';
 import { FeaturedPostsComponent } from './components/featured-posts/featured-posts.component';
 import { LatestPostsComponent } from './components/latest-posts/latest-posts.component';
 import { DiscordComponent } from './components/discord/discord.component';
+import { FooterComponent } from './layout/footer/footer.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -101,7 +107,8 @@ import { DiscordComponent } from './components/discord/discord.component';
     TitleBarComponent,
     FeaturedPostsComponent,
     LatestPostsComponent,
-    DiscordComponent
+    DiscordComponent,
+    FooterComponent
   ],
   entryComponents: [
     PostHelpComponent,
@@ -111,6 +118,6 @@ import { DiscordComponent } from './components/discord/discord.component';
 })
 export class AppModule {
   constructor() {
-    library.add(faHeart);
+    library.add(faHeart, faMugHot, faGithub, faDiscord, faDocker, faTwitter);
   }
 }
