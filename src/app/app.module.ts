@@ -36,6 +36,11 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
 import { TitlebarComponent } from './components/titlebar/titlebar.component';
 import { CharacterPickerComponent } from './components/character-picker/character-picker.component';
 import { AvatarModule } from 'ngx-avatar';
+import { HomeComponent } from './pages/home/home.component';
+import { TitleBarComponent } from './components/title-bar/title-bar.component';
+import { FeaturedPostsComponent } from './components/featured-posts/featured-posts.component';
+import { LatestPostsComponent } from './components/latest-posts/latest-posts.component';
+import { DiscordComponent } from './components/discord/discord.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -91,7 +96,12 @@ import { AvatarModule } from 'ngx-avatar';
     UserComponent,
     RegisterComponent,
     TitlebarComponent,
-    CharacterPickerComponent
+    CharacterPickerComponent,
+    HomeComponent,
+    TitleBarComponent,
+    FeaturedPostsComponent,
+    LatestPostsComponent,
+    DiscordComponent
   ],
   entryComponents: [
     PostHelpComponent,
