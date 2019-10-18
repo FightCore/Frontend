@@ -29,6 +29,22 @@ export class PostService extends BaseService {
     return this.httpClient.get<Post[]>(this.baseUrl, this.getDefaultHttpOptions());
   }
 
+  public getLatestsPosts(): Observable<Post[]> {
+    if (environment.mocking) {
+      return new Observable(observer => observer.next(this.generatePostList(3)));
+    }
+
+    return this.httpClient.get<Post[]>(`${this.baseUrl}/latest`, this.getDefaultHttpOptions());
+  }
+
+  public getFeaturedPosts(): Observable<Post[]> {
+    if (environment.mocking) {
+      return new Observable(observer => observer.next(this.generatePostList(3)));
+    }
+
+    return this.httpClient.get<Post[]>(`${this.baseUrl}/featured`, this.getDefaultHttpOptions());
+  }
+
   /**
    * Gets a single post based on it's id.
    * @param id the id of the post requested.
