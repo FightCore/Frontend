@@ -12,6 +12,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faDocker } from '@fortawesome/free-brands-svg-icons';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { PostComponent } from './pages/post/post.component';
@@ -118,6 +119,6 @@ import { FooterComponent } from './layout/footer/footer.component';
 })
 export class AppModule {
   constructor() {
-    library.add(faHeart, faMugHot, faGithub, faDiscord, faDocker, faTwitter);
+    library.add(faHeart, faMugHot, faGithub, faDiscord, faDocker, faTwitter, faUserCircle);
   }
 }

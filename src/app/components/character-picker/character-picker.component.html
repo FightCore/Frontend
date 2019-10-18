@@ -3,6 +3,7 @@
     <mat-form-field style="width: 100%" class="game-dropdown">
         <mat-label i18n>Character</mat-label>
         <input matInput aria-label="Character" [matAutocomplete]="auto" [formControl]="characterFormControl">
+        <mat-icon matSuffix>search</mat-icon>
         <mat-autocomplete #auto (optionSelected)="onSelectChange($event)" [displayWith]="displayCharacter">
           <mat-option *ngIf="addAllOptions" [value]="0" i18n>
             All
