@@ -8,6 +8,7 @@ import { PostText } from 'src/app/text/post.text';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { MarkdownService } from 'ngx-markdown';
 import { GameThemes } from 'src/styles/gameThemes';
+import { UserOptions } from 'src/app/options/userOptions';
 
 @Component({
   selector: 'app-post-preview',
@@ -49,5 +50,9 @@ export class PostPreviewComponent implements OnInit {
 
   getPostClass(): string {
     return GameThemes.getThemeForGameId(this.post.gameId);
+  }
+
+  minimalMode(): boolean {
+    return UserOptions.getMinimalMode();
   }
 }

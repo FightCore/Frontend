@@ -1,13 +1,15 @@
 <div [class]="'post ' + getPostClass()">
   <div class="post-header background-color-primary row">
-    <div *ngIf="post.game.bannerUrl">
+    <div *ngIf="post.game.bannerUrl && !minimalMode()">
       <img class="post-banner" alt="Post Banner" [src]="post.game.bannerUrl" />
     </div>
     <div class="d-none d-sm-block post-avatar-container col-lg-2">
       <ngx-avatar class="avatar-accent" [name]="post.author.name"></ngx-avatar>
     </div>
     <div class="col-lg-8 col-xs-12">
-      <h4 class="post-title">{{ post.title }}</h4>
+      <h4 class="post-title"><span *ngIf="post.isPrivate">
+          <fa-icon icon="lock" size="1x"></fa-icon>
+        </span> {{ post.title }}</h4>
       <h6 class="post-subtitle">By {{ post.author.name }}</h6>
     </div>
     <div class="d-none d-md-block col-lg-2">

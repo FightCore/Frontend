@@ -34,6 +34,9 @@
             <h2 class="col-lg-4 col-xs-12 title">
               {{ post.title }}
               <h4 class="subtitle" i18n>By {{ post.author.name }}</h4>
+              <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
+                <fa-icon icon="lock" size="1x"></fa-icon> This is a private post, only you can see it.
+              </h5>
             </h2>
             <div class="col-lg-4 col-xs-12 like-button">
               <app-like-button
