@@ -1,17 +1,15 @@
 <div [class]="'character ' + getGameClass()">
   <div class="header background-color-primary row">
-    <div class="d-none d-sm-block col-2">
-      <img class="avatar" alt="character profile shot" [src]="characterIcon()">
+    <div class="d-none d-sm-block">
+      <img class="avatar" alt="character profile shot" [src]="characterIcon()" />
     </div>
-    <div class="col-8">
-      <h3 class="title">{{ character.name }}</h3>
+    <div>
+      <h3 class="title">
+        {{ character.name }}
+      </h3>
     </div>
-    <div class="col-2">
-      <img
-        [src]="seriesIcon()"
-        alt="character-icon"
-        height="70em"
-      />
+    <div>
+      <img [src]="seriesIcon()" alt="character-icon" height="70em" />
     </div>
   </div>
 
@@ -20,18 +18,16 @@
       {{ character.generalInformation }}
     </div>
     <div class="fill-remaining-space"></div>
-    <div class="post-bottom-bar row">
+    <div class="post-bottom-bar">
       <div class="col-lg-9">
         <button (click)="viewCharacter(character.id)" mat-raised-button color="accent">
           View
         </button>
       </div>
-      <div class="col-lg-3 col-xs-12">
-        <mat-chip-list class="game-chip">
-          <mat-chip color="primary" selected>
-            {{ character.game.abbreviation }}
-          </mat-chip>
-        </mat-chip-list>
+      <div class="col-lg-3 col-xs-12 game-chips">
+        <mat-chip color="primary" class="game-chip" selected>
+          {{ character.game.abbreviation }}
+        </mat-chip>
       </div>
     </div>
   </div>
