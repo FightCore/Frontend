@@ -9,23 +9,32 @@
           </mat-label>
           <input [(ngModel)]="title" matInput name="title" required />
         </mat-form-field>
-        <app-game-selector *ngIf="!this.post" (selectionChange)="onGameChange($event)" class="create-post-header">
+        <app-game-selector
+          [selected]="getGameId()"
+          (selectionChange)="onGameChange($event)" class="create-post-header">
         </app-game-selector>
-        <app-game-selector *ngIf="this.post" [selected]="this.post.gameId" (selectionChange)="onGameChange($event)" class="create-post-header">
-        </app-game-selector>
-        <mat-checkbox class="create-post-header" [(ngModel)]="isPrivate" i18n
-          >Private Post</mat-checkbox
-        >
+        <div class="character-picker">
+        <app-character-picker
+          [selected]="getCharacterId()"
+          #characterPicker [gameId]="gameId"
+        ></app-character-picker>
+        </div>
+        <mat-checkbox class="create-post-header" [(ngModel)]="isPrivate" i18n>
+          Private Post
+        </mat-checkbox>
+
+
         <div class="create-button">
           <button mat-raised-button color="primary" (click)="togglePreview()" i18n>
-            Show/Hide Preview
+              <i class="material-icons">visibility</i> Show/Hide Preview
           </button>
           <button mat-raised-button color="primary" (click)="openHelp()" i18n>
-            Show Help
+              <i class="material-icons">help</i> Show Help
           </button>
           <button [disabled]="isLoading" mat-raised-button color="accent" (click)="createPost()" i18n>
-            <div *ngIf="this.post else createText">
-              Update Post
+              <i class="material-icons">save</i>
+            <div class="post-text" *ngIf="this.post else createText">
+                Update Post
             </div>
           </button>
         </div>
@@ -34,6 +43,7 @@
       <md-editor
       #mdEditor
         name="Post Content"
+        [options]="options"
         [(ngModel)]="markdownContent"
         [height]="'40em'"
         required

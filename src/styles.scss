@@ -1,2 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "src/styles/fightcore-theme.scss";
+
+.fit-image-width {
+    width: 100%;
+    object-fit: contain;
+}
+
+.fit-image-height {
+    height: 100%;
+    object-fit: contain;
+}

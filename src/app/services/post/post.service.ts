@@ -29,6 +29,22 @@ export class PostService extends BaseService {
     return this.httpClient.get<Post[]>(this.baseUrl, this.getDefaultHttpOptions());
   }
 
+  public getLatestsPosts(): Observable<Post[]> {
+    if (environment.mocking) {
+      return new Observable(observer => observer.next(this.generatePostList(3)));
+    }
+
+    return this.httpClient.get<Post[]>(`${this.baseUrl}/latest`, this.getDefaultHttpOptions());
+  }
+
+  public getFeaturedPosts(): Observable<Post[]> {
+    if (environment.mocking) {
+      return new Observable(observer => observer.next(this.generatePostList(3)));
+    }
+
+    return this.httpClient.get<Post[]>(`${this.baseUrl}/featured`, this.getDefaultHttpOptions());
+  }
+
   /**
    * Gets a single post based on it's id.
    * @param id the id of the post requested.
@@ -90,11 +106,11 @@ export class PostService extends BaseService {
     post.author.name = faker.internet.userName();
     post.body = faker.lorem.paragraphs(2);
     post.likes = faker.random.number();
-    post.game = 'Ultimate';
+    // post.game = 'Ultimate';
 
-    if (faker.random.boolean()) {
-    post.bannerUrl = 'https://i.imgur.com/aEwNXVn.jpg';
-    }
+    // if (faker.random.boolean()) {
+    // post.bannerUrl = 'https://i.imgur.com/aEwNXVn.jpg';
+    // }
 
     return post;
   }

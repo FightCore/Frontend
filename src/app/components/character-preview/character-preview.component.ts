@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Character } from 'src/app/models/character';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { Router } from '@angular/router';
+import { GameThemes } from 'src/styles/gameThemes';
 
 @Component({
   selector: 'app-character-preview',
@@ -34,5 +35,9 @@ export class CharacterPreviewComponent implements OnInit {
     }
 
     return 'https://www.stickpng.com/assets/images/5a4613ddd099a2ad03f9c994.png';
+  }
+
+  getGameClass(): string {
+    return GameThemes.themeDictionary.get(this.character.game.id);
   }
 }

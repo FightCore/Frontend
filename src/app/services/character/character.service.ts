@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { Character } from 'src/app/models/character';
 import { BaseService } from '../base.service';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import * as faker from 'faker';
+import { Post } from 'src/app/models/post';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,14 @@ export class CharacterService extends BaseService {
     }
 
     return this.httpClient.get<Character>(`${this.baseUrl}/${id}`);
+  }
+
+  /**
+   * Gets the posts about the character requested.
+   * @param characterId the id of the character to be looked for.
+   */
+  public getPosts(characterId: number): Observable<Post[]> {
+    return this.httpClient.get<Post[]>(`${this.baseUrl}/${characterId}/posts`, this.getDefaultHttpOptions());
   }
 
   private generateCharacterList(amount: number): Character[] {

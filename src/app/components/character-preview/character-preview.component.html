@@ -1,5 +1,5 @@
-<div class="character">
-  <div class="header row">
+<div [class]="'character ' + getGameClass()">
+  <div class="header background-color-primary row">
     <div class="d-none d-sm-block col-2">
       <img class="avatar" alt="character profile shot" [src]="characterIcon()">
     </div>

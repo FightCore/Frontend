@@ -10,6 +10,8 @@ import { PostText } from 'src/app/text/post.text';
 import { MarkdownEditorComponent } from 'ngx-markdown-editor';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { UserOptions } from 'src/app/options/userOptions';
+import { CharacterPickerComponent } from 'src/app/components/character-picker/character-picker.component';
 
 @Component({
   selector: 'app-create-post',
@@ -32,8 +34,17 @@ export class CreatePostComponent implements OnInit {
   title: string;
   isPrivate: boolean;
   isLoading = false;
-  gameId: number;
+  gameId: number = this.getGameId();
+  options = {
+    // Makes the editor scrollable itself.
+    scrollPastEnd: 1,
+    // Uses FontAwesome5
+    usingFontAwesome5: true,
+    // Hides the code icon as it's not needed for normal development.
+    hideIcons: ['Code']
+  };
 
+  @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
 
   ngOnInit() {
     if (!this.authService.isAuthenticated()) {
@@ -48,6 +59,20 @@ export class CreatePostComponent implements OnInit {
     }
   }
 
+  getGameId(): number {
+    if (this.post) {
+      return this.post.gameId;
+    }
+
+    return UserOptions.getCurrentGame() === 0 ? -1 : UserOptions.getCurrentGame();
+  }
+  getCharacterId(): number {
+    if (this.post && this.post.character) {
+      return this.post.character.id;
+    }
+
+    return -1;
+  }
   createPost() {
     if (this.post != null) {
       this.updatePost();
@@ -59,6 +84,7 @@ export class CreatePostComponent implements OnInit {
     post.title = this.title;
     post.isPrivate = this.isPrivate;
     post.gameId = this.gameId;
+    post.characterId = this.characterPicker.getValue();
 
     this.isLoading = true;
     this.postService.createPost(post).subscribe((_) => {
@@ -76,6 +102,7 @@ export class CreatePostComponent implements OnInit {
     this.post.title = this.title;
     this.post.isPrivate = this.isPrivate;
     this.post.gameId = this.gameId;
+    this.post.characterId = this.characterPicker.getValue();
 
     this.postService.updatePost(this.post).subscribe((_) => {
       this.toastrService.success(PostText.updatedPost);
@@ -95,6 +122,7 @@ export class CreatePostComponent implements OnInit {
 
   onGameChange(id: number) {
     this.gameId = id;
+    this.characterPicker.updateGame(id);
   }
 
   togglePreview() {

@@ -11,6 +11,14 @@ export const environment = {
     callbackUrl: 'http://localhost:4200/auth-callback',
     redirectUrl: 'http://localhost:4200/',
     clientId: 'fightcore_dev'
+  },
+  // TODO Move this to a possible environment.json
+  links: {
+    discord: 'https://discord.gg/CVqDy6c',
+    github: 'https://github.com/fightcore',
+    dockerhub: 'https://cloud.docker.com/u/fightcore/repository/list',
+    kofi: 'https://ko-fi.com/bartdebever',
+    twitter: null
   }
 };
 

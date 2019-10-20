@@ -1,19 +1,28 @@
-<div class="post">
-  <div class="post-header row">
-    <div *ngIf="post.bannerUrl">
-      <img class="post-banner" alt="Post Banner" [src]="post.bannerUrl" />
+<div [class]="'post ' + getPostClass()">
+  <div class="post-header background-color-primary row">
+    <div *ngIf="post.game.bannerUrl && !minimalMode()">
+      <img class="post-banner" alt="Post Banner" [src]="post.game.bannerUrl" />
     </div>
     <div class="d-none d-sm-block post-avatar-container col-lg-2">
-      <div class="post-avatar"></div>
+      <ngx-avatar class="avatar-accent" [name]="post.author.name"></ngx-avatar>
     </div>
-    <div class="col-lg-10 col-xs-12">
-      <h4 class="post-title">{{ post.title }}</h4>
+    <div class="col-lg-8 col-xs-12">
+      <h4 class="post-title"><span *ngIf="post.isPrivate">
+          <fa-icon icon="lock" size="1x"></fa-icon>
+        </span> {{ post.title }}</h4>
       <h6 class="post-subtitle">By {{ post.author.name }}</h6>
+    </div>
+    <div class="d-none d-md-block col-lg-2">
+      <img
+        alt="Character stock icon"
+        class="fit-image-height"
+        *ngIf="post.character && post.character.stockIcon"
+        [src]="post.character.stockIcon.url"
+      />
     </div>
   </div>
   <div class="post-content">
-    <div [innerHTML]="post.body" class="post-markdown-text">
-    </div>
+    <div [innerHTML]="post.body" class="post-markdown-text"></div>
     <div class="fill-remaining-space"></div>
     <div class="fill-remaining-space .d-block .d-sm-none"></div>
     <div class="post-bottom-bar row">
@@ -21,13 +30,16 @@
         <button (click)="viewPost(post.id)" mat-raised-button color="accent">
           View
         </button>
-        <app-like-button [postId]="post.id" [likes]="post.likes"
-        [liked]="post.liked">
-      </app-like-button>
+        <app-like-button
+          [postId]="post.id"
+          [likes]="post.likes"
+          [liked]="post.liked"
+        >
+        </app-like-button>
       </div>
       <div class="col-lg-3 col-xs-12">
         <mat-chip-list class="game-chip">
-          <mat-chip color="primary" selected>{{post.game}}</mat-chip>
+          <mat-chip color="primary" selected>{{ post.game.abbreviation }}</mat-chip>
         </mat-chip-list>
       </div>
     </div>

@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -10,15 +10,106 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $fightcore-app-primary: mat-palette($mat-deep-purple, 500);
-$fightcore-app-accent:  mat-palette($mat-deep-orange, 500);
+$fightcore-app-accent: mat-palette($mat-deep-orange, 500);
 
 // The warn palette is optional (defaults to red).
-$fightcore-app-warn:    mat-palette($mat-red);
+$fightcore-app-warn: mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$fightcore-app-theme: mat-light-theme($fightcore-app-primary, $fightcore-app-accent, $fightcore-app-warn);
+$fightcore-app-theme: mat-light-theme(
+  $fightcore-app-primary,
+  $fightcore-app-accent,
+  $fightcore-app-warn
+);
+
+$melee-app-primary: mat-palette($mat-gray, 800);
+$melee-app-accent: mat-palette($mat-red, 800);
+
+$melee: mat-light-theme($melee-app-primary, $melee-app-accent);
+
+$ds-app-primary: mat-palette($mat-red, 600);
+$ds-app-accent: mat-palette($mat-blue, 900);
+
+$ds: mat-light-theme($ds-app-primary, $ds-app-accent);
+
+$smash-app-primary: mat-palette($mat-amber, 800);
+$smash-app-accent: mat-palette($mat-light-blue, 600);
+
+$smash: mat-light-theme($smash-app-primary, $smash-app-accent);
+
+$wiiu-app-primary: mat-palette($mat-blue, 600);
+$wiiu-app-accent: mat-palette($mat-red, 900);
+
+$wiiu: mat-light-theme($wiiu-app-primary, $wiiu-app-accent);
+
+$ultimate-app-primary: mat-palette($mat-deep-purple, 500);
+$ultimate-app-accent: mat-palette($mat-deep-orange, 500);
+
+$ultimate: mat-light-theme($ultimate-app-primary, $ultimate-app-accent);
+
+$brawl-app-primary: mat-palette($mat-orange, 800);
+$brawl-app-accent: mat-palette($mat-red, 800);
+
+$brawl: mat-light-theme($brawl-app-primary, $brawl-app-accent);
+
+@mixin background-theme($theme) {
+  // Extract the palettes you need from the theme definition.
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  .background-color-primary {
+    background-color: mat-color($primary);
+  }
+
+  .background-color-accent {
+    background-color: mat-color($accent);
+  }
+  .avatar-accent {
+    .avatar-content {
+        background-color: mat-color($accent) !important;
+    }
+  }
+  .color-primary {
+    color: mat-color($primary);
+  }
+
+  .color-accent {
+    color: mat-color($accent);
+  }
+}
+
+.melee-theme {
+  @include angular-material-theme($melee);
+  @include background-theme($melee);
+}
+
+.ds-theme {
+  @include angular-material-theme($ds);
+  @include background-theme($ds);
+}
+
+.smash-theme {
+  @include angular-material-theme($smash);
+  @include background-theme($smash);
+}
+
+.wiiu-theme {
+  @include angular-material-theme($wiiu);
+  @include background-theme($wiiu);
+}
+
+.ultimate-theme {
+  @include angular-material-theme($ultimate);
+  @include background-theme($ultimate);
+}
+
+.brawl-theme {
+  @include angular-material-theme($brawl);
+  @include background-theme($brawl);
+}
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($fightcore-app-theme);
+@include background-theme($fightcore-app-theme);

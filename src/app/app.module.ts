@@ -6,7 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModules } from './material-modules';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faLock, faMugHot, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faDocker, faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { PostComponent } from './pages/post/post.component';
@@ -19,7 +20,7 @@ import { GameSelectorComponent } from './components/game-selector/game-selector.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostHelpComponent } from './components/post-help/post-help.component';
 import { LoginComponent } from './pages/login/login.component';
-import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { PostDisplayComponent } from './pages/post-display/post-display.component';
 import { LikeButtonComponent } from './components/like-button/like-button.component';
@@ -31,6 +32,17 @@ import { CharacterDisplayComponent } from './pages/character-display/character-d
 import { CharacterEditComponent } from './pages/character-edit/character-edit.component';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './pages/user/user.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import { TitlebarComponent } from './components/titlebar/titlebar.component';
+import { CharacterPickerComponent } from './components/character-picker/character-picker.component';
+import { AvatarModule } from 'ngx-avatar';
+import { HomeComponent } from './pages/home/home.component';
+import { TitleBarComponent } from './components/title-bar/title-bar.component';
+import { FeaturedPostsComponent } from './components/featured-posts/featured-posts.component';
+import { LatestPostsComponent } from './components/latest-posts/latest-posts.component';
+import { DiscordComponent } from './components/discord/discord.component';
+import { FooterComponent } from './layout/footer/footer.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -46,6 +58,7 @@ import { UserComponent } from './pages/user/user.component';
     HttpClientModule,
     ToastrModule.forRoot(),
     LMarkdownEditorModule,
+    ReactiveFormsModule,
     MarkdownModule.forRoot({
       markedOptions: {
         provide: MarkedOptions,
@@ -56,10 +69,12 @@ import { UserComponent } from './pages/user/user.component';
           pedantic: false,
           sanitize: false, // enable marked built-in html sanitizer
           smartLists: true,
-          smartypants: false
+          smartypants: false,
         }
       }
-    })
+    }),
+    AvatarModule,
+    MatPasswordStrengthModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -80,14 +95,25 @@ import { UserComponent } from './pages/user/user.component';
     LoadingComponent,
     CharacterDisplayComponent,
     CharacterEditComponent,
-    UserComponent
+    UserComponent,
+    RegisterComponent,
+    TitlebarComponent,
+    CharacterPickerComponent,
+    HomeComponent,
+    TitleBarComponent,
+    FeaturedPostsComponent,
+    LatestPostsComponent,
+    DiscordComponent,
+    FooterComponent
   ],
-  entryComponents: [PostHelpComponent],
-  providers: [],
+  entryComponents: [
+    PostHelpComponent,
+    RegisterComponent],
+  providers: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor() {
-    library.add(faHeart);
+    library.add(faHeart, faMugHot, faGithub, faDiscord, faDocker, faTwitter, faUserCircle, faLock);
   }
 }

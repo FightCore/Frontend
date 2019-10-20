@@ -1,17 +1,22 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <img class="logo" src="assets/FC.png" alt="FightCore logo"/>
-      <span>FightCore</span>
+      <div [routerLink]="['']" >
+          <img class="logo" src="assets/FC.png" alt="FightCore logo"/>
+          <span>FightCore</span>
+      </div>
       <span [routerLink]="['/post']" i18n>Posts</span>
       <span [routerLink]="['/character']" i18n>Characters</span>
       <span class="spacer"></span>
       <div>
-        <span *ngIf="isAuthenticated() else login" (click)="toUser()" >{{getUserName()}}</span>
+        <span *ngIf="isAuthenticated() else login" (click)="toUser()" >
+          <fa-icon icon="user-circle" size="1x">
+          </fa-icon> {{getUserName()}}</span>
         <span *ngIf="isAuthenticated()" (click)="logout()" i18n> Logout</span>
       </div>
     </mat-toolbar-row>
 </mat-toolbar>
 
 <ng-template #login>
+  <span (click)="register()" i18n>Register</span>
   <span [routerLink]="['/login']" i18n>Login</span>
 </ng-template>
