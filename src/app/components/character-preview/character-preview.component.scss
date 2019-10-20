@@ -21,19 +21,23 @@ $post-border-radius: 0.5em;
       margin-top: -1%;
 
       // Give it a little padding to make the text distance itself.
-      padding: 0.4em;
+      padding: 1em;
       border-radius: $post-border-radius;
 
       // Align the text in the center middle.
       vertical-align: middle;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      max-height: 5rem;
 
       color: $text-color;
 
       .title {
-        line-height: 2em;
         text-align: center;
-        vertical-align: middle;
-        height: 100%;
+        padding: 0 0.5em;
+        font-size: 1.5em;
       }
 
       .avatar {
@@ -41,7 +45,6 @@ $post-border-radius: 0.5em;
 
         /* make a square container */
         width: 4em;
-        height: 4em;
         /* fill the container, preserving aspect ratio, and cropping to fit */
         background-size: cover;
         /* center the image vertically and horizontally */
@@ -64,23 +67,21 @@ $post-border-radius: 0.5em;
       }
 
       .post-bottom-bar {
-        width: 95%;
-        position: absolute;
-        bottom: 1.5em;
-        left: 1.5em;
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+
         color: $primary-text-color;
-        button {
-          margin-left: 1em;
-        }
-        .game-chip {
-          position: relative;
-          top: 0.5em;
-          mat-chip {
-            max-width: 50em;
-            width: 100%;
-            text-align: center;
-            display: inline;
-            padding-top: 0.4em;
+
+        .game-chips{
+          display: flex;
+          justify-content: flex-end;
+          
+          .game-chip {
+            border-radius: 16px;
+            padding: 0.4em 0.7em;
           }
         }
       }
