@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModules } from './material-modules';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHeart, faLock, faMugHot, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faLock, faMugHot, faUserCircle, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faDocker, faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
@@ -43,6 +43,7 @@ import { FeaturedPostsComponent } from './components/featured-posts/featured-pos
 import { LatestPostsComponent } from './components/latest-posts/latest-posts.component';
 import { DiscordComponent } from './components/discord/discord.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { TopScrollerComponent } from './components/top-scroller/top-scroller.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -104,7 +105,8 @@ import { FooterComponent } from './layout/footer/footer.component';
     FeaturedPostsComponent,
     LatestPostsComponent,
     DiscordComponent,
-    FooterComponent
+    FooterComponent,
+    TopScrollerComponent
   ],
   entryComponents: [
     PostHelpComponent,
@@ -114,6 +116,6 @@ import { FooterComponent } from './layout/footer/footer.component';
 })
 export class AppModule {
   constructor() {
-    library.add(faHeart, faMugHot, faGithub, faDiscord, faDocker, faTwitter, faUserCircle, faLock);
+    library.add(faHeart, faMugHot, faGithub, faDiscord, faDocker, faTwitter, faUserCircle, faLock, faAngleUp);
   }
 }
