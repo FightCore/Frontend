@@ -1,12 +1,12 @@
 export const environment = {
   production: true,
   mocking: false,
-  baseUrl: 'https://localhost:5001',
+  baseUrl: 'https://http://167.86.102.65:5001',
   authentication: {
-    authUrl: 'http://localhost:5000',
-    callbackUrl: 'http://localhost:4200/auth-callback',
-    redirectUrl: 'http://localhost:4200',
-    clientId: 'angular_spa'
+    authUrl: 'http://http://167.86.102.65:5000',
+    callbackUrl: 'http://fightcore.gg/auth-callback',
+    redirectUrl: 'http://fightcore.gg',
+    clientId: 'fightcore_dev'
   },
   links: {
     discord: 'https://discord.gg/CVqDy6c',

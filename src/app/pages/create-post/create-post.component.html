@@ -26,13 +26,13 @@
 
         <div class="create-button">
           <button mat-raised-button color="primary" (click)="togglePreview()" i18n>
-              <i class="material-icons">visibility</i> Show/Hide Preview
+              <em class="material-icons">visibility</em> Show/Hide Preview
           </button>
           <button mat-raised-button color="primary" (click)="openHelp()" i18n>
-              <i class="material-icons">help</i> Show Help
+              <em class="material-icons">help</em> Show Help
           </button>
           <button [disabled]="isLoading" mat-raised-button color="accent" (click)="createPost()" i18n>
-              <i class="material-icons">save</i>
+              <em class="material-icons">save</em>
             <div class="post-text" *ngIf="this.post else createText">
                 Update Post
             </div>
