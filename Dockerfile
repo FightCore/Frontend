@@ -1,23 +1,36 @@
-# Select a specific node version for better stability.
-FROM node:10.16.0-jessie-slim
+# Original source: https://mherman.org/blog/dockerizing-an-angular-app/
+# Docker file meant for "production" use.
 
-# Create the working folders.
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
+# base image
+FROM node:12.2.0 as build
 
-# Copy the dependencies to the app folder.
-COPY package.json /usr/src/app/package.json
-COPY package-lock.json /usr/src/app/package-lock.json
+RUN apt-get update
 
-# Install the dependencies and the Angular CLI
-RUN npm install --save \
-    && npm install -g @angular/cli
+# set working directory
+WORKDIR /app
 
-# Copy the rest of the source to the app folder.
-COPY . /usr/src/app
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-# Serve the application so it can be visited.
-CMD ng serve --host 0.0.0.0
+# install and cache app dependencies
+COPY package.json /app/package.json
+RUN npm install
+RUN npm install -g @angular/cli@8.3.12
 
-# 4200 should be exposed as it's the port that will be served.
-EXPOSE 4200:4200
+# add app
+COPY . /app
+
+# generate build
+RUN ng build --output-path=dist
+
+# base image
+FROM nginx:1.16.0-alpine
+
+# copy artifact build from the 'build environment'
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# expose port 80
+EXPOSE 80
+
+# run nginx
+CMD ["nginx", "-g", "daemon off;"]

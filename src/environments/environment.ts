@@ -16,7 +16,7 @@ export const environment = {
   links: {
     discord: 'https://discord.gg/CVqDy6c',
     github: 'https://github.com/fightcore',
-    dockerhub: 'https://cloud.docker.com/u/fightcore/repository/list',
+    dockerhub: 'https://hub.docker.com/r/fightcore/frontend',
     kofi: 'https://ko-fi.com/bartdebever',
     twitter: null
   }

@@ -13,6 +13,19 @@ There is an on-website text editor that can be used to write markdown. It
 features a side-by-side preview, shortcuts and much more. Yet because of the
 nature of text-editors and IDEs, we recommend using `Visual Studio Code` instead.
 
+## Docker
+
+Deployment can be done with the included `Dockerfile`
+or using the container from our [repository](https://hub.docker.com/r/fightcore/frontend).
+
+To build and run the container locally use the following commands:
+
+```bash
+docker build -t CONTAINERNAME .
+
+docker run -d -p 80:80 CONTAINERNAME
+```
+
 ## Stack
 
 FightCore is build using **Angular 8**, **Angular Material**, **Travis** and **Docker**.
@@ -21,3 +34,7 @@ FightCore is build using **Angular 8**, **Angular Material**, **Travis** and **D
 
 For the API to perform the CRUD actions and the UI designs made are in different
 repositories.
+
+[FightCore/Backend](https://github.com/fightcore/backend)
+
+[FightCore/Documentation](https://github.com/fightcore/documentation)
