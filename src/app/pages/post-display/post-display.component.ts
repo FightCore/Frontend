@@ -29,6 +29,10 @@ export class PostDisplayComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.markdownService.renderer.image = (href: string, title: string, text: string) => {
+      return `<img src="${href}" alt="test" class="fit-image-width">`;
+    };
+
     const postId = this.route.snapshot.paramMap.get('postId');
 
     this.postService.getPost(parseFloat(postId)).subscribe(
