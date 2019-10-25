@@ -78,19 +78,24 @@ $brawl: mat-light-theme($brawl-app-primary, $brawl-app-accent);
   }
 }
 
+.smash-theme {
+  @include angular-material-theme($smash);
+  @include background-theme($smash);
+}
+
 .melee-theme {
   @include angular-material-theme($melee);
   @include background-theme($melee);
 }
 
+.brawl-theme {
+  @include angular-material-theme($brawl);
+  @include background-theme($brawl);
+}
+
 .ds-theme {
   @include angular-material-theme($ds);
   @include background-theme($ds);
-}
-
-.smash-theme {
-  @include angular-material-theme($smash);
-  @include background-theme($smash);
 }
 
 .wiiu-theme {
@@ -103,9 +108,34 @@ $brawl: mat-light-theme($brawl-app-primary, $brawl-app-accent);
   @include background-theme($ultimate);
 }
 
-.brawl-theme {
+.force-smash-theme {
+  @include angular-material-theme($smash);
+  @include background-theme($smash);
+}
+
+.force-melee-theme {
+  @include angular-material-theme($melee);
+  @include background-theme($melee);
+}
+
+.force-brawl-theme {
   @include angular-material-theme($brawl);
   @include background-theme($brawl);
+}
+
+.force-ds-theme {
+  @include angular-material-theme($ds);
+  @include background-theme($ds);
+}
+
+.force-wiiu-theme {
+  @include angular-material-theme($wiiu);
+  @include background-theme($wiiu);
+}
+
+.force-ultimate-theme {
+  @include angular-material-theme($ultimate);
+  @include background-theme($ultimate);
 }
 
 // Include theme styles for core and each component used in your app.
