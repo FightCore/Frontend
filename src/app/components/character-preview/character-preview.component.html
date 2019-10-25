@@ -4,7 +4,7 @@
       <img class="avatar" alt="character profile shot" [src]="characterIcon()" >
     </div>
     <div>
-      <h3 class="title">
+      <h3 class="title" (click)="viewCharacter(character.id)" class="mouse-pointer">
         {{ character.name }}
       </h3>
     </div>
