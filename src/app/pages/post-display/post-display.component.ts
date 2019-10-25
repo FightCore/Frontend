@@ -75,4 +75,8 @@ export class PostDisplayComponent implements OnInit {
       }
     );
   }
+
+  viewCharacter(characterId: number): void {
+    this.router.navigate([StaticRoutes.characters, characterId]);
+  }
 }

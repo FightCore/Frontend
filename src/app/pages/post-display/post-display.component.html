@@ -16,7 +16,7 @@
     color="primary"
     i18n
   >
-  <em class="material-icons">arrow_back</em> Back to posts.
+    <em class="material-icons">arrow_back</em> Back to posts.
   </button>
 </div>
 <app-top-scroller></app-top-scroller>
@@ -36,7 +36,8 @@
               {{ post.title }}
               <h4 class="subtitle" i18n>By {{ post.author.name }}</h4>
               <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
-                <fa-icon icon="lock" size="1x"></fa-icon> This is a private post, only you can see it.
+                <fa-icon icon="lock" size="1x"></fa-icon> This is a private
+                post, only you can see it.
               </h5>
             </h2>
             <div class="col-lg-4 col-xs-12 like-button">
@@ -57,41 +58,67 @@
           color="accent"
           i18n
         >
-        <em class="material-icons">edit</em> Edit
+          <em class="material-icons">edit</em> Edit
         </button>
       </div>
     </div>
     <div class="col-lg-2">
+      <div class="post">
+        <h4 i18n>Featured in this post.</h4>
         <div class="post">
             <div class="header background-color-primary">
               <h4 class="title" i18n>
-                {{ post.game.name }}
+                {{ post.author.name }}
               </h4>
-              <img alt="Game banner" class="fit-image-width" [src]="post.game.bannerUrl">
-            </div>
-            <div>
-              <p>
-                Here is a little bit of a description about the game that this
-                post is about.
-              </p>
-            </div>
+          </div>
+          <p>
+            A small text about the author of this post.
+          </p>
+        </div>
+
+        <div class="post">
+          <div class="header background-color-primary">
+            <h4 class="title" i18n>
+              {{ post.game.name }}
+            </h4>
+            <img
+              alt="Game banner"
+              class="fit-image-width"
+              [src]="post.game.bannerUrl"
+            />
+          </div>
+          <div>
+            <p>
+              Here is a little bit of a description about the game that this
+              post is about.
+            </p>
+          </div>
         </div>
         <div *ngIf="post.character" class="post">
-            <div class="header background-color-primary">
-              <h4 class="title" i18n>
-                {{ post.character.name }}
-              </h4>
-              <img
+          <div class="header background-color-primary">
+            <h4 class="title" i18n>
+              {{ post.character.name }}
+            </h4>
+            <img
               alt="Character stock icon"
               class="fit-image-height"
-              [src]="post.character.stockIcon.url">
-            </div>
-            <div>
-              <p>
-                {{ post.character.generalInformation }}
-              </p>
-            </div>
+              [src]="post.character.stockIcon.url"
+            />
+          </div>
+          <p class="description">
+            {{ post.character.generalInformation }}
+          </p>
+              <button
+              class="view-button"
+              mat-raised-button
+              color="accent"
+              (click)="viewCharacter(post.character.id)"
+              i18n
+            >
+              View
+            </button>
         </div>
+      </div>
     </div>
   </div>
 </ng-template>
