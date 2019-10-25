@@ -12,7 +12,8 @@ export class GameThemes {
    * Gets the class name of the theme for a game.
    * @param gameId the id of the game to get the theme for.
    */
-  public static getThemeForGameId(gameId: number) {
-    return this.themeDictionary.get(gameId);
+  public static getThemeForGameId(gameId: number, force: boolean = false) {
+    const theme = this.themeDictionary.get(gameId);
+    return force ? 'force-' + theme : theme;
   }
 }

@@ -1,4 +1,4 @@
-<div *ngIf="loading else selector">
+<div *ngIf="loading else selector" class="game-dropdown">
   <div *ngIf="!failed else loadFail" i18n>
       <mat-spinner [diameter]="20" class="loading-spinner"></mat-spinner>
       Loading games..

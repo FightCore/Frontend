@@ -24,10 +24,8 @@
           View
         </button>
       </div>
-      <div class="col-lg-3 col-xs-12 game-chips">
-        <mat-chip color="primary" class="game-chip" selected>
-          {{ character.game.abbreviation }}
-        </mat-chip>
+      <div class="col-lg-3 col-xs-12">
+        <app-game-chip [game]="character.game"></app-game-chip>
       </div>
     </div>
   </div>

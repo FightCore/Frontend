@@ -3,7 +3,7 @@
     <div *ngIf="post.game.bannerUrl && !minimalMode()">
       <img class="post-banner" alt="Post Banner" [src]="post.game.bannerUrl" />
     </div>
-    <div class="d-none d-sm-block post-avatar-container col-lg-2">
+    <div class="d-none d-md-block post-avatar-container col-lg-2">
       <ngx-avatar class="avatar-accent" [name]="post.author.name"></ngx-avatar>
     </div>
     <div class="col-lg-8 col-xs-12">
@@ -37,10 +37,8 @@
         >
         </app-like-button>
       </div>
-      <div class="col-lg-3 col-xs-12">
-        <mat-chip-list class="game-chip">
-          <mat-chip color="primary" selected>{{ post.game.abbreviation }}</mat-chip>
-        </mat-chip-list>
+      <div class="col-3">
+        <app-game-chip [game]="post.game"></app-game-chip>
       </div>
     </div>
   </div>

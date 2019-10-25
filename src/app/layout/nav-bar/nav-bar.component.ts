@@ -45,7 +45,7 @@ export class NavBarComponent implements OnInit {
 
   register() {
     let dialogRef = this.dialog.open(RegisterComponent, {
-      width: '25%'
+      width: '40em'
     });
   }
 

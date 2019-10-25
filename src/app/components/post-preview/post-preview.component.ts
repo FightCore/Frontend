@@ -49,7 +49,7 @@ export class PostPreviewComponent implements OnInit {
   }
 
   getPostClass(): string {
-    return GameThemes.getThemeForGameId(this.post.gameId);
+    return GameThemes.getThemeForGameId(this.post.gameId, true);
   }
 
   minimalMode(): boolean {

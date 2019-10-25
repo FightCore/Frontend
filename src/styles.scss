@@ -6,7 +6,13 @@
     object-fit: contain;
 }
 
+.fit-image-max-width {
+    max-width: 100%;
+    object-fit: contain;
+}
+
 .fit-image-height {
     height: 100%;
+    max-width: 100%;
     object-fit: contain;
 }
