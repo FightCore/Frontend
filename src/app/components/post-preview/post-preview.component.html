@@ -7,7 +7,7 @@
       <ngx-avatar class="avatar-accent" [name]="post.author.name"></ngx-avatar>
     </div>
     <div class="col-lg-8 col-xs-12">
-      <h4 class="post-title"><span *ngIf="post.isPrivate">
+      <h4 class="post-title mouse-pointer" (click)="viewPost(post.id)" ><span *ngIf="post.isPrivate">
           <fa-icon icon="lock" size="1x"></fa-icon>
         </span> {{ post.title }}</h4>
       <h6 class="post-subtitle">By {{ post.author.name }}</h6>
