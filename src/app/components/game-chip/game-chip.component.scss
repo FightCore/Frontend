@@ -1,0 +1,14 @@
+$chip-border: 16px;
+$chip-padding: 0.4em 0.7em;
+
+.game-chips {
+    display: flex;
+    justify-content: flex-end;
+    border-radius: $chip-border;
+    padding: $chip-padding;
+
+    .game-chip {
+        border-radius: $chip-border;
+        padding: $chip-padding;
+    }
+}
