@@ -3,4 +3,5 @@ export class Game {
     name: string;
     abbreviation: string;
     bannerUrl?: string;
+    description?: string;
 }

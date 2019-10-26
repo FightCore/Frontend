@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <app-loading *ngIf="loading; else gameDisplay"></app-loading>
+</div>
+
+<ng-template #gameDisplay>
+  <div class="row">
+    <div class="col-lg-6">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ game.name }}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]="game.bannerUrl" alt="Game banner" />
+        <mat-card-content>
+          {{ game.description }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-lg-6">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title i18n>Posts</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-loading *ngIf="postLoading; else postList"></app-loading>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title i18n>Characters</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-loading *ngIf="characterLoading; else characterList"></app-loading>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+
+<ng-template #characterList>
+  <div class="row">
+    <div *ngFor="let character of characters" class="col-lg-4">
+      <app-character-preview [character]="character"></app-character-preview>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #postList>
+  <div class="row">
+    <div *ngFor="let post of posts" class="col-lg-6">
+      <app-post-preview [post]="post"></app-post-preview>
+    </div>
+  </div>
+</ng-template>

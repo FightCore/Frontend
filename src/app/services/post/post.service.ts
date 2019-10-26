@@ -57,6 +57,14 @@ export class PostService extends BaseService {
     return this.httpClient.get<Post>(`${this.baseUrl}/${id}`, this.getDefaultHttpOptions());
   }
 
+  public getPostsForGame(gameId: number): Observable<Post[]> {
+    if (environment.mocking) {
+      return new Observable(observer => observer.next(this.generatePostList(10)));
+    }
+
+    return this.httpClient.get<Post[]>(`${environment.baseUrl}/games/${gameId}/posts`);
+  }
+
   /**
    * Add or Removes a like from a post if the user is logged in.
    * @param id the id of the post wanting to like or remove a like from.

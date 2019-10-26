@@ -45,6 +45,7 @@ import { DiscordComponent } from './components/discord/discord.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { TopScrollerComponent } from './components/top-scroller/top-scroller.component';
 import { GameChipComponent } from './components/game-chip/game-chip.component';
+import { GameDisplayComponent } from './pages/game-display/game-display.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -108,7 +109,8 @@ import { GameChipComponent } from './components/game-chip/game-chip.component';
     DiscordComponent,
     FooterComponent,
     TopScrollerComponent,
-    GameChipComponent
+    GameChipComponent,
+    GameDisplayComponent
   ],
   entryComponents: [
     PostHelpComponent,

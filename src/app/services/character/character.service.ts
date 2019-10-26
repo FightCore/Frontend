@@ -49,6 +49,10 @@ export class CharacterService extends BaseService {
     return this.httpClient.get<Post[]>(`${this.baseUrl}/${characterId}/posts`, this.getDefaultHttpOptions());
   }
 
+  public getForGame(gameId: number): Observable<Character[]> {
+    return this.httpClient.get<Character[]>(`${environment.baseUrl}/games/${gameId}/characters`);
+  }
+
   private generateCharacterList(amount: number): Character[] {
     const characters = new Character[amount]();
     for (let i = 0; i < amount; i++) {
