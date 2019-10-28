@@ -46,6 +46,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { TopScrollerComponent } from './components/top-scroller/top-scroller.component';
 import { GameChipComponent } from './components/game-chip/game-chip.component';
 import { GameDisplayComponent } from './pages/game-display/game-display.component';
+import { GamePreviewComponent } from './components/game-preview/game-preview.component';
+import { GameComponent } from './pages/game/game.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -110,7 +112,9 @@ import { GameDisplayComponent } from './pages/game-display/game-display.componen
     FooterComponent,
     TopScrollerComponent,
     GameChipComponent,
-    GameDisplayComponent
+    GameDisplayComponent,
+    GamePreviewComponent,
+    GameComponent
   ],
   entryComponents: [
     PostHelpComponent,

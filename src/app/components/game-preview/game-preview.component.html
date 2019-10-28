@@ -1,0 +1,25 @@
+<div [class]="getClass()">
+  <mat-card class="background-color-primary image-card">
+    <mat-card-header>
+      <mat-card-title class="title"
+        ><img [src]="game.icon.url" [alt]="game.abbreviation + '-icon'" />{{
+          game.name
+        }}</mat-card-title
+      >
+      <mat-card-subtitle class="sub-title">{{ game.abbreviation }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      mat-card-image
+      [src]="game.bannerUrl"
+      [alt]="game.abbreviation + '-banner'"
+    />
+  </mat-card>
+  <mat-card class="content-card">
+    <mat-card-content class="description">
+      {{ game.description }}
+    </mat-card-content>
+    <button mat-raised-button color="primary" (click)="viewGame()" i18n>
+      View
+    </button>
+  </mat-card>
+</div>

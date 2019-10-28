@@ -1,0 +1,12 @@
+<div class="container-fluid">
+  <h2 i18n>Games</h2>
+  <app-loading *ngIf="loading; else gameList"></app-loading>
+</div>
+
+<ng-template #gameList>
+  <div class="row equal">
+    <div *ngFor="let game of games" class="col-lg-4 game">
+        <app-game-preview [game]="game"></app-game-preview>
+    </div>
+  </div>
+</ng-template>

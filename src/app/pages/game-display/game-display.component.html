@@ -1,5 +1,11 @@
 <div class="container-fluid">
-  <app-loading *ngIf="loading; else gameDisplay"></app-loading>
+  <button mat-raised-button color="primary" class="back-button"
+       [routerLink]="['/game']" i18n>
+    <em class="material-icons">arrow_back</em> Back to games
+  </button>
+  <div [class]="getGameClass()">
+      <app-loading *ngIf="loading; else gameDisplay"></app-loading>
+  </div>
 </div>
 
 <ng-template #gameDisplay>
@@ -7,7 +13,10 @@
     <div class="col-lg-6">
       <mat-card>
         <mat-card-header>
-          <mat-card-title>{{ game.name }}</mat-card-title>
+          <mat-card-title
+            ><img *ngIf="game.icon" [src]="game.icon.url" alt="game icon" />
+            {{ game.name }}</mat-card-title
+          >
         </mat-card-header>
         <img mat-card-image [src]="game.bannerUrl" alt="Game banner" />
         <mat-card-content>

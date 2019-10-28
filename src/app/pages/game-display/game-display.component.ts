@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Game } from 'src/app/models/game';
 import { Character } from 'src/app/models/character';
 import { Post } from 'src/app/models/post';
+import { GameThemes } from 'src/styles/gameThemes';
 
 @Component({
   selector: 'app-game-display',
@@ -43,6 +44,10 @@ export class GameDisplayComponent implements OnInit {
           this.postLoading = false;
         });
     });
+  }
+
+  getGameClass(): string {
+    return GameThemes.getThemeForGameId(this.game.id, true);
   }
 
 }

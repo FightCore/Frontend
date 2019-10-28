@@ -91,6 +91,15 @@
             <p class="description">
               {{ post.game.description }}
             </p>
+            <button
+            class="view-button"
+            mat-raised-button
+            color="accent"
+            (click)="viewGame(post.game.id)"
+            i18n
+          >
+            View
+          </button>
           </div>
         </div>
         <div *ngIf="post.character" class="post">
