@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { UserOptions } from 'src/app/options/userOptions';
 import { CharacterPickerComponent } from 'src/app/components/character-picker/character-picker.component';
+import { TuiService } from 'ngx-tui-editor';
 
 @Component({
   selector: 'app-create-post',
@@ -28,20 +29,27 @@ export class CreatePostComponent implements OnInit {
     private toastrService: ToastrService,
     private router: Router,
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private editorService: TuiService
   ) { }
   markdownContent = '';
   title: string;
   isPrivate: boolean;
   isLoading = false;
   gameId: number = this.getGameId();
+  // options = {
+  //   // Makes the editor scrollable itself.
+  //   scrollPastEnd: 1,
+  //   // Uses FontAwesome5
+  //   usingFontAwesome5: true,
+  //   // Hides the code icon as it's not needed for normal development.
+  //   hideIcons: ['Code']
+  // };
   options = {
-    // Makes the editor scrollable itself.
-    scrollPastEnd: 1,
-    // Uses FontAwesome5
-    usingFontAwesome5: true,
-    // Hides the code icon as it's not needed for normal development.
-    hideIcons: ['Code']
+    initialValue: `# Title of Project` ,
+    initialEditType: 'markdown',
+    previewStyle: 'vertical',
+    height: '50em'
   };
 
   @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
@@ -56,6 +64,7 @@ export class CreatePostComponent implements OnInit {
       this.isPrivate = this.post.isPrivate;
       this.gameId = this.post.gameId;
       this.markdownContent = this.post.body;
+      this.options.initialValue = this.post.body;
     }
   }
 
@@ -80,7 +89,7 @@ export class CreatePostComponent implements OnInit {
     }
 
     const post = new CreatedPost();
-    post.body = this.markdownContent;
+    post.body = this.editorService.getMarkdown();
     post.title = this.title;
     post.isPrivate = this.isPrivate;
     post.gameId = this.gameId;
@@ -98,7 +107,7 @@ export class CreatePostComponent implements OnInit {
   }
 
   updatePost() {
-    this.post.body = this.markdownContent;
+    this.post.body = this.editorService.getMarkdown();
     this.post.title = this.title;
     this.post.isPrivate = this.isPrivate;
     this.post.gameId = this.gameId;

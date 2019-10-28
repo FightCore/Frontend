@@ -40,7 +40,8 @@
         </div>
       </div>
       <hr />
-      <md-editor
+      <tui-editor [options]="options"></tui-editor>
+      <!-- <md-editor
       #mdEditor
         name="Post Content"
         [options]="options"
@@ -48,7 +49,7 @@
         [height]="'40em'"
         required
       >
-      </md-editor>
+      </md-editor> -->
 </div>
 <ng-template #createText i18n>
     Create Post
