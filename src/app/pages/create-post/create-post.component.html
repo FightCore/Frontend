@@ -9,10 +9,12 @@
           </mat-label>
           <input [(ngModel)]="title" matInput name="title" required />
         </mat-form-field>
-        <app-game-selector
+        <div class="game-picker">
+          <app-game-selector
           [selected]="getGameId()"
           (selectionChange)="onGameChange($event)" class="create-post-header">
         </app-game-selector>
+        </div>
         <div class="character-picker">
         <app-character-picker
           [selected]="getCharacterId()"
@@ -41,15 +43,6 @@
       </div>
       <hr />
       <tui-editor [options]="options"></tui-editor>
-      <!-- <md-editor
-      #mdEditor
-        name="Post Content"
-        [options]="options"
-        [(ngModel)]="markdownContent"
-        [height]="'40em'"
-        required
-      >
-      </md-editor> -->
 </div>
 <ng-template #createText i18n>
     Create Post

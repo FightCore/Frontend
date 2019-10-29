@@ -13,6 +13,7 @@ import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { UserOptions } from 'src/app/options/userOptions';
 import { CharacterPickerComponent } from 'src/app/components/character-picker/character-picker.component';
 import { TuiService } from 'ngx-tui-editor';
+import { MarkdownService } from 'ngx-markdown';
 
 @Component({
   selector: 'app-create-post',
@@ -30,31 +31,25 @@ export class CreatePostComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private authService: AuthService,
-    private editorService: TuiService
+    private editorService: TuiService,
+    private markdownService: MarkdownService
   ) { }
   markdownContent = '';
   title: string;
   isPrivate: boolean;
   isLoading = false;
   gameId: number = this.getGameId();
-  // options = {
-  //   // Makes the editor scrollable itself.
-  //   scrollPastEnd: 1,
-  //   // Uses FontAwesome5
-  //   usingFontAwesome5: true,
-  //   // Hides the code icon as it's not needed for normal development.
-  //   hideIcons: ['Code']
-  // };
+
   options = {
-    initialValue: `# Title of Project` ,
-    initialEditType: 'markdown',
+    initialValue: '' ,
+    initialEditType: 'wysiwyg',
     previewStyle: 'vertical',
     height: '50em'
-  };
+    };
 
   @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
-
   ngOnInit() {
+
     if (!this.authService.isAuthenticated()) {
       this.authService.login();
     }
@@ -137,5 +132,4 @@ export class CreatePostComponent implements OnInit {
   togglePreview() {
     this.markdownEditor.togglePreview();
   }
-
 }

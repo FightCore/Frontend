@@ -4,6 +4,7 @@ import { Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user/user.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<RegisterComponent>,
     private toastrService: ToastrService,
+    private authService: AuthService,
     private userService: UserService) {
   }
 
@@ -55,6 +57,7 @@ export class RegisterComponent implements OnInit {
 
     this.userService.createUser(user).subscribe(_ => {
       this.toastrService.success('Successfully registered, redirecting...', 'Success');
+      this.authService.login();
     }, error => {
       this.toastrService.error('An error occurred while registering', 'Error');
     });
