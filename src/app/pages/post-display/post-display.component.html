@@ -1,4 +1,4 @@
-<div [class]="'container-fluid ' + getGameClass()">
+<div class="container-fluid">
   <button
     mat-raised-button
     class="back-button"
@@ -22,101 +22,102 @@
 <app-top-scroller></app-top-scroller>
 
 <ng-template #display>
-  <div class="row">
-    <div class="col-lg-10">
-      <div class="post">
-        <div class="header background-color-primary">
-          <div class="row">
-            <div class="col-lg-4 col-xs-12">
-              <div class="game-chip">
-                {{ post.game.abbreviation }}
+  <div [class]="getGameClass()">
+    <div class="row">
+      <div class="col-lg-10">
+        <div class="post">
+          <div class="header background-color-primary">
+            <div class="row">
+              <div class="col-lg-4 col-xs-12">
+                <div class="game-chip">
+                  {{ post.game.abbreviation }}
+                </div>
+              </div>
+              <h2 class="col-lg-4 col-xs-12 title">
+                {{ post.title }}
+                <h4 class="subtitle" i18n>By {{ post.author.name }}</h4>
+                <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
+                  <fa-icon icon="lock" size="1x"></fa-icon> This is a private
+                  post, only you can see it.
+                </h5>
+              </h2>
+              <div class="col-lg-4 col-xs-12 like-button">
+                <app-like-button
+                  [postId]="post.id"
+                  [likes]="post.likes"
+                  [liked]="post.liked"
+                >
+                </app-like-button>
               </div>
             </div>
-            <h2 class="col-lg-4 col-xs-12 title">
-              {{ post.title }}
-              <h4 class="subtitle" i18n>By {{ post.author.name }}</h4>
-              <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
-                <fa-icon icon="lock" size="1x"></fa-icon> This is a private
-                post, only you can see it.
-              </h5>
-            </h2>
-            <div class="col-lg-4 col-xs-12 like-button">
-              <app-like-button
-                [postId]="post.id"
-                [likes]="post.likes"
-                [liked]="post.liked"
-              >
-              </app-like-button>
-            </div>
           </div>
+          <div [innerHTML]="bodyHtml"></div>
+          <button
+            *ngIf="isPostFromUser()"
+            (click)="editPost()"
+            mat-raised-button
+            color="accent"
+            i18n
+          >
+            <em class="material-icons">edit</em> Edit
+          </button>
         </div>
-        <div [innerHTML]="bodyHtml"></div>
-        <button
-          *ngIf="isPostFromUser()"
-          (click)="editPost()"
-          mat-raised-button
-          color="accent"
-          i18n
-        >
-          <em class="material-icons">edit</em> Edit
-        </button>
       </div>
-    </div>
-    <div class="col-lg-2">
-      <div class="post">
-        <h4 i18n>Featured in this post.</h4>
+      <div class="col-lg-2">
         <div class="post">
+          <h4 i18n>Featured in this post.</h4>
+          <div class="post">
             <div class="header background-color-primary">
               <h4 class="title" i18n>
                 {{ post.author.name }}
               </h4>
+            </div>
+            <p>
+              A small text about the author of this post.
+            </p>
           </div>
-          <p>
-            A small text about the author of this post.
-          </p>
-        </div>
 
-        <div class="post">
-          <div class="header background-color-primary">
-            <h4 class="title" i18n>
-              {{ post.game.name }}
-            </h4>
-            <img
-              alt="Game banner"
-              class="fit-image-width"
-              [src]="post.game.bannerUrl"
-            />
+          <div class="post">
+            <div class="header background-color-primary">
+              <h4 class="title" i18n>
+                {{ post.game.name }}
+              </h4>
+              <img
+                alt="Game banner"
+                class="fit-image-width"
+                [src]="post.game.bannerUrl"
+              />
+            </div>
+            <div>
+              <p class="description">
+                {{ post.game.description }}
+              </p>
+              <button
+                class="view-button"
+                mat-raised-button
+                color="accent"
+                (click)="viewGame(post.game.id)"
+                i18n
+              >
+                View
+              </button>
+            </div>
           </div>
-          <div>
+          <div *ngIf="post.character" class="post">
+            <div class="header background-color-primary">
+              <h4 class="title" i18n>
+                {{ post.character.name }}
+              </h4>
+              <img
+                alt="Character stock icon"
+                class="fit-image-height"
+                [src]="post.character.stockIcon.url"
+              />
+            </div>
             <p class="description">
-              {{ post.game.description }}
+              {{ post.character.generalInformation }}
             </p>
             <button
-            class="view-button"
-            mat-raised-button
-            color="accent"
-            (click)="viewGame(post.game.id)"
-            i18n
-          >
-            View
-          </button>
-          </div>
-        </div>
-        <div *ngIf="post.character" class="post">
-          <div class="header background-color-primary">
-            <h4 class="title" i18n>
-              {{ post.character.name }}
-            </h4>
-            <img
-              alt="Character stock icon"
-              class="fit-image-height"
-              [src]="post.character.stockIcon.url"
-            />
-          </div>
-          <p class="description">
-            {{ post.character.generalInformation }}
-          </p>
-              <button
               class="view-button"
               mat-raised-button
               color="accent"
@@ -125,6 +126,7 @@
             >
               View
             </button>
+          </div>
         </div>
       </div>
     </div>
