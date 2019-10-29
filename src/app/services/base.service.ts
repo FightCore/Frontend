@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth/auth.service';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 
 export class BaseService {
     private authService: AuthService;

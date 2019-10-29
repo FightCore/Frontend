@@ -8,14 +8,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faLock, faMugHot, faUserCircle, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faDocker, faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { PostComponent } from './pages/post/post.component';
 import { ToastrModule } from 'ngx-toastr';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
-import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 import { GameSelectorComponent } from './components/game-selector/game-selector.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostHelpComponent } from './components/post-help/post-help.component';
@@ -63,7 +61,6 @@ import { TuiModule } from 'ngx-tui-editor';
     FontAwesomeModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    LMarkdownEditorModule,
     ReactiveFormsModule,
     MarkdownModule.forRoot({
       markedOptions: {
@@ -85,7 +82,6 @@ import { TuiModule } from 'ngx-tui-editor';
   ],
   declarations: [
     AppComponent,
-    SideNavComponent,
     NavBarComponent,
     PostComponent,
     PostPreviewComponent,

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post/post.service';
-import { Theme } from 'src/styles/fightcore-theme';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { PostText } from 'src/app/text/post.text';

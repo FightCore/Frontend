@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Character } from 'src/app/models/character';
 import { BaseService } from '../base.service';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import * as faker from 'faker';
 import { Post } from 'src/app/models/post';
 
 @Injectable({
@@ -64,9 +63,6 @@ export class CharacterService extends BaseService {
 
   private generateCharacter(): Character {
     const character = new Character();
-    character.generalInformation = faker.lorem.paragraphs();
-    character.name = faker.lorem.words(3);
-    character.id = faker.random.number(10000);
 
     return character;
   }

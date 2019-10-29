@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterService } from 'src/app/services/character/character.service';
 import { Character } from 'src/app/models/character';
-import * as faker from 'faker';
-import { GameSeries } from 'src/app/models/gameSeries';
 import { GameService } from 'src/app/services/game/game.service';
 import { Game } from 'src/app/models/game';
 import { UserOptions } from 'src/app/options/userOptions';

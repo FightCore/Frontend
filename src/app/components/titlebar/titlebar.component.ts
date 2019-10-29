@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, EventEmitter, Output, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UserOptions } from 'src/app/options/userOptions';
-import { OverlayContainer } from '@angular/cdk/overlay';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({

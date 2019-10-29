@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, never } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Post, CreatedPost } from 'src/app/models/post';
-import * as faker from 'faker';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
 import { BaseService } from '../base.service';
 import { User } from 'src/app/models/user';
-import { Game } from 'src/app/models/game';
 
 @Injectable({
   providedIn: 'root'
@@ -108,14 +106,6 @@ export class PostService extends BaseService {
 
   private generatePost(): Post {
     const post = new Post();
-    post.id = faker.random.number();
-    post.title = faker.lorem.sentence();
-    post.author = new User();
-    post.author.name = faker.internet.userName();
-    post.body = faker.lorem.paragraphs(2);
-    post.likes = faker.random.number();
-    // post.game = 'Ultimate';
-
     // if (faker.random.boolean()) {
     // post.bannerUrl = 'https://i.imgur.com/aEwNXVn.jpg';
     // }

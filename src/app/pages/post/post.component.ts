@@ -1,20 +1,21 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { PostService } from "src/app/services/post/post.service";
-import { Post } from "src/app/models/post";
-import { Router } from "@angular/router";
-import { StaticRoutes } from "src/app/routes/static-routes";
-import { ToastrService } from "ngx-toastr";
-import { PostText } from "src/app/text/post.text";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PostService } from 'src/app/services/post/post.service';
+import { Post } from 'src/app/models/post';
+import { Router } from '@angular/router';
+import { StaticRoutes } from 'src/app/routes/static-routes';
+import { ToastrService } from 'ngx-toastr';
+import { PostText } from 'src/app/text/post.text';
 import { UserOptions } from 'src/app/options/userOptions';
 import { CharacterPickerComponent } from 'src/app/components/character-picker/character-picker.component';
 
 @Component({
-  selector: "app-post",
-  templateUrl: "./post.component.html",
-  styleUrls: ["./post.component.scss"]
+  selector: 'app-post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
+  @ViewChild('characterPicker', { static: false })
+  characterPicker: CharacterPickerComponent;
   constructor(
     private postService: PostService,
     private router: Router,

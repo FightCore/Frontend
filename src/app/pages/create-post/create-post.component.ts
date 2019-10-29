@@ -7,9 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostHelpComponent } from 'src/app/components/post-help/post-help.component';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { PostText } from 'src/app/text/post.text';
-import { MarkdownEditorComponent } from 'ngx-markdown-editor';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { UserOptions } from 'src/app/options/userOptions';
 import { CharacterPickerComponent } from 'src/app/components/character-picker/character-picker.component';
 import { TuiService } from 'ngx-tui-editor';
@@ -21,8 +19,6 @@ import { MarkdownService } from 'ngx-markdown';
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit {
-
-  @ViewChild('mdEditor', {static: false}) markdownEditor: MarkdownEditorComponent;
   @Input() post: Post;
 
   constructor(
@@ -77,7 +73,7 @@ export class CreatePostComponent implements OnInit {
 
     return -1;
   }
-  createPost() {
+  createPost(): void {
     if (this.post != null) {
       this.updatePost();
       return;
@@ -101,7 +97,7 @@ export class CreatePostComponent implements OnInit {
     });
   }
 
-  updatePost() {
+  updatePost(): void {
     this.post.body = this.editorService.getMarkdown();
     this.post.title = this.title;
     this.post.isPrivate = this.isPrivate;
@@ -118,18 +114,17 @@ export class CreatePostComponent implements OnInit {
     });
   }
 
-  openHelp() {
+  openHelp(): void {
     this.dialog.open(PostHelpComponent, {
       width: '50%',
     });
   }
 
-  onGameChange(id: number) {
+  onGameChange(id: number): void {
     this.gameId = id;
     this.characterPicker.updateGame(id);
   }
 
-  togglePreview() {
-    this.markdownEditor.togglePreview();
+  togglePreview(): void {
   }
 }

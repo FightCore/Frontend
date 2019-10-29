@@ -35,10 +35,7 @@
               "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [
-              "node_modules/marked/lib/marked.js",
-              "node_modules/highlight.js/lib/highlight.js",
-              "node_modules/ace-builds/src-min/ace.js",
-              "node_modules/ace-builds/src-min/mode-markdown.js"
+              "node_modules/marked/lib/marked.js"
             ]
           },
           "configurations": {
@@ -56,13 +53,13 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
+              "vendorChunk": true,
               "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
                   "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumError": "6mb"
                 }
               ]
             },
