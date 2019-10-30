@@ -10,8 +10,8 @@ import { PostText } from 'src/app/text/post.text';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserOptions } from 'src/app/options/userOptions';
 import { CharacterPickerComponent } from 'src/app/components/character-picker/character-picker.component';
-import { TuiService } from 'ngx-tui-editor';
 import { MarkdownService } from 'ngx-markdown';
+import * as Showdown from 'showdown';
 
 @Component({
   selector: 'app-create-post',
@@ -27,7 +27,6 @@ export class CreatePostComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private authService: AuthService,
-    private editorService: TuiService,
     private markdownService: MarkdownService
   ) { }
   markdownContent = '';
@@ -42,10 +41,8 @@ export class CreatePostComponent implements OnInit {
     previewStyle: 'vertical',
     height: '50em'
     };
-
   @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
   ngOnInit() {
-
     if (!this.authService.isAuthenticated()) {
       this.authService.login();
     }
@@ -54,8 +51,8 @@ export class CreatePostComponent implements OnInit {
       this.title = this.post.title;
       this.isPrivate = this.post.isPrivate;
       this.gameId = this.post.gameId;
-      this.markdownContent = this.post.body;
-      this.options.initialValue = this.post.body;
+      const converter = new Showdown.Converter();
+      this.markdownContent = converter.makeHtml(this.post.body);
     }
   }
 
@@ -80,11 +77,12 @@ export class CreatePostComponent implements OnInit {
     }
 
     const post = new CreatedPost();
-    post.body = this.editorService.getMarkdown();
     post.title = this.title;
     post.isPrivate = this.isPrivate;
     post.gameId = this.gameId;
     post.characterId = this.characterPicker.getValue();
+    const converter = new Showdown.Converter();
+    post.body = converter.makeMarkdown(this.markdownContent);
 
     this.isLoading = true;
     this.postService.createPost(post).subscribe((_) => {
@@ -98,11 +96,13 @@ export class CreatePostComponent implements OnInit {
   }
 
   updatePost(): void {
-    this.post.body = this.editorService.getMarkdown();
     this.post.title = this.title;
     this.post.isPrivate = this.isPrivate;
     this.post.gameId = this.gameId;
     this.post.characterId = this.characterPicker.getValue();
+
+    const converter = new Showdown.Converter();
+    this.post.body = converter.makeMarkdown(this.markdownContent);
 
     this.postService.updatePost(this.post).subscribe((_) => {
       this.toastrService.success(PostText.updatedPost);
@@ -126,5 +126,8 @@ export class CreatePostComponent implements OnInit {
   }
 
   togglePreview(): void {
+    const converter = new Showdown.Converter();
+    console.log(converter.makeMarkdown(this.markdownContent));
+    console.log(this.markdownContent);
   }
 }

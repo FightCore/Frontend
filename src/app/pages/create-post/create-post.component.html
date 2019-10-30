@@ -42,7 +42,9 @@
         </div>
       </div>
       <hr />
-      <tui-editor [options]="options"></tui-editor>
+      <div class="editor">
+        <quill-editor [(ngModel)]="markdownContent"></quill-editor>
+      </div>
 </div>
 <ng-template #createText i18n>
     Create Post

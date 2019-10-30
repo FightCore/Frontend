@@ -46,7 +46,7 @@ import { GameChipComponent } from './components/game-chip/game-chip.component';
 import { GameDisplayComponent } from './pages/game-display/game-display.component';
 import { GamePreviewComponent } from './components/game-preview/game-preview.component';
 import { GameComponent } from './pages/game/game.component';
-import { TuiModule } from 'ngx-tui-editor';
+import { QuillModule } from 'ngx-quill';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -76,7 +76,7 @@ import { TuiModule } from 'ngx-tui-editor';
         }
       }
     }),
-    TuiModule,
+    QuillModule.forRoot(),
     AvatarModule,
     MatPasswordStrengthModule.forRoot()
   ],
