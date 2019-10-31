@@ -24,6 +24,7 @@
           <div class="info-container">
             <!--Center this image.-->
             <img
+              *ngIf="character.characterImage"
               [src]="character.characterImage.url"
               alt="character-portrait"
               height="370em"

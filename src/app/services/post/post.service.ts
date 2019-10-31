@@ -27,6 +27,9 @@ export class PostService extends BaseService {
     return this.httpClient.get<Post[]>(this.baseUrl, this.getDefaultHttpOptions());
   }
 
+  /**
+   * Gets a list of latest posts.
+   */
   public getLatestsPosts(): Observable<Post[]> {
     if (environment.mocking) {
       return new Observable(observer => observer.next(this.generatePostList(3)));
@@ -35,6 +38,9 @@ export class PostService extends BaseService {
     return this.httpClient.get<Post[]>(`${this.baseUrl}/latest`, this.getDefaultHttpOptions());
   }
 
+  /**
+   * Gets the currently featured posts.
+   */
   public getFeaturedPosts(): Observable<Post[]> {
     if (environment.mocking) {
       return new Observable(observer => observer.next(this.generatePostList(3)));
@@ -55,6 +61,10 @@ export class PostService extends BaseService {
     return this.httpClient.get<Post>(`${this.baseUrl}/${id}`, this.getDefaultHttpOptions());
   }
 
+  /**
+   * Gets a list of posts based on the gameId provided.
+   * @param gameId the id of the game
+   */
   public getPostsForGame(gameId: number): Observable<Post[]> {
     if (environment.mocking) {
       return new Observable(observer => observer.next(this.generatePostList(10)));
@@ -87,6 +97,10 @@ export class PostService extends BaseService {
     return this.httpClient.post<null>(this.baseUrl, post, this.getDefaultHttpOptions());
   }
 
+  /**
+   * Updates the post provided.
+   * @param post the post to be updated.
+   */
   public updatePost(post: Post): Observable<never> | Observable<null> {
     if (environment.mocking) {
       return this.returnFakeObserver();

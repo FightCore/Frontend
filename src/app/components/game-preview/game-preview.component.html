@@ -2,13 +2,18 @@
   <mat-card class="background-color-primary image-card">
     <mat-card-header>
       <mat-card-title class="title"
-        ><img [src]="game.icon.url" [alt]="game.abbreviation + '-icon'" />{{
-          game.name
-        }}</mat-card-title
+        ><img
+          *ngIf="game.icon"
+          [src]="game.icon.url"
+          [alt]="game.abbreviation + '-icon'"
+        />{{ game.name }}</mat-card-title
       >
-      <mat-card-subtitle class="sub-title">{{ game.abbreviation }}</mat-card-subtitle>
+      <mat-card-subtitle class="sub-title">{{
+        game.abbreviation
+      }}</mat-card-subtitle>
     </mat-card-header>
     <img
+      *ngIf="game.bannerUrl"
       mat-card-image
       [src]="game.bannerUrl"
       [alt]="game.abbreviation + '-banner'"

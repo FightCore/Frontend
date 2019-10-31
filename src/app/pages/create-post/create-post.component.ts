@@ -34,13 +34,8 @@ export class CreatePostComponent implements OnInit {
   isPrivate: boolean;
   isLoading = false;
   gameId: number = this.getGameId();
+  converter: Showdown.Converter = new Showdown.Converter();
 
-  options = {
-    initialValue: '' ,
-    initialEditType: 'wysiwyg',
-    previewStyle: 'vertical',
-    height: '50em'
-    };
   @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
   ngOnInit() {
     if (!this.authService.isAuthenticated()) {
@@ -51,8 +46,7 @@ export class CreatePostComponent implements OnInit {
       this.title = this.post.title;
       this.isPrivate = this.post.isPrivate;
       this.gameId = this.post.gameId;
-      const converter = new Showdown.Converter();
-      this.markdownContent = converter.makeHtml(this.post.body);
+      this.markdownContent = this.converter.makeHtml(this.post.body);
     }
   }
 
@@ -63,6 +57,7 @@ export class CreatePostComponent implements OnInit {
 
     return UserOptions.getCurrentGame() === 0 ? -1 : UserOptions.getCurrentGame();
   }
+
   getCharacterId(): number {
     if (this.post && this.post.character) {
       return this.post.character.id;
@@ -70,19 +65,15 @@ export class CreatePostComponent implements OnInit {
 
     return -1;
   }
+
   createPost(): void {
     if (this.post != null) {
       this.updatePost();
       return;
     }
 
-    const post = new CreatedPost();
-    post.title = this.title;
-    post.isPrivate = this.isPrivate;
-    post.gameId = this.gameId;
-    post.characterId = this.characterPicker.getValue();
-    const converter = new Showdown.Converter();
-    post.body = converter.makeMarkdown(this.markdownContent);
+    const post = new Post();
+    this.forgePost(post);
 
     this.isLoading = true;
     this.postService.createPost(post).subscribe((_) => {
@@ -95,14 +86,8 @@ export class CreatePostComponent implements OnInit {
     });
   }
 
-  updatePost(): void {
-    this.post.title = this.title;
-    this.post.isPrivate = this.isPrivate;
-    this.post.gameId = this.gameId;
-    this.post.characterId = this.characterPicker.getValue();
-
-    const converter = new Showdown.Converter();
-    this.post.body = converter.makeMarkdown(this.markdownContent);
+  private updatePost(): void {
+    this.post = this.forgePost(this.post);
 
     this.postService.updatePost(this.post).subscribe((_) => {
       this.toastrService.success(PostText.updatedPost);
@@ -112,6 +97,17 @@ export class CreatePostComponent implements OnInit {
       this.isLoading = false;
       this.toastrService.error(PostText.failedUpdatePost);
     });
+  }
+
+  private forgePost(post: Post): Post {
+    post.title = this.title;
+    post.isPrivate = this.isPrivate;
+    post.gameId = this.gameId;
+    post.characterId = this.characterPicker.getValue();
+
+    post.body = this.converter.makeMarkdown(this.markdownContent);
+
+    return post;
   }
 
   openHelp(): void {
@@ -126,8 +122,5 @@ export class CreatePostComponent implements OnInit {
   }
 
   togglePreview(): void {
-    const converter = new Showdown.Converter();
-    console.log(converter.makeMarkdown(this.markdownContent));
-    console.log(this.markdownContent);
   }
 }
