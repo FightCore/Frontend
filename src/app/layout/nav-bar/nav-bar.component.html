@@ -6,6 +6,7 @@
       </div>
       <span [routerLink]="['/post']" i18n>Posts</span>
       <span [routerLink]="['/character']" i18n>Characters</span>
+      <span [routerLink]="['/game']" i18n>Games</span>
       <span class="spacer"></span>
       <div class="d-none d-md-block">
         <span *ngIf="isAuthenticated() else login" (click)="toUser()" >

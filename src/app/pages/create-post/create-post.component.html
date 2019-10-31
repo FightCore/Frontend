@@ -1,55 +1,57 @@
 <div class="d-md-block">
-    <div class="container-fluid">
-        <h2 i18n>
-            Create a new post
-          </h2>
-        <mat-form-field class="create-post-header">
-          <mat-label i18n>
-            Title
-          </mat-label>
-          <input [(ngModel)]="title" matInput name="title" required />
-        </mat-form-field>
-        <app-game-selector
-          [selected]="getGameId()"
-          (selectionChange)="onGameChange($event)" class="create-post-header">
-        </app-game-selector>
-        <div class="character-picker">
-        <app-character-picker
-          [selected]="getCharacterId()"
-          #characterPicker [gameId]="gameId"
-        ></app-character-picker>
-        </div>
-        <mat-checkbox class="create-post-header" [(ngModel)]="isPrivate" i18n>
-          Private Post
-        </mat-checkbox>
-
-
-        <div class="create-button">
-          <button mat-raised-button color="primary" (click)="togglePreview()" i18n>
-              <em class="material-icons">visibility</em> Show/Hide Preview
-          </button>
-          <button mat-raised-button color="primary" (click)="openHelp()" i18n>
-              <em class="material-icons">help</em> Show Help
-          </button>
-          <button [disabled]="isLoading" mat-raised-button color="accent" (click)="createPost()" i18n>
-              <em class="material-icons">save</em>
-            <div class="post-text" *ngIf="this.post else createText">
-                Update Post
-            </div>
-          </button>
-        </div>
-      </div>
-      <hr />
-      <md-editor
-      #mdEditor
-        name="Post Content"
-        [options]="options"
-        [(ngModel)]="markdownContent"
-        [height]="'40em'"
-        required
+  <div class="container-fluid">
+    <h2 i18n>
+      Create a new post
+    </h2>
+    <mat-form-field class="create-post-header">
+      <mat-label i18n>
+        Title
+      </mat-label>
+      <input [(ngModel)]="title" matInput name="title" required />
+    </mat-form-field>
+    <div class="game-picker">
+      <app-game-selector
+        [selected]="getGameId()"
+        (selectionChange)="onGameChange($event)"
+        class="create-post-header"
       >
-      </md-editor>
+      </app-game-selector>
+    </div>
+    <div class="character-picker">
+      <app-character-picker
+        [selected]="getCharacterId()"
+        #characterPicker
+        [gameId]="gameId"
+      ></app-character-picker>
+    </div>
+    <mat-checkbox class="create-post-header" [(ngModel)]="isPrivate" i18n>
+      Private Post
+    </mat-checkbox>
+
+    <div class="create-button">
+      <button mat-raised-button color="primary" (click)="togglePreview()" i18n>
+        <em class="material-icons">visibility</em> Show/Hide Preview
+      </button>
+      <button mat-raised-button color="primary" (click)="openHelp()" i18n>
+        <em class="material-icons">help</em> Show Help
+      </button>
+      <button
+        [disabled]="isLoading"
+        mat-raised-button
+        color="accent"
+        (click)="createPost()"
+        i18n
+      >
+        <em class="material-icons">save</em>
+        <div class="post-text" *ngIf="this.post; else createText">
+          Update Post
+        </div>
+      </button>
+    </div>
+  </div>
+  <hr />
+  <quill-editor [(ngModel)]="markdownContent"></quill-editor>
 </div>
 <ng-template #createText i18n>
-    Create Post
+  Create Post
 </ng-template>

@@ -3,20 +3,18 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 import { UserManager, UserManagerSettings, User } from 'oidc-client';
-import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import * as faker from 'faker';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   // Observable navItem source
-  private _authNavStatusSource = new BehaviorSubject<boolean>(false);
+  private authNavStatusSource = new BehaviorSubject<boolean>(false);
   // Observable navItem stream
-  authNavStatus$ = this._authNavStatusSource.asObservable();
+  authNavStatus$ = this.authNavStatusSource.asObservable();
 
   private manager = new UserManager(getClientSettings());
   private user: User | null;
@@ -28,7 +26,7 @@ export class AuthService {
 
     this.manager.getUser().then(user => {
       this.user = user;
-      this._authNavStatusSource.next(this.isAuthenticated());
+      this.authNavStatusSource.next(this.isAuthenticated());
     });
   }
 
@@ -42,7 +40,7 @@ export class AuthService {
 
   async completeAuthentication() {
     this.user = await this.manager.signinRedirectCallback();
-    this._authNavStatusSource.next(this.isAuthenticated());
+    this.authNavStatusSource.next(this.isAuthenticated());
   }
 
   register(userRegistration: any) {
@@ -52,7 +50,6 @@ export class AuthService {
 
     return this.http
       .post(environment.authentication.authUrl + '/account', userRegistration);
-      //.pipe(catchError(this.handleError));
   }
 
   isAuthenticated(): boolean {
@@ -65,7 +62,7 @@ export class AuthService {
 
   get authorizationHeaderValue(): string {
     if (environment.mocking) {
-      return faker.random.alphaNumeric(50);
+      return '';
     }
 
     return `${this.user.token_type} ${this.user.access_token}`;
@@ -73,7 +70,7 @@ export class AuthService {
 
   get name(): string {
     if (environment.mocking) {
-      return faker.internet.userName();
+      return '';
     }
 
     return this.user != null ? this.user.profile.name : '';
@@ -81,7 +78,7 @@ export class AuthService {
 
   get id(): number {
     if (environment.mocking) {
-      return faker.random.number({ min: 1});
+      return 5;
     }
 
     return this.user != null ? parseFloat(this.user.profile.sub) : 0;

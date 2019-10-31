@@ -12,6 +12,8 @@ import { CharacterDisplayComponent } from './pages/character-display/character-d
 import { CharacterEditComponent } from './pages/character-edit/character-edit.component';
 import { UserComponent } from './pages/user/user.component';
 import { HomeComponent } from './pages/home/home.component';
+import { GameDisplayComponent } from './pages/game-display/game-display.component';
+import { GameComponent } from './pages/game/game.component';
 
 const routes: Routes = [
   { path: StaticRoutes.createPost, component: CreatePostComponent },
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: StaticRoutes.editCharacter, component: CharacterEditComponent },
   { path: StaticRoutes.viewCharacter, component: CharacterDisplayComponent },
   { path: StaticRoutes.viewUser, component: UserComponent },
+  { path: StaticRoutes.viewGame, component: GameDisplayComponent },
+  { path: StaticRoutes.game, component: GameComponent },
   { path: StaticRoutes.home, component: HomeComponent },
   { path: '**', redirectTo: StaticRoutes.home }
 ];

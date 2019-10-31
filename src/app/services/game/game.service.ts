@@ -15,6 +15,17 @@ export class GameService extends BaseService {
     super(authService);
   }
 
+  /**
+   * Gets a game based on it's id.
+   * @param gameId the id of the game to be gotten.
+   */
+  public getGame(gameId: number): Observable<Game> {
+    return this.httpClient.get<Game>(`${environment.baseUrl}/games/${gameId}`);
+  }
+
+  /**
+   * Gets a list of all games.
+   */
   public getAllGames(): Observable<Game[]> {
 
     if (environment.mocking) {

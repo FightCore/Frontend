@@ -7,7 +7,6 @@ import { StaticRoutes } from 'src/app/routes/static-routes';
 import { PostText } from 'src/app/text/post.text';
 import { MarkdownService } from 'ngx-markdown';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { AppComponent } from 'src/app/app.component';
 import { GameThemes } from 'src/styles/gameThemes';
 
 @Component({
@@ -78,5 +77,9 @@ export class PostDisplayComponent implements OnInit {
 
   viewCharacter(characterId: number): void {
     this.router.navigate([StaticRoutes.characters, characterId]);
+  }
+
+  viewGame(gameId: number): void {
+    this.router.navigate([StaticRoutes.game, gameId]);
   }
 }

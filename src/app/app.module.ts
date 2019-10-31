@@ -8,14 +8,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faLock, faMugHot, faUserCircle, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faDocker, faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { PostComponent } from './pages/post/post.component';
 import { ToastrModule } from 'ngx-toastr';
 import { PostPreviewComponent } from './components/post-preview/post-preview.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
-import { LMarkdownEditorModule } from 'ngx-markdown-editor';
 import { GameSelectorComponent } from './components/game-selector/game-selector.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostHelpComponent } from './components/post-help/post-help.component';
@@ -45,6 +43,10 @@ import { DiscordComponent } from './components/discord/discord.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { TopScrollerComponent } from './components/top-scroller/top-scroller.component';
 import { GameChipComponent } from './components/game-chip/game-chip.component';
+import { GameDisplayComponent } from './pages/game-display/game-display.component';
+import { GamePreviewComponent } from './components/game-preview/game-preview.component';
+import { GameComponent } from './pages/game/game.component';
+import { QuillModule } from 'ngx-quill';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -59,7 +61,6 @@ import { GameChipComponent } from './components/game-chip/game-chip.component';
     FontAwesomeModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    LMarkdownEditorModule,
     ReactiveFormsModule,
     MarkdownModule.forRoot({
       markedOptions: {
@@ -75,12 +76,12 @@ import { GameChipComponent } from './components/game-chip/game-chip.component';
         }
       }
     }),
+    QuillModule.forRoot(),
     AvatarModule,
     MatPasswordStrengthModule.forRoot()
   ],
   declarations: [
     AppComponent,
-    SideNavComponent,
     NavBarComponent,
     PostComponent,
     PostPreviewComponent,
@@ -108,7 +109,10 @@ import { GameChipComponent } from './components/game-chip/game-chip.component';
     DiscordComponent,
     FooterComponent,
     TopScrollerComponent,
-    GameChipComponent
+    GameChipComponent,
+    GameDisplayComponent,
+    GamePreviewComponent,
+    GameComponent
   ],
   entryComponents: [
     PostHelpComponent,

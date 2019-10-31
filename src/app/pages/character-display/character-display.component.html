@@ -1,4 +1,4 @@
-<div [class]="'container-fluid main-container ' + getGameClass()">
+<div class="container-fluid main-container">
   <div *ngIf="loading; else postDisplay">
     <app-loading></app-loading>
   </div>
@@ -6,92 +6,94 @@
 <app-top-scroller></app-top-scroller>
 
 <ng-template #postDisplay>
-  <div class="header  background-color-primary">
-    <div class="row equal">
-      <div class="col-lg-2">{{ character.game.name }}</div>
-      <div class="col-lg-8 nametag">
-        <h1>{{ character.name }}</h1>
-      </div>
-      <div class="col-lg-2">
-        <img
-          [src]="seriesIcon()"
-          alt="character-icon"
-          height="100em"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="body info-container">
-    <div class="row">
-      <div class="col-lg-3">
-        <div class="info-container">
-          <!--Center this image.-->
-          <img
-            [src]="character.characterImage.url"
-            alt="character-portrait"
-            height="370em"
-            class="profile-shot"
-          />
+  <div [class]="getGameClass()">
+    <div class="header  background-color-primary">
+      <div class="row equal">
+        <div class="col-lg-2">{{ character.game.name }}</div>
+        <div class="col-lg-8 nametag">
+          <h1>{{ character.name }}</h1>
         </div>
-      </div>
-      <div class="col-lg-9">
-        <div class="info-container">
-          <h2 class="title" i18n>General Information</h2>
-          <p class="text">
-            {{ character.generalInformation }}
-          </p>
+        <div class="col-lg-2">
+          <img [src]="seriesIcon()" alt="character-icon" height="100em" />
         </div>
       </div>
     </div>
-    <br />
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="info-container">
-          <h2 class="title" i18n>Notable Players</h2>
-          <h5 class="title" *ngIf="character.notablePlayers.length == 0" i18n>
-            No players yet!
-          </h5>
+    <div class="body info-container">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="info-container">
+            <!--Center this image.-->
+            <img
+              *ngIf="character.characterImage"
+              [src]="character.characterImage.url"
+              alt="character-portrait"
+              height="370em"
+              class="profile-shot"
+            />
+          </div>
+        </div>
+        <div class="col-lg-9">
+          <div class="info-container">
+            <h2 class="title" i18n>General Information</h2>
+            <p class="text">
+              {{ character.generalInformation }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="info-container">
+            <h2 class="title" i18n>Notable Players</h2>
+            <h5 class="title" *ngIf="character.notablePlayers.length == 0" i18n>
+              No players yet!
+            </h5>
             <div *ngFor="let player of character.notablePlayers">
-              <p class="text"><strong>{{player.name}}</strong>: {{player.description}}</p>
-            </div>
-        </div>
-      </div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="info-container">
-          <h2 class="title" i18n>Top FightCore posts</h2>
-          <div class="row equal">
-            <div *ngFor="let post of posts" class="col-lg-4">
-              <app-post-preview [post]="post"></app-post-preview>
+              <p class="text">
+                <strong>{{ player.name }}</strong
+                >: {{ player.description }}
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="info-container">
-          <h2 class="title" i18n>Videos</h2>
-          <h5 class="title" *ngIf="youtubeUrls.length == 0" i18n>
+      <br />
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="info-container">
+            <h2 class="title" i18n>Top FightCore posts</h2>
+            <div class="row equal">
+              <div *ngFor="let post of posts" class="col-lg-4">
+                <app-post-preview [post]="post"></app-post-preview>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="info-container">
+            <h2 class="title" i18n>Videos</h2>
+            <h5 class="title" *ngIf="youtubeUrls.length == 0" i18n>
               No videos yet!
             </h5>
-          <div class="row">
-            <div *ngFor="let video of youtubeUrls" class="col-lg-6">
-              <div class="video">
-                <iframe
-                  [src]="video"
-                  width="625em"
-                  height="350em"
-                  class="fit-image-max-width"
-                  frameborder="0"
-                  title="youtube-video-embed"
-                  webkitallowfullscreen
-                  mozallowfullscreen
-                  allowfullscreen
-                ></iframe>
+            <div class="row">
+              <div *ngFor="let video of youtubeUrls" class="col-lg-6">
+                <div class="video">
+                  <iframe
+                    [src]="video"
+                    width="625em"
+                    height="350em"
+                    class="fit-image-max-width"
+                    frameborder="0"
+                    title="youtube-video-embed"
+                    webkitallowfullscreen
+                    mozallowfullscreen
+                    allowfullscreen
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>

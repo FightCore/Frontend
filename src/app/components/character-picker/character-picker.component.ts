@@ -1,18 +1,15 @@
-import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
-import { CharacterService } from "src/app/services/character/character.service";
-import { Character } from "src/app/models/character";
-import {
-  MatSelectChange,
-  MatAutocompleteSelectedEvent
-} from "@angular/material";
-import { FormControl } from "@angular/forms";
-import { startWith, map } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { CharacterService } from 'src/app/services/character/character.service';
+import { Character } from 'src/app/models/character';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { startWith, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: "app-character-picker",
-  templateUrl: "./character-picker.component.html",
-  styleUrls: ["./character-picker.component.scss"]
+  selector: 'app-character-picker',
+  templateUrl: './character-picker.component.html',
+  styleUrls: ['./character-picker.component.scss']
 })
 export class CharacterPickerComponent implements OnInit {
   @Input() selected: number;
@@ -42,7 +39,6 @@ export class CharacterPickerComponent implements OnInit {
         map(value => (typeof value === 'string' ? value : value.name)),
         map(name => (name ? this._filter(name) : this.gameCharacters.slice()))
       );
-
     });
   }
 
