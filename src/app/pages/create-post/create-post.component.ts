@@ -12,6 +12,10 @@ import { UserOptions } from 'src/app/options/userOptions';
 import { CharacterPickerComponent } from 'src/app/components/character-picker/character-picker.component';
 import { MarkdownService } from 'ngx-markdown';
 import * as Showdown from 'showdown';
+import { PostPreviewDialogComponent } from 'src/app/components/post-preview-dialog/post-preview-dialog.component';
+import { GameService } from 'src/app/services/game/game.service';
+import { CharacterService } from 'src/app/services/character/character.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-create-post',
@@ -27,7 +31,8 @@ export class CreatePostComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private authService: AuthService,
-    private markdownService: MarkdownService
+    private gameService: GameService,
+    private characterService: CharacterService
   ) { }
   markdownContent = '';
   title: string;
@@ -122,5 +127,30 @@ export class CreatePostComponent implements OnInit {
   }
 
   togglePreview(): void {
+
+
+    const post = this.forgePost(new Post());
+    post.author = new User();
+    post.author.name = this.authService.name;
+
+    this.gameService.getGame(post.gameId).subscribe(game => {
+        post.game = game;
+        if (post.characterId && post.characterId !== 0) {
+          this.characterService.get(post.characterId).subscribe(character => {
+            post.character = character;
+            this.createDialog(post);
+          });
+        } else {
+          this.createDialog(post);
+        }
+    });
+  }
+
+  private createDialog(post: Post) {
+    const dialogRef = this.dialog.open(PostPreviewDialogComponent, {
+      width: '40em'
+    });
+
+    dialogRef.componentInstance.post = post;
   }
 }

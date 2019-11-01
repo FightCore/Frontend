@@ -1,7 +1,11 @@
-<fa-icon
+<button
+  class="heart-container"
+  mat-button
+  [color]="liked ? 'accent' : ''"
   (click)="likePost()"
-  [class]="liked ? 'liked-button color-accent' : 'like-button'"
-  size="2x"
-  icon="heart"
-></fa-icon>
-{{ likes }}
+>
+  <em class="material-icons">
+    favorite
+  </em>
+  {{ likes }}
+</button>

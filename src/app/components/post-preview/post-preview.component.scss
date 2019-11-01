@@ -67,27 +67,19 @@ $post-border-radius: 0.5em;
     color: $secondary-text-color;
     margin: 1em;
     .post-markdown-text {
-      max-height: 10em;
+      max-height: 15em;
+      min-height: 15em;
       overflow: hidden;
       text-overflow: ellipsis;
-    }
-
-    .fill-remaining-space {
-      height: 2.5em;
+      margin-bottom: 1em;
     }
     .post-bottom-bar {
-      width: 95%;
-      position: absolute;
-      bottom: 1.5em;
-      left: 2em;
       color: $primary-text-color;
-
       .game-chip {
         position: relative;
         top: 0.5em;
         mat-chip {
           max-width: 50em;
-          width: 100%;
           text-align: center;
           display: inline;
           padding-top: 0.4em;
