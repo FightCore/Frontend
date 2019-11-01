@@ -12,7 +12,6 @@ export class PostPreviewDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<PostPreviewDialogComponent>) { }
   @Input() post: Post;
   ngOnInit() {
-    console.log(this.post);
   }
 
 }
