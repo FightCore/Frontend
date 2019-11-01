@@ -23,7 +23,7 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     const userId = parseFloat(this.route.snapshot.paramMap.get('userId'));
 
-    const user = this.userService.get(userId).subscribe(user => {
+    this.userService.get(userId).subscribe(user => {
       this.user = user;
     });
 
