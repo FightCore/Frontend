@@ -8,6 +8,7 @@ import { PostText } from 'src/app/text/post.text';
 import { MarkdownService } from 'ngx-markdown';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GameThemes } from 'src/styles/gameThemes';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-post-display',
@@ -81,5 +82,10 @@ export class PostDisplayComponent implements OnInit {
 
   viewGame(gameId: number): void {
     this.router.navigate([StaticRoutes.game, gameId]);
+  }
+
+  downloadPost(): void {
+    const blob = new Blob([this.post.body], {type: 'text/markdown' });
+    saveAs(blob, this.post.title + '.md');
   }
 }
