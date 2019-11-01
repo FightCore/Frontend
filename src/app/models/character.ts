@@ -3,6 +3,7 @@ import { NotablePlayer } from './notablePlayer';
 import { FightCoreImage } from './fightcoreImage';
 import { VideoResource } from './videoResource';
 import { GameSeries } from './gameSeries';
+import { Contributor } from './contributor';
 
 export class Character {
     id: number;
@@ -14,4 +15,5 @@ export class Character {
     characterImage?: FightCoreImage;
     videos: VideoResource[];
     series?: GameSeries;
+    contributors?: Contributor[];
 }
