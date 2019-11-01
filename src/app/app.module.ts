@@ -47,6 +47,7 @@ import { GameDisplayComponent } from './pages/game-display/game-display.componen
 import { GamePreviewComponent } from './components/game-preview/game-preview.component';
 import { GameComponent } from './pages/game/game.component';
 import { QuillModule } from 'ngx-quill';
+import { PostPreviewDialogComponent } from './components/post-preview-dialog/post-preview-dialog.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -112,11 +113,14 @@ import { QuillModule } from 'ngx-quill';
     GameChipComponent,
     GameDisplayComponent,
     GamePreviewComponent,
-    GameComponent
+    GameComponent,
+    PostPreviewDialogComponent
   ],
   entryComponents: [
     PostHelpComponent,
-    RegisterComponent],
+    RegisterComponent,
+    PostPreviewDialogComponent
+  ],
   providers: [AppComponent],
   bootstrap: [AppComponent]
 })

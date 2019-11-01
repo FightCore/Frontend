@@ -1,15 +1,5 @@
 @import "src/styles/variables.scss";
-
-.like-button {
-    color: $primary-text-color;
-    position: relative;
-    top: 0.5em;
-    left: 0.5em;
-    margin-right: 0.5em;
-  }
-  .liked-button {
-    position: relative;
-    top: 0.5em;
-    left: 0.5em;
-    margin-right: 0.5em;
-  }
+.heart-container {
+  display: inline;
+  text-align: center;
+}
