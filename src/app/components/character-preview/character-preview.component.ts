@@ -17,7 +17,6 @@ export class CharacterPreviewComponent implements OnInit {
   }
 
   viewCharacter(id: number): void {
-    console.log(id);
     this.router.navigate([StaticRoutes.characters, id]);
   }
 

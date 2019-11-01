@@ -6,6 +6,8 @@ import { Character } from 'src/app/models/character';
 import { Post } from 'src/app/models/post';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GameThemes } from 'src/styles/gameThemes';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { StaticRoutes } from 'src/app/routes/static-routes';
 
 @Component({
   selector: 'app-character-display',
@@ -23,7 +25,8 @@ export class CharacterDisplayComponent implements OnInit {
     private characterService: CharacterService,
     private postService: PostService,
     private router: Router,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer,
+    private authService: AuthService) {
     }
 
   ngOnInit() {
@@ -66,5 +69,14 @@ export class CharacterDisplayComponent implements OnInit {
 
   getGameClass(): string {
     return GameThemes.getThemeForGameId(this.character.game.id);
+  }
+
+  isContributor(): boolean {
+    return this.character.contributors.find(contributor =>
+      contributor.user.id === this.authService.id) !== null;
+  }
+
+  editCharacter(): void {
+    this.router.navigate([StaticRoutes.editCharacterNoId, this.character.id]);
   }
 }
