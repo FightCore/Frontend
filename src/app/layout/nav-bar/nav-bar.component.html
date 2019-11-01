@@ -4,9 +4,12 @@
           <img class="logo" src="assets/FC.png" alt="FightCore logo"/>
           <span>FightCore</span>
       </div>
-      <span [routerLink]="['/post']" i18n>Posts</span>
-      <span [routerLink]="['/character']" i18n>Characters</span>
-      <span [routerLink]="['/game']" i18n>Games</span>
+      <span [routerLink]="['/post']" i18n>
+        <fa-icon class="d-none d-md-inline" icon="file"></fa-icon> Posts</span>
+      <span [routerLink]="['/character']" i18n>
+        <fa-icon class="d-none d-md-inline" icon="mask"></fa-icon> Characters</span>
+      <span [routerLink]="['/game']" i18n>
+        <fa-icon class="d-none d-md-inline" icon="gamepad"></fa-icon> Games</span>
       <span class="spacer"></span>
       <div class="d-none d-md-block">
         <span *ngIf="isAuthenticated() else login" (click)="toUser()" >

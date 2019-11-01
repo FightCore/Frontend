@@ -6,8 +6,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModules } from './material-modules';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHeart, faLock, faMugHot, faUserCircle, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faDocker, faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import {
+  faHeart,
+  faLock,
+  faMugHot,
+  faUserCircle,
+  faAngleUp,
+  faGamepad,
+  faFile,
+  faMask
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faGithub,
+  faDocker,
+  faDiscord,
+  faTwitter
+} from '@fortawesome/free-brands-svg-icons';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { PostComponent } from './pages/post/post.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -73,7 +87,7 @@ import { PostPreviewDialogComponent } from './components/post-preview-dialog/pos
           pedantic: false,
           sanitize: false, // enable marked built-in html sanitizer
           smartLists: true,
-          smartypants: false,
+          smartypants: false
         }
       }
     }),
@@ -126,6 +140,19 @@ import { PostPreviewDialogComponent } from './components/post-preview-dialog/pos
 })
 export class AppModule {
   constructor() {
-    library.add(faHeart, faMugHot, faGithub, faDiscord, faDocker, faTwitter, faUserCircle, faLock, faAngleUp);
+    library.add(
+      faHeart,
+      faMugHot,
+      faGithub,
+      faDiscord,
+      faDocker,
+      faTwitter,
+      faUserCircle,
+      faLock,
+      faAngleUp,
+      faGamepad,
+      faFile,
+      faMask
+    );
   }
 }
