@@ -50,8 +50,21 @@
     </div>
   </div>
   <hr />
-  <quill-editor [(ngModel)]="markdownContent"></quill-editor>
+  <mat-slide-toggle (change)="toggleMarkdown()" [(ngModel)]="useMarkdown" i18n>
+    <div *ngIf="useMarkdown else quillText" i18n>
+        Markdown mode
+    </div>
+    <ng-template #quillText i18n>
+        Editor mode
+    </ng-template>
+
+  </mat-slide-toggle>
+  <textarea *ngIf="useMarkdown; else quill" id="markdown-editor"> </textarea>
 </div>
+
+<ng-template #quill>
+  <quill-editor [(ngModel)]="content"></quill-editor>
+</ng-template>
 <ng-template #createText i18n>
   Create Post
 </ng-template>

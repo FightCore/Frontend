@@ -16,6 +16,7 @@ import { PostPreviewDialogComponent } from 'src/app/components/post-preview-dial
 import { GameService } from 'src/app/services/game/game.service';
 import { CharacterService } from 'src/app/services/character/character.service';
 import { User } from 'src/app/models/user';
+import * as SimpleMDE from 'simplemde';
 
 @Component({
   selector: 'app-create-post',
@@ -33,15 +34,18 @@ export class CreatePostComponent implements OnInit {
     private authService: AuthService,
     private gameService: GameService,
     private characterService: CharacterService
-  ) { }
-  markdownContent = '';
+  ) {}
+  content = '';
+  useMarkdown = false;
   title: string;
   isPrivate: boolean;
   isLoading = false;
   gameId: number = this.getGameId();
   converter: Showdown.Converter = new Showdown.Converter();
+  editor: SimpleMDE;
 
-  @ViewChild('characterPicker', { static: false}) characterPicker: CharacterPickerComponent;
+  @ViewChild('characterPicker', { static: false })
+  characterPicker: CharacterPickerComponent;
   ngOnInit() {
     if (!this.authService.isAuthenticated()) {
       this.authService.login();
@@ -51,7 +55,7 @@ export class CreatePostComponent implements OnInit {
       this.title = this.post.title;
       this.isPrivate = this.post.isPrivate;
       this.gameId = this.post.gameId;
-      this.markdownContent = this.converter.makeHtml(this.post.body);
+      this.content = this.converter.makeHtml(this.post.body);
     }
   }
 
@@ -60,7 +64,9 @@ export class CreatePostComponent implements OnInit {
       return this.post.gameId;
     }
 
-    return UserOptions.getCurrentGame() === 0 ? -1 : UserOptions.getCurrentGame();
+    return UserOptions.getCurrentGame() === 0
+      ? -1
+      : UserOptions.getCurrentGame();
   }
 
   getCharacterId(): number {
@@ -81,27 +87,31 @@ export class CreatePostComponent implements OnInit {
     this.forgePost(post);
 
     this.isLoading = true;
-    this.postService.createPost(post).subscribe((_) => {
-      this.toastrService.success(PostText.createdPost);
-      this.router.navigate([`/${StaticRoutes.posts}`]);
-    },
-    error => {
-      this.isLoading = false;
-      this.toastrService.error(PostText.failedCreatePost);
-    });
+    this.postService.createPost(post).subscribe(
+      _ => {
+        this.toastrService.success(PostText.createdPost);
+        this.router.navigate([`/${StaticRoutes.posts}`]);
+      },
+      error => {
+        this.isLoading = false;
+        this.toastrService.error(PostText.failedCreatePost);
+      }
+    );
   }
 
   private updatePost(): void {
     this.post = this.forgePost(this.post);
 
-    this.postService.updatePost(this.post).subscribe((_) => {
-      this.toastrService.success(PostText.updatedPost);
-      this.router.navigate([StaticRoutes.viewPostNoId, this.post.id]);
-    },
-    error => {
-      this.isLoading = false;
-      this.toastrService.error(PostText.failedUpdatePost);
-    });
+    this.postService.updatePost(this.post).subscribe(
+      _ => {
+        this.toastrService.success(PostText.updatedPost);
+        this.router.navigate([StaticRoutes.viewPostNoId, this.post.id]);
+      },
+      error => {
+        this.isLoading = false;
+        this.toastrService.error(PostText.failedUpdatePost);
+      }
+    );
   }
 
   private forgePost(post: Post): Post {
@@ -109,15 +119,18 @@ export class CreatePostComponent implements OnInit {
     post.isPrivate = this.isPrivate;
     post.gameId = this.gameId;
     post.characterId = this.characterPicker.getValue();
+    if (!this.useMarkdown) {
+      this.content = this.converter.makeMarkdown(this.content);
+    }
 
-    post.body = this.converter.makeMarkdown(this.markdownContent);
+    post.body = this.content;
 
     return post;
   }
 
   openHelp(): void {
     this.dialog.open(PostHelpComponent, {
-      width: '50%',
+      width: '50em'
     });
   }
 
@@ -127,22 +140,21 @@ export class CreatePostComponent implements OnInit {
   }
 
   togglePreview(): void {
-
-
     const post = this.forgePost(new Post());
     post.author = new User();
     post.author.name = this.authService.name;
 
     this.gameService.getGame(post.gameId).subscribe(game => {
-        post.game = game;
-        if (post.characterId && post.characterId !== 0) {
-          this.characterService.get(post.characterId).subscribe(character => {
-            post.character = character;
-            this.createDialog(post);
-          });
-        } else {
+      post.game = game;
+
+      if (post.characterId && post.characterId !== 0) {
+        this.characterService.get(post.characterId).subscribe(character => {
+          post.character = character;
           this.createDialog(post);
-        }
+        });
+      } else {
+        this.createDialog(post);
+      }
     });
   }
 
@@ -152,5 +164,29 @@ export class CreatePostComponent implements OnInit {
     });
 
     dialogRef.componentInstance.post = post;
+  }
+
+  toggleMarkdown() {
+    if (!this.useMarkdown) {
+      this.content = this.converter.makeHtml(this.content);
+    } else {
+      this.content = this.converter.makeMarkdown(this.content);
+    }
+
+    if (this.useMarkdown) {
+      setTimeout(() => this.createEditor(this.content));
+    } else {
+      if (this.editor) {
+        this.editor.toTextArea();
+      }
+    }
+  }
+
+  private createEditor(text: string) {
+    this.editor = new SimpleMDE({
+      element: document.getElementById('markdown-editor'),
+      initialValue: text,
+      spellChecker: false
+    });
   }
 }
