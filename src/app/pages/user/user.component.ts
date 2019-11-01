@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user/user.service';
 import { Post } from 'src/app/models/post';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user',
@@ -12,6 +13,7 @@ export class UserComponent implements OnInit {
 
   loading: boolean = true;
   posts: Post[];
+  user: User;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,11 +21,15 @@ export class UserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const userId = this.route.snapshot.paramMap.get('userId');
-    this.userService.getPosts(parseFloat(userId)).subscribe(posts => {
+    const userId = parseFloat(this.route.snapshot.paramMap.get('userId'));
+
+    this.userService.get(userId).subscribe(user => {
+      this.user = user;
+    });
+
+    this.userService.getPosts(userId).subscribe(posts => {
         this.posts = posts;
         this.loading = false;
-        console.log(this.posts);
       });
   }
 

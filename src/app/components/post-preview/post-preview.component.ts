@@ -54,4 +54,7 @@ export class PostPreviewComponent implements OnInit {
   minimalMode(): boolean {
     return UserOptions.getMinimalMode();
   }
+  viewAuthor(): void {
+    this.router.navigate([StaticRoutes.viewUserNoId, this.post.author.id]);
+  }
 }

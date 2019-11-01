@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Post } from 'src/app/models/post';
 import { Observable } from 'rxjs';
 import { CreateUser } from 'src/app/models/createUser';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class UserService extends BaseService {
     */
    public getPosts(userId: number): Observable<Post[]> {
     return this.httpClient.get<Post[]>(`${this.baseUrl}/${userId}/posts`, this.getDefaultHttpOptions());
+   }
+
+   public get(userId: number): Observable<User> {
+    return this.httpClient.get<User>(`${this.baseUrl}/${userId}`, this.getDefaultHttpOptions());
    }
 
    /**

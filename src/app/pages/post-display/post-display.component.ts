@@ -88,4 +88,7 @@ export class PostDisplayComponent implements OnInit {
     const blob = new Blob([this.post.body], {type: 'text/markdown' });
     saveAs(blob, this.post.title + '.md');
   }
+  viewAuthor(): void {
+    this.router.navigate([StaticRoutes.viewUserNoId, this.post.author.id]);
+  }
 }
