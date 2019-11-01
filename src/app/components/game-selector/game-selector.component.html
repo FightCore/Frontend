@@ -13,6 +13,7 @@
             All
           </mat-option>
           <mat-option *ngFor="let game of games" [value]="game.id">
+              <img class="d-inline" *ngIf="game.icon" [src]="game.icon" alt="game-icon">
               {{ game.name }}
           </mat-option>
         </mat-select>
