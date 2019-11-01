@@ -62,6 +62,7 @@ import { GamePreviewComponent } from './components/game-preview/game-preview.com
 import { GameComponent } from './pages/game/game.component';
 import { QuillModule } from 'ngx-quill';
 import { PostPreviewDialogComponent } from './components/post-preview-dialog/post-preview-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -128,12 +129,14 @@ import { PostPreviewDialogComponent } from './components/post-preview-dialog/pos
     GameDisplayComponent,
     GamePreviewComponent,
     GameComponent,
-    PostPreviewDialogComponent
+    PostPreviewDialogComponent,
+    ConfirmDialogComponent
   ],
   entryComponents: [
     PostHelpComponent,
     RegisterComponent,
-    PostPreviewDialogComponent
+    PostPreviewDialogComponent,
+    ConfirmDialogComponent
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent]

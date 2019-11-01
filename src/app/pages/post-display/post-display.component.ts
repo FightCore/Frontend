@@ -9,6 +9,8 @@ import { MarkdownService } from 'ngx-markdown';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GameThemes } from 'src/styles/gameThemes';
 import { saveAs } from 'file-saver';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-post-display',
@@ -25,7 +27,8 @@ export class PostDisplayComponent implements OnInit {
     private router: Router,
     private toastrService: ToastrService,
     private markdownService: MarkdownService,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -88,7 +91,24 @@ export class PostDisplayComponent implements OnInit {
     const blob = new Blob([this.post.body], {type: 'text/markdown' });
     saveAs(blob, this.post.title + '.md');
   }
+
   viewAuthor(): void {
     this.router.navigate([StaticRoutes.viewUserNoId, this.post.author.id]);
+  }
+
+  deletePost(): void {
+    const dialog = this.dialog.open(ConfirmDialogComponent, {
+      width: '20em'
+    });
+    dialog.componentInstance.title = 'Delete ' + this.post.title;
+    dialog.componentInstance.description = `Are you sure you want to delete "${this.post.title}".\nThis action can not be undone.`;
+    dialog.componentInstance.confirmText = 'Delete';
+    dialog.componentInstance.confirmed.subscribe(_ => {
+      this.postService.deletePost(this.post.id).subscribe(_ => {
+        this.toastrService.success('Deleted');
+      }, error => {
+        this.toastrService.error('Error');
+      });
+    });
   }
 }

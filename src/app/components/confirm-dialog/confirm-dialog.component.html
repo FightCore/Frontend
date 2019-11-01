@@ -1,0 +1,8 @@
+<h2 class="title">{{ title }}</h2>
+<p>{{ description }}</p>
+<button mat-raised-button color="primary" i18n>
+    Cancel
+</button>
+<button mat-raised-button (click)="confirmClick()" color="accent">
+    {{ confirmText }}
+</button>

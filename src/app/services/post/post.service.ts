@@ -109,6 +109,10 @@ export class PostService extends BaseService {
     return this.httpClient.put<null>(this.baseUrl, post, this.getDefaultHttpOptions());
   }
 
+  public deletePost(postId: number): Observable<null> {
+    return this.httpClient.delete<null>(`${this.baseUrl}/${postId}`, this.getDefaultHttpOptions());
+  }
+
   private generatePostList(iterations: number): Post[] {
     const posts = [];
     for (let i = 0; i < iterations; i++) {
