@@ -8,7 +8,7 @@ export class BaseService {
         this.authService = authService;
     }
 
-    public getDefaultHttpOptions() {
+    protected getDefaultHttpOptions() {
         let token = '';
 
         if (this.authService.isAuthenticated()) {

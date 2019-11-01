@@ -79,4 +79,8 @@ export class CharacterDisplayComponent implements OnInit {
   editCharacter(): void {
     this.router.navigate([StaticRoutes.editCharacterNoId, this.character.id]);
   }
+
+  viewUser(userId: number): void {
+    this.router.navigate([StaticRoutes.viewUserNoId, userId]);
+  }
 }
