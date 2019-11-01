@@ -17,7 +17,6 @@ import { GameService } from 'src/app/services/game/game.service';
 import { CharacterService } from 'src/app/services/character/character.service';
 import { User } from 'src/app/models/user';
 import * as SimpleMDE from 'simplemde';
-import { MatButton } from '@angular/material';
 
 @Component({
   selector: 'app-create-post',
