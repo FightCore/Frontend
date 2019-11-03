@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row equal">
+    <div class="col-6">
+      <h2 i18n>Tournaments</h2>
+      <mat-form-field>
+        <mat-label>Country</mat-label>
+        <mat-select required>
+          <mat-option value="volvo">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png"
+              width="20em"
+            />
+            United States</mat-option
+          >
+          <mat-option value="saab">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/1200px-Flag_of_France.svg.png"
+              width="20em"
+            />
+            France
+          </mat-option>
+          <mat-option value="mercedes">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Flag_of_Great_Britain_%281707%E2%80%931800%29.svg/255px-Flag_of_Great_Britain_%281707%E2%80%931800%29.svg.png"
+              width="20em"
+            />
+            United Kingdom
+          </mat-option>
+          <mat-option value="audi">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg"
+              width="20em"
+            />
+            The Netherlands</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <app-loading *ngIf="!tournaments; else tournamentList"></app-loading>
+    </div>
+  </div>
+</div>
+
+<ng-template #tournamentList>
+  <div class="row">
+    <div class="col-6 mb-2" *ngFor="let tournament of tournaments">
+      <app-tournament-preview
+        [tournament]="tournament"
+      ></app-tournament-preview>
+    </div>
+  </div>
+</ng-template>

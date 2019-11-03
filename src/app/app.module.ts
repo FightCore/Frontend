@@ -14,7 +14,8 @@ import {
   faAngleUp,
   faGamepad,
   faFile,
-  faMask
+  faMask,
+  faTrophy
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
@@ -62,6 +63,8 @@ import { GamePreviewComponent } from './components/game-preview/game-preview.com
 import { GameComponent } from './pages/game/game.component';
 import { QuillModule } from 'ngx-quill';
 import { PostPreviewDialogComponent } from './components/post-preview-dialog/post-preview-dialog.component';
+import { TournamentsComponent } from './pages/tournaments/tournaments.component';
+import { TournamentPreviewComponent } from './components/tournament-preview/tournament-preview.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -128,7 +131,9 @@ import { PostPreviewDialogComponent } from './components/post-preview-dialog/pos
     GameDisplayComponent,
     GamePreviewComponent,
     GameComponent,
-    PostPreviewDialogComponent
+    PostPreviewDialogComponent,
+    TournamentsComponent,
+    TournamentPreviewComponent
   ],
   entryComponents: [
     PostHelpComponent,
@@ -152,7 +157,8 @@ export class AppModule {
       faAngleUp,
       faGamepad,
       faFile,
-      faMask
+      faMask,
+      faTrophy
     );
   }
 }
