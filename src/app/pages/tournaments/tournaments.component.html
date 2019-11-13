@@ -2,7 +2,10 @@
   <div class="row equal">
     <div class="col-6">
       <h2 i18n>Tournaments</h2>
-      <mat-form-field>
+      <mat-slide-toggle class="mr-2" [(ngModel)]="useCountry">
+        Use Country Selector
+      </mat-slide-toggle>
+      <mat-form-field *ngIf="useCountry else useLatLong" class="custom-field">
         <mat-label>Country</mat-label>
         <mat-select required>
           <mat-option value="volvo">
@@ -35,6 +38,8 @@
           >
         </mat-select>
       </mat-form-field>
+
+      <button mat-raised-button color="accent">Search</button>
       <app-loading *ngIf="!tournaments; else tournamentList"></app-loading>
     </div>
   </div>
@@ -48,4 +53,13 @@
       ></app-tournament-preview>
     </div>
   </div>
+</ng-template>
+
+<ng-template #useLatLong>
+    <mat-form-field class="custom-field">
+        <input matInput placeholder="Latitude" [(ngModel)]="latitude">
+      </mat-form-field>
+    <mat-form-field class="custom-field">
+        <input matInput placeholder="Longitude" [(ngModel)]="longitude">
+      </mat-form-field>
 </ng-template>
