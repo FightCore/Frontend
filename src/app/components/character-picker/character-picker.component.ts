@@ -95,7 +95,7 @@ export class CharacterPickerComponent implements OnInit {
     characters = this.gameCharacters.filter(
       character =>
         this.filterCharacterByGame(character, this.gameId) &&
-        character.name.includes(name)
+        character.name.search(new RegExp(name, 'i')) >= 0
     );
     characters.sort(this.sortCharacters);
 
