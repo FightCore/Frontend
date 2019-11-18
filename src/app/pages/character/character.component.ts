@@ -56,7 +56,7 @@ export class CharacterComponent implements OnInit {
     );
     if (this.searchedName) {
       this.displayedCharacters = this.displayedCharacters.filter(character =>
-        character.name.toLowerCase().includes(this.searchedName.toLowerCase())
+        character.name.search(new RegExp(this.searchedName, 'i')) >= 0
       );
     }
 
