@@ -78,8 +78,8 @@ export class PostComponent implements OnInit {
     if (this.searchTerm) {
       this.displayPosts = this.displayPosts.filter(
         post =>
-          post.title.includes(this.searchTerm) ||
-          post.author.name.includes(this.searchTerm)
+          post.title.search(new RegExp(this.searchTerm, 'i')) >= 0 ||
+          post.author.name.search(new RegExp(this.searchTerm, 'i')) >= 0
       );
     }
 

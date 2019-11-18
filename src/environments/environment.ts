@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   mocking: false,
+  enableAvatars: false,
   baseUrl: 'https://localhost:5001',
   authentication: {
     authUrl: 'http://localhost:5000',

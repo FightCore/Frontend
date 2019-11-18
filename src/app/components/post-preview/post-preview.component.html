@@ -1,7 +1,7 @@
 <div [class]="'post ' + getPostClass()">
   <div class="post-header background-color-primary row">
     <div class="d-none d-md-block post-avatar-container col-lg-2">
-      <img alt="avatar"
+      <img *ngIf="useAvatar()" alt="avatar"
       [src]="'https://www.gravatar.com/avatar/' + post.author.gravatarMd5 + '?s=40&d=retro'">
     </div>
     <div class="col-lg-8 col-xs-12">

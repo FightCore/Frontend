@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   mocking: false,
+  enableAvatars: false,
   baseUrl: 'https://http://167.86.102.65:5001',
   authentication: {
     authUrl: 'http://http://167.86.102.65:5000',

@@ -8,6 +8,7 @@ import { StaticRoutes } from 'src/app/routes/static-routes';
 import { MarkdownService } from 'ngx-markdown';
 import { GameThemes } from 'src/styles/gameThemes';
 import { UserOptions } from 'src/app/options/userOptions';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-preview',
@@ -54,7 +55,12 @@ export class PostPreviewComponent implements OnInit {
   minimalMode(): boolean {
     return UserOptions.getMinimalMode();
   }
+
   viewAuthor(): void {
     this.router.navigate([StaticRoutes.viewUserNoId, this.post.author.id]);
+  }
+
+  useAvatar(): boolean {
+    return environment.enableAvatars;
   }
 }
