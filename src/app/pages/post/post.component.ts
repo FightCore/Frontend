@@ -24,8 +24,11 @@ export class PostComponent implements OnInit {
   loading: boolean = true;
   posts: Post[];
   displayPosts: Post[];
+
+  // Search settings
   searchTerm: string;
   gameId: number = UserOptions.getCurrentGame();
+  characterId: number;
 
   ngOnInit() {
     this.postService.getPosts().subscribe(
@@ -46,18 +49,24 @@ export class PostComponent implements OnInit {
     this.filterPosts();
   }
 
-  onGameChange(gameId: number): void {
+  protected onGameChange(gameId: number): void {
     this.gameId = gameId;
-    this.filterPosts();
     this.characterPicker.updateGame(gameId);
+    this.characterId = this.characterPicker.getValue();
+    this.filterPosts();
   }
 
-  onSearchChange(searchTerm: string): void {
+  protected onSearchChange(searchTerm: string): void {
     this.searchTerm = searchTerm;
     this.filterPosts();
   }
 
-  filterPosts(): void {
+  protected onCharacterChange(characterId: number): void {
+    this.characterId = characterId;
+    this.filterPosts();
+  }
+
+  private filterPosts(): void {
     if (this.gameId === 0) {
       this.displayPosts = this.posts;
     } else {
@@ -71,6 +80,12 @@ export class PostComponent implements OnInit {
         post =>
           post.title.includes(this.searchTerm) ||
           post.author.name.includes(this.searchTerm)
+      );
+    }
+
+    if (this.characterId) {
+      this.displayPosts = this.displayPosts.filter(
+        post => post.characterId === this.characterId
       );
     }
   }
