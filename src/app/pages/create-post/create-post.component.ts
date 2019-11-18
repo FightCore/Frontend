@@ -119,11 +119,20 @@ export class CreatePostComponent implements OnInit {
     post.isPrivate = this.isPrivate;
     post.gameId = this.gameId;
     post.characterId = this.characterPicker.getValue();
+    let postContent = this.content;
+
+    // Use a local copy of the variable instead of the actual value to not
+    // destroy the HTML content while converting to Markdown.
     if (!this.useMarkdown) {
-      this.content = this.converter.makeMarkdown(this.content);
+      postContent = this.converter.makeMarkdown(this.content);
     }
 
-    post.body = this.content;
+    post.body = postContent;
+
+    if (post.body.length <= 0 || post.title.length <= 0) {
+      this.toastrService.error('Please provide a title and write a body.');
+      return null;
+    }
 
     return post;
   }
