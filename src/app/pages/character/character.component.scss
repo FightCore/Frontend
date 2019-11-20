@@ -1,6 +1,28 @@
+@import "src/styles/variables.scss";
+
 .custom-container {
     margin-top: 1em;
 }
+
 .right-search-bar {
     width: 100%;
+}
+
+.character-stock-icon {
+    display: inline;
+
+    img {
+        width: 3.5em;
+        height: 3.5em;
+        max-width: 3.5em;
+        max-height: 3.5em;
+    }
+}
+
+.character-container {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 1em;
+    border: solid 0.25em $light-primary-color;
 }

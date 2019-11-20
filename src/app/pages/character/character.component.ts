@@ -4,6 +4,8 @@ import { Character } from 'src/app/models/character';
 import { GameService } from 'src/app/services/game/game.service';
 import { Game } from 'src/app/models/game';
 import { UserOptions } from 'src/app/options/userOptions';
+import { StaticRoutes } from 'src/app/routes/static-routes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-character',
@@ -13,7 +15,8 @@ import { UserOptions } from 'src/app/options/userOptions';
 export class CharacterComponent implements OnInit {
   constructor(
     private characterService: CharacterService,
-    private gameService: GameService) {}
+    private gameService: GameService,
+    private router: Router) {}
   loading: boolean = true;
   characters: Character[];
   displayedCharacters: Character[];
@@ -45,10 +48,16 @@ export class CharacterComponent implements OnInit {
     this.selectedGame = gameId;
     this.filterCharacters();
   }
+
   onSearchChange(term: string): void {
     this.searchedName = term;
     this.filterCharacters();
   }
+
+  viewCharacter(id: number): void {
+    this.router.navigate([StaticRoutes.characters, id]);
+  }
+
 
   filterCharacters(): void {
     this.displayedCharacters = this.characters.filter(
