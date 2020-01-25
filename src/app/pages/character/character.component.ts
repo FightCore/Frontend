@@ -70,7 +70,13 @@ export class CharacterComponent implements OnInit {
     }
 
     this.displayedCharacters.sort((characterOne, characterTwo) =>
+      characterOne.game.id > characterTwo.game.id ? 1 : -1
+    );
+
+    this.displayedCharacters.sort((characterOne, characterTwo) =>
       characterOne.name > characterTwo.name ? 1 : -1
     );
+
+
   }
 }

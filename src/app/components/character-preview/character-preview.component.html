@@ -9,7 +9,7 @@
       </h3>
     </div>
     <div>
-      <img [src]="seriesIcon()" alt="character-icon" height="70em" />
+      <img *ngIf="this.character.series" [src]="seriesIcon()" alt="character-icon" height="70em" />
     </div>
   </div>
 
