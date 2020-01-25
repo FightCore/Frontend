@@ -60,15 +60,15 @@ export class CharacterDisplayComponent implements OnInit {
 
       this.youtubeLoading = false;
 
-
       this.generateMatchup();
+
+      console.log(this.character);
     });
   }
 
   private youtubeVideos(): string[] {
     const videos = [];
     this.character.videos.forEach(video => {
-      console.log(video);
       videos.push(this.getEmbed(video.youtubeId));
     });
 
@@ -105,6 +105,10 @@ export class CharacterDisplayComponent implements OnInit {
 
   viewUser(userId: number): void {
     this.router.navigate([StaticRoutes.viewUserNoId, userId]);
+  }
+
+  openInNewTab(url: string): void {
+    window.open(url, '_blank');
   }
 
   private generateMatchup() {
