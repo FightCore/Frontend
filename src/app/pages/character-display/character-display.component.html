@@ -53,18 +53,7 @@
         </div>
         <div class="col-lg-9">
           <div class="info-container">
-            <h2 class="title" i18n>General Information</h2>
-            <p class="text">
-              {{ character.generalInformation }}
-            </p>
-            <h5 class="title" i18n>Sources</h5>
-            <div *ngFor="let source of character.informationSources">
-              <button mat-raised-button color="accent"
-              (click)="openInNewTab(source.url)">
-                <em class="material-icons">exit_to_app</em>
-                {{source.displayName}}
-              </button>
-            </div>
+              <app-general-information [character]="character"></app-general-information>
           </div>
         </div>
       </div>

@@ -107,10 +107,6 @@ export class CharacterDisplayComponent implements OnInit {
     this.router.navigate([StaticRoutes.viewUserNoId, userId]);
   }
 
-  openInNewTab(url: string): void {
-    window.open(url, '_blank');
-  }
-
   private generateMatchup() {
     this.characterService
       .getForGame(this.character.game.id)
