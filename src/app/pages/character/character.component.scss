@@ -23,4 +23,8 @@
     margin-right: 5%;
     margin-bottom: 1em;
     border: solid 0.25em $light-primary-color;
+    img {
+        min-width: 3em;
+        min-height: 3em;
+    }
 }
