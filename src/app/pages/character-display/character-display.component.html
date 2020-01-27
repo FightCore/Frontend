@@ -66,10 +66,7 @@
               No players yet!
             </h5>
             <div *ngFor="let player of character.notablePlayers">
-              <p class="text">
-                <strong>{{ player.name }}</strong
-                >: {{ player.description }}
-              </p>
+              <app-notable-player [player]="player"></app-notable-player>
             </div>
           </div>
         </div>

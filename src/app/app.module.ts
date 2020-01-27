@@ -64,6 +64,7 @@ import { QuillModule } from 'ngx-quill';
 import { PostPreviewDialogComponent } from './components/post-preview-dialog/post-preview-dialog.component';
 import { MatchupChartComponent } from './components/matchup-chart/matchup-chart.component';
 import { GeneralInformationComponent } from './components/characters/general-information/general-information.component';
+import { NotablePlayerComponent } from './components/characters/notable-player/notable-player.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -132,7 +133,8 @@ import { GeneralInformationComponent } from './components/characters/general-inf
     GameComponent,
     PostPreviewDialogComponent,
     MatchupChartComponent,
-    GeneralInformationComponent
+    GeneralInformationComponent,
+    NotablePlayerComponent
   ],
   entryComponents: [
     PostHelpComponent,
