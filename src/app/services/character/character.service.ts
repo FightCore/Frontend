@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Character } from 'src/app/models/character';
-import { BaseService } from '../base.service';
-import { AuthService } from '../auth/auth.service';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Post } from 'src/app/models/post';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Character } from "src/app/models/character";
+import { BaseService } from "../base.service";
+import { AuthService } from "../auth/auth.service";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { Post } from "src/app/models/post";
+import { Matchup } from "src/app/models/matchup";
+import { match } from 'minimatch';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class CharacterService extends BaseService {
   constructor(private httpClient: HttpClient, authService: AuthService) {
@@ -22,7 +24,9 @@ export class CharacterService extends BaseService {
    */
   public getAll(): Observable<Character[]> {
     if (environment.mocking) {
-      return new Observable(observer => observer.next(this.generateCharacterList(20)));
+      return new Observable(observer =>
+        observer.next(this.generateCharacterList(20))
+      );
     }
 
     return this.httpClient.get<Character[]>(this.baseUrl);
@@ -34,7 +38,9 @@ export class CharacterService extends BaseService {
    */
   public get(id: number): Observable<Character> {
     if (environment.mocking) {
-      return new Observable(observer => observer.next(this.generateCharacter()));
+      return new Observable(observer =>
+        observer.next(this.generateCharacter())
+      );
     }
 
     return this.httpClient.get<Character>(`${this.baseUrl}/${id}`);
@@ -45,11 +51,16 @@ export class CharacterService extends BaseService {
    * @param characterId the id of the character to be looked for.
    */
   public getPosts(characterId: number): Observable<Post[]> {
-    return this.httpClient.get<Post[]>(`${this.baseUrl}/${characterId}/posts`, this.getDefaultHttpOptions());
+    return this.httpClient.get<Post[]>(
+      `${this.baseUrl}/${characterId}/posts`,
+      this.getDefaultHttpOptions()
+    );
   }
 
   public getForGame(gameId: number): Observable<Character[]> {
-    return this.httpClient.get<Character[]>(`${environment.baseUrl}/games/${gameId}/characters`);
+    return this.httpClient.get<Character[]>(
+      `${environment.baseUrl}/games/${gameId}/characters`
+    );
   }
 
   private generateCharacterList(amount: number): Character[] {

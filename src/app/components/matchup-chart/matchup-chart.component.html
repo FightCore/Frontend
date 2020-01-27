@@ -1,0 +1,24 @@
+<h5 style="text-align: center;">These are ordered from best to worst.</h5>
+<app-loading *ngIf="!loaded; else showTable"> </app-loading>
+
+<ng-template #showTable>
+  <div class="container-fluid">
+    <div *ngFor="let tier of tiers">
+      <div class="row equal">
+        <div class="col-lg-1">
+          <div class="tier-icon">
+            <h3 style="display: inline">{{ tier }}</h3>
+          </div>
+        </div>
+        <div class="col-lg-11">
+          <div class="characters-container">
+            <img
+              *ngFor="let character of getCharactersByTier(tier)"
+              [src]="character.stockIcon.url"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -33,7 +33,7 @@ export class CharacterPreviewComponent implements OnInit {
       return this.character.series.gameIcon.url;
     }
 
-    return 'https://www.stickpng.com/assets/images/5a4613ddd099a2ad03f9c994.png';
+    return '';
   }
 
   getGameClass(): string {
