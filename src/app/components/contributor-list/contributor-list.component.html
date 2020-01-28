@@ -1,0 +1,8 @@
+<mat-chip-list>
+    <mat-chip
+      color="accent" selected
+      *ngFor="let contributor of contributors"
+      (click)="viewUser(contributor.user.id)">
+      {{ contributor.user.name }}
+    </mat-chip>
+  </mat-chip-list>

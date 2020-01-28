@@ -103,10 +103,6 @@ export class CharacterDisplayComponent implements OnInit {
     this.router.navigate([StaticRoutes.editCharacterNoId, this.character.id]);
   }
 
-  viewUser(userId: number): void {
-    this.router.navigate([StaticRoutes.viewUserNoId, userId]);
-  }
-
   private generateMatchup() {
     this.characterService
       .getForGame(this.character.game.id)

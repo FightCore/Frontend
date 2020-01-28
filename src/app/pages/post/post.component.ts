@@ -49,19 +49,19 @@ export class PostComponent implements OnInit {
     this.filterPosts();
   }
 
-  protected onGameChange(gameId: number): void {
+  onGameChange(gameId: number): void {
     this.gameId = gameId;
     this.characterPicker.updateGame(gameId);
     this.characterId = this.characterPicker.getValue();
     this.filterPosts();
   }
 
-  protected onSearchChange(searchTerm: string): void {
+  onSearchChange(searchTerm: string): void {
     this.searchTerm = searchTerm;
     this.filterPosts();
   }
 
-  protected onCharacterChange(characterId: number): void {
+  onCharacterChange(characterId: number): void {
     this.characterId = characterId;
     this.filterPosts();
   }

@@ -65,6 +65,7 @@ import { PostPreviewDialogComponent } from './components/post-preview-dialog/pos
 import { MatchupChartComponent } from './components/matchup-chart/matchup-chart.component';
 import { GeneralInformationComponent } from './components/characters/general-information/general-information.component';
 import { NotablePlayerComponent } from './components/characters/notable-player/notable-player.component';
+import { ContributorListComponent } from './components/contributor-list/contributor-list.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -134,7 +135,8 @@ import { NotablePlayerComponent } from './components/characters/notable-player/n
     PostPreviewDialogComponent,
     MatchupChartComponent,
     GeneralInformationComponent,
-    NotablePlayerComponent
+    NotablePlayerComponent,
+    ContributorListComponent
   ],
   entryComponents: [
     PostHelpComponent,
