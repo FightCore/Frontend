@@ -11,7 +11,8 @@
       </div>
     </div>
     <div class="col-lg-2 col-xs-12">
-      <app-character-picker #characterPicker [gameId]="gameId"></app-character-picker>
+      <app-character-picker #characterPicker (selectionChange)="onCharacterChange($event)"
+      [gameId]="gameId"></app-character-picker>
       <mat-form-field class="right-search-bar">
           <mat-label i18n>Search</mat-label>
         <input (input)="onSearchChange($event.target.value)" matInput name="search" />

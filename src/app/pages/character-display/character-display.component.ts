@@ -8,6 +8,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { GameThemes } from 'src/styles/gameThemes';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { StaticRoutes } from 'src/app/routes/static-routes';
+import { Matchup } from 'src/app/models/matchup';
 
 @Component({
   selector: 'app-character-display',
@@ -17,8 +18,14 @@ import { StaticRoutes } from 'src/app/routes/static-routes';
 export class CharacterDisplayComponent implements OnInit {
   loading: boolean = true;
   character: Character;
+
+  postLoading = true;
   posts: Post[];
+
+  youtubeLoading = true;
   youtubeUrls: SafeResourceUrl[] = [];
+
+  matchups: Matchup[];
 
   constructor(
     private route: ActivatedRoute,
@@ -26,29 +33,42 @@ export class CharacterDisplayComponent implements OnInit {
     private postService: PostService,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private authService: AuthService) {
-    }
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
-
-    const characterId = parseFloat(this.route.snapshot.paramMap.get('characterId'));
-    this.characterService.getPosts(characterId).subscribe(posts =>
-      this.posts = posts);
+    const characterId = parseFloat(
+      this.route.snapshot.paramMap.get('characterId')
+    );
+    this.characterService
+      .getPosts(characterId)
+      .subscribe(posts => {
+        this.posts = posts;
+        this.postLoading = false;
+      });
 
     this.characterService.get(characterId).subscribe(character => {
       this.character = character;
+      this.loading = false;
+
       const videos = this.youtubeVideos();
       videos.forEach(video => {
-        this.youtubeUrls.push(this.sanitizer.bypassSecurityTrustResourceUrl(video));
+        this.youtubeUrls.push(
+          this.sanitizer.bypassSecurityTrustResourceUrl(video)
+        );
       });
-      this.loading = false;
+
+      this.youtubeLoading = false;
+
+      this.generateMatchup();
+
+      console.log(this.character);
     });
   }
 
   private youtubeVideos(): string[] {
     const videos = [];
     this.character.videos.forEach(video => {
-      console.log(video);
       videos.push(this.getEmbed(video.youtubeId));
     });
 
@@ -57,7 +77,7 @@ export class CharacterDisplayComponent implements OnInit {
 
   public getEmbed(youtubeId: string): string {
     return 'https://www.youtube.com/embed/' + youtubeId;
- }
+  }
 
   seriesIcon(): string {
     if (this.character.series) {
@@ -72,15 +92,33 @@ export class CharacterDisplayComponent implements OnInit {
   }
 
   isContributor(): boolean {
-    return this.character.contributors.find(contributor =>
-      contributor.user.id === this.authService.id) !== null;
+    return (
+      this.character.contributors.find(
+        contributor => contributor.user.id === this.authService.id
+      ) !== null
+    );
   }
 
   editCharacter(): void {
     this.router.navigate([StaticRoutes.editCharacterNoId, this.character.id]);
   }
 
-  viewUser(userId: number): void {
-    this.router.navigate([StaticRoutes.viewUserNoId, userId]);
+  private generateMatchup() {
+    this.characterService
+      .getForGame(this.character.game.id)
+      .subscribe(characters => {
+        const matchups: Matchup[] = [];
+        for (const characterTwo of characters) {
+          const matchup = new Matchup();
+          matchup.character1 = this.character;
+          matchup.character1Id = this.character.id;
+          matchup.character2 = characterTwo;
+          matchup.character2Id = characterTwo.id;
+          matchup.value = Math.floor(Math.random() * 9) + -4;
+          matchups.push(matchup);
+        }
+
+        this.matchups = matchups;
+      });
   }
 }

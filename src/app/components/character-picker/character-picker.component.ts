@@ -57,9 +57,15 @@ export class CharacterPickerComponent implements OnInit {
     );
     this.gameCharacters.sort(this.sortCharacters);
 
-    // Basically resets the control so that the right characters from the right
-    // game are in the dropdown.
-    this.characterFormControl.setValue('');
+    // Check if character that was previously picked is no longer in the dropdown.
+    const pickedCharacterIndex = this.gameCharacters.findIndex(character =>
+      character.id === this.getValue());
+
+    if (pickedCharacterIndex < 0) {
+      // Reset the dropdown.
+      this.characterFormControl.setValue('');
+    }
+
   }
 
   private getCharacterForId(id: number): Character {
@@ -89,7 +95,7 @@ export class CharacterPickerComponent implements OnInit {
     characters = this.gameCharacters.filter(
       character =>
         this.filterCharacterByGame(character, this.gameId) &&
-        character.name.includes(name)
+        character.name.search(new RegExp(name, 'i')) >= 0
     );
     characters.sort(this.sortCharacters);
 
