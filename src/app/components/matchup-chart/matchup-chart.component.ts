@@ -14,12 +14,16 @@ export class MatchupChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.tiers = new Set(this.matchups.sort((matchupOne, matchupTwo) => matchupOne.value < matchupTwo.value ? 1 : -1)
+    this.tiers = new Set(this.matchups.sort(this.sortMatchup)
       .map(matchup => matchup.value));
     this.loaded = true;
   }
 
   getCharactersByTier(tier: number): Character[] {
     return this.matchups.filter(matchup => matchup.value === tier).map(matchup => matchup.character2);
+  }
+
+  sortMatchup(matchupOne: Matchup, matchupTwo: Matchup): number {
+    return matchupOne.value < matchupTwo.value ? 1 : -1;
   }
 }

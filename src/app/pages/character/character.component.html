@@ -33,7 +33,8 @@
           <img class="mouse-pointer"
           *ngIf="character.stockIcon"
             [src]="character.stockIcon.url"
-            (click)="viewCharacter(character.id)">
+            (click)="viewCharacter(character.id)"
+            [alt]="character.name">
         </div>
   </div>
 </ng-template>
