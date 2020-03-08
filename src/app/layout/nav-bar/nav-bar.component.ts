@@ -17,7 +17,7 @@ export class NavBarComponent implements OnInit {
       private router: Router) { }
 
   userName: string;
-  opened: false;
+  opened: boolean;
 
   links = [
     {
