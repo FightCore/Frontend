@@ -17,6 +17,25 @@ export class NavBarComponent implements OnInit {
       private router: Router) { }
 
   userName: string;
+  opened: false;
+
+  links = [
+    {
+      name: 'Posts',
+      route: ['/post'],
+      icon: 'file'
+    },
+    {
+      name: 'Characters',
+      route: ['/character'],
+      icon: 'mask'
+    },
+    {
+      name: 'Games',
+      route: ['game'],
+      icon: 'gamepad'
+    }
+  ];
   ngOnInit() {
   }
 
@@ -47,6 +66,10 @@ export class NavBarComponent implements OnInit {
     this.dialog.open(RegisterComponent, {
       width: '40em'
     });
+  }
+
+  hideSidebar() {
+    this.opened = false;
   }
 
 }

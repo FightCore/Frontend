@@ -1,32 +1,106 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <div [routerLink]="['']" >
-          <img class="logo" src="assets/FC.png" alt="FightCore logo"/>
-          <span>FightCore</span>
+<mat-sidenav-container>
+  <mat-sidenav style="height: 100%; width: 50%" [(opened)]="opened">
+    <img class="logo" src="assets/FC.png" alt="FightCore logo" />
+    <span i18n>FightCore</span>
+    <div class="p-1">
+      <div *ngFor="let link of links">
+        <button
+          color="primary"
+          mat-flat-button
+          class="text-center w-100 mb-1"
+          [routerLink]="link.route"
+          (click)="hideSidebar()"
+          i18n
+        >
+          {{ link.name }}
+        </button>
       </div>
-      <span [routerLink]="['/post']" i18n>
-        <fa-icon class="d-none d-md-inline" icon="file"></fa-icon> Posts</span>
-      <span [routerLink]="['/character']" i18n>
-        <fa-icon class="d-none d-md-inline" icon="mask"></fa-icon> Characters</span>
-      <span [routerLink]="['/game']" i18n>
-        <fa-icon class="d-none d-md-inline" icon="gamepad"></fa-icon> Games</span>
-      <span class="spacer"></span>
-      <div class="d-none d-md-block">
-        <span *ngIf="isAuthenticated() else login" (click)="toUser()" >
-          <fa-icon icon="user-circle" size="1x">
-          </fa-icon> {{getUserName()}}</span>
-        <span *ngIf="isAuthenticated()" (click)="logout()" i18n> Logout</span>
+      <div *ngIf="isAuthenticated(); else mobileLogin">
+        <button
+        color="accent"
+        mat-flat-button
+        class="text-center w-100 mb-1"(click)="hideSidebar(); toUser()" i18n>
+        <fa-icon icon="user-circle" size="1x"> </fa-icon>
+        {{ getUserName() }}
+        </button>
+
+      <button
+      color="accent"
+      mat-flat-button
+      class="text-center w-100 mb-1"(click)="hideSidebar(); logout()" i18n>
+        Logout</button>
       </div>
-    </mat-toolbar-row>
-    <mat-toolbar-row class="d-md-block d-lg-none">
-        <span *ngIf="isAuthenticated() else login" (click)="toUser()" >
-            <fa-icon icon="user-circle" size="1x">
-            </fa-icon> {{getUserName()}}</span>
-          <span *ngIf="isAuthenticated()" (click)="logout()" i18n> Logout</span>
-    </mat-toolbar-row>
-</mat-toolbar>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="d-none d-lg-block">
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <div [routerLink]="['']">
+            <img class="logo" src="assets/FC.png" alt="FightCore logo" />
+            <span i18n>FightCore</span>
+          </div>
+          <span *ngFor="let link of links" [routerLink]="link.route" i18n>
+            <fa-icon class="d-none d-md-inline" [icon]="link.icon"></fa-icon>
+            {{ link.name }}</span
+          >
+          <span class="spacer"></span>
+          <div class="d-none d-md-block">
+            <span *ngIf="isAuthenticated(); else login" (click)="toUser()">
+              <fa-icon icon="user-circle" size="1x"> </fa-icon>
+              {{ getUserName() }}</span
+            >
+            <span *ngIf="isAuthenticated()" (click)="logout()" i18n>
+              Logout</span
+            >
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </div>
+    <mat-toolbar class="d-md-block d-lg-none" color="primary">
+      <div [routerLink]="['']">
+        <img class="logo" src="assets/FC.png" alt="FightCore logo" />
+        <span>FightCore</span>
+      </div>
+      <span class="example-spacer"></span>
+      <button
+        class="float-right"
+        color="accent"
+        mat-raised-button
+        (click)="opened = true"
+      >
+        <em class="material-icons">
+          menu
+        </em>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 
 <ng-template #login>
   <span (click)="register()" i18n>Register</span>
   <span [routerLink]="['/login']" i18n>Login</span>
+</ng-template>
+
+<ng-template #mobileLogin>
+  <button
+    color="accent"
+    class="text-center w-100 mb-1"
+    mat-raised-button
+    (click)="hideSidebar(); register()"
+    i18n
+  >
+    Register
+  </button>
+  <button
+    class="text-center w-100 mb-1"
+    color="accent"
+    mat-raised-button
+    (click)="hideSidebar()"
+    [routerLink]="['/login']"
+    i18n
+  >
+    Login
+  </button>
 </ng-template>

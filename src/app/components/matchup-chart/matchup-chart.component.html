@@ -15,6 +15,7 @@
             <img
               *ngFor="let character of getCharactersByTier(tier)"
               [src]="character.stockIcon.url"
+              (click)="viewCharacter(character.id)"
             />
           </div>
         </div>

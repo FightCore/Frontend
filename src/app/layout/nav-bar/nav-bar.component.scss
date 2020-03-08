@@ -1,6 +1,9 @@
 .spacer {
     flex: 1 1 auto;
 }
+.height-spacer {
+    flex-grow: 1;
+}
 
 span {
     margin-right: 1em;
@@ -11,3 +14,7 @@ span {
     height: 3em;
     margin-right: 0.5em;
 }
+
+.example-spacer {
+    flex: 1 1 auto;
+  }

@@ -2,12 +2,12 @@ export const environment = {
   production: true,
   mocking: false,
   enableAvatars: false,
-  baseUrl: 'https://http://167.86.102.65:5001',
+  baseUrl: 'https://api.fightcore.gg',
   authentication: {
-    authUrl: 'http://http://167.86.102.65:5000',
-    callbackUrl: 'http://fightcore.gg/auth-callback',
-    redirectUrl: 'http://fightcore.gg',
-    clientId: 'fightcore_dev'
+    authUrl: 'https://identity.fightcore.gg',
+    callbackUrl: 'https://www.fightcore.gg/auth-callback',
+    redirectUrl: 'https://www.fightcore.gg',
+    clientId: 'fightcore_prod'
   },
   links: {
     discord: 'https://discord.gg/CVqDy6c',

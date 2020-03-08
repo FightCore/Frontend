@@ -9,6 +9,7 @@ import { GameThemes } from 'src/styles/gameThemes';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { Matchup } from 'src/app/models/matchup';
+import { MatchupService } from 'src/app/services/matchup/matchup.service';
 
 @Component({
   selector: 'app-character-display',
@@ -26,6 +27,7 @@ export class CharacterDisplayComponent implements OnInit {
   youtubeUrls: SafeResourceUrl[] = [];
 
   matchups: Matchup[];
+  matchupsLoading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +35,8 @@ export class CharacterDisplayComponent implements OnInit {
     private postService: PostService,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private authService: AuthService
+    private authService: AuthService,
+    private matchupService: MatchupService
   ) { }
 
   ngOnInit() {
@@ -59,10 +62,14 @@ export class CharacterDisplayComponent implements OnInit {
       });
 
       this.youtubeLoading = false;
+    });
 
-      this.generateMatchup();
-
-      console.log(this.character);
+    this.matchupService.getAll(characterId).subscribe(matchups => {
+      this.matchups = matchups;
+      this.matchupsLoading = false;
+    }, error => {
+        this.matchups = [];
+        this.matchupsLoading = false;
     });
   }
 
@@ -79,24 +86,16 @@ export class CharacterDisplayComponent implements OnInit {
     return 'https://www.youtube.com/embed/' + youtubeId;
   }
 
-  seriesIcon(): string {
-    if (this.character.series) {
-      return this.character.series.gameIcon.url;
-    }
-
-    return 'https://www.stickpng.com/assets/images/5a4613ddd099a2ad03f9c994.png';
-  }
-
   getGameClass(): string {
     return GameThemes.getThemeForGameId(this.character.game.id);
   }
 
   isContributor(): boolean {
-    return (
-      this.character.contributors.find(
-        contributor => contributor.user.id === this.authService.id
-      ) !== null
+    const foundContributor = this.character.contributors.find(
+      contributor => contributor.user.id === this.authService.id
     );
+
+    return (foundContributor !== null && foundContributor !== undefined);
   }
 
   editCharacter(): void {
@@ -109,6 +108,10 @@ export class CharacterDisplayComponent implements OnInit {
       .subscribe(characters => {
         const matchups: Matchup[] = [];
         for (const characterTwo of characters) {
+          if (characterTwo.id === this.character.id) {
+            continue;
+          }
+
           const matchup = new Matchup();
           matchup.character1 = this.character;
           matchup.character1Id = this.character.id;

@@ -28,7 +28,7 @@
 </ng-template>
 
 <ng-template #characterListSmall>
-  <div class="container-fluid character-container">
+  <div *ngIf="selectedGame > 0" class="container-fluid character-container">
       <div class="character-stock-icon" *ngFor="let character of displayedCharacters">
           <img class="mouse-pointer"
           *ngIf="character.stockIcon"
