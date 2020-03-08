@@ -16,6 +16,7 @@
               *ngFor="let character of getCharactersByTier(tier)"
               [src]="character.stockIcon.url"
               (click)="viewCharacter(character.id)"
+              [alt]="character.name + 'stock icon'"
             />
           </div>
         </div>

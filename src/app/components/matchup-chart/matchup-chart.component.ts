@@ -16,7 +16,7 @@ export class MatchupChartComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    this.tiers = new Set(this.matchups.sort((matchupOne, matchupTwo) => matchupOne.value < matchupTwo.value ? 1 : -1)
+    this.tiers = new Set(this.matchups.sort(this.sortMatchup)
       .map(matchup => matchup.value));
     this.loaded = true;
   }
@@ -27,4 +27,8 @@ export class MatchupChartComponent implements OnInit {
    viewCharacter(id: number): void {
     this.router.navigate([StaticRoutes.characters, id]);
    }
+
+  sortMatchup(matchupOne: Matchup, matchupTwo: Matchup): number {
+    return matchupOne.value < matchupTwo.value ? 1 : -1;
+  }
 }
