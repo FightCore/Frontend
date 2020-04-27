@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { Matchup } from 'src/app/models/matchup';
 import { MatchupService } from 'src/app/services/matchup/matchup.service';
+import { WebsiteResource } from 'src/app/models/resources/websiteResource';
 
 @Component({
   selector: 'app-character-display',
@@ -22,6 +23,11 @@ export class CharacterDisplayComponent implements OnInit {
 
   postLoading = true;
   posts: Post[];
+
+  websites: WebsiteResource[] = [
+    { url: 'https://ultimateframedata.com/fox.php', displayName: 'Ultimate Frame Data' },
+    { url: 'https://discord.com/fox.php', displayName: 'Mains Discord' },
+  ]
 
   youtubeLoading = true;
   youtubeUrls: SafeResourceUrl[] = [];
@@ -123,5 +129,9 @@ export class CharacterDisplayComponent implements OnInit {
 
         this.matchups = matchups;
       });
+  }
+
+  viewUser(id: number) {
+
   }
 }

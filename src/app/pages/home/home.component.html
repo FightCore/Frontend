@@ -1,22 +1,21 @@
 <div class="container-fluid">
-    <div class="title-bar">
+    <mat-card class="mat-elevation-z10 mb-2">
         <app-title-bar></app-title-bar>
-    </div>
+    </mat-card>
     <div class="row equal">
         <div class="col-lg-9">
-            <div class="card featured-posts">
-                <app-featured-posts></app-featured-posts>
-            </div>
+            <mat-card class="mat-elevation-z5">
+            <app-featured-posts></app-featured-posts>
+        </mat-card>
         </div>
         <div class="col-lg-3">
-            <div class="card">
+            <mat-card class="mat-elevation-z5 h-100">
                 <app-discord class="discord-banner"></app-discord>
-            </div>
+            </mat-card>
         </div>
     </div>
-
-    <div class="card featured-posts">
+    <mat-card class="mat-elevation-z5 mt-2 mb-1">
         <app-latest-posts></app-latest-posts>
-    </div>
+    </mat-card>
 </div>
 <app-top-scroller></app-top-scroller>

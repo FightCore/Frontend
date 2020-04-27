@@ -1,44 +1,28 @@
-<div [class]="'post ' + getPostClass()">
-  <div class="post-header background-color-primary row">
-    <div class="d-none d-md-block post-avatar-container col-lg-2">
-      <img *ngIf="useAvatar()" alt="avatar"
-      [src]="'https://www.gravatar.com/avatar/' + post.author.gravatarMd5 + '?s=40&d=retro'">
-    </div>
-    <div class="col-lg-8 col-xs-12">
-      <h4 class="post-title mouse-pointer" (click)="viewPost(post.id)" ><span *ngIf="post.isPrivate">
-          <fa-icon icon="lock" size="1x"></fa-icon>
-        </span> {{ post.title }}</h4>
-      <h6 class="post-subtitle">By <a class="mouse-pointer" (click)="viewAuthor()">{{ post.author.name }}</a></h6>
-    </div>
-    <div class="d-none d-md-block col-lg-2">
+<mat-card class="mat-elevation-z5">
+  <mat-card-header>
+    <div *ngIf="post.character && post.character.stockIcon" mat-card-avatar>
       <img
-        alt="Character stock icon"
-        class="fit-image-height"
-        *ngIf="post.character && post.character.stockIcon"
-        [src]="post.character.stockIcon.url"
-      />
+      alt="Character stock icon"
+      class="fit-image-height"
+      [src]="post.character.stockIcon.url"
+    />
     </div>
-  </div>
-  <div class="post-content">
-    <div [innerHTML]="post.body" class="post-markdown-text"></div>
-    <div class="fill-remaining-space"></div>
-    <div class="fill-remaining-space .d-block .d-sm-none"></div>
-    <div class="post-bottom-bar row">
-      <div class="col-6">
-        <button (click)="viewPost(post.id)" mat-raised-button color="accent">
-          View
-        </button>
-        <app-like-button
+    <mat-card-title> {{ post.title }}</mat-card-title>
+    <mat-card-subtitle>Written by: <strong>{{post.author.name}}</strong></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="post-content">
+      <p [innerHTML]="post.body" class="post-markdown-text"></p>
+  </mat-card-content>
+  <mat-card-actions>
+    <app-like-button
         class="like-button"
           [postId]="post.id"
           [likes]="post.likes"
           [liked]="post.liked"
         >
         </app-like-button>
-      </div>
-      <div class="col-6">
-        <app-game-chip [game]="post.game"></app-game-chip>
-      </div>
-    </div>
-  </div>
-</div>
+        <button (click)="viewPost(post.id)" mat-button color="accent">
+          Read more
+        </button>
+  </mat-card-actions>
+</mat-card>

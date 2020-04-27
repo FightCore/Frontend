@@ -41,7 +41,6 @@
             <span i18n>FightCore</span>
           </div>
           <span *ngFor="let link of links" [routerLink]="link.route" i18n>
-            <fa-icon class="d-none d-md-inline" [icon]="link.icon"></fa-icon>
             {{ link.name }}</span
           >
           <span class="spacer"></span>

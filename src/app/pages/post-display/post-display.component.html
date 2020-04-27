@@ -25,39 +25,32 @@
   <div [class]="getGameClass()">
     <div class="row">
       <div class="col-lg-10">
-        <div class="post">
-          <div class="header background-color-primary">
-            <div class="row">
-              <div class="col-lg-4 col-xs-12">
-                <div class="game-chip">
-                  {{ post.game.abbreviation }}
-                </div>
-              </div>
-              <h2 class="col-lg-4 col-xs-12 title">
-                {{ post.title }}
-                <h4 class="subtitle" i18n>
-                  By
-                  <a class="mouse-pointer" (click)="viewAuthor()">{{
-                    post.author.name
-                  }}</a>
-                </h4>
-                <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
-                  <fa-icon icon="lock" size="1x"></fa-icon> This is a private
-                  post, only you can see it.
-                </h5>
-              </h2>
-              <div class="col-lg-4 col-xs-12 like-button">
-                <app-like-button
-                  [postId]="post.id"
-                  [likes]="post.likes"
-                  [liked]="post.liked"
-                >
-                </app-like-button>
-              </div>
-            </div>
-          </div>
-          <div [innerHTML]="bodyHtml"></div>
-          <div *ngIf="isPostFromUser()">
+
+        <mat-card class="mat-elevation-z10 mt-1">
+          <mat-card-header>
+            <mat-card-title>{{ post.title }}</mat-card-title>
+            <mat-card-subtitle class="mouse-pointer" (click)="viewAuthor()">
+              Written by {{post.author.name}}
+            </mat-card-subtitle>
+            <mat-card-subtitle>{{ post.game.name }}</mat-card-subtitle>
+            <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
+              <fa-icon icon="lock" size="1x"></fa-icon> This is a private
+              post, only you can see it.
+            </h5>
+          </mat-card-header>
+          <mat-card-content>
+            <hr/>
+            <div [innerHTML]="bodyHtml"></div>
+          </mat-card-content>
+          <mat-card-actions>
+            <app-like-button
+            [postId]="post.id"
+            [likes]="post.likes"
+            [liked]="post.liked"
+          >
+          </app-like-button>
+
+          <div class="d-inline p-1" *ngIf="isPostFromUser()">
             <button (click)="editPost()" mat-raised-button color="accent" i18n>
               <em class="material-icons">edit</em> Edit
             </button>
@@ -72,38 +65,36 @@
               <em class="material-icons">cloud_download</em> Download Markdown
             </button>
           </div>
-        </div>
+          </mat-card-actions>
+        </mat-card>
       </div>
       <div class="col-lg-2">
-        <div class="post">
-          <h4 i18n>Featured in this post.</h4>
-          <div class="post">
-            <div class="header background-color-primary">
-              <h4 class="title" i18n>
-                {{ post.author.name }}
-              </h4>
-            </div>
-            <p>
-              A small text about the author of this post.
-            </p>
-          </div>
-
-          <div class="post">
-            <div class="header background-color-primary">
-              <h4 class="title" i18n>
-                {{ post.game.name }}
-              </h4>
-              <img
-                alt="Game banner"
-                class="fit-image-width"
-                [src]="post.game.bannerUrl"
-              />
-            </div>
-            <div>
-              <p class="description">
-                {{ post.game.description }}
-              </p>
-              <button
+        <mat-card class="mat-elevation-z10">
+          <mat-card-header>
+            <mat-card-title i18n>Featured in this post.</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-card class="mb-2">
+              <mat-card-header>
+                <mat-card-title>
+                  {{ post.author.name }}
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                  A small text about the author of this post.
+              </mat-card-content>
+            </mat-card>
+            <mat-card class="mb-2">
+              <mat-card-header>
+                <mat-card-title>
+                  {{ post.game.name }}
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p class="description">
+                  {{ post.game.description }}
+                </p>
+                <button
                 class="view-button"
                 mat-raised-button
                 color="accent"
@@ -112,33 +103,38 @@
               >
                 View
               </button>
-            </div>
-          </div>
-          <div *ngIf="post.character" class="post">
-            <div class="header background-color-primary">
-              <h4 class="title" i18n>
-                {{ post.character.name }}
-              </h4>
-              <img
-                alt="Character stock icon"
-                class="fit-image-height"
-                [src]="post.character.stockIcon.url"
-              />
-            </div>
-            <p class="description">
-              {{ post.character.generalInformation }}
-            </p>
-            <button
-              class="view-button"
-              mat-raised-button
-              color="accent"
-              (click)="viewCharacter(post.character.id)"
-              i18n
-            >
-              View
-            </button>
-          </div>
-        </div>
+              </mat-card-content>
+            </mat-card>
+            <mat-card *ngIf="post.character" class="mb-2">
+              <mat-card-header>
+                <mat-card-title>
+                  {{ post.character.name }}
+                </mat-card-title>
+                <div mat-card-avatar>
+                  <img
+                  alt="Character stock icon"
+                  class="fit-image-height"
+                  [src]="post.character.stockIcon.url"
+                />
+                </div>
+              </mat-card-header>
+              <mat-card-content>
+                <p class="description">
+                  {{ post.character.generalInformation }}
+                </p>
+                <button
+                class="view-button"
+                mat-raised-button
+                color="accent"
+                (click)="viewCharacter(post.character.id)"
+                i18n
+              >
+                View
+              </button>
+              </mat-card-content>
+            </mat-card>
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
   </div>

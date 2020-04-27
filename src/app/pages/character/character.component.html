@@ -28,13 +28,20 @@
 </ng-template>
 
 <ng-template #characterListSmall>
-  <div *ngIf="selectedGame > 0" class="container-fluid character-container">
-      <div class="character-stock-icon" *ngFor="let character of displayedCharacters">
+  <div *ngIf="selectedGame > 0" class="character-container">
+    <mat-card class="mat-elevation-z10">
+      <mat-card-header>
+        <mat-card-title>Quick character selector</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="character-stock-icon" *ngFor="let character of displayedCharacters">
           <img class="mouse-pointer"
           *ngIf="character.stockIcon"
             [src]="character.stockIcon.url"
             (click)="viewCharacter(character.id)"
             [alt]="character.name">
         </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </ng-template>

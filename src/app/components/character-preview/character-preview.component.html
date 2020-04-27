@@ -1,32 +1,19 @@
-<div [class]="'character ' + getGameClass()">
-  <div class="header background-color-primary row">
-    <div class="d-none d-sm-block">
-      <img class="avatar" alt="character profile shot" [src]="characterIcon()" >
+<mat-card class="mat-elevation-z5">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <img class="fit-image-height" alt="character profile shot" [src]="characterIcon()" >
     </div>
-    <div>
-      <h3 class="title" (click)="viewCharacter(character.id)" class="mouse-pointer">
-        {{ character.name }}
-      </h3>
-    </div>
-    <div>
-      <img *ngIf="this.character.series" [src]="seriesIcon()" alt="character-icon" height="70em" />
-    </div>
-  </div>
-
-  <div class="body">
+    <mat-card-title>{{ character.name }}</mat-card-title>
+    <mat-card-subtitle>{{character.game.name}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
     <div class="description">
       {{ character.generalInformation }}
     </div>
-    <div class="fill-remaining-space"></div>
-    <div class="post-bottom-bar">
-      <div class="col-lg-6">
-        <button (click)="viewCharacter(character.id)" mat-raised-button color="accent">
-          View
-        </button>
-      </div>
-      <div class="col-lg-6 col-xs-12">
-        <app-game-chip [game]="character.game"></app-game-chip>
-      </div>
-    </div>
-  </div>
-</div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="viewCharacter(character.id)" mat-button color="accent">
+      View
+    </button>
+  </mat-card-actions>
+</mat-card>

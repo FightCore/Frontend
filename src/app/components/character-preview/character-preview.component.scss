@@ -88,3 +88,10 @@ $post-border-radius: 0.5em;
       }
     }
 }
+
+.description {
+  max-height: 10.5em;
+  min-height: 10.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

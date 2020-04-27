@@ -1,4 +1,4 @@
-<div class="container-fluid main-container">
+<div class="container-fluid main-container mb-1">
   <div *ngIf="loading; else postDisplay">
     <app-loading></app-loading>
   </div>
@@ -6,125 +6,130 @@
 <app-top-scroller></app-top-scroller>
 
 <ng-template #postDisplay>
-  <div [class]="getGameClass()">
-    <div class="header  background-color-primary">
-      <div class="row equal">
-        <div class="col-lg-2">{{ character.game.name }}</div>
-        <div class="col-lg-8 nametag">
-          <h1>{{ character.name }}</h1>
-        </div>
-        <div class="col-lg-2">
-          <img *ngIf="this.character.series" [src]="this.character.series.gameIcon.url"
-            alt="character-icon" height="100em" />
-        </div>
-      </div>
-    </div>
-    <div class="body info-container">
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="info-container">
-            <!--Center this image.-->
-            <img
-              *ngIf="character.characterImage"
-              [src]="character.characterImage.url"
-              alt="character-portrait"
-              height="370em"
-              class="profile-shot"
-            />
-            <hr/>
-            <h5 class="title" i18n>Contributors</h5>
-            <p *ngIf="character.contributors.length === 0" i18n>
-              No contributors yet.
-            </p>
-            <mat-chip-list *ngIf="character.contributors.length > 0">
-              <mat-chip
-                color="accent" selected
-                *ngFor="let contributor of character.contributors"
-                (click)="viewUser(contributor.user.id)">
-                {{ contributor.user.name }}
-              </mat-chip>
-            </mat-chip-list>
-            <button *ngIf="isContributor()" mat-raised-button
-            color="accent"
-            class="mt-2 edit-button"
-            (click)="editCharacter()" i18n>
-            <em class="material-icons">edit</em> Edit character
-            </button>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ character.name }}</mat-card-title>
+      <mat-card-subtitle>{{ character.game.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-tab-group>
+        <mat-tab label="General Information">
+          <div class="row w-100">
+            <div class="col-lg-3">
+              <div>
+                <!--Center this image.-->
+                <img
+                  *ngIf="character.characterImage"
+                  [src]="character.characterImage.url"
+                  alt="character-portrait"
+                  height="370em"
+                  class="profile-shot"
+                />
+                <hr />
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div>
+                <app-general-information
+                  [character]="character"
+                ></app-general-information>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-lg-9">
-          <div class="info-container">
-              <app-general-information [character]="character"></app-general-information>
-          </div>
-        </div>
-      </div>
-      <br />
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="info-container">
-            <h2 class="title" i18n>Notable Players</h2>
-            <h5 class="title" *ngIf="character.notablePlayers.length == 0" i18n>
+        </mat-tab>
+        <mat-tab label="Notable players">
+          <div>
+            <h2 i18n>Notable Players</h2>
+            <h5 *ngIf="character.notablePlayers.length == 0" i18n>
               No players yet!
             </h5>
             <div *ngFor="let player of character.notablePlayers">
               <app-notable-player [player]="player"></app-notable-player>
             </div>
           </div>
-        </div>
-      </div>
-      <br />
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="info-container">
-            <h2 class="title" i18n>Top FightCore posts</h2>
-            <div *ngIf="!postLoading" class="row equal">
+        </mat-tab>
+        <mat-tab label="FightCore Posts">
+          <div class="m-1">
+            <h2 i18n>Top FightCore posts</h2>
+            <div *ngIf="!postLoading" class="row equal  w-100">
               <div *ngFor="let post of posts" class="col-lg-4">
                 <app-post-preview [post]="post"></app-post-preview>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <br />
-      <div *ngIf="!youtubeLoading" class="row">
-        <div class="col-lg-12">
-          <div class="info-container">
-            <h2 class="title" i18n>Videos</h2>
-            <h5 class="title" *ngIf="youtubeUrls.length == 0" i18n>
-              No videos yet!
-            </h5>
-            <div class="row">
-              <div *ngFor="let video of youtubeUrls" class="col-lg-6">
-                <div class="video">
-                  <iframe
-                    [src]="video"
-                    width="625em"
-                    height="350em"
-                    class="fit-image-max-width"
-                    title="youtube-video-embed"
-                    webkitallowfullscreen
-                    mozallowfullscreen
-                    allowfullscreen
-                  ></iframe>
+        </mat-tab>
+        <mat-tab label="Resources">
+          <div *ngIf="!youtubeLoading">
+            <div>
+              <h2 i18n>Videos</h2>
+              <h5 *ngIf="youtubeUrls.length == 0" i18n>
+                No videos yet!
+              </h5>
+              <div class="row w-100">
+                <div *ngFor="let video of youtubeUrls" class="col-lg-6">
+                  <div class="video">
+                    <iframe
+                      [src]="video"
+                      width="625em"
+                      height="350em"
+                      class="fit-image-max-width"
+                      title="youtube-video-embed"
+                      webkitallowfullscreen
+                      mozallowfullscreen
+                      allowfullscreen
+                    ></iframe>
+                  </div>
                 </div>
               </div>
+              <h2 i18n>Websites</h2>
+              <p *ngIf="websites.length === 0">
+                No websites have been added yet.
+              </p>
+                <button *ngFor="let website of websites" class="d-inline m-1" color="accent" mat-raised-button>
+                  {{website.displayName}}
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <br/>
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="info-container">
-            <h2 class="title" i18n>Matchups</h2>
-            <h5 class="title" *ngIf="this.matchups.length == 0 else matchupsDisplay" i18n>
-              No matchups yet!
-            </h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </mat-tab>
+        <mat-tab label="Matchups">
+              <h2 i18n>Matchups</h2>
+              <h5
+                class="title"
+                *ngIf="this.matchups.length == 0; else matchupsDisplay"
+                i18n
+              >
+                No matchups yet!
+              </h5>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+    <mat-card-actions>
+      <h5 class="title" i18n>Contributors</h5>
+      <p *ngIf="character.contributors.length === 0" i18n>
+        No contributors yet.
+      </p>
+      <mat-chip-list *ngIf="character.contributors.length > 0">
+        <mat-chip
+          color="accent"
+          selected
+          *ngFor="let contributor of character.contributors"
+          (click)="viewUser(contributor.user.id)"
+        >
+          {{ contributor.user.name }}
+        </mat-chip>
+      </mat-chip-list>
+      <button
+        *ngIf="isContributor()"
+        mat-raised-button
+        color="accent"
+        class="mt-2 edit-button"
+        (click)="editCharacter()"
+        i18n
+      >
+        <em class="material-icons">edit</em> Edit character
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </ng-template>
 
 <ng-template #matchupsDisplay>
