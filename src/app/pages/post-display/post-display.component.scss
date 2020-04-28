@@ -7,55 +7,6 @@ $post-border-radius: 0.5em;
   margin-top: 1em;
 }
 
-div.post {
-  border-style: solid;
-  border-width: 0.25em;
-  border-color: $light-primary-color;
-  border-radius: $post-border-radius;
-  padding: 0.5em;
-  margin-top: 1em;
-
-  .header {
-    width: 101%;
-
-    // Offsets so the width and height are overlapped properly.
-    margin-left: -0.5%;
-    margin-top: -0.5%;
-
-    // Give it a little padding to make the text distance itself.
-    padding: 0.4em;
-    border-radius: $post-border-radius $post-border-radius 0 0;
-    text-align: center;
-    .title {
-      color: $text-color;
-      .subtitle {
-        color: $divider-color;
-      }
-    }
-    .game-chip {
-      max-width: 10em;
-      display: inline;
-      // Center Vertically
-      height: 5em;
-      line-height: 5em;
-      // End center vertically.
-      vertical-align: middle;
-      padding: 0.5em 6em 0.5em 6em;
-      color: $text-color;
-      border-style: solid;
-      border-width: 0.1em;
-      border-color: $light-primary-color;
-      border-radius: $post-border-radius;
-    }
-    .like-button {
-      color: $text-color;
-      display: inline;
-      height: 5em;
-      line-height: 5em;
-    }
-  }
-}
-
 .description {
   color: $secondary-text-color;
   max-height: 10.5em;

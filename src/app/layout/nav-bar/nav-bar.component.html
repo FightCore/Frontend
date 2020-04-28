@@ -20,7 +20,7 @@
         color="accent"
         mat-flat-button
         class="text-center w-100 mb-1"(click)="hideSidebar(); toUser()" i18n>
-        <fa-icon icon="user-circle" size="1x"> </fa-icon>
+        <em class="material-icons">account_circle</em>
         {{ getUserName() }}
         </button>
 
@@ -46,7 +46,7 @@
           <span class="spacer"></span>
           <div class="d-none d-md-block">
             <span *ngIf="isAuthenticated(); else login" (click)="toUser()">
-              <fa-icon icon="user-circle" size="1x"> </fa-icon>
+              <em class="material-icons">account_circle</em>
               {{ getUserName() }}</span
             >
             <span *ngIf="isAuthenticated()" (click)="logout()" i18n>

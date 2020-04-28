@@ -6,7 +6,7 @@ import { StaticRoutes } from 'src/app/routes/static-routes';
 import { ToastrService } from 'ngx-toastr';
 import { PostText } from 'src/app/text/post.text';
 import { UserOptions } from 'src/app/options/userOptions';
-import { CharacterPickerComponent } from 'src/app/components/character-picker/character-picker.component';
+import { CharacterPickerComponent } from 'src/app/components/characters/character-picker/character-picker.component';
 
 @Component({
   selector: 'app-post',

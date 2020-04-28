@@ -4,16 +4,6 @@
     padding-top: 1em;
 }
 
-.header {
-    padding: 1em;
-    border-style: solid;
-    border-width: 0px;
-    border-color: $light-primary-color;
-    border-radius: $card-border-radius;
-    text-align: center;
-    color: $text-color;
-}
-
 .profile-shot {
     display: block;
     margin-left: auto;
@@ -22,29 +12,6 @@
     object-fit: contain;
 }
 
-.info-container {
-    padding: 1em;
-    border-style: solid;
-    border-width: $card-border-width;
-    border-color: $light-primary-color;
-    border-radius: $card-border-radius;
-
-    // Forced the container to always be full height, meaning that the same items
-    // in the row have the same outline.
-    height: 100%;
-
-    .title {
-        text-align: center;
-        margin-bottom: 0.5em;
-    }
-    .text {
-        // Makes it so the new lines are rendered from the given TS variable.
-        white-space: pre-line;
-    }
-    .video {
-        text-align: center;
-    }
-}
 .edit-button {
     width: 100%;
 }
