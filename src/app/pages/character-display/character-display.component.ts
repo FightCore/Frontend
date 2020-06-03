@@ -24,11 +24,6 @@ export class CharacterDisplayComponent implements OnInit {
   postLoading = true;
   posts: Post[];
 
-  websites: WebsiteResource[] = [
-    { url: 'https://ultimateframedata.com/fox.php', displayName: 'Ultimate Frame Data' },
-    { url: 'https://discord.com/fox.php', displayName: 'Mains Discord' },
-  ]
-
   youtubeLoading = true;
   youtubeUrls: SafeResourceUrl[] = [];
 
@@ -107,31 +102,7 @@ export class CharacterDisplayComponent implements OnInit {
   editCharacter(): void {
     this.router.navigate([StaticRoutes.editCharacterNoId, this.character.id]);
   }
-
-  private generateMatchup() {
-    this.characterService
-      .getForGame(this.character.game.id)
-      .subscribe(characters => {
-        const matchups: Matchup[] = [];
-        for (const characterTwo of characters) {
-          if (characterTwo.id === this.character.id) {
-            continue;
-          }
-
-          const matchup = new Matchup();
-          matchup.character1 = this.character;
-          matchup.character1Id = this.character.id;
-          matchup.character2 = characterTwo;
-          matchup.character2Id = characterTwo.id;
-          matchup.value = Math.floor(Math.random() * 9) + -4;
-          matchups.push(matchup);
-        }
-
-        this.matchups = matchups;
-      });
-  }
-
-  viewUser(id: number) {
-
+  openUrl(url: string): void {
+    window.open(url, '_blank');
   }
 }

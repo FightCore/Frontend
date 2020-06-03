@@ -1,9 +1,5 @@
 @import "src/styles/variables.scss";
 
-.main-container {
-    padding-top: 1em;
-}
-
 .profile-shot {
     display: block;
     margin-left: auto;
@@ -12,6 +8,7 @@
     object-fit: contain;
 }
 
-.edit-button {
-    width: 100%;
+.stock-icon {
+    // Override the border radius to just show the entire character.
+    border-radius: 0%;
 }

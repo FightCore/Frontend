@@ -55,10 +55,10 @@ import { GamePreviewComponent } from './components/games/game-preview/game-previ
 import { GameComponent } from './pages/game/game.component';
 import { QuillModule } from 'ngx-quill';
 import { PostPreviewDialogComponent } from './components/posts/post-preview-dialog/post-preview-dialog.component';
-import { MatchupChartComponent } from './components/characters/matchup-chart/matchup-chart.component';
 import { GeneralInformationComponent } from './components/characters/general-information/general-information.component';
 import { NotablePlayerComponent } from './components/characters/notable-player/notable-player.component';
 import { ContributorListComponent } from './components/characters/contributor-list/contributor-list.component';
+import { SocialsComponent } from './components/frontpage/socials/socials.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -126,10 +126,10 @@ import { ContributorListComponent } from './components/characters/contributor-li
     GamePreviewComponent,
     GameComponent,
     PostPreviewDialogComponent,
-    MatchupChartComponent,
     GeneralInformationComponent,
     NotablePlayerComponent,
-    ContributorListComponent
+    ContributorListComponent,
+    SocialsComponent
   ],
   entryComponents: [
     PostHelpComponent,

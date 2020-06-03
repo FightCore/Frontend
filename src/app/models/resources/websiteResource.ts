@@ -1,4 +1,5 @@
 export class WebsiteResource {
-    url: string;
-    displayName: string;
+    id: number;
+    websiteUrl: string;
+    title: string;
 }

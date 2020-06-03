@@ -37,8 +37,7 @@
       <mat-toolbar color="primary">
         <mat-toolbar-row>
           <div [routerLink]="['']">
-            <img class="logo" src="assets/FC.png" alt="FightCore logo" />
-            <span i18n>FightCore</span>
+            <img class="logo" src="assets/Fightcore_Logo.svg" alt="FightCore logo" />
           </div>
           <span *ngFor="let link of links" [routerLink]="link.route" i18n>
             {{ link.name }}</span
@@ -58,7 +57,7 @@
     </div>
     <mat-toolbar class="d-md-block d-lg-none" color="primary">
       <div [routerLink]="['']">
-        <img class="logo" src="assets/FC.png" alt="FightCore logo" />
+        <!-- <img class="logo" src="assets/FC.png" alt="FightCore logo" /> -->
         <span>FightCore</span>
       </div>
       <span class="example-spacer"></span>
