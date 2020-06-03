@@ -14,7 +14,7 @@ import { CharacterPickerComponent } from 'src/app/components/characters/characte
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
-  @ViewChild('characterPicker', { static: false })
+  @ViewChild('characterPicker')
   characterPicker: CharacterPickerComponent;
   constructor(
     private postService: PostService,

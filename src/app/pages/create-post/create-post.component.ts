@@ -44,7 +44,7 @@ export class CreatePostComponent implements OnInit {
   converter: Showdown.Converter = new Showdown.Converter();
   editor: SimpleMDE;
 
-  @ViewChild('characterPicker', { static: false })
+  @ViewChild('characterPicker')
   characterPicker: CharacterPickerComponent;
   ngOnInit() {
     if (!this.authService.isAuthenticated()) {
