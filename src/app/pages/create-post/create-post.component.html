@@ -51,10 +51,10 @@
   </div>
   <hr />
   <mat-slide-toggle (change)="toggleMarkdown()" [(ngModel)]="useMarkdown" i18n>
-    <div *ngIf="useMarkdown else quillText" i18n>
+    <div *ngIf="useMarkdown else quillText">
         Markdown mode
     </div>
-    <ng-template #quillText i18n>
+    <ng-template #quillText>
         Editor mode
     </ng-template>
 

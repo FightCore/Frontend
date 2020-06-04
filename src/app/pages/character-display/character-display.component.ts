@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { Matchup } from 'src/app/models/matchup';
 import { MatchupService } from 'src/app/services/matchup/matchup.service';
+import { WebsiteResource } from 'src/app/models/resources/websiteResource';
 
 @Component({
   selector: 'app-character-display',
@@ -101,27 +102,7 @@ export class CharacterDisplayComponent implements OnInit {
   editCharacter(): void {
     this.router.navigate([StaticRoutes.editCharacterNoId, this.character.id]);
   }
-
-  private generateMatchup() {
-    this.characterService
-      .getForGame(this.character.game.id)
-      .subscribe(characters => {
-        const matchups: Matchup[] = [];
-        for (const characterTwo of characters) {
-          if (characterTwo.id === this.character.id) {
-            continue;
-          }
-
-          const matchup = new Matchup();
-          matchup.character1 = this.character;
-          matchup.character1Id = this.character.id;
-          matchup.character2 = characterTwo;
-          matchup.character2Id = characterTwo.id;
-          matchup.value = Math.floor(Math.random() * 9) + -4;
-          matchups.push(matchup);
-        }
-
-        this.matchups = matchups;
-      });
+  openUrl(url: string): void {
+    window.open(url, '_blank');
   }
 }

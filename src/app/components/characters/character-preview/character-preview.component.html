@@ -1,0 +1,19 @@
+<mat-card class="mat-elevation-z5">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <img class="fit-image-height" alt="character profile shot" [src]="characterIcon()" >
+    </div>
+    <mat-card-title>{{ character.name }}</mat-card-title>
+    <mat-card-subtitle>{{character.game.name}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="description">
+      {{ character.generalInformation }}
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="viewCharacter(character.id)" mat-button color="primary">
+      View
+    </button>
+  </mat-card-actions>
+</mat-card>

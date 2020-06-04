@@ -1,0 +1,32 @@
+<mat-card class="mat-elevation-z5">
+  <mat-card-header>
+    <div *ngIf="post.character && post.character.stockIcon" mat-card-avatar>
+      <img
+      alt="Character stock icon"
+      class="fit-image-height"
+      [src]="post.character.stockIcon.url"
+    />
+    </div>
+    <mat-card-title> {{ post.title }}</mat-card-title>
+    <mat-card-subtitle>
+      Written by: <strong>{{post.author.name}}</strong>
+      <div></div>
+      <span class="float-right">{{post.game.name}}</span>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="post-content">
+      <p [innerHTML]="post.body" class="post-markdown-text"></p>
+  </mat-card-content>
+  <mat-card-actions>
+    <app-like-button
+        class="like-button"
+          [postId]="post.id"
+          [likes]="post.likes"
+          [liked]="post.liked"
+        >
+        </app-like-button>
+        <button (click)="viewPost(post.id)" mat-button color="primary">
+          Read more
+        </button>
+  </mat-card-actions>
+</mat-card>

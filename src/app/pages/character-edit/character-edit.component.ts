@@ -5,6 +5,8 @@ import { Character } from 'src/app/models/character';
 import { NotablePlayer } from 'src/app/models/notablePlayer';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StaticRoutes } from 'src/app/routes/static-routes';
+import { VideoResource } from 'src/app/models/videoResource';
+import { WebsiteResource } from 'src/app/models/resources/websiteResource';
 
 @Component({
   selector: 'app-character-edit',
@@ -35,8 +37,30 @@ export class CharacterEditComponent implements OnInit {
     this.character.notablePlayers.push(new NotablePlayer());
   }
 
+  createVideo(): void {
+    this.character.videos.push(new VideoResource());
+  }
+
+  createWebsite(): void {
+    this.character.websites.push(new WebsiteResource());
+  }
+
+  deleteVideo(video: VideoResource): void {
+    const index = this.character.videos.indexOf(video);
+    if (index > -1) {
+      this.character.videos.splice(index, 1);
+    }
+  }
+
+  deleteWebsite(website: WebsiteResource): void {
+    const index = this.character.websites.indexOf(website);
+    if (index > -1) {
+      this.character.websites.splice(index, 1);
+    }
+  }
+
   saveForm(): void {
-    console.log(this.character);
+    this.characterService.updateCharacter(this.character).subscribe(_ => {}, error => console.log(error));
   }
 
   deletePlayer(player: NotablePlayer): void {

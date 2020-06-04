@@ -3,10 +3,16 @@
 </div>
 
 <ng-template #editTemplate>
-  <button mat-raised-button color="primary" class="mt-1 mb-1" (click)="toCharacters()" i18n>
+  <button
+    mat-raised-button
+    color="primary"
+    class="mt-1 mb-1"
+    (click)="toCharacters()"
+    i18n
+  >
     <em class="material-icons">arrow_back</em> Back
   </button>
-  <mat-card>
+  <mat-card class="h-100">
     <mat-card-header>
       <mat-card-title>
         <h2 class="d-inline">
@@ -19,131 +25,182 @@
         </h2>
       </mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col-12">
-          <h3 i18n>General Information</h3>
-          <mat-form-field class="general-information">
+    <mat-card-content class="h-100">
+      <mat-tab-group class="h-100">
+        <mat-tab class="h-100" label="General Information">
+          <mat-form-field class="h-100 general-information">
             <textarea
               matInput
               placeholder="General Information about the character."
               [(ngModel)]="character.generalInformation"
               type="textarea"
+              class="h-100"
               name="generalInformation"
             ></textarea>
           </mat-form-field>
-        </div>
-        <hr />
-        <div class="col-6">
-          <div class="title">
-            <h3 i18n>Players</h3>
+        </mat-tab>
+        <mat-tab class="h-100" label="Notable Players">
+          <div class="row">
+            <div class="col-12">
+              <button
+                class="create-button"
+                mat-raised-button
+                (click)="createPlayer()"
+                color="primary"
+                i18n
+              >
+                <em class="material-icons">add</em> New Player
+              </button>
+            </div>
+            <div class="col-12">
+              <p *ngIf="character.notablePlayers.length === 0" i18n>
+                No players yet.
+              </p>
+              <div
+                *ngFor="let player of character.notablePlayers"
+                class="player"
+              >
+                <mat-form-field class="name">
+                  <input
+                    matInput
+                    placeholder="Player's name"
+                    [(ngModel)]="player.name"
+                    type="input"
+                    [name]="'playerName' + player.id"
+                    required
+                  />
+                </mat-form-field>
+                <mat-form-field class="description">
+                  <input
+                    matInput
+                    placeholder="Player's description"
+                    [(ngModel)]="player.description"
+                    type="input"
+                    [name]="'playerDescription' + player.id"
+                    required
+                  />
+                </mat-form-field>
+                <button
+                  class="delete-button"
+                  mat-raised-button
+                  color="accent"
+                  (click)="deletePlayer(player)"
+                  i18n
+                >
+                  <em class="material-icons">delete</em> Delete
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-6">
-          <button
-            class="create-button"
-            mat-raised-button
-            (click)="createPlayer()"
-            color="primary"
-            i18n
-          >
-            <em class="material-icons">add</em> New Player
-          </button>
-        </div>
-        <div class="col-12">
-          <p *ngIf="character.notablePlayers.length === 0" i18n>
-            No players yet.
-          </p>
-          <div *ngFor="let player of character.notablePlayers" class="player">
-            <mat-form-field class="name">
-              <input
-                matInput
-                placeholder="Player's name"
-                [(ngModel)]="player.name"
-                type="input"
-                [name]="'playerName' + player.id"
-                required
-              />
-            </mat-form-field>
-            <mat-form-field class="description">
-              <input
-                matInput
-                placeholder="Player's description"
-                [(ngModel)]="player.description"
-                type="input"
-                [name]="'playerDescription' + player.id"
-                required
-              />
-            </mat-form-field>
-            <button
-              class="delete-button"
-              mat-raised-button
-              color="accent"
-              (click)="deletePlayer(player)"
-              i18n
-            >
-            <em class="material-icons">delete</em> Delete
-            </button>
-            <hr />
+        </mat-tab>
+        <mat-tab class="h-100" label="Videos">
+          <div class="row">
+            <div class="col-12">
+              <button
+                class="create-button"
+                mat-raised-button
+                (click)="createVideo()"
+                color="primary"
+                i18n
+              >
+                <em class="material-icons">add</em> New Video
+              </button>
+            </div>
+            <div class="col-12">
+              <p *ngIf="character.videos.length === 0" i18n>
+                No videos yet.
+              </p>
+              <div *ngFor="let video of character.videos" class="player">
+                <mat-form-field class="name">
+                  <input
+                    matInput
+                    placeholder="Video's name"
+                    [(ngModel)]="video.name"
+                    type="input"
+                    [name]="'videoName' + video.id"
+                    required
+                  />
+                </mat-form-field>
+                <mat-form-field class="description">
+                  <input
+                    matInput
+                    placeholder="Video's YouTubeId"
+                    [(ngModel)]="video.youtubeId"
+                    type="input"
+                    [name]="'youtubeId' + video.id"
+                    required
+                  />
+                </mat-form-field>
+                <button
+                  class="delete-button"
+                  mat-raised-button
+                  color="accent"
+                  (click)="deleteVideo(video)"
+                  i18n
+                >
+                  <em class="material-icons">delete</em> Delete
+                </button>
+                <hr />
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-6">
-          <div class="title">
-            <h3 i18n>Videos</h3>
+        </mat-tab>
+        <mat-tab class="h-100" label="Websites">
+          <div class="row">
+            <div class="col-12">
+              <button
+                class="create-button"
+                mat-raised-button
+                (click)="createWebsite()"
+                color="primary"
+                i18n
+              >
+                <em class="material-icons">add</em> New Website
+              </button>
+            </div>
+            <div class="col-12">
+              <p *ngIf="character.websites.length === 0" i18n>
+                No websites yet.
+              </p>
+              <div *ngFor="let websites of character.websites" class="player">
+                <mat-form-field class="name">
+                  <input
+                    matInput
+                    placeholder="Website's title"
+                    [(ngModel)]="websites.title"
+                    type="input"
+                    [name]="'websiteName' + websites.id"
+                    required
+                  />
+                </mat-form-field>
+                <mat-form-field class="description">
+                  <input
+                    matInput
+                    placeholder="Websites's URL"
+                    [(ngModel)]="websites.websiteUrl"
+                    type="input"
+                    [name]="'websitesUrl' + websites.id"
+                    required
+                  />
+                </mat-form-field>
+                <button
+                  class="delete-button"
+                  mat-raised-button
+                  color="accent"
+                  (click)="deleteWebsite(websites)"
+                  i18n
+                >
+                  <em class="material-icons">delete</em> Delete
+                </button>
+                <hr />
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-6">
-          <button
-            class="create-button"
-            mat-raised-button
-            (click)="createPlayer()"
-            color="primary"
-            i18n
-          >
-          <em class="material-icons">add</em> New Video
-          </button>
-        </div>
-        <div class="col-12">
-          <p *ngIf="character.videos.length === 0" i18n>
-            No videos yet.
-          </p>
-          <div *ngFor="let video of character.videos" class="player">
-            <mat-form-field class="name">
-              <input
-                matInput
-                placeholder="Video's name"
-                [(ngModel)]="video.name"
-                type="input"
-                [name]="'videoName' + video.id"
-                required
-              />
-            </mat-form-field>
-            <mat-form-field class="description">
-              <input
-                matInput
-                placeholder="Video's YouTubeId"
-                [(ngModel)]="video.youtubeId"
-                type="input"
-                [name]="'youtubeId' + video.id"
-                required
-              />
-            </mat-form-field>
-            <button
-              class="delete-button"
-              mat-raised-button
-              color="accent"
-              (click)="deletePlayer(video)"
-              i18n
-            >
-            <em class="material-icons">delete</em> Delete
-            </button>
-            <hr />
-          </div>
-        </div>
-      </div>
+        </mat-tab>
+      </mat-tab-group>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="accent" (click)="saveForm()" i18n>
+      <button mat-raised-button color="primary" (click)="saveForm()" i18n>
         <em class="material-icons">save</em> Save
       </button>
       <button mat-raised-button color="primary" (click)="toCharacters()" i18n>

@@ -20,7 +20,7 @@
         color="accent"
         mat-flat-button
         class="text-center w-100 mb-1"(click)="hideSidebar(); toUser()" i18n>
-        <fa-icon icon="user-circle" size="1x"> </fa-icon>
+        <em class="material-icons">account_circle</em>
         {{ getUserName() }}
         </button>
 
@@ -37,17 +37,15 @@
       <mat-toolbar color="primary">
         <mat-toolbar-row>
           <div [routerLink]="['']">
-            <img class="logo" src="assets/FC.png" alt="FightCore logo" />
-            <span i18n>FightCore</span>
+            <img class="logo" src="assets/Fightcore_Logo.svg" alt="FightCore logo" />
           </div>
           <span *ngFor="let link of links" [routerLink]="link.route" i18n>
-            <fa-icon class="d-none d-md-inline" [icon]="link.icon"></fa-icon>
             {{ link.name }}</span
           >
           <span class="spacer"></span>
           <div class="d-none d-md-block">
             <span *ngIf="isAuthenticated(); else login" (click)="toUser()">
-              <fa-icon icon="user-circle" size="1x"> </fa-icon>
+              <em class="material-icons">account_circle</em>
               {{ getUserName() }}</span
             >
             <span *ngIf="isAuthenticated()" (click)="logout()" i18n>
@@ -59,7 +57,7 @@
     </div>
     <mat-toolbar class="d-md-block d-lg-none" color="primary">
       <div [routerLink]="['']">
-        <img class="logo" src="assets/FC.png" alt="FightCore logo" />
+        <!-- <img class="logo" src="assets/FC.png" alt="FightCore logo" /> -->
         <span>FightCore</span>
       </div>
       <span class="example-spacer"></span>

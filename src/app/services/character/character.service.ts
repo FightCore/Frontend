@@ -7,10 +7,10 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Post } from "src/app/models/post";
 import { Matchup } from "src/app/models/matchup";
-import { match } from 'minimatch';
+import { match } from "minimatch";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class CharacterService extends BaseService {
   constructor(private httpClient: HttpClient, authService: AuthService) {
@@ -24,7 +24,7 @@ export class CharacterService extends BaseService {
    */
   public getAll(): Observable<Character[]> {
     if (environment.mocking) {
-      return new Observable(observer =>
+      return new Observable((observer) =>
         observer.next(this.generateCharacterList(20))
       );
     }
@@ -38,7 +38,7 @@ export class CharacterService extends BaseService {
    */
   public get(id: number): Observable<Character> {
     if (environment.mocking) {
-      return new Observable(observer =>
+      return new Observable((observer) =>
         observer.next(this.generateCharacter())
       );
     }
@@ -60,6 +60,14 @@ export class CharacterService extends BaseService {
   public getForGame(gameId: number): Observable<Character[]> {
     return this.httpClient.get<Character[]>(
       `${environment.baseUrl}/games/${gameId}/characters`
+    );
+  }
+
+  public updateCharacter(character: Character): Observable<never> {
+    return this.httpClient.put<never>(
+      `${environment.baseUrl}/characters/${character.id}`,
+      character,
+      this.getDefaultHttpOptions()
     );
   }
 

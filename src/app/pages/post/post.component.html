@@ -1,7 +1,7 @@
 <div class="container-fluid toolbar-container">
   <app-titlebar [title]="'Posts'" (selectionChange)="onGameChange($event)"></app-titlebar>
   <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-6">
       <div class="create-button">
         <button (click)="createPost()" mat-raised-button color="accent" i18n>
           <em class="material-icons">
@@ -10,14 +10,16 @@
         </button>
       </div>
     </div>
-    <div class="col-lg-2 col-xs-12">
-      <app-character-picker #characterPicker (selectionChange)="onCharacterChange($event)"
-      [gameId]="gameId"></app-character-picker>
-      <mat-form-field class="right-search-bar">
-          <mat-label i18n>Search</mat-label>
-        <input (input)="onSearchChange($event.target.value)" matInput name="search" />
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
+    <div class="col-lg-6 col-xs-12">
+      <div class="float-right">
+        <app-character-picker class="d-inline" #characterPicker (selectionChange)="onCharacterChange($event)"
+        [gameId]="gameId"></app-character-picker>
+        <mat-form-field class="d-inline-block ml-2">
+            <mat-label i18n>Search</mat-label>
+          <input (input)="onSearchChange($event.target.value)" matInput name="search" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
     </div>
   </div>
 </div>
