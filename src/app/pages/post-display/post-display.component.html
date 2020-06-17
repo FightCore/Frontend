@@ -6,7 +6,7 @@
     color="primary"
     i18n
   >
-    <em class="material-icons">arrow_back</em> Back to posts.
+    <em class="material-icons">arrow_back</em> {{ 'Posts.BackToPosts' | translate }}
   </button>
   <div *ngIf="loading; else display"></div>
   <button
@@ -16,7 +16,7 @@
     color="primary"
     i18n
   >
-    <em class="material-icons">arrow_back</em> Back to posts.
+    <em class="material-icons">arrow_back</em> {{ 'Posts.BackToPosts' | translate }}
   </button>
 </div>
 <app-top-scroller></app-top-scroller>
@@ -30,12 +30,12 @@
           <mat-card-header>
             <mat-card-title>{{ post.title }}</mat-card-title>
             <mat-card-subtitle class="mouse-pointer" (click)="viewAuthor()">
-              Written by {{post.author.name}}
+              <p [innerHTML]="'Posts.WrittenBy'| translate:{ author: post.author.name }">
             </mat-card-subtitle>
             <mat-card-subtitle>{{ post.game.name }}</mat-card-subtitle>
-            <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
-              <em class="material-icons">lock</em> This is a private
-              post, only you can see it.
+            <h5 class="subtitle" *ngIf="post.isPrivate">
+              <em class="material-icons">lock</em>
+              {{ 'Posts.ThisIsAPrivatePostOnlyYouCanSeeIt' | translate }}
             </h5>
           </mat-card-header>
           <mat-card-content>
@@ -51,8 +51,8 @@
           </app-like-button>
 
           <div class="d-inline p-1" *ngIf="isPostFromUser()">
-            <button (click)="editPost()" mat-raised-button color="accent" i18n>
-              <em class="material-icons">edit</em> Edit
+            <button (click)="editPost()" mat-raised-button color="accent">
+              <em class="material-icons">edit</em> {{ 'Common.Edit' | translate}}
             </button>
 
             <button
@@ -62,7 +62,8 @@
               i18n
               class="ml-2"
             >
-              <em class="material-icons">cloud_download</em> Download Markdown
+              <em class="material-icons">cloud_download</em>
+              {{ 'Posts.DownloadMarkdown' | translate }}
             </button>
           </div>
           </mat-card-actions>
@@ -71,7 +72,7 @@
       <div class="col-lg-2">
         <mat-card class="mat-elevation-z10">
           <mat-card-header>
-            <mat-card-title i18n>Featured in this post.</mat-card-title>
+            <mat-card-title>{{ 'Posts.FeaturedInThisPost' | translate }}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
             <mat-card class="mb-2">
@@ -81,7 +82,7 @@
                 </mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                  A small text about the author of this post.
+                  <!-- A small text about the author of this post. -->
               </mat-card-content>
             </mat-card>
             <mat-card class="mb-2">
@@ -99,9 +100,8 @@
                 mat-raised-button
                 color="primary"
                 (click)="viewGame(post.game.id)"
-                i18n
               >
-                View
+                {{ 'Common.View' | translate }}
               </button>
               </mat-card-content>
             </mat-card>
@@ -127,9 +127,8 @@
                 mat-raised-button
                 color="primary"
                 (click)="viewCharacter(post.character.id)"
-                i18n
               >
-                View
+                {{ 'Common.View' | translate }}
               </button>
               </mat-card-content>
             </mat-card>

@@ -6,7 +6,7 @@
         <button (click)="createPost()" mat-raised-button color="accent" i18n>
           <em class="material-icons">
             add
-            </em> Create new post
+            </em> {{ 'Posts.CreatePost' | translate }}
         </button>
       </div>
     </div>
@@ -15,7 +15,7 @@
         <app-character-picker class="d-inline" #characterPicker (selectionChange)="onCharacterChange($event)"
         [gameId]="gameId"></app-character-picker>
         <mat-form-field class="d-inline-block ml-2">
-            <mat-label i18n>Search</mat-label>
+            <mat-label i18n>{{ 'Common.Search' | translate }}</mat-label>
           <input (input)="onSearchChange($event.target.value)" matInput name="search" />
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>

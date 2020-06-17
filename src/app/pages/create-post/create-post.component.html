@@ -1,11 +1,11 @@
 <div class="d-md-block">
   <div class="container-fluid">
     <h2 i18n>
-      Create a new post
+      {{ 'Posts.CreatePost' | translate }}
     </h2>
     <mat-form-field class="create-post-header">
       <mat-label i18n>
-        Title
+        {{ 'Post.Title' | translate }}
       </mat-label>
       <input [(ngModel)]="title" matInput name="title" required />
     </mat-form-field>
@@ -25,15 +25,15 @@
       ></app-character-picker>
     </div>
     <mat-checkbox class="create-post-header" [(ngModel)]="isPrivate" i18n>
-      Private Post
+      {{ 'Posts.PrivatePost' | translate }}
     </mat-checkbox>
 
     <div class="create-button">
       <button mat-raised-button color="primary" (click)="togglePreview()" i18n>
-        <em class="material-icons">visibility</em> Preview
+        <em class="material-icons">visibility</em> {{ 'Posts.Preview' | translate }}
       </button>
       <button mat-raised-button color="primary" (click)="openHelp()" i18n>
-        <em class="material-icons">help</em> Show Help
+        <em class="material-icons">help</em> {{ 'Posts.Help' | translate }}
       </button>
       <button
         [disabled]="isLoading"
@@ -44,7 +44,7 @@
       >
         <em class="material-icons">save</em>
         <div class="post-text" *ngIf="this.post; else createText">
-          Update Post
+          {{ 'Posts.Update' | translate }}
         </div>
       </button>
     </div>
@@ -52,10 +52,10 @@
   <hr />
   <mat-slide-toggle (change)="toggleMarkdown()" [(ngModel)]="useMarkdown" i18n>
     <div *ngIf="useMarkdown else quillText">
-        Markdown mode
+        {{ 'Posts.MarkdownMode' | translate }}
     </div>
     <ng-template #quillText>
-        Editor mode
+      {{ 'Posts.FancyMode' | translate }}
     </ng-template>
 
   </mat-slide-toggle>
@@ -65,6 +65,6 @@
 <ng-template #quill>
   <quill-editor [(ngModel)]="content"></quill-editor>
 </ng-template>
-<ng-template #createText i18n>
-  Create Post
+<ng-template #createText>
+  {{ 'Posts.CreatePost' | translate }}
 </ng-template>

@@ -1,0 +1,76 @@
+{
+    "Account": {
+        "ConfirmPassword": "Confirm password",
+        "CreateYourAccount": "Create your account",
+        "Email": "Email",
+        "Login": "Login",
+        "Logout": "Logout",
+        "Password": "Password",
+        "Register": "Register",
+        "ShowDetails": "Show details",
+        "Username": "Username",
+        "YouAreBeingRedirected": "You are being redirect, please wait a moment."
+    },
+    "Characters": {
+        "Character": "Character",
+        "Characters": "Characters",
+        "Contributors": "Contributors",
+        "EditCharacter": "Edit character",
+        "GeneralInformation": "General Information",
+        "NewPlayer": "New player",
+        "NewVideo": "New video",
+        "NewWebsite": "New website",
+        "NoContributorsYet": "No contributors yet.",
+        "NoPlayersYet": "No players yet.",
+        "NotablePlayers": "Notable players",
+        "NoVideosYet": "No videos yet.",
+        "NoWebsitesYet": "No websites have been added yet.",
+        "QuickSelector": "Quick selector",
+        "Sources": "Sources",
+        "TopFightCorePosts": "Top FightCore posts",
+        "Videos": "Videos",
+        "Websites": "Websites"
+    },
+    "Common": {
+        "Back": "Back",
+        "Delete": "Delete",
+        "Edit": "Edit",
+        "Loading": "Loading",
+        "RedirectWarning": "You are being redirected, this may take up to a few seconds.",
+        "Save": "Save",
+        "Search": "Search",
+        "ToTop": "To top",
+        "View": "View"
+    },
+    "Games": {
+        "All": "All",
+        "BackToGames": "Back to games",
+        "Game": "Game",
+        "Games": "Games",
+        "LoadingFailed": "Loading games has failed. Try refreshing."
+    },
+    "Posts": {
+        "AboutMakingAPost": "About making a post",
+        "BackToPosts": "Back to posts",
+        "CreatePost": "Create post",
+        "DownloadMarkdown": "Download markdown",
+        "EverythingYouNeedToKnow": "Everything you need to know before posting.",
+        "FancyMode": "Fancy mode",
+        "FeaturedInThisPost": "Featured in this post",
+        "FeaturedPosts": "Featured posts",
+        "Help": "Help",
+        "LatestPosts": "Latest posts",
+        "MarkdownMode": "Markdown Mode",
+        "Posts": "Posts",
+        "Preview": "Preview",
+        "PrivatePost": "Private post",
+        "ReadMore": "Read more",
+        "ThisIsAPrivatePostOnlyYouCanSeeIt": "This is a private post, only you can see it.",
+        "Title": "Title",
+        "Update": "Update",
+        "WrittenBy": "Written by: <strong>{{author}}</strong>"
+    },
+    "Socials": {
+        "FollowUs": "Follow us"
+    }
+}

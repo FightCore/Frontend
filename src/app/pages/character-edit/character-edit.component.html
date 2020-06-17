@@ -10,7 +10,7 @@
     (click)="toCharacters()"
     i18n
   >
-    <em class="material-icons">arrow_back</em> Back
+    <em class="material-icons">arrow_back</em> {{ 'Common.Back' | translate }}
   </button>
   <mat-card class="h-100">
     <mat-card-header>
@@ -49,12 +49,12 @@
                 color="primary"
                 i18n
               >
-                <em class="material-icons">add</em> New Player
+                <em class="material-icons">add</em> {{ 'Characters.NewPlayer' | translate }}
               </button>
             </div>
             <div class="col-12">
               <p *ngIf="character.notablePlayers.length === 0" i18n>
-                No players yet.
+                {{ 'Characters.NoPlayersYet' | translate }}
               </p>
               <div
                 *ngFor="let player of character.notablePlayers"
@@ -87,7 +87,7 @@
                   (click)="deletePlayer(player)"
                   i18n
                 >
-                  <em class="material-icons">delete</em> Delete
+                  <em class="material-icons">delete</em> {{ 'Common.Delete' | translate }}
                 </button>
               </div>
             </div>
@@ -103,12 +103,12 @@
                 color="primary"
                 i18n
               >
-                <em class="material-icons">add</em> New Video
+                <em class="material-icons">add</em> {{ 'Characters.NewVideo' | translate }}
               </button>
             </div>
             <div class="col-12">
               <p *ngIf="character.videos.length === 0" i18n>
-                No videos yet.
+                {{ 'Characters.NoVideosYet' | translate }}
               </p>
               <div *ngFor="let video of character.videos" class="player">
                 <mat-form-field class="name">
@@ -138,7 +138,7 @@
                   (click)="deleteVideo(video)"
                   i18n
                 >
-                  <em class="material-icons">delete</em> Delete
+                  <em class="material-icons">delete</em> {{ 'Common.Delete' | translate }}
                 </button>
                 <hr />
               </div>
@@ -155,12 +155,12 @@
                 color="primary"
                 i18n
               >
-                <em class="material-icons">add</em> New Website
+                <em class="material-icons">add</em> {{ 'Characters.NewWebsite' | translate }}
               </button>
             </div>
             <div class="col-12">
               <p *ngIf="character.websites.length === 0" i18n>
-                No websites yet.
+                {{ 'Characters.NoWebsitesYet' | translate }}
               </p>
               <div *ngFor="let websites of character.websites" class="player">
                 <mat-form-field class="name">
@@ -190,7 +190,7 @@
                   (click)="deleteWebsite(websites)"
                   i18n
                 >
-                  <em class="material-icons">delete</em> Delete
+                  <em class="material-icons">delete</em> {{ 'Common.Delete' | translate }}
                 </button>
                 <hr />
               </div>
@@ -201,10 +201,10 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="saveForm()" i18n>
-        <em class="material-icons">save</em> Save
+        <em class="material-icons">save</em> {{ 'Common.Save' | translate }}
       </button>
       <button mat-raised-button color="primary" (click)="toCharacters()" i18n>
-        <em class="material-icons">arrow_back</em> Back
+        <em class="material-icons">arrow_back</em> {{ 'Common.Back' | translate }}
       </button>
     </mat-card-actions>
   </mat-card>

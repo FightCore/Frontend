@@ -30,6 +30,8 @@
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@handsontable/angular": "^5.1.1",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^4.0.0",
     "@types/faker": "^4.1.12",
     "@types/file-saver": "^2.0.1",
     "@types/showdown": "^1.9.3",

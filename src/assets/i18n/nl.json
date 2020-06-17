@@ -1,0 +1,76 @@
+{
+    "Account": {
+        "ConfirmPassword": "Herhaal wachtwoord",
+        "CreateYourAccount": "Account aanmaken",
+        "Email": "Email",
+        "Login": "Inloggen",
+        "Logout": "Uitloggen",
+        "Password": "Wachtwoord",
+        "Register": "Registreren",
+        "ShowDetails": "Details weergeven",
+        "Username": "Gebruikersnaam",
+        "YouAreBeingRedirected": "U wordt naar een andere pagina gestuurd, een moment geduld."
+    },
+    "Characters": {
+        "Character": "Personage",
+        "Characters": "Personages",
+        "Contributors": "Medewerkers",
+        "EditCharacter": "Personage werken",
+        "GeneralInformation": "Generale informatie",
+        "NewPlayer": "Nieuwe speler",
+        "NewVideo": "Nieuwe video",
+        "NewWebsite": "Nieuwe website",
+        "NoContributorsYet": "Nog geen medewerkers.",
+        "NoPlayersYet": "Nog geen spelers",
+        "NotablePlayers": "Opmerkelijke spelers",
+        "NoVideosYet": "Nog geen videos.",
+        "NoWebsitesYet": "Er zijn nog geen website toegevoegd.",
+        "QuickSelector": "Snelle selectie",
+        "Sources": "Bronnen",
+        "TopFightCorePosts": "Top FightCore posts",
+        "Videos": "Videos",
+        "Websites": "Websites"
+    },
+    "Common": {
+        "Back": "Terug",
+        "Delete": "Verwijderen",
+        "Edit": "Aanpassen",
+        "Loading": "Laden",
+        "RedirectWarning": "U wordt naar een andere pagina gestuurd, een moment geduld.",
+        "Save": "Opslaan",
+        "Search": "Zoeken",
+        "ToTop": "Naar boven",
+        "View": "Bekijken"
+    },
+    "Games": {
+        "All": "Alles",
+        "BackToGames": "Terug naar spellen",
+        "Game": "Spel",
+        "Games": "Spellen",
+        "LoadingFailed": "Spellen laden gefaald, probeer de pagina te verversen."
+    },
+    "Posts": {
+        "AboutMakingAPost": "Over een post maken.",
+        "BackToPosts": "Terug naar posts",
+        "CreatePost": "Blogpost aanmaken.",
+        "DownloadMarkdown": "Markdown donwloaden",
+        "EverythingYouNeedToKnow": "Alles wat u moet weten voor het maken van een post.",
+        "FancyMode": "Fancy-modus",
+        "FeaturedInThisPost": "Uitgelicht in deze post",
+        "FeaturedPosts": "Uitgelichte posts",
+        "Help": "Help",
+        "LatestPosts": "Laatste post",
+        "MarkdownMode": "Markdown-modus",
+        "Posts": "Posts",
+        "Preview": "Voorbeeld",
+        "PrivatePost": "Privé ppost",
+        "ReadMore": "Lees meer",
+        "ThisIsAPrivatePostOnlyYouCanSeeIt": "Dit is een privé post, alleen u kan deze lezen..",
+        "Title": "Titel",
+        "Update": "Updaten",
+        "WrittenBy": "Geschreven door: <strong>{{author}}</strong>"
+    },
+    "Socials": {
+        "FollowUs": "Volg ons"
+    }
+}

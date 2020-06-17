@@ -9,7 +9,7 @@
     </div>
     <mat-card-title> {{ post.title }}</mat-card-title>
     <mat-card-subtitle>
-      Written by: <strong>{{post.author.name}}</strong>
+      <p [innerHTML]="'Posts.WrittenBy'| translate:{ author: post.author.name }">
       <div></div>
       <span class="float-right">{{post.game.name}}</span>
     </mat-card-subtitle>
@@ -26,7 +26,7 @@
         >
         </app-like-button>
         <button (click)="viewPost(post.id)" mat-button color="primary">
-          Read more
+          {{ 'Posts.ReadMore' | translate }}
         </button>
   </mat-card-actions>
 </mat-card>

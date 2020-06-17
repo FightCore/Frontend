@@ -1,7 +1,7 @@
 <app-loading *ngIf="loading else dropdown"></app-loading>
 <ng-template #dropdown>
     <mat-form-field class="game-dropdown">
-        <mat-label i18n>Character</mat-label>
+        <mat-label>{{ 'Characters.Character' | translate}}</mat-label>
         <input matInput aria-label="Character" [matAutocomplete]="auto" [formControl]="characterFormControl">
         <mat-icon matSuffix>search</mat-icon>
         <mat-autocomplete #auto (optionSelected)="onSelectChange($event)" [displayWith]="displayCharacter">

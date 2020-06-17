@@ -1,11 +1,10 @@
 <div class="container-fluid">
-  <h2 class="title" i18n>Create your account</h2>
+  <h2 class="title">{{ 'Account.CreateYourAccount' | translate }}</h2>
   <form class="user-form">
     <mat-form-field appearance="outline">
-      <mat-label i18n>Email</mat-label>
+      <mat-label>{{ 'Account.Email' | translate }}</mat-label>
       <input
         matInput
-        placeholder="Enter your email"
         [formControl]="email"
         required
       />
@@ -13,10 +12,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label i18n>Username</mat-label>
+      <mat-label>{{ 'Account.Username' | translate }}</mat-label>
       <input
         matInput
-        placeholder="Enter your username"
         [formControl]="username"
         required
       />
@@ -26,10 +24,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label i18n>Password</mat-label>
+      <mat-label i18n>{{ 'Account.Password' | translate }}</mat-label>
       <input
         matInput
-        placeholder="Enter your password"
         [formControl]="password"
         type="password"
         required
@@ -40,10 +37,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label i18n>Confirm password</mat-label>
+      <mat-label>{{ 'Account.ConfirmPassword' | translate }}</mat-label>
       <input
         matInput
-        placeholder="Confirm your password"
         [formControl]="confirmPassword"
         type="password"
         required
@@ -60,8 +56,8 @@
       </mat-hint>
       <mat-password-strength #passwordComponent [password]="password.value">
       </mat-password-strength>
-      <mat-checkbox [(ngModel)]="showPasswordInfo" name="showPasswordInfo" i18n
-        >Show details
+      <mat-checkbox [(ngModel)]="showPasswordInfo" name="showPasswordInfo"
+        > {{'Account.ShowDetails' | translate }}
       </mat-checkbox>
       <mat-password-strength-info
         *ngIf="showPasswordInfo"
@@ -77,7 +73,7 @@
       class="register-button"
       i18n
     >
-      Register
+      {{ 'Account.Register' | translate }}
     </button>
   </form>
 </div>

@@ -45,9 +45,9 @@
         </mat-tab>
         <mat-tab label="Notable players">
           <div>
-            <h2 i18n>Notable Players</h2>
-            <h5 *ngIf="character.notablePlayers.length == 0" i18n>
-              No players yet!
+            <h2>{{ 'Characters.NotablePlayers' | translate }}</h2>
+            <h5 *ngIf="character.notablePlayers.length == 0">
+              {{ 'Characters.NoPlayersYet' | translate }}
             </h5>
             <div *ngFor="let player of character.notablePlayers">
               <app-notable-player [player]="player"></app-notable-player>
@@ -56,7 +56,7 @@
         </mat-tab>
         <mat-tab label="FightCore Posts">
           <div class="m-1">
-            <h2 i18n>Top FightCore posts</h2>
+            <h2>{{ 'Characters.TopFightCorePosts' | translate }}</h2>
             <div *ngIf="!postLoading" class="row equal w-100">
               <div *ngFor="let post of posts" class="col-lg-4">
                 <app-post-preview [post]="post"></app-post-preview>
@@ -67,9 +67,9 @@
         <mat-tab label="Resources">
           <div *ngIf="!youtubeLoading">
             <div>
-              <h2 i18n>Videos</h2>
-              <h5 *ngIf="youtubeUrls.length == 0" i18n>
-                No videos yet!
+              <h2>{{ 'Characters.Videos' | translate }}</h2>
+              <h5 *ngIf="youtubeUrls.length == 0">
+                {{ 'characters.NoVideosYet' | translate }}
               </h5>
               <div class="row w-100">
                 <div *ngFor="let video of youtubeUrls" class="col-lg-6">
@@ -87,9 +87,9 @@
                   </div>
                 </div>
               </div>
-              <h2 i18n>Websites</h2>
+              <h2 i18n>{{ 'Characters.Websites' | translate }}</h2>
               <p *ngIf="character.websites.length === 0">
-                No websites have been added yet.
+                {{ 'Characters.NoWebsitesYet' | translate }}
               </p>
               <button
                 *ngFor="let website of character.websites"
@@ -106,11 +106,11 @@
       </mat-tab-group>
     </mat-card-content>
     <mat-card-actions>
-      <h5 class="title" i18n>Contributors</h5>
+      <h5 class="title">{{ 'Characters.Contributors' | translate }}</h5>
       <div class="row">
         <div class="col-lg-6 col-md-12">
           <p *ngIf="character.contributors.length === 0" i18n>
-            No contributors yet.
+            {{ 'Characters.NoContributorsYet' | translate }}
           </p>
           <app-contributor-list
             [contributors]="character.contributors"
@@ -125,7 +125,7 @@
             (click)="editCharacter()"
             i18n
           >
-            <em class="material-icons">edit</em> Edit character
+            <em class="material-icons">edit</em> {{ 'Characters.EditCharacter' | translate }}
           </button>
         </div>
       </div>

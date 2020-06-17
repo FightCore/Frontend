@@ -1,21 +1,31 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { UserOptions } from './options/userOptions';
-import { GameThemes } from 'src/styles/gameThemes';
+import { Component, HostBinding, OnInit } from "@angular/core";
+import { OverlayContainer } from "@angular/cdk/overlay";
+import { UserOptions } from "./options/userOptions";
+import { GameThemes } from "src/styles/gameThemes";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  title = 'FightCore';
+  title = "FightCore";
 
-  constructor(public overlayContainer: OverlayContainer) { }
-  @HostBinding('class') componentCssClass;
+  constructor(
+    public overlayContainer: OverlayContainer,
+    translate: TranslateService
+  ) {
+    // this language will be used as a fallback when a translation isn't found in the current language
+    translate.setDefaultLang("nl");
+
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    translate.use("nl");
+  }
+  @HostBinding("class") componentCssClass;
 
   ngOnInit(): void {
-   this.setThemeForCurrentGame();
+    this.setThemeForCurrentGame();
   }
 
   public setThemeForCurrentGame(): void {

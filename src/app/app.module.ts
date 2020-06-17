@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MaterialModules } from './material-modules';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -59,7 +59,13 @@ import { GeneralInformationComponent } from './components/characters/general-inf
 import { NotablePlayerComponent } from './components/characters/notable-player/notable-player.component';
 import { ContributorListComponent } from './components/characters/contributor-list/contributor-list.component';
 import { SocialsComponent } from './components/frontpage/socials/socials.component';
-// Import FontAwesome icons where needed.
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   imports: [
@@ -90,7 +96,14 @@ import { SocialsComponent } from './components/frontpage/socials/socials.compone
     }),
     QuillModule.forRoot(),
     AvatarModule,
-    MatPasswordStrengthModule.forRoot()
+    MatPasswordStrengthModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    })
   ],
   declarations: [
     AppComponent,
