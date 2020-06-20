@@ -21,7 +21,7 @@ RUN npm install -g @angular/cli@8.3.12
 COPY . /app
 
 # generate build
-RUN ng build --output-path=dist
+RUN ng build --prod --output-path=dist
 
 # base image
 FROM nginx:1.16.0-alpine
