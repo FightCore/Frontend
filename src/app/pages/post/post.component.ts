@@ -11,7 +11,7 @@ import { CharacterPickerComponent } from 'src/app/components/characters/characte
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  styleUrls: ['./post.component.scss'],
 })
 export class PostComponent implements OnInit {
   @ViewChild('characterPicker')
@@ -32,11 +32,11 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.postService.getPosts().subscribe(
-      postArray => {
+      (postArray) => {
         this.setupPosts(postArray);
         this.loading = false;
       },
-      error => {
+      (error) => {
         this.loading = false;
         this.toastrService.error(PostText.failedPostsLoad);
       }
@@ -71,13 +71,13 @@ export class PostComponent implements OnInit {
       this.displayPosts = this.posts;
     } else {
       this.displayPosts = this.posts.filter(
-        post => post.gameId === this.gameId
+        (post) => post.gameId === this.gameId
       );
     }
 
     if (this.searchTerm) {
       this.displayPosts = this.displayPosts.filter(
-        post =>
+        (post) =>
           post.title.search(new RegExp(this.searchTerm, 'i')) >= 0 ||
           post.author.name.search(new RegExp(this.searchTerm, 'i')) >= 0
       );
@@ -85,7 +85,7 @@ export class PostComponent implements OnInit {
 
     if (this.characterId) {
       this.displayPosts = this.displayPosts.filter(
-        post => post.characterId === this.characterId
+        (post) => post.characterId === this.characterId
       );
     }
   }

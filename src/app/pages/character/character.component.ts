@@ -37,7 +37,6 @@ export class CharacterComponent implements OnInit {
       this.filterCharacters();
       this.loading = false;
     });
-
   }
 
   getCurrentGame(): Game {
@@ -58,13 +57,13 @@ export class CharacterComponent implements OnInit {
     this.router.navigate([StaticRoutes.characters, id]);
   }
 
-
   filterCharacters(): void {
     this.displayedCharacters = this.characters.filter(
       character => this.selectedGame === 0 ? true : character.game.id === this.selectedGame
     );
     if (this.searchedName) {
       this.displayedCharacters = this.displayedCharacters.filter(character =>
+        // 'i' modifier makes the case-insensitive.
         character.name.search(new RegExp(this.searchedName, 'i')) >= 0
       );
     }
@@ -76,7 +75,5 @@ export class CharacterComponent implements OnInit {
     this.displayedCharacters.sort((characterOne, characterTwo) =>
       characterOne.name > characterTwo.name ? 1 : -1
     );
-
-
   }
 }
