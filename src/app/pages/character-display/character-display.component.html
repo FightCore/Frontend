@@ -103,6 +103,15 @@
             </div>
           </div>
         </mat-tab>
+        <mat-tab *ngIf="isContributor()">
+          <ng-template mat-tab-label>
+            <mat-icon>build</mat-icon>
+            Edits
+          </ng-template>
+          <div *ngIf="characterId">
+            <app-edits-overview [characterId]="characterId"></app-edits-overview>
+          </div>
+        </mat-tab>
       </mat-tab-group>
     </mat-card-content>
     <mat-card-actions>

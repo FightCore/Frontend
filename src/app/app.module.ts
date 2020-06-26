@@ -59,6 +59,8 @@ import { GeneralInformationComponent } from './components/characters/general-inf
 import { NotablePlayerComponent } from './components/characters/notable-player/notable-player.component';
 import { ContributorListComponent } from './components/characters/contributor-list/contributor-list.component';
 import { SocialsComponent } from './components/frontpage/socials/socials.component';
+import { EditsOverviewComponent } from './components/characters/edits-overview/edits-overview.component';
+import { NgxTextDiffModule } from 'ngx-text-diff';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -90,7 +92,8 @@ import { SocialsComponent } from './components/frontpage/socials/socials.compone
     }),
     QuillModule.forRoot(),
     AvatarModule,
-    MatPasswordStrengthModule.forRoot()
+    MatPasswordStrengthModule.forRoot(),
+    NgxTextDiffModule
   ],
   declarations: [
     AppComponent,
@@ -129,7 +132,8 @@ import { SocialsComponent } from './components/frontpage/socials/socials.compone
     GeneralInformationComponent,
     NotablePlayerComponent,
     ContributorListComponent,
-    SocialsComponent
+    SocialsComponent,
+    EditsOverviewComponent
   ],
   entryComponents: [
     PostHelpComponent,
