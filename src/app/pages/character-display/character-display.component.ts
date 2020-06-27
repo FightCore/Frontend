@@ -34,7 +34,6 @@ export class CharacterDisplayComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private characterService: CharacterService,
-    private postService: PostService,
     private router: Router,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
@@ -91,6 +90,10 @@ export class CharacterDisplayComponent implements OnInit {
 
   getGameClass(): string {
     return GameThemes.getThemeForGameId(this.character.game.id);
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   isContributor(): boolean {

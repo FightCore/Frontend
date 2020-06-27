@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { VideoResource } from 'src/app/models/videoResource';
 import { WebsiteResource } from 'src/app/models/resources/websiteResource';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-character-edit',
@@ -22,6 +23,7 @@ export class CharacterEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private characterService: CharacterService,
+    private toastrService: ToastrService,
     private router: Router) {
     }
 
@@ -34,15 +36,21 @@ export class CharacterEditComponent implements OnInit {
   }
 
   createPlayer(): void {
-    this.character.notablePlayers.push(new NotablePlayer());
+    const player = new NotablePlayer();
+    player.new = true;
+    this.character.notablePlayers.push(player);
   }
 
   createVideo(): void {
-    this.character.videos.push(new VideoResource());
+    const video = new VideoResource();
+    video.new = true;
+    this.character.videos.push(video);
   }
 
   createWebsite(): void {
-    this.character.websites.push(new WebsiteResource());
+    const website = new WebsiteResource();
+    website.new = true;
+    this.character.websites.push(website);
   }
 
   deleteVideo(video: VideoResource): void {
@@ -60,7 +68,10 @@ export class CharacterEditComponent implements OnInit {
   }
 
   saveForm(): void {
-    this.characterService.updateCharacter(this.character).subscribe(_ => {}, error => console.log(error));
+    this.characterService.updateCharacter(this.character).subscribe(_ => {
+    this.toastrService.success('Successfully suggested an edit.');
+    this.toCharacters();
+    }, error => console.log(error));
   }
 
   deletePlayer(player: NotablePlayer): void {
@@ -69,6 +80,7 @@ export class CharacterEditComponent implements OnInit {
       this.character.notablePlayers.splice(index, 1);
     }
   }
+
   toCharacters(): void {
     this.router.navigate([StaticRoutes.characters, this.character.id]);
   }

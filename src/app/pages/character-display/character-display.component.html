@@ -46,7 +46,7 @@
         <mat-tab label="Notable players">
           <div>
             <h2 i18n>Notable Players</h2>
-            <h5 *ngIf="character.notablePlayers.length == 0" i18n>
+            <h5 *ngIf="character.notablePlayers.length == 0">
               No players yet!
             </h5>
             <div *ngFor="let player of character.notablePlayers">
@@ -68,7 +68,7 @@
           <div *ngIf="!youtubeLoading">
             <div>
               <h2 i18n>Videos</h2>
-              <h5 *ngIf="youtubeUrls.length == 0" i18n>
+              <h5 *ngIf="youtubeUrls.length == 0">
                 No videos yet!
               </h5>
               <div class="row w-100">
@@ -87,7 +87,7 @@
                   </div>
                 </div>
               </div>
-              <h2 i18n>Websites</h2>
+              <h2>Websites</h2>
               <p *ngIf="character.websites.length === 0">
                 No websites have been added yet.
               </p>
@@ -103,22 +103,22 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab *ngIf="isContributor()">
+        <mat-tab *ngIf="isLoggedIn">
           <ng-template mat-tab-label>
             <mat-icon>build</mat-icon>
             Edits
           </ng-template>
           <div *ngIf="characterId">
-            <app-edits-overview [characterId]="characterId"></app-edits-overview>
+            <app-edits-overview [characterId]="characterId" [isContributor]="isContributor()"></app-edits-overview>
           </div>
         </mat-tab>
       </mat-tab-group>
     </mat-card-content>
     <mat-card-actions>
-      <h5 class="title" i18n>Contributors</h5>
+      <h5 class="title">Contributors</h5>
       <div class="row">
         <div class="col-lg-6 col-md-12">
-          <p *ngIf="character.contributors.length === 0" i18n>
+          <p *ngIf="character.contributors.length === 0">
             No contributors yet.
           </p>
           <app-contributor-list
@@ -127,7 +127,6 @@
         </div>
         <div class="col-lg-6 col-md-12">
           <button
-            *ngIf="isContributor()"
             mat-raised-button
             color="primary"
             class="float-right"

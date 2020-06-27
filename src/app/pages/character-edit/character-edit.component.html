@@ -67,7 +67,8 @@
                     [(ngModel)]="player.name"
                     type="input"
                     [name]="'playerName' + player.id"
-                    required
+                    [readonly]="!player.new"
+                    [disabled]="!player.new"
                   />
                 </mat-form-field>
                 <mat-form-field class="description">
@@ -77,7 +78,8 @@
                     [(ngModel)]="player.description"
                     type="input"
                     [name]="'playerDescription' + player.id"
-                    required
+                    [readonly]="!player.new"
+                    [disabled]="!player.new"
                   />
                 </mat-form-field>
                 <button
@@ -119,6 +121,8 @@
                     type="input"
                     [name]="'videoName' + video.id"
                     required
+                    [readonly]="!video.new"
+                    [disabled]="!video.new"
                   />
                 </mat-form-field>
                 <mat-form-field class="description">
@@ -129,6 +133,8 @@
                     type="input"
                     [name]="'youtubeId' + video.id"
                     required
+                    [readonly]="!video.new"
+                    [disabled]="!video.new"
                   />
                 </mat-form-field>
                 <button
@@ -171,6 +177,8 @@
                     type="input"
                     [name]="'websiteName' + websites.id"
                     required
+                    [readonly]="!websites.new"
+                    [disabled]="!websites.new"
                   />
                 </mat-form-field>
                 <mat-form-field class="description">
@@ -181,6 +189,8 @@
                     type="input"
                     [name]="'websitesUrl' + websites.id"
                     required
+                    [readonly]="!websites.new"
+                    [disabled]="!websites.new"
                   />
                 </mat-form-field>
                 <button
