@@ -67,12 +67,26 @@
         <mat-tab label="Resources">
           <div *ngIf="!youtubeLoading">
             <div>
+              <h2>Websites</h2>
+              <p *ngIf="character.websites.length === 0">
+                No websites have been added yet.
+              </p>
+              <button
+                *ngFor="let website of character.websites"
+                class="d-inline m-1"
+                color="primary"
+                mat-stroked-button
+                (click)="openUrl(website.websiteUrl)"
+              >
+                {{ website.title }}
+              </button>
+
               <h2 i18n>Videos</h2>
               <h5 *ngIf="youtubeUrls.length == 0">
                 No videos yet!
               </h5>
               <div class="row w-100">
-                <div *ngFor="let video of youtubeUrls" class="col-lg-6">
+                <div *ngFor="let video of youtubeUrls" class="col-lg-3">
                   <div class="video">
                     <iframe
                       [src]="video"
@@ -87,19 +101,6 @@
                   </div>
                 </div>
               </div>
-              <h2>Websites</h2>
-              <p *ngIf="character.websites.length === 0">
-                No websites have been added yet.
-              </p>
-              <button
-                *ngFor="let website of character.websites"
-                class="d-inline m-1"
-                color="primary"
-                mat-stroked-button
-                (click)="openUrl(website.websiteUrl)"
-              >
-                {{ website.title }}
-              </button>
             </div>
           </div>
         </mat-tab>

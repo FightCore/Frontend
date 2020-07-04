@@ -78,7 +78,7 @@
 
 <ng-template #login>
   <span (click)="register()" i18n>Register</span>
-  <span [routerLink]="['/login']" i18n>Login</span>
+  <span (click)="goToLogin()" i18n>Login</span>
 </ng-template>
 
 <ng-template #mobileLogin>

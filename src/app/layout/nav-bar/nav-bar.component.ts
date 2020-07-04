@@ -55,6 +55,7 @@ export class NavBarComponent implements OnInit {
   }
 
   logout() {
+    localStorage.setItem('PreviousUrl', this.router.url);
     return this.authService.signout();
   }
 
@@ -70,6 +71,11 @@ export class NavBarComponent implements OnInit {
 
   hideSidebar() {
     this.opened = false;
+  }
+
+  goToLogin(): void {
+    localStorage.setItem('PreviousUrl', this.router.url);
+    this.router.navigate(['/login']);
   }
 
 }

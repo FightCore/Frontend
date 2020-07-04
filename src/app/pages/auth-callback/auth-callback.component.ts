@@ -22,6 +22,13 @@ export class AuthCallbackComponent implements OnInit {
     }
 
     await this.authService.completeAuthentication();
-    this.router.navigate(['/home']);
+
+    const previousUrl = localStorage.getItem('PreviousUrl');
+    if (previousUrl) {
+      localStorage.setItem('PreviousUrl', null);
+      this.router.navigateByUrl(previousUrl);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }
