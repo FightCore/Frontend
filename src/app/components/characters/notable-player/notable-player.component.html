@@ -1,4 +1,4 @@
-<p class="text">
-    <strong>{{ player.name }}</strong
-    >: {{ player.description }}
-  </p>
+<strong>{{ player.name }}</strong> <span
+  *ngIf="player.country"
+  [class]="'flag flag-icon flag-icon-' + player.country"
+></span>: {{ player.description }}

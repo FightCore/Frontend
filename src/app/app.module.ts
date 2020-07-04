@@ -61,6 +61,7 @@ import { ContributorListComponent } from './components/characters/contributor-li
 import { SocialsComponent } from './components/frontpage/socials/socials.component';
 import { EditsOverviewComponent } from './components/characters/edits-overview/edits-overview.component';
 import { NgxTextDiffModule } from 'ngx-text-diff';
+import { NgxFlagPickerModule } from 'ngx-flag-picker';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -93,7 +94,8 @@ import { NgxTextDiffModule } from 'ngx-text-diff';
     QuillModule.forRoot(),
     AvatarModule,
     MatPasswordStrengthModule.forRoot(),
-    NgxTextDiffModule
+    NgxTextDiffModule,
+    NgxFlagPickerModule
   ],
   declarations: [
     AppComponent,

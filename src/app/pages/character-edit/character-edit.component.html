@@ -71,6 +71,22 @@
                     [disabled]="!player.new"
                   />
                 </mat-form-field>
+                <mat-form-field class="country">
+                  <input
+                    maxlength="2"
+                    matInput
+                    placeholder="Player's country"
+                    [(ngModel)]="player.country"
+                    type="input"
+                    [name]="'playerDescription' + player.id"
+                    [readonly]="!player.new"
+                    [disabled]="!player.new"
+                  />
+                </mat-form-field>
+                <span
+  *ngIf="player.country"
+  [class]="'flag flag-icon flag-icon-' + player.country"
+></span>
                 <mat-form-field class="description">
                   <input
                     matInput
@@ -91,6 +107,7 @@
                 >
                   <em class="material-icons">delete</em> Delete
                 </button>
+                <hr/>
               </div>
             </div>
           </div>
