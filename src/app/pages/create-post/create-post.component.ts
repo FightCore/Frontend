@@ -21,7 +21,7 @@ import * as SimpleMDE from 'simplemde';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.scss']
+  styleUrls: ['./create-post.component.scss'],
 })
 export class CreatePostComponent implements OnInit {
   @Input() post: Post;
@@ -88,11 +88,11 @@ export class CreatePostComponent implements OnInit {
 
     this.isLoading = true;
     this.postService.createPost(post).subscribe(
-      _ => {
+      (_) => {
         this.toastrService.success(PostText.createdPost);
         this.router.navigate([`/${StaticRoutes.posts}`]);
       },
-      error => {
+      (error) => {
         this.isLoading = false;
         this.toastrService.error(PostText.failedCreatePost);
       }
@@ -103,11 +103,11 @@ export class CreatePostComponent implements OnInit {
     this.post = this.forgePost(this.post);
 
     this.postService.updatePost(this.post).subscribe(
-      _ => {
+      (_) => {
         this.toastrService.success(PostText.updatedPost);
         this.router.navigate([StaticRoutes.viewPostNoId, this.post.id]);
       },
-      error => {
+      (error) => {
         this.isLoading = false;
         this.toastrService.error(PostText.failedUpdatePost);
       }
@@ -125,6 +125,8 @@ export class CreatePostComponent implements OnInit {
     // destroy the HTML content while converting to Markdown.
     if (!this.useMarkdown) {
       postContent = this.converter.makeMarkdown(this.content);
+    } else {
+      postContent = this.editor.value();
     }
 
     post.body = postContent;
@@ -139,7 +141,7 @@ export class CreatePostComponent implements OnInit {
 
   openHelp(): void {
     this.dialog.open(PostHelpComponent, {
-      width: '50em'
+      width: '50em',
     });
   }
 
@@ -153,11 +155,11 @@ export class CreatePostComponent implements OnInit {
     post.author = new User();
     post.author.name = this.authService.name;
 
-    this.gameService.getGame(post.gameId).subscribe(game => {
+    this.gameService.getGame(post.gameId).subscribe((game) => {
       post.game = game;
 
       if (post.characterId && post.characterId !== 0) {
-        this.characterService.get(post.characterId).subscribe(character => {
+        this.characterService.get(post.characterId).subscribe((character) => {
           post.character = character;
           this.createDialog(post);
         });
@@ -169,7 +171,7 @@ export class CreatePostComponent implements OnInit {
 
   private createDialog(post: Post) {
     const dialogRef = this.dialog.open(PostPreviewDialogComponent, {
-      width: '40em'
+      width: '40em',
     });
 
     dialogRef.componentInstance.post = post;
@@ -177,6 +179,7 @@ export class CreatePostComponent implements OnInit {
 
   toggleMarkdown() {
     if (!this.useMarkdown) {
+      this.content = this.editor.value();
       this.content = this.converter.makeHtml(this.content);
     } else {
       this.content = this.converter.makeMarkdown(this.content);
@@ -195,7 +198,7 @@ export class CreatePostComponent implements OnInit {
     this.editor = new SimpleMDE({
       element: document.getElementById('markdown-editor'),
       initialValue: text,
-      spellChecker: false
+      spellChecker: false,
     });
   }
 }

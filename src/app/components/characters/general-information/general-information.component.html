@@ -4,7 +4,7 @@
 </p>
 <h5 i18n>Sources</h5>
 <div *ngFor="let source of character.informationSources">
-  <button mat-raised-button color="accent"
+  <button mat-stroked-button color="accent"
   (click)="openInNewTab(source.url)">
     <em class="material-icons">exit_to_app</em>
     {{source.displayName}}

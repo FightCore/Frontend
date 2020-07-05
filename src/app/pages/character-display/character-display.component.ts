@@ -20,6 +20,7 @@ import { WebsiteResource } from 'src/app/models/resources/websiteResource';
 export class CharacterDisplayComponent implements OnInit {
   loading: boolean = true;
   character: Character;
+  characterId: number;
 
   postLoading = true;
   posts: Post[];
@@ -33,7 +34,6 @@ export class CharacterDisplayComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private characterService: CharacterService,
-    private postService: PostService,
     private router: Router,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
@@ -52,6 +52,7 @@ export class CharacterDisplayComponent implements OnInit {
       });
 
     this.characterService.get(characterId).subscribe(character => {
+      this.characterId = characterId;
       this.character = character;
       this.loading = false;
 
@@ -91,12 +92,16 @@ export class CharacterDisplayComponent implements OnInit {
     return GameThemes.getThemeForGameId(this.character.game.id);
   }
 
+  get isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
   isContributor(): boolean {
     const foundContributor = this.character.contributors.find(
       contributor => contributor.user.id === this.authService.id
     );
 
-    return (foundContributor !== null && foundContributor !== undefined);
+    return (foundContributor != (null || undefined));
   }
 
   editCharacter(): void {

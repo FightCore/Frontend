@@ -12,4 +12,7 @@ export class SocialsComponent implements OnInit {
   ngOnInit() {
   }
 
+  openUrl(url: string) {
+    window.open(url, '_blank');
+  }
 }

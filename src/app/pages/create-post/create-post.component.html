@@ -50,7 +50,7 @@
     </div>
   </div>
   <hr />
-  <mat-slide-toggle (change)="toggleMarkdown()" [(ngModel)]="useMarkdown" i18n>
+  <mat-slide-toggle (change)="toggleMarkdown()" color="primary" [(ngModel)]="useMarkdown" i18n>
     <div *ngIf="useMarkdown else quillText">
         Markdown mode
     </div>

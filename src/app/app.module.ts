@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModules } from './material-modules';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faMugHot
@@ -59,6 +59,9 @@ import { GeneralInformationComponent } from './components/characters/general-inf
 import { NotablePlayerComponent } from './components/characters/notable-player/notable-player.component';
 import { ContributorListComponent } from './components/characters/contributor-list/contributor-list.component';
 import { SocialsComponent } from './components/frontpage/socials/socials.component';
+import { EditsOverviewComponent } from './components/characters/edits-overview/edits-overview.component';
+import { NgxTextDiffModule } from 'ngx-text-diff';
+import { NgxFlagPickerModule } from 'ngx-flag-picker';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -90,7 +93,9 @@ import { SocialsComponent } from './components/frontpage/socials/socials.compone
     }),
     QuillModule.forRoot(),
     AvatarModule,
-    MatPasswordStrengthModule.forRoot()
+    MatPasswordStrengthModule.forRoot(),
+    NgxTextDiffModule,
+    NgxFlagPickerModule
   ],
   declarations: [
     AppComponent,
@@ -129,7 +134,8 @@ import { SocialsComponent } from './components/frontpage/socials/socials.compone
     GeneralInformationComponent,
     NotablePlayerComponent,
     ContributorListComponent,
-    SocialsComponent
+    SocialsComponent,
+    EditsOverviewComponent
   ],
   entryComponents: [
     PostHelpComponent,
@@ -140,8 +146,8 @@ import { SocialsComponent } from './components/frontpage/socials/socials.compone
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {
-    library.add(
+  constructor(library: FaIconLibrary) {
+    library.addIcons(
       faMugHot,
       faGithub,
       faDiscord,
