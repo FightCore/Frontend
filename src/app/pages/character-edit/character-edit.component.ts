@@ -71,7 +71,10 @@ export class CharacterEditComponent implements OnInit {
     this.characterService.updateCharacter(this.character).subscribe(_ => {
     this.toastrService.success('Successfully suggested an edit.');
     this.toCharacters();
-    }, error => console.log(error));
+    }, error => {
+      console.log(error);
+      this.toastrService.error('Failed to suggest edit, try refreshing the page.');
+    });
   }
 
   deletePlayer(player: NotablePlayer): void {

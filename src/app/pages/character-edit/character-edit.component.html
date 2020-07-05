@@ -12,6 +12,15 @@
   >
     <em class="material-icons">arrow_back</em> Back
   </button>
+  <mat-card class="mb-2">
+    <mat-card-header>About character editing</mat-card-header>
+    <mat-card-content>
+      Editing a character will be saved as a suggestion towards the moderators of this character.
+      These suggestions will later be approved and you will be added to the list of contributors.
+      All edits made are saved with the respective editor, nobody will take credit for your edit.
+      If there are no contributors for your character, contact Bort on Discord or Twitter.
+    </mat-card-content>
+  </mat-card>
   <mat-card class="h-100">
     <mat-card-header>
       <mat-card-title>
@@ -28,13 +37,13 @@
     <mat-card-content class="h-100">
       <mat-tab-group class="h-100">
         <mat-tab class="h-100" label="General Information">
-          <mat-form-field class="h-100 general-information">
+          <mat-form-field class="general-information">
             <textarea
               matInput
               placeholder="General Information about the character."
               [(ngModel)]="character.generalInformation"
               type="textarea"
-              class="h-100"
+              class="general-information"
               name="generalInformation"
             ></textarea>
           </mat-form-field>

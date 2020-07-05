@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModules } from './material-modules';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faMugHot
@@ -146,8 +146,8 @@ import { NgxFlagPickerModule } from 'ngx-flag-picker';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor() {
-    library.add(
+  constructor(library: FaIconLibrary) {
+    library.addIcons(
       faMugHot,
       faGithub,
       faDiscord,

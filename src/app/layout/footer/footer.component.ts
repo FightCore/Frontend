@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { version } from '../../../../package.json';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +8,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+  version: string = version;
   links = [
     {
       icon: ['fab', 'github'],
