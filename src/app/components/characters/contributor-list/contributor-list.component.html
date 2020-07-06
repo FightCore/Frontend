@@ -1,8 +1,28 @@
+<h5 class="title">Contributors</h5>
 <mat-chip-list>
-    <mat-chip
-      color="primary" selected
-      *ngFor="let contributor of contributors"
-      (click)="viewUser(contributor.user.id)">
-      {{ contributor.user.name }}
-    </mat-chip>
-  </mat-chip-list>
+  <mat-chip
+    color="primary"
+    selected
+    *ngFor="let contributor of contributorsEdit"
+    (click)="viewUser(contributor.user.id)"
+  >
+    {{ contributor.user.name }}
+  </mat-chip>
+</mat-chip-list>
+<p *ngIf="contributorsEdit.length === 0">
+  No contributors yet.
+</p>
+<h5 class="title">Moderators</h5>
+<mat-chip-list>
+  <mat-chip
+    color="primary"
+    selected
+    *ngFor="let contributor of contributorsModerator"
+    (click)="viewUser(contributor.user.id)"
+  >
+    {{ contributor.user.name }}
+  </mat-chip>
+</mat-chip-list>
+<p *ngIf="contributorsModerator.length === 0">
+  No moderators yet.
+</p>

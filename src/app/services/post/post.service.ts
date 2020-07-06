@@ -30,7 +30,7 @@ export class PostService extends BaseService {
   /**
    * Gets a list of latest posts.
    */
-  public getLatestsPosts(): Observable<Post[]> {
+  public getLatestPosts(): Observable<Post[]> {
     if (environment.mocking) {
       return new Observable(observer => observer.next(this.generatePostList(3)));
     }

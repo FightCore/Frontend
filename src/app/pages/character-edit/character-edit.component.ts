@@ -38,19 +38,19 @@ export class CharacterEditComponent implements OnInit {
   createPlayer(): void {
     const player = new NotablePlayer();
     player.new = true;
-    this.character.notablePlayers.push(player);
+    this.character.notablePlayers.unshift(player);
   }
 
   createVideo(): void {
     const video = new VideoResource();
     video.new = true;
-    this.character.videos.push(video);
+    this.character.videos.unshift(video);
   }
 
   createWebsite(): void {
     const website = new WebsiteResource();
     website.new = true;
-    this.character.websites.push(website);
+    this.character.websites.unshift(website);
   }
 
   deleteVideo(video: VideoResource): void {
