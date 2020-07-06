@@ -86,6 +86,7 @@
                     matInput
                     placeholder="Player's country"
                     [(ngModel)]="player.country"
+                    (ngModelChange)="player.country = player.country.toLowerCase()"
                     type="input"
                     [name]="'playerDescription' + player.id"
                     [readonly]="!player.new"
@@ -122,6 +123,9 @@
           </div>
         </mat-tab>
         <mat-tab class="h-100" label="Videos">
+          A video's YouTube ID is located within the URL.
+          For example in the URLs https://www.youtube.com/watch?v=<strong>dQw4w9WgXcQ</strong> or https://youtu.be/<strong>dQw4w9WgXcQ</strong>.
+          Please submit only the ID instead of the full URL as a full URL will not work.
           <div class="row">
             <div class="col-12">
               <button

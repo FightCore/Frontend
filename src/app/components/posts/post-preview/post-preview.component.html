@@ -7,7 +7,9 @@
       [src]="post.character.stockIcon.url"
     />
     </div>
-    <mat-card-title> {{ post.title }}</mat-card-title>
+    <mat-card-title class="mouse-pointer" (click)="viewPost(post.id)">
+      {{ post.title }}
+    </mat-card-title>
     <mat-card-subtitle>
       Written by: <strong>{{post.author.name}}</strong>
       <div></div>

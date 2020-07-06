@@ -116,29 +116,29 @@
       </mat-tab-group>
     </mat-card-content>
     <mat-card-actions>
-      <h5 class="title">Contributors</h5>
       <div class="row">
         <div class="col-lg-6 col-md-12">
-          <p *ngIf="character.contributors.length === 0">
-            No contributors yet.
-          </p>
           <app-contributor-list
             [contributors]="character.contributors"
           ></app-contributor-list>
         </div>
         <div class="col-lg-6 col-md-12">
           <button
-            *ngIf="isLoggedIn"
             mat-raised-button
             color="primary"
             class="float-right"
             (click)="editCharacter()"
             i18n
+            [disabled]="!isLoggedIn"
           >
-            <em class="material-icons">edit</em> Edit character
+            <em class="material-icons">edit</em>
+            <div class="d-inline" *ngIf="isLoggedIn else loginText"> Edit character</div>
           </button>
         </div>
       </div>
     </mat-card-actions>
   </mat-card>
+</ng-template>
+<ng-template #loginText>
+Login to edit
 </ng-template>

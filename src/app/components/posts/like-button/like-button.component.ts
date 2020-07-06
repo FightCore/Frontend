@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from 'src/app/services/post/post.service';
 import { PostText } from 'src/app/text/post.text';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-like-button',
@@ -25,13 +26,18 @@ export class LikeButtonComponent implements OnInit {
   @Input() liked: boolean;
   constructor(
     private postService: PostService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
   }
 
-  likePost() {
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  likePost(): void {
     this.postService.likePost(this.postId).subscribe(() => {
       if (this.liked) {
         this.likes--;

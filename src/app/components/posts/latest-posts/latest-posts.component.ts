@@ -14,7 +14,7 @@ export class LatestPostsComponent implements OnInit {
   constructor(private postService: PostService) { }
 
   ngOnInit() {
-    this.postService.getFeaturedPosts().subscribe(posts => {
+    this.postService.getLatestPosts().subscribe(posts => {
       this.posts = posts;
       this.loading = false;
     });
