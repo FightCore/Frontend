@@ -62,6 +62,13 @@ import { SocialsComponent } from './components/frontpage/socials/socials.compone
 import { EditsOverviewComponent } from './components/characters/edits-overview/edits-overview.component';
 import { NgxTextDiffModule } from 'ngx-text-diff';
 import { NgxFlagPickerModule } from 'ngx-flag-picker';
+import { DashboardComponent } from './pages/edits/dashboard/dashboard.component';
+import { CharacterEditOverviewComponent } from './components/edits/character-edit-overview/character-edit-overview.component';
+import { NotablePlayerEditComponent } from './components/edits/view/notable-player-edit/notable-player-edit.component';
+import { WebsiteEditComponent } from './components/edits/view/website-edit/website-edit.component';
+import { VideoEditComponent } from './components/edits/view/video-edit/video-edit.component';
+import { UpdateWebsiteEditComponent } from './components/edits/edit/update-website-edit/update-website-edit.component';
+import { UpdateNotablePlayerEditComponent } from './components/edits/edit/update-notable-player-edit/update-notable-player-edit.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -135,7 +142,14 @@ import { NgxFlagPickerModule } from 'ngx-flag-picker';
     NotablePlayerComponent,
     ContributorListComponent,
     SocialsComponent,
-    EditsOverviewComponent
+    EditsOverviewComponent,
+    DashboardComponent,
+    CharacterEditOverviewComponent,
+    NotablePlayerEditComponent,
+    WebsiteEditComponent,
+    VideoEditComponent,
+    UpdateWebsiteEditComponent,
+    UpdateNotablePlayerEditComponent
   ],
   entryComponents: [
     PostHelpComponent,

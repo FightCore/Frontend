@@ -49,7 +49,7 @@ export class PostDisplayComponent implements OnInit {
   }
 
   isPostFromUser(): boolean {
-    return this.post.author.id === this.authService.id;
+    return this.authService.isAuthenticated() && this.post.author.id === this.authService.id;
   }
 
   editPost() {

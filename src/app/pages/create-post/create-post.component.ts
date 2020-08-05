@@ -47,10 +47,6 @@ export class CreatePostComponent implements OnInit {
   @ViewChild('characterPicker')
   characterPicker: CharacterPickerComponent;
   ngOnInit() {
-    if (!this.authService.isAuthenticated()) {
-      this.authService.login();
-    }
-
     if (this.post) {
       this.title = this.post.title;
       this.isPrivate = this.post.isPrivate;

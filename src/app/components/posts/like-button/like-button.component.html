@@ -3,7 +3,7 @@
   mat-button
   [color]="liked ? 'warn' : 'accent'"
   (click)="likePost()"
-  [disabled]="isLoggedIn()"
+  [disabled]="!isLoggedIn()"
 >
   <em class="material-icons">
     favorite
