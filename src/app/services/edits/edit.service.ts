@@ -5,6 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { EditDto } from 'src/app/models/edits/edit-dto';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { CharacterEdits } from 'src/app/models/edits/character-edits';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,24 @@ export class EditService extends BaseService {
     super(authService);
   }
 
-  getEditsForCharacter(id: number): Observable<EditDto[]> {
+  getAllOpenForUser(): Observable<CharacterEdits[]> {
+    return this.httpClient.get<CharacterEdits[]>(`${environment.baseUrl}/edits/`, this.getDefaultHttpOptions());
+  }
+
+  getOpenEditsForCharacter(id: number): Observable<EditDto[]> {
     return this.httpClient.get<EditDto[]>(`${environment.baseUrl}/characters/${id}/edits`, this.getDefaultHttpOptions());
   }
 
+  getHistoryForCharacter(id: number): Observable<EditDto[]> {
+    return this.httpClient.get<EditDto[]>(`${environment.baseUrl}/characters/${id}/edits/history`, this.getDefaultHttpOptions());
+  }
+
   approveEdit(id: number): Observable<never> {
-    return this.httpClient.put<never>(`${environment.baseUrl}/edits/${id}`, null, this.getDefaultHttpOptions());
+    return this.httpClient.put<never>(`${environment.baseUrl}/edits/approve/${id}`, null, this.getDefaultHttpOptions());
+  }
+
+  updateEdit(id: number, editDto: EditDto): Observable<never> {
+    return this.httpClient.put<never>(`${environment.baseUrl}/edits/${id}`, editDto, this.getDefaultHttpOptions());
   }
 
   rejectEdit(id: number): Observable<never> {

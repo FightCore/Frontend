@@ -11,6 +11,8 @@ import { StaticRoutes } from 'src/app/routes/static-routes';
 import { Matchup } from 'src/app/models/matchup';
 import { MatchupService } from 'src/app/services/matchup/matchup.service';
 import { WebsiteResource } from 'src/app/models/resources/websiteResource';
+import { EditDto } from 'src/app/models/edits/edit-dto';
+import { EditService } from 'src/app/services/edits/edit.service';
 
 @Component({
   selector: 'app-character-display',
@@ -28,8 +30,8 @@ export class CharacterDisplayComponent implements OnInit {
   youtubeLoading = true;
   youtubeUrls: SafeResourceUrl[] = [];
 
-  matchups: Matchup[];
-  matchupsLoading = true;
+  openEdits: EditDto[];
+  allEdits: EditDto[];
 
   constructor(
     private route: ActivatedRoute,
@@ -37,7 +39,7 @@ export class CharacterDisplayComponent implements OnInit {
     private router: Router,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private matchupService: MatchupService
+    private editService: EditService
   ) { }
 
   ngOnInit() {
@@ -66,12 +68,12 @@ export class CharacterDisplayComponent implements OnInit {
       this.youtubeLoading = false;
     });
 
-    this.matchupService.getAll(characterId).subscribe(matchups => {
-      this.matchups = matchups;
-      this.matchupsLoading = false;
-    }, error => {
-        this.matchups = [];
-        this.matchupsLoading = false;
+    this.editService.getOpenEditsForCharacter(characterId).subscribe(edits => {
+      this.openEdits = edits;
+    });
+
+    this.editService.getHistoryForCharacter(characterId).subscribe(edits => {
+      this.allEdits = edits;
     });
   }
 

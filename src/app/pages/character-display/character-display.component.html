@@ -104,13 +104,31 @@
             </div>
           </div>
         </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            History
+          </ng-template>
+          <div *ngIf="characterId">
+            <app-edits-overview *ngIf="allEdits"
+            [readOnly]="true"
+            [edits]="allEdits"
+            [characterId]="characterId"
+            [isContributor]="isContributor()">
+          </app-edits-overview>
+          </div>
+        </mat-tab>
         <mat-tab *ngIf="isLoggedIn">
           <ng-template mat-tab-label>
             <mat-icon>build</mat-icon>
-            Edits
+            <span matBadge="edits ? edits.length : 0" matBadgeOverlap="false">Edits</span>
           </ng-template>
           <div *ngIf="characterId">
-            <app-edits-overview [characterId]="characterId" [isContributor]="isContributor()"></app-edits-overview>
+            <p>A refresh is needed before the changes take place!</p>
+            <app-edits-overview *ngIf="openEdits"
+            [edits]="openEdits"
+            [characterId]="characterId"
+            [isContributor]="isContributor()">
+          </app-edits-overview>
           </div>
         </mat-tab>
       </mat-tab-group>

@@ -1,21 +1,33 @@
 <div class="container-fluid">
-    <mat-card class="mat-elevation-z10 mb-2">
+    <div class="mb-2">
         <app-title-bar></app-title-bar>
-    </mat-card>
+    </div>
     <div class="row equal">
-        <div class="col-lg-9">
+        <!-- <div class="col-lg-4">
             <mat-card class="mat-elevation-z5">
             <app-featured-posts></app-featured-posts>
         </mat-card>
+        </div> -->
+        <div class="col-lg-8">
+            <h2 class="title">Popular characters</h2>
+            <div class="row">
+                <div *ngFor="let character of popularCharacters" class="col-lg-4">
+                    <app-character-preview [character]="character"></app-character-preview>
+                </div>
+            </div>
+
         </div>
-        <div class="col-lg-3">
-            <mat-card class="mat-elevation-z5 h-100">
-                <app-socials></app-socials>
-            </mat-card>
+        <div class="col-lg-4">
+            <app-socials></app-socials>
+        </div>
+
+        <div class="col-lg-12 mt-2 mb-1">
+            <app-latest-posts></app-latest-posts>
+        </div>
+        <div class="col-lg-12 mt-2 mb-1">
+            <app-featured-posts></app-featured-posts>
         </div>
     </div>
-    <mat-card class="mat-elevation-z5 mt-2 mb-1">
-        <app-latest-posts></app-latest-posts>
-    </mat-card>
+
 </div>
 <app-top-scroller></app-top-scroller>

@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <h2>Edits for your characters.</h2>
+    <div class="row">
+        <div *ngFor="let characterEdit of characterEdits" class="col-lg-12 p-2">
+            <app-character-edit-overview
+            [characterEdits]="characterEdit">
+            </app-character-edit-overview>
+        </div>
+    </div>
+</div>

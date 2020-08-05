@@ -1,4 +1,5 @@
 <mat-sidenav-container>
+  <!-- Sidenav is only viewable on mobile. -->
   <mat-sidenav style="height: 100%; width: 50%" [(opened)]="opened">
     <img class="logo" src="assets/FC.png" alt="FightCore logo" />
     <span i18n>FightCore</span>
@@ -33,6 +34,7 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
+    <!-- Content only visible when the website is viewed on a bigger screen. -->
     <div class="d-none d-lg-block">
       <mat-toolbar color="primary">
         <mat-toolbar-row>
@@ -55,22 +57,29 @@
         </mat-toolbar-row>
       </mat-toolbar>
     </div>
+    <!-- Toolbar for the non-desktop displays -->
     <mat-toolbar class="d-md-block d-lg-none" color="primary">
-      <div [routerLink]="['']">
-        <!-- <img class="logo" src="assets/FC.png" alt="FightCore logo" /> -->
-        <span>FightCore</span>
+      <div class="row pt-2">
+        <div class="col-6">
+          <div [routerLink]="['']">
+            <img class="logo mouse-pointer" src="assets/Fightcore_Logo.svg" alt="FightCore logo" />
+            <span>FightCore</span>
+          </div>
+        </div>
+        <div class="col-6">
+          <button
+          class="float-right"
+          color="accent"
+          mat-raised-button
+          (click)="opened = true"
+        >
+          <em class="material-icons">
+            menu
+          </em>
+        </button>
+        </div>
       </div>
-      <span class="example-spacer"></span>
-      <button
-        class="float-right"
-        color="accent"
-        mat-raised-button
-        (click)="opened = true"
-      >
-        <em class="material-icons">
-          menu
-        </em>
-      </button>
+
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

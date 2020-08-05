@@ -67,15 +67,19 @@
     >
     </mat-password-strength-info>
     <!-- End Password Validation -->
-
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="register()"
-      class="register-button"
-      i18n
-    >
-      Register
-    </button>
+    <div class="p-2">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="register()"
+        class="register-button"
+        i18n
+      >
+        Register
+      </button>
+      <button mat-raised-button (click)="login()" class="register-button">
+        Login
+      </button>
+    </div>
   </form>
 </mat-dialog-content>

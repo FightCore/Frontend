@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Edit notable player</h1>
+<div mat-dialog-content>
+  <div *ngIf="notablePlayer">
+    <mat-form-field class="w-100">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="notablePlayer.name" />
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Description</mat-label>
+      <input matInput [(ngModel)]="notablePlayer.description" />
+    </mat-form-field>
+    <mat-form-field class="w-100">
+        <mat-label>Country</mat-label>
+        <input matInput [(ngModel)]="notablePlayer.country" />
+      </mat-form-field>
+  </div>
+</div>

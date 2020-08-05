@@ -14,21 +14,24 @@ import { UserComponent } from './pages/user/user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { GameDisplayComponent } from './pages/game-display/game-display.component';
 import { GameComponent } from './pages/game/game.component';
+import { DashboardComponent } from './pages/edits/dashboard/dashboard.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: StaticRoutes.createPost, component: CreatePostComponent },
+  { path: StaticRoutes.createPost, component: CreatePostComponent, canActivate: [ AuthGuard ] },
   { path: StaticRoutes.login, component: LoginComponent},
   { path: StaticRoutes.authCallback, component: AuthCallbackComponent},
   { path: StaticRoutes.posts, component: PostComponent},
-  { path: StaticRoutes.editPost, component: EditPostComponent },
+  { path: StaticRoutes.editPost, component: EditPostComponent, canActivate: [ AuthGuard ] },
   { path: StaticRoutes.viewPost, component: PostDisplayComponent},
   { path: StaticRoutes.characters, component: CharacterComponent },
-  { path: StaticRoutes.editCharacter, component: CharacterEditComponent },
+  { path: StaticRoutes.editCharacter, component: CharacterEditComponent, canActivate: [ AuthGuard ] },
   { path: StaticRoutes.viewCharacter, component: CharacterDisplayComponent },
   { path: StaticRoutes.viewUser, component: UserComponent },
   { path: StaticRoutes.viewGame, component: GameDisplayComponent },
   { path: StaticRoutes.game, component: GameComponent },
   { path: StaticRoutes.home, component: HomeComponent },
+  { path: 'edits', component: DashboardComponent, canActivate: [ AuthGuard ] },
   { path: '**', redirectTo: StaticRoutes.home }
 ];
 

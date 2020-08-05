@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { UserManager, UserManagerSettings, User } from 'oidc-client';
 import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
+import { TileStyler } from '@angular/material/grid-list/tile-styler';
 
 @Injectable({
   providedIn: 'root'
@@ -61,7 +62,7 @@ export class AuthService {
   }
 
   get authorizationHeaderValue(): string {
-    if (environment.mocking) {
+    if (environment.mocking || !this.isAuthenticated()) {
       return '';
     }
 
@@ -69,7 +70,7 @@ export class AuthService {
   }
 
   get name(): string {
-    if (environment.mocking) {
+    if (environment.mocking || !this.isAuthenticated()) {
       return '';
     }
 
@@ -77,7 +78,7 @@ export class AuthService {
   }
 
   get id(): number {
-    if (environment.mocking) {
+    if (environment.mocking || !this.isAuthenticated()) {
       return 5;
     }
 

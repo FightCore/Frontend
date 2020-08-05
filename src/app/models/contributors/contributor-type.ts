@@ -1,5 +1,5 @@
 export enum ContributorType {
-    contributor = 0,
-    moderator = 1,
-    owner = 2
+    contributor = 1,
+    moderator = 2,
+    owner = 3
 }

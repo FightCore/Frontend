@@ -63,6 +63,10 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  login() {
+    this.authService.login();
+  }
+
   private validateAreEqual(fieldControl: FormControl) {
     return fieldControl.value === this.password.value ? null : {
         match: true
