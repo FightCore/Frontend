@@ -1,8 +1,14 @@
-<div class="container-fluid custom-container">
+<div class="container-fluid mt-2">
   <app-titlebar title="Characters" (selectionChange)="changeGameSelection($event)"></app-titlebar>
   <div class="row">
-    <div class="col-lg-10"></div>
-    <div class="col-lg-2 col-xs-12">
+    <div class="col-lg-6 col-xs-12">
+      <app-game-selector
+        [addAllOptions]="true"
+        [selected]="selectedGame"
+        (selectionChange)="changeGameSelection($event)">
+      </app-game-selector>
+    </div>
+    <div class="col-lg-6 col-xs-12">
         <mat-form-field class="right-search-bar">
             <mat-label i18n>Search</mat-label>
           <input (input)="onSearchChange($event.target.value)" matInput name="search" />

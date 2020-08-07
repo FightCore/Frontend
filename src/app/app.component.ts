@@ -11,25 +11,8 @@ import { GameThemes } from 'src/styles/gameThemes';
 export class AppComponent implements OnInit {
   title = 'FightCore';
 
-  constructor(public overlayContainer: OverlayContainer) { }
-  @HostBinding('class') componentCssClass;
+  constructor() { }
 
   ngOnInit(): void {
-   this.setThemeForCurrentGame();
-  }
-
-  public setThemeForCurrentGame(): void {
-    const gameId = UserOptions.getCurrentGame();
-    this.setThemeForGameId(gameId);
-  }
-
-  public setThemeForGameId(gameId: number): void {
-    const theme = this.getThemeForGameId(gameId);
-    this.overlayContainer.getContainerElement().classList.add(theme);
-    this.componentCssClass = theme;
-  }
-
-  public getThemeForGameId(gameId: number): string {
-    return GameThemes.themeDictionary.get(gameId);
   }
 }
