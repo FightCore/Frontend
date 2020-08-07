@@ -69,6 +69,7 @@ import { WebsiteEditComponent } from './components/edits/view/website-edit/websi
 import { VideoEditComponent } from './components/edits/view/video-edit/video-edit.component';
 import { UpdateWebsiteEditComponent } from './components/edits/edit/update-website-edit/update-website-edit.component';
 import { UpdateNotablePlayerEditComponent } from './components/edits/edit/update-notable-player-edit/update-notable-player-edit.component';
+import { TopContributorsComponent } from './components/edits/top-contributors/top-contributors.component';
 // Import FontAwesome icons where needed.
 
 @NgModule({
@@ -149,7 +150,8 @@ import { UpdateNotablePlayerEditComponent } from './components/edits/edit/update
     WebsiteEditComponent,
     VideoEditComponent,
     UpdateWebsiteEditComponent,
-    UpdateNotablePlayerEditComponent
+    UpdateNotablePlayerEditComponent,
+    TopContributorsComponent
   ],
   entryComponents: [
     PostHelpComponent,

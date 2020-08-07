@@ -1,34 +1,57 @@
-<div class="container-fluid toolbar-container">
-  <app-titlebar [title]="'Posts'" (selectionChange)="onGameChange($event)"></app-titlebar>
-  <div class="row">
-    <div class="col-lg-8">
-      <div class="create-button">
-        <button (click)="createPost()" mat-raised-button color="primary" i18n>
-          <em class="material-icons">
-            add
-            </em> Create new post
-        </button>
-      </div>
+<div class="container-fluid mt-2 toolbar-container">
+  <div *ngIf="!loading" class="row">
+    <div class="col-lg-6 col-12">
+      <app-titlebar
+        [title]="'Posts'"
+      ></app-titlebar>
     </div>
-    <div class="col-lg-2 col-xs-12">
+    <div class="col-lg-6 col-12">
+      <button
+        class="float-right"
+        (click)="createPost()"
+        mat-raised-button
+        color="primary"
+        i18n
+      >
+        <em class="material-icons">
+          add
+        </em>
+        Create new post
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!loading" class="row">
+    <div class="col-lg-4 col-xs-12">
+      <app-game-selector
+        [addAllOptions]="true"
+        (selectionChange)="onGameChange($event)"
+      ></app-game-selector>
+    </div>
+    <div class="col-lg-4 col-xs-12">
       <div class="float-right w-100">
-        <app-character-picker class="w-100" #characterPicker (selectionChange)="onCharacterChange($event)"
-        [gameId]="gameId"></app-character-picker>
+        <app-character-picker
+          class="w-100"
+          #characterPicker
+          (selectionChange)="onCharacterChange($event)"
+          [gameId]="gameId"
+        ></app-character-picker>
       </div>
-  </div>
-  <div class="col-lg-2 col-xs-12">
-    <div class="w-100 float-right">
-      <mat-form-field class="w-100">
+    </div>
+    <div class="col-lg-4 col-xs-12">
+      <div class="w-100 float-right">
+        <mat-form-field class="w-100">
           <mat-label i18n>Search</mat-label>
-        <input (input)="onSearchChange($event.target.value)" matInput name="search" />
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
+          <input
+            (input)="onSearchChange($event.target.value)"
+            matInput
+            name="search"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
     </div>
   </div>
-</div>
 
-
-<div class="container-fluid">
   <div *ngIf="loading; else postDisplay">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
@@ -39,6 +62,6 @@
       </div>
     </div>
   </ng-template>
-</div>
 
-<app-top-scroller></app-top-scroller>
+  <app-top-scroller></app-top-scroller>
+</div>

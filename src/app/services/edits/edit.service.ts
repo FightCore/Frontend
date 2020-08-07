@@ -6,6 +6,7 @@ import { EditDto } from 'src/app/models/edits/edit-dto';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { CharacterEdits } from 'src/app/models/edits/character-edits';
+import { TopContributor } from 'src/app/models/contributors/top-contributor';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,12 @@ export class EditService extends BaseService {
 
   getHistoryForCharacter(id: number): Observable<EditDto[]> {
     return this.httpClient.get<EditDto[]>(`${environment.baseUrl}/characters/${id}/edits/history`, this.getDefaultHttpOptions());
+  }
+
+  getTopContributors(): Observable<TopContributor[]> {
+    return this.httpClient.get<TopContributor[]>(
+      `${environment.baseUrl}/edits/contributors`,
+      this.getDefaultHttpOptions());
   }
 
   approveEdit(id: number): Observable<never> {

@@ -9,23 +9,8 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class TitlebarComponent implements OnInit {
   @Input() title: string;
-  @Output() selectionChange: EventEmitter<number> = new EventEmitter();
-
-  constructor(private appComponent: AppComponent) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  onSwitchingGame(gameId: number): void {
-    UserOptions.setCurrentGame(gameId);
-    this.appComponent.setThemeForCurrentGame();
-
-    if (this.selectionChange) {
-      this.selectionChange.emit(gameId);
-    }
-  }
-
-  getCurrentGame(): number {
-    return UserOptions.getCurrentGame();
   }
 }
