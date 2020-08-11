@@ -21,17 +21,17 @@ export class NavBarComponent implements OnInit {
 
   links = [
     {
-      name: 'Posts',
+      name: 'Nav.Posts',
       route: ['/post'],
       icon: 'file'
     },
     {
-      name: 'Characters',
+      name: 'Nav.Characters',
       route: ['/character'],
       icon: 'mask'
     },
     {
-      name: 'Games',
+      name: 'Nav.Games',
       route: ['game'],
       icon: 'gamepad'
     }
@@ -74,8 +74,7 @@ export class NavBarComponent implements OnInit {
   }
 
   goToLogin(): void {
-    localStorage.setItem('PreviousUrl', this.router.url);
-    this.router.navigate(['/login']);
+    this.authService.login();
   }
 
 }

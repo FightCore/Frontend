@@ -1,12 +1,12 @@
-<h1 mat-dialog-title>Edit website</h1>
+<h1 mat-dialog-title>{{ 'Characters.EditWebsite' | translate }}</h1>
 <div mat-dialog-content>
   <div *ngIf="website">
     <mat-form-field class="w-100">
-      <mat-label>Title</mat-label>
+      <mat-label>{{ 'Common.Title' | translate }}</mat-label>
       <input matInput [(ngModel)]="website.title" />
     </mat-form-field>
     <mat-form-field class="w-100">
-      <mat-label>Website</mat-label>
+      <mat-label>{{ 'Characters.Website' | translate }}</mat-label>
       <input matInput [(ngModel)]="website.websiteUrl" />
     </mat-form-field>
   </div>

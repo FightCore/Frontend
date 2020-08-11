@@ -1,5 +1,5 @@
 <div class="container-fluid mt-2">
-  <app-titlebar title="Games"></app-titlebar>
+  <app-titlebar [title]="'Games.Games' | translate"></app-titlebar>
   <app-loading *ngIf="loading; else gameList"></app-loading>
 </div>
 

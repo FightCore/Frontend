@@ -19,7 +19,7 @@
     </mat-card-header>
     <mat-card-content>
       <mat-tab-group>
-        <mat-tab label="General Information">
+        <mat-tab [label]="'Characters.GeneralInformation' | translate">
           <div class="row w-100">
             <div class="col-lg-3">
               <div>
@@ -43,20 +43,20 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="Notable players">
+        <mat-tab [label]="'Characters.NotablePlayers' | translate">
           <div>
-            <h2 i18n>Notable Players</h2>
+            <h2>{{'Characters.NotablePlayers' | translate}}</h2>
             <h5 *ngIf="character.notablePlayers.length == 0">
-              No players yet!
+              {{'Characters.NoPlayersYet' | translate}}
             </h5>
             <div *ngFor="let player of character.notablePlayers">
               <app-notable-player [player]="player"></app-notable-player>
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="FightCore Posts">
+        <mat-tab [label]="'Posts.FightCorePosts' | translate">
           <div class="m-1">
-            <h2 i18n>Top FightCore posts</h2>
+            <h2>{{ 'Posts.FightCorePosts' | translate }}</h2>
             <div *ngIf="!postLoading" class="row equal w-100">
               <div *ngFor="let post of posts" class="col-lg-4">
                 <app-post-preview [post]="post"></app-post-preview>
@@ -64,12 +64,12 @@
             </div>
           </div>
         </mat-tab>
-        <mat-tab label="Resources">
+        <mat-tab [label]="'Characters.Resources' | translate">
           <div *ngIf="!youtubeLoading">
             <div>
-              <h2>Websites</h2>
+              <h2>{{'Characters.Websites' | translate}}</h2>
               <p *ngIf="character.websites.length === 0">
-                No websites have been added yet.
+                {{'Characters.NoWebsitesYet' | translate}}
               </p>
               <button
                 *ngFor="let website of character.websites"
@@ -81,9 +81,9 @@
                 {{ website.title }}
               </button>
 
-              <h2 i18n>Videos</h2>
+              <h2>{{'Characters.Videos' | translate}}</h2>
               <h5 *ngIf="youtubeUrls.length == 0">
-                No videos yet!
+                {{'Characters.NoVideosYet' | translate}}
               </h5>
               <div class="row w-100">
                 <div *ngFor="let video of youtubeUrls" class="col-lg-3">
@@ -106,7 +106,7 @@
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
-            History
+            {{'Characters.History' | translate}}
           </ng-template>
           <div *ngIf="characterId">
             <app-edits-overview *ngIf="allEdits"
@@ -120,10 +120,10 @@
         <mat-tab *ngIf="isLoggedIn">
           <ng-template mat-tab-label>
             <mat-icon>build</mat-icon>
-            <span matBadge="edits ? edits.length : 0" matBadgeOverlap="false">Edits</span>
+            <span matBadge="edits ? edits.length : 0" matBadgeOverlap="false">{{ 'Edits.Edits' | translate}}</span>
           </ng-template>
           <div *ngIf="characterId">
-            <p>A refresh is needed before the changes take place!</p>
+            <p>{{'Characters.ARefreshIsNeeded' | translate}}</p>
             <app-edits-overview *ngIf="openEdits"
             [edits]="openEdits"
             [characterId]="characterId"
@@ -150,7 +150,7 @@
             [disabled]="!isLoggedIn"
           >
             <em class="material-icons">edit</em>
-            <div class="d-inline" *ngIf="isLoggedIn else loginText"> Edit character</div>
+            <div class="d-inline" *ngIf="isLoggedIn else loginText"> {{'Characters.EditCharacter' | translate}}</div>
           </button>
         </div>
       </div>
@@ -158,5 +158,5 @@
   </mat-card>
 </ng-template>
 <ng-template #loginText>
-Login to edit
+  {{'Characters.LoginToEdit' | translate}}
 </ng-template>

@@ -4,21 +4,26 @@
   [dataSource]="edits"
   class="mat-elevation-z8 w-100"
 >
-<caption>Suggested edits</caption>
-  <!-- Position Column -->
+<caption>{{ 'Edits.SuggestedEdits' | translate }}</caption>
+
   <ng-container matColumnDef="userName">
-    <th mat-header-cell *matHeaderCellDef id="edit-user-header">User.</th>
+    <th mat-header-cell *matHeaderCellDef id="edit-user-header">
+      {{ 'Common.User' | translate }}
+    </th>
     <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
   </ng-container>
 
   <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef id="edit-type-header">Type.</th>
+    <th mat-header-cell *matHeaderCellDef id="edit-type-header">
+      {{ 'Common.Type' | translate }}
+    </th>
     <td mat-cell *matCellDef="let element">{{ getEditType(element.editType) }}</td>
   </ng-container>
 
-  <!-- Name Column -->
   <ng-container matColumnDef="original">
-    <th mat-header-cell *matHeaderCellDef id="edit-original-header">Original</th>
+    <th mat-header-cell *matHeaderCellDef id="edit-original-header">
+      {{ 'Edits.Original' | translate }}
+    </th>
     <td class="big-text" mat-cell *matCellDef="let element">
       <div [ngSwitch]="element.editable">
         <div *ngSwitchCase="0">
@@ -46,7 +51,9 @@
     <th mat-header-cell *matHeaderCellDef id="edit-approve-header"></th>
     <td mat-cell *matCellDef="let element">
       <div *ngIf="isContributor">
-        <button mat-stroked-button (click)="approvePost(element)" color="accent">Approve</button>
+        <button mat-stroked-button (click)="approvePost(element)" color="accent">
+          {{ 'Edits.Approve' | translate }}
+        </button>
       </div>
     </td>
   </ng-container>
@@ -55,7 +62,9 @@
     <th mat-header-cell *matHeaderCellDef id="edit-approve-header"></th>
     <td mat-cell *matCellDef="let element">
       <div *ngIf="isEdit(element)">
-        <button mat-stroked-button (click)="update(element)" color="accent">Edit</button>
+        <button mat-stroked-button (click)="update(element)" color="accent">
+          {{ 'Edits.Edit' | translate }}
+        </button>
       </div>
     </td>
   </ng-container>
@@ -63,7 +72,9 @@
   <ng-container matColumnDef="deny">
     <th mat-header-cell *matHeaderCellDef id="edit-deny-header"></th>
     <td mat-cell *matCellDef="let element">
-        <button mat-stroked-button (click)="reject(element)" color="primary">Reject</button>
+        <button mat-stroked-button (click)="reject(element)" color="primary">
+          {{ 'Edits.Reject' | translate }}
+        </button>
     </td>
   </ng-container>
 
@@ -75,5 +86,5 @@
   ></tr>
 </table>
 <ng-template #noEdits>
-  There are no edits available.
+  {{ 'Edits.NoEditsAvailable' | translate }}
 </ng-template>

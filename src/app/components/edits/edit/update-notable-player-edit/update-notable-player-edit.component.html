@@ -1,16 +1,16 @@
-<h1 mat-dialog-title>Edit notable player</h1>
+<h1 mat-dialog-title>{{ 'Characters.EditNotablePlayer' | translate }}</h1>
 <div mat-dialog-content>
   <div *ngIf="notablePlayer">
     <mat-form-field class="w-100">
-      <mat-label>Name</mat-label>
+      <mat-label>{{ 'Common.Name' | translate }}</mat-label>
       <input matInput [(ngModel)]="notablePlayer.name" />
     </mat-form-field>
     <mat-form-field class="w-100">
-      <mat-label>Description</mat-label>
+      <mat-label>{{ 'Common.Description' | translate }}</mat-label>
       <input matInput [(ngModel)]="notablePlayer.description" />
     </mat-form-field>
     <mat-form-field class="w-100">
-        <mat-label>Country</mat-label>
+        <mat-label>{{ 'Characters.Country' | translate }}</mat-label>
         <input matInput [(ngModel)]="notablePlayer.country" />
       </mat-form-field>
   </div>

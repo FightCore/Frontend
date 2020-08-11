@@ -13,7 +13,7 @@
           (click)="hideSidebar()"
           i18n
         >
-          {{ link.name }}
+          {{ link.name | translate }}
         </button>
       </div>
       <div *ngIf="isAuthenticated(); else mobileLogin">
@@ -29,7 +29,7 @@
       color="accent"
       mat-flat-button
       class="text-center w-100 mb-1"(click)="hideSidebar(); logout()" i18n>
-        Logout</button>
+      {{ 'Authentication.Logout' | translate }}</button>
       </div>
     </div>
   </mat-sidenav>
@@ -42,16 +42,17 @@
             <img class="logo mouse-pointer" src="assets/Fightcore_Logo.svg" alt="FightCore logo" />
           </div>
           <span *ngFor="let link of links" [routerLink]="link.route" i18n>
-            {{ link.name }}</span
+            {{ link.name | translate }}</span
           >
           <span class="spacer"></span>
           <div class="d-none d-md-block">
+            <app-language class="language-picker p-3"></app-language>
             <span *ngIf="isAuthenticated(); else login" (click)="toUser()">
               <em class="material-icons">account_circle</em>
               {{ getUserName() }}</span
             >
             <span *ngIf="isAuthenticated()" (click)="logout()" i18n>
-              Logout</span
+              {{ 'Authentication.Logout' | translate }}</span
             >
           </div>
         </mat-toolbar-row>
@@ -86,8 +87,8 @@
 </mat-sidenav-container>
 
 <ng-template #login>
-  <span (click)="register()" i18n>Register</span>
-  <span (click)="goToLogin()" i18n>Login</span>
+  <span (click)="register()">{{ 'Authentication.Register' | translate }}</span>
+  <span (click)="goToLogin()">{{ 'Authentication.Login' | translate }}</span>
 </ng-template>
 
 <ng-template #mobileLogin>
@@ -96,9 +97,8 @@
     class="text-center w-100 mb-1"
     mat-raised-button
     (click)="hideSidebar(); register()"
-    i18n
   >
-    Register
+  {{ 'Authentication.Register' | translate }}
   </button>
   <button
     class="text-center w-100 mb-1"
@@ -106,8 +106,7 @@
     mat-raised-button
     (click)="hideSidebar()"
     [routerLink]="['/login']"
-    i18n
   >
-    Login
+  {{ 'Authentication.Login' | translate }}
   </button>
 </ng-template>

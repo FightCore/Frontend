@@ -10,15 +10,14 @@
     (click)="toCharacters()"
     i18n
   >
-    <em class="material-icons">arrow_back</em> Back
+    <em class="material-icons">arrow_back</em> {{ 'Common.Back' | translate }}
   </button>
   <mat-card class="mb-2">
-    <mat-card-header>About character editing</mat-card-header>
+    <mat-card-header>{{
+      'Edits.AboutCharacterEditing' | translate
+    }}</mat-card-header>
     <mat-card-content>
-      Editing a character will be saved as a suggestion towards the moderators of this character.
-      These suggestions will later be approved and you will be added to the list of contributors.
-      All edits made are saved with the respective editor, nobody will take credit for your edit.
-      If there are no contributors for your character, contact Bort on Discord or Twitter.
+      {{ 'Edits.CharacterEditingInfo' | translate }}
     </mat-card-content>
   </mat-card>
   <mat-card class="h-100">
@@ -36,11 +35,16 @@
     </mat-card-header>
     <mat-card-content class="h-100">
       <mat-tab-group class="h-100">
-        <mat-tab class="h-100" label="General Information">
+        <mat-tab
+          class="h-100"
+          [label]="'Characters.GeneralInformation' | translate"
+        >
           <mat-form-field class="general-information">
             <textarea
               matInput
-              placeholder="General Information about the character."
+              [placeholder]="
+                'Characters.GeneralInformationAboutTheCharacter' | translate
+              "
               [(ngModel)]="character.generalInformation"
               type="textarea"
               class="general-information"
@@ -48,7 +52,10 @@
             ></textarea>
           </mat-form-field>
         </mat-tab>
-        <mat-tab class="h-100" label="Notable Players">
+        <mat-tab
+          class="h-100"
+          [label]="'Characters.NotablePlayers' | translate"
+        >
           <div class="row">
             <div class="col-12">
               <button
@@ -58,12 +65,13 @@
                 color="primary"
                 i18n
               >
-                <em class="material-icons">add</em> New Player
+                <em class="material-icons">add</em>
+                {{ 'Characters.NewPlayer' | translate }}
               </button>
             </div>
             <div class="col-12">
               <p *ngIf="character.notablePlayers.length === 0" i18n>
-                No players yet.
+                {{ 'Characters.NoPlayersYet' | translate }}
               </p>
               <div
                 *ngFor="let player of character.notablePlayers"
@@ -72,7 +80,7 @@
                 <mat-form-field class="name">
                   <input
                     matInput
-                    placeholder="Player's name"
+                    [placeholder]="'Common.Name' | translate"
                     [(ngModel)]="player.name"
                     type="input"
                     [name]="'playerName' + player.id"
@@ -84,9 +92,11 @@
                   <input
                     maxlength="2"
                     matInput
-                    placeholder="Player's country"
+                    [placeholder]="'Characters.Country' | translate"
                     [(ngModel)]="player.country"
-                    (ngModelChange)="player.country = player.country.toLowerCase()"
+                    (ngModelChange)="
+                      player.country = player.country.toLowerCase()
+                    "
                     type="input"
                     [name]="'playerDescription' + player.id"
                     [readonly]="!player.new"
@@ -94,13 +104,13 @@
                   />
                 </mat-form-field>
                 <span
-  *ngIf="player.country"
-  [class]="'flag flag-icon flag-icon-' + player.country"
-></span>
+                  *ngIf="player.country"
+                  [class]="'flag flag-icon flag-icon-' + player.country"
+                ></span>
                 <mat-form-field class="description">
                   <input
                     matInput
-                    placeholder="Player's description"
+                    [placeholder]="'Common.Description' | translate"
                     [(ngModel)]="player.description"
                     type="input"
                     [name]="'playerDescription' + player.id"
@@ -115,17 +125,16 @@
                   (click)="deletePlayer(player)"
                   i18n
                 >
-                  <em class="material-icons">delete</em> Delete
+                  <em class="material-icons">delete</em>
+                  {{ 'Common.Delete' | translate }}
                 </button>
-                <hr/>
+                <hr />
               </div>
             </div>
           </div>
         </mat-tab>
-        <mat-tab class="h-100" label="Videos">
-          A video's YouTube ID is located within the URL.
-          For example in the URLs https://www.youtube.com/watch?v=<strong>dQw4w9WgXcQ</strong> or https://youtu.be/<strong>dQw4w9WgXcQ</strong>.
-          Please submit only the ID instead of the full URL as a full URL will not work.
+        <mat-tab class="h-100" [label]="'Characters.Videos' | translate">
+          <span [innerHTML]="'Characters.AboutYouTubeIds' | translate"></span>
           <div class="row">
             <div class="col-12">
               <button
@@ -135,18 +144,19 @@
                 color="primary"
                 i18n
               >
-                <em class="material-icons">add</em> New Video
+                <em class="material-icons">add</em>
+                {{ 'Characters.NewVideo' | translate }}
               </button>
             </div>
             <div class="col-12">
               <p *ngIf="character.videos.length === 0" i18n>
-                No videos yet.
+                {{ 'Characters.NoVideosYet' | translate }}
               </p>
               <div *ngFor="let video of character.videos" class="player">
                 <mat-form-field class="name">
                   <input
                     matInput
-                    placeholder="Video's name"
+                    [placeholder]="'Common.Name' | translate"
                     [(ngModel)]="video.name"
                     type="input"
                     [name]="'videoName' + video.id"
@@ -158,7 +168,7 @@
                 <mat-form-field class="description">
                   <input
                     matInput
-                    placeholder="Video's YouTubeId"
+                    [placeholder]="'Characters.YouTubeId' | translate"
                     [(ngModel)]="video.youtubeId"
                     type="input"
                     [name]="'youtubeId' + video.id"
@@ -174,14 +184,15 @@
                   (click)="deleteVideo(video)"
                   i18n
                 >
-                  <em class="material-icons">delete</em> Delete
+                  <em class="material-icons">delete</em>
+                  {{ 'Common.Delete' | translate }}
                 </button>
                 <hr />
               </div>
             </div>
           </div>
         </mat-tab>
-        <mat-tab class="h-100" label="Websites">
+        <mat-tab class="h-100" [label]="'Characters.Websites' | translate">
           <div class="row">
             <div class="col-12">
               <button
@@ -191,18 +202,19 @@
                 color="primary"
                 i18n
               >
-                <em class="material-icons">add</em> New Website
+                <em class="material-icons">add</em>
+                {{ 'Characters.NewWebsite' | translate }}
               </button>
             </div>
             <div class="col-12">
               <p *ngIf="character.websites.length === 0" i18n>
-                No websites yet.
+                {{ 'Characters.NoWebsitesYet' | translate }}
               </p>
               <div *ngFor="let websites of character.websites" class="player">
                 <mat-form-field class="name">
                   <input
                     matInput
-                    placeholder="Website's title"
+                    [placeholder]="'Common.Title' | translate"
                     [(ngModel)]="websites.title"
                     type="input"
                     [name]="'websiteName' + websites.id"
@@ -214,7 +226,7 @@
                 <mat-form-field class="description">
                   <input
                     matInput
-                    placeholder="Websites's URL"
+                    [placeholder]="'Characters.Url' | translate"
                     [(ngModel)]="websites.websiteUrl"
                     type="input"
                     [name]="'websitesUrl' + websites.id"
@@ -230,7 +242,8 @@
                   (click)="deleteWebsite(websites)"
                   i18n
                 >
-                  <em class="material-icons">delete</em> Delete
+                  <em class="material-icons">delete</em>
+                  {{ 'Common.Delete' | translate }}
                 </button>
                 <hr />
               </div>
@@ -241,10 +254,11 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="saveForm()" i18n>
-        <em class="material-icons">save</em> Save
+        <em class="material-icons">save</em> {{ 'Common.Save' | translate }}
       </button>
       <button mat-raised-button color="primary" (click)="toCharacters()" i18n>
-        <em class="material-icons">arrow_back</em> Back
+        <em class="material-icons">arrow_back</em>
+        {{ 'Common.Back' | translate }}
       </button>
     </mat-card-actions>
   </mat-card>

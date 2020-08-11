@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MaterialModules } from './material-modules';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -70,7 +70,14 @@ import { VideoEditComponent } from './components/edits/view/video-edit/video-edi
 import { UpdateWebsiteEditComponent } from './components/edits/edit/update-website-edit/update-website-edit.component';
 import { UpdateNotablePlayerEditComponent } from './components/edits/edit/update-notable-player-edit/update-notable-player-edit.component';
 import { TopContributorsComponent } from './components/edits/top-contributors/top-contributors.component';
-// Import FontAwesome icons where needed.
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageComponent } from './components/common/language/language.component';
+
+// AoT requires an exported function for factories
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   imports: [
@@ -103,7 +110,15 @@ import { TopContributorsComponent } from './components/edits/top-contributors/to
     AvatarModule,
     MatPasswordStrengthModule.forRoot(),
     NgxTextDiffModule,
-    NgxFlagPickerModule
+    NgxFlagPickerModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      },
+      defaultLanguage: 'en'
+  })
   ],
   declarations: [
     AppComponent,
@@ -151,7 +166,8 @@ import { TopContributorsComponent } from './components/edits/top-contributors/to
     VideoEditComponent,
     UpdateWebsiteEditComponent,
     UpdateNotablePlayerEditComponent,
-    TopContributorsComponent
+    TopContributorsComponent,
+    LanguageComponent
   ],
   entryComponents: [
     PostHelpComponent,
