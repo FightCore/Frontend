@@ -1,16 +1,16 @@
 <div *ngIf="loading else selector" class="game-dropdown">
   <div *ngIf="!failed else loadFail" i18n>
       <mat-spinner [diameter]="20" class="loading-spinner"></mat-spinner>
-      Loading games..
+      {{ 'Common.Loading' | translate }}
   </div>
 </div>
 
 <ng-template #selector>
     <mat-form-field class="game-dropdown">
-        <mat-label i18n>Game</mat-label>
+        <mat-label i18n>{{ 'Games.Game' | translate }}</mat-label>
         <mat-select [(value)]="selected" (selectionChange)="onSelectChange($event)">
           <mat-option *ngIf="addAllOptions" [value]="0" i18n>
-            All
+            {{ 'Common.All' | translate }}
           </mat-option>
           <mat-option *ngFor="let game of games" [value]="game.id">
               <img *ngIf="game.icon" class="d-inline" [src]="game.icon.url" alt="game-icon">
@@ -21,5 +21,5 @@
 </ng-template>
 
 <ng-template #loadFail>
-  <p i18n>Loading games has failed. Try refreshing.</p>
+  <p i18n>{{ 'Games.LoadingGamesFailed' | translate }}</p>
 </ng-template>

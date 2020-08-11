@@ -11,7 +11,7 @@
       {{ post.title }}
     </mat-card-title>
     <mat-card-subtitle>
-      Written by: <strong>{{post.author.name}}</strong>
+      {{ 'Posts.WrittenBy' | translate }} <strong>{{post.author.name}}</strong>
       <div></div>
       <span class="float-right">{{post.game.name}}</span>
     </mat-card-subtitle>
@@ -28,7 +28,7 @@
         >
         </app-like-button>
         <button (click)="viewPost(post.id)" mat-button color="primary">
-          Read more
+          {{ 'Posts.ReadMore' | translate }}
         </button>
   </mat-card-actions>
 </mat-card>

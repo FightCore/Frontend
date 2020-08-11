@@ -6,7 +6,7 @@
     [routerLink]="['/game']"
     i18n
   >
-    <em class="material-icons">arrow_back</em> Back to games
+    <em class="material-icons">arrow_back</em> {{ 'Games.BackToGames' | translate }}
   </button>
   <div [class]="getGameClass()">
     <app-loading *ngIf="loading; else gameDisplay"></app-loading>
@@ -37,7 +37,7 @@
     <div class="col-lg-6">
       <mat-card>
         <mat-card-header>
-          <mat-card-title i18n>Posts</mat-card-title>
+          <mat-card-title>{{ 'Posts.Posts' | translate }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <app-loading *ngIf="postLoading; else postList"></app-loading>
@@ -48,7 +48,7 @@
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title i18n>Characters</mat-card-title>
+      <mat-card-title>{{ 'Characters.Characters' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <app-loading *ngIf="characterLoading; else characterList"></app-loading>

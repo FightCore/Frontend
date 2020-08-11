@@ -1,8 +1,8 @@
-<h2 i18n>General Information</h2>
+<h2 i18n>{{ 'Characters.GeneralInformation' | translate }}</h2>
 <p class="text">
   {{ character.generalInformation }}
 </p>
-<h5 i18n>Sources</h5>
+<h5 i18n>{{ 'Characters.Sources' | translate }}</h5>
 <div *ngFor="let source of character.informationSources">
   <button mat-stroked-button color="accent"
   (click)="openInNewTab(source.url)">

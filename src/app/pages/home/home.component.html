@@ -3,13 +3,8 @@
         <app-title-bar></app-title-bar>
     </div>
     <div class="row equal">
-        <!-- <div class="col-lg-4">
-            <mat-card class="mat-elevation-z5">
-            <app-featured-posts></app-featured-posts>
-        </mat-card>
-        </div> -->
         <div class="col-lg-8">
-            <h2 class="title">Popular characters</h2>
+            <h2 class="title">{{ 'Characters.PopularCharacters' | translate }}</h2>
             <div class="row">
                 <div *ngFor="let character of popularCharacters" class="col-lg-4">
                     <app-character-preview [character]="character"></app-character-preview>

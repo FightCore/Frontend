@@ -1,11 +1,10 @@
-<h2 mat-dialog-titl class="title">Create your account</h2>
+<h2 mat-dialog-title class="title">{{ 'Authentication.CreateYourAccount' | translate }}</h2>
 <mat-dialog-content>
   <form class="user-form">
     <mat-form-field appearance="outline">
-      <mat-label i18n>Email</mat-label>
+      <mat-label>{{ 'Authentication.Email' | translate }}</mat-label>
       <input
         matInput
-        placeholder="Enter your email"
         [formControl]="email"
         required
       />
@@ -13,10 +12,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label i18n>Username</mat-label>
+      <mat-label>{{ 'Authentication.Username' | translate }}</mat-label>
       <input
         matInput
-        placeholder="Enter your username"
         [formControl]="username"
         required
       />
@@ -26,10 +24,9 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label i18n>Password</mat-label>
+      <mat-label>{{ 'Authentication.Password' | translate }}</mat-label>
       <input
         matInput
-        placeholder="Enter your password"
         [formControl]="password"
         type="password"
         required
@@ -40,7 +37,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label i18n>Confirm password</mat-label>
+      <mat-label>{{ 'Authentication.ConfirmPassword' | translate }}</mat-label>
       <input
         matInput
         placeholder="Confirm your password"
@@ -59,7 +56,7 @@
     <mat-password-strength #passwordComponent [password]="password.value">
     </mat-password-strength>
     <mat-checkbox [(ngModel)]="showPasswordInfo" name="showPasswordInfo" i18n
-      >Show details
+      >{{ 'Authentication.ShowDetails' | translate }}
     </mat-checkbox>
     <mat-password-strength-info
       *ngIf="showPasswordInfo"
@@ -75,10 +72,10 @@
         class="register-button"
         i18n
       >
-        Register
+      {{ 'Authentication.Register' | translate }}
       </button>
       <button mat-raised-button (click)="login()" class="register-button">
-        Login
+        {{ 'Authentication.Login' | translate }}
       </button>
     </div>
   </form>

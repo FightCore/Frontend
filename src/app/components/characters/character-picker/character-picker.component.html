@@ -1,12 +1,12 @@
 <app-loading *ngIf="loading else dropdown"></app-loading>
 <ng-template #dropdown>
     <mat-form-field class="w-100">
-        <mat-label i18n>Character</mat-label>
+        <mat-label i18n>{{ 'Characters.Character' | translate }}</mat-label>
         <input matInput aria-label="Character" [matAutocomplete]="auto" [formControl]="characterFormControl">
         <mat-icon matSuffix>search</mat-icon>
         <mat-autocomplete #auto (optionSelected)="onSelectChange($event)" [displayWith]="displayCharacter">
-          <mat-option *ngIf="addAllOptions" [value]="0" i18n>
-            All
+          <mat-option *ngIf="addAllOptions" [value]="0">
+            {{ 'Common.All' | translate }}
           </mat-option>
           <mat-option *ngFor="let character of displayedCharacters | async" [value]="character">
               <img alt="character stock image"

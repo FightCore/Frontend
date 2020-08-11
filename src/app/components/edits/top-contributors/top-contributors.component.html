@@ -1,25 +1,25 @@
-<h2 class="title">Top contributors</h2>
+<h2 class="title">{{ 'Edits.TopContributors' | translate }}</h2>
 <mat-table
   *ngIf="dataSource"
   [dataSource]="dataSource"
   class="mat-elevation-z2"
 >
   <ng-container matColumnDef="position">
-    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>{{ 'Common.Rank' | translate }}</mat-header-cell>
     <mat-cell *matCellDef="let contributor; let i = index">
       {{ i + 1 }}.
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>{{ 'Common.Name' | translate }}</mat-header-cell>
     <mat-cell *matCellDef="let contributor">
       {{ contributor.user.name }}
     </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="edits">
-    <mat-header-cell *matHeaderCellDef> Edits </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>{{ 'Edits.Edits' | translate }}</mat-header-cell>
     <mat-cell *matCellDef="let contributor"> {{ contributor.edits }} </mat-cell>
   </ng-container>
 
