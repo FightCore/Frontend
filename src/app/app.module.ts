@@ -73,6 +73,11 @@ import { TopContributorsComponent } from './components/edits/top-contributors/to
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguageComponent } from './components/common/language/language.component';
+import { EditMetaDataComponent } from './components/posts/editor/edit-meta-data/edit-meta-data.component';
+import { EditPostTextComponent } from './components/posts/editor/edit-post-text/edit-post-text.component';
+import { EditIntialPostComponent } from './components/posts/editor/edit-intial-post/edit-intial-post.component';
+import { MoveDisplayComponent } from './components/frame-data/move-display/move-display.component';
+import { HitboxTableDialogComponent } from './components/frame-data/hitbox-table-dialog/hitbox-table-dialog.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -167,7 +172,12 @@ export function createTranslateLoader(http: HttpClient) {
     UpdateWebsiteEditComponent,
     UpdateNotablePlayerEditComponent,
     TopContributorsComponent,
-    LanguageComponent
+    LanguageComponent,
+    EditMetaDataComponent,
+    EditPostTextComponent,
+    EditIntialPostComponent,
+    MoveDisplayComponent,
+    HitboxTableDialogComponent
   ],
   entryComponents: [
     PostHelpComponent,

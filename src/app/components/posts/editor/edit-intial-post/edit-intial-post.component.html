@@ -1,0 +1,13 @@
+<h4>Title and Description</h4>
+<mat-form-field class="w-100">
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="The title of your post" value="">
+</mat-form-field>
+<mat-form-field class="w-100">
+    <mat-label>Description</mat-label>
+    <input matInput placeholder="A short description about your post" value="">
+</mat-form-field>
+<mat-divider class="mb-2"></mat-divider>
+<h4>Game and optional character</h4>
+<app-game-selector></app-game-selector>
+<app-character-picker [gameId]="2"></app-character-picker>
