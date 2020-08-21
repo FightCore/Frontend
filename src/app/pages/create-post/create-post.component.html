@@ -1,70 +1,31 @@
-<div class="d-md-block">
-  <div class="container-fluid">
-    <h2 i18n>
-      {{ 'Posts.CreateNewPost' | translate }}
-    </h2>
-    <mat-form-field class="create-post-header">
-      <mat-label i18n>
-        {{ 'Common.Title' | translate }}
-      </mat-label>
-      <input [(ngModel)]="title" matInput name="title" required />
-    </mat-form-field>
-    <div class="game-picker">
-      <app-game-selector
-        [selected]="getGameId()"
-        (selectionChange)="onGameChange($event)"
-        class="create-post-header"
-      >
-      </app-game-selector>
-    </div>
-    <div class="character-picker">
-      <app-character-picker
-        [selected]="getCharacterId()"
-        #characterPicker
-        [gameId]="gameId"
-      ></app-character-picker>
-    </div>
-    <mat-checkbox class="create-post-header" [(ngModel)]="isPrivate" i18n>
-      {{ 'Posts.PrivatePost' | translate }}
-    </mat-checkbox>
-
-    <div class="create-button">
-      <button mat-raised-button color="primary" (click)="togglePreview()" i18n>
-        <em class="material-icons">visibility</em> {{ 'Posts.Preview' | translate }}
-      </button>
-      <button mat-raised-button color="primary" (click)="openHelp()" i18n>
-        <em class="material-icons">help</em> {{ 'Posts.ShowHelp' | translate }}
-      </button>
-      <button
-        [disabled]="isLoading"
-        mat-raised-button
-        color="accent"
-        (click)="createPost()"
-        i18n
-      >
-        <em class="material-icons">save</em>
-        <div class="post-text" *ngIf="this.post; else createText">
-          {{ 'Posts.UpdatePost' | translate }}
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Select initial topics</ng-template>
+      <app-edit-intial-post></app-edit-intial-post>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <form>
+      <ng-template matStepLabel>Optional meta data</ng-template>
+      <app-edit-meta-data></app-edit-meta-data>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+      <form>
+        <ng-template matStepLabel>Write the post</ng-template>
+        <app-edit-post-text></app-edit-post-text>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Finish</button>
         </div>
-      </button>
-    </div>
-  </div>
-  <hr />
-  <mat-slide-toggle (change)="toggleMarkdown()" color="primary" [(ngModel)]="useMarkdown" i18n>
-    <div *ngIf="useMarkdown else quillText">
-      {{ 'Posts.MarkdownMode' | translate }}
-    </div>
-    <ng-template #quillText>
-      {{ 'Posts.EditorMode' | translate }}
-    </ng-template>
-
-  </mat-slide-toggle>
-  <textarea *ngIf="useMarkdown; else quill" id="markdown-editor"> </textarea>
-</div>
-
-<ng-template #quill>
-  <quill-editor [(ngModel)]="content"></quill-editor>
-</ng-template>
-<ng-template #createText i18n>
-  {{ 'Posts.CreateNewPost' | translate }}
-</ng-template>
+      </form>
+    </mat-step>
+</mat-horizontal-stepper>

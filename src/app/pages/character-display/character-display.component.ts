@@ -13,7 +13,11 @@ import { MatchupService } from 'src/app/services/matchup/matchup.service';
 import { WebsiteResource } from 'src/app/models/resources/websiteResource';
 import { EditDto } from 'src/app/models/edits/edit-dto';
 import { EditService } from 'src/app/services/edits/edit.service';
-
+import { FrameDataCharacter} from 'src/app/models/framedata/framedata-character';
+import { FrameDataService } from 'src/app/services/framedata/frame-data.service';
+import { MoveType } from 'src/app/models/framedata/move-type';
+import { Move } from 'src/app/models/framedata/move';
+import { MatSidenavContent } from '@angular/material/sidenav';
 @Component({
   selector: 'app-character-display',
   templateUrl: './character-display.component.html',
@@ -33,13 +37,25 @@ export class CharacterDisplayComponent implements OnInit {
   openEdits: EditDto[];
   allEdits: EditDto[];
 
+  frameDataCharacter: FrameDataCharacter;
+  moveTypes = [
+    { name: 'Grounded attacks', value: MoveType.grounded},
+    { name: 'Tilt attacks', value: MoveType.tilt},
+    { name: 'Aerial attacks', value: MoveType.air},
+    { name: 'Special attacks', value: MoveType.special},
+    { name: 'Throws', value: MoveType.throw},
+    { name: 'Dodges', value: MoveType.dodge},
+    { name: 'Unknown', value: MoveType.unknown}
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private characterService: CharacterService,
     private router: Router,
     private sanitizer: DomSanitizer,
     private authService: AuthService,
-    private editService: EditService
+    private editService: EditService,
+    private frameDataService: FrameDataService
   ) { }
 
   ngOnInit() {
@@ -75,6 +91,9 @@ export class CharacterDisplayComponent implements OnInit {
     this.editService.getHistoryForCharacter(characterId).subscribe(edits => {
       this.allEdits = edits;
     });
+
+    this.frameDataService.getFrameDataForCharacter(characterId).subscribe(frameDataCharacter => 
+      this.frameDataCharacter = frameDataCharacter);
   }
 
   private youtubeVideos(): string[] {
@@ -111,5 +130,11 @@ export class CharacterDisplayComponent implements OnInit {
   }
   openUrl(url: string): void {
     window.open(url, '_blank');
+  }
+
+  getMovesForType(moveType: MoveType): Move[] {
+    return this.frameDataCharacter.moves
+      .filter(move => move.type === moveType)
+      .sort((moveA, moveB) => moveA.name.localeCompare(moveB.name));
   }
 }
