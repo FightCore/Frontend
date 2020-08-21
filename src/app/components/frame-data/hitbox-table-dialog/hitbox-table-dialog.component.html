@@ -12,55 +12,55 @@
 
     <!-- Position Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name.</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Name.</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.name }}</td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="damage">
-      <th mat-header-cell *matHeaderCellDef>Damage</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Damage</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.damage }}</td>
     </ng-container>
 
     <ng-container matColumnDef="angle">
-      <th mat-header-cell *matHeaderCellDef>Angle</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Angle</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.angle }}</td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="knockbackGrowth">
-      <th mat-header-cell *matHeaderCellDef>Knockback Growth</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Knockback Growth</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.knockbackGrowth }}</td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="setKnockback">
-      <th mat-header-cell *matHeaderCellDef>Set Knockback</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Set Knockback</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.setKnockback }}</td>
     </ng-container>
 
     <ng-container matColumnDef="baseKnockback">
-      <th mat-header-cell *matHeaderCellDef>Base Knockback</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Base Knockback</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.baseKnockback }}</td>
     </ng-container>
 
     <ng-container matColumnDef="effect">
-      <th mat-header-cell *matHeaderCellDef>Effect</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Effect</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.effect }}</td>
     </ng-container>
 
     <ng-container matColumnDef="hitlagAttacker">
-      <th mat-header-cell *matHeaderCellDef>Hitlag Attacker</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Hitlag Attacker</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.hitlagAttacker }}</td>
     </ng-container>
 
     <ng-container matColumnDef="hitlagDefender">
-      <th mat-header-cell *matHeaderCellDef>Hitlag Defender</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Hitlag Defender</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.hitlagDefender }}</td>
     </ng-container>
 
     <ng-container matColumnDef="shieldstun">
-      <th mat-header-cell *matHeaderCellDef>Shieldstun</th>
+      <th mat-header-cell *matHeaderCellDef scope="col">Shieldstun</th>
       <td mat-cell *matCellDef="let hitbox">{{ hitbox.shieldstun }}</td>
     </ng-container>
 
