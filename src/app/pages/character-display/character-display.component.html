@@ -137,7 +137,7 @@
             </app-edits-overview>
           </div>
         </mat-tab>
-        <mat-tab [label]="'FrameData.FrameData' | translate">
+        <mat-tab *ngIf="frameDataCharacter" [label]="'FrameData.FrameData' | translate">
           <div class="container-fluid">
             <p>
               Original data from
@@ -145,8 +145,11 @@
               and <a href="http://ikneeddata.com"><strong>I KneeData</strong></a>.
             </p>
             <hr />
-            <div *ngIf="frameDataCharacter">
-              <div *ngFor="let type of moveTypes" class="row mb-2">
+            <div class="">
+              <div class="row">
+                <app-character-attributes [frameDataCharacter]="frameDataCharacter" class="w-100"></app-character-attributes>
+              </div>
+              <div *ngFor="let type of moveTypes" class="mb-2 row">
                 <mat-toolbar color="primary">
                   <h3>{{ type.name }}</h3>
                 </mat-toolbar>

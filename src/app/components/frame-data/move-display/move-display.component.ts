@@ -29,7 +29,7 @@ export class MoveDisplayComponent implements OnInit {
   }
 
   openHitboxes(move: Move): void {
-    const dialog = this.dialog.open(HitboxTableDialogComponent, { width: '1600px', height: '700px'});
+    const dialog = this.dialog.open(HitboxTableDialogComponent, { width: '1600px'});
     dialog.componentInstance.hitboxes = move.hitboxes;
     dialog.componentInstance.moveName = move.name;
   }

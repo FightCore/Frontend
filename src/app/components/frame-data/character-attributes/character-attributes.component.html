@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <span>Character attributes</span>
+</mat-toolbar>
+<div class="container-fluid">
+    <div class="row mb-1">
+        <div *ngFor="let stat of statistics" class="col-lg-2 col-12">
+                {{ stat.name }}:
+                <p class="float-right">
+                    {{ stat.value }}
+                </p>
+        </div>
+    </div>
+</div>

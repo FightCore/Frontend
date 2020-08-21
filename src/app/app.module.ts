@@ -78,6 +78,7 @@ import { EditPostTextComponent } from './components/posts/editor/edit-post-text/
 import { EditIntialPostComponent } from './components/posts/editor/edit-intial-post/edit-intial-post.component';
 import { MoveDisplayComponent } from './components/frame-data/move-display/move-display.component';
 import { HitboxTableDialogComponent } from './components/frame-data/hitbox-table-dialog/hitbox-table-dialog.component';
+import { CharacterAttributesComponent } from './components/frame-data/character-attributes/character-attributes.component';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -177,7 +178,8 @@ export function createTranslateLoader(http: HttpClient) {
     EditPostTextComponent,
     EditIntialPostComponent,
     MoveDisplayComponent,
-    HitboxTableDialogComponent
+    HitboxTableDialogComponent,
+    CharacterAttributesComponent
   ],
   entryComponents: [
     PostHelpComponent,
