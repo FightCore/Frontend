@@ -53,6 +53,7 @@ export class PostComponent implements OnInit {
     this.gameId = gameId;
     this.characterPicker.updateGame(gameId);
     this.characterId = this.characterPicker.getValue();
+    UserOptions.setCurrentGame(gameId);
     this.filterPosts();
   }
 

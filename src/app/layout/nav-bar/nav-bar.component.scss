@@ -5,9 +5,11 @@
     flex-grow: 1;
 }
 
-span {
+span, a {
     margin-right: 1em;
     cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 }
 
 .language-picker {
@@ -22,4 +24,8 @@ span {
 
 .example-spacer {
     flex: 1 1 auto;
-  }
+}
+
+.logo-mobile {
+    height: 1.5em;
+}

@@ -1,12 +1,10 @@
 <mat-horizontal-stepper [linear]="true" #stepper>
-  <mat-step>
-    <form>
+  <mat-step [stepControl]="initialPost.formGroup">
       <ng-template matStepLabel>Select initial topics</ng-template>
-      <app-edit-intial-post></app-edit-intial-post>
+      <app-edit-intial-post #initialPost></app-edit-intial-post>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
-    </form>
   </mat-step>
   <mat-step>
     <form>
@@ -21,10 +19,10 @@
   <mat-step>
       <form>
         <ng-template matStepLabel>Write the post</ng-template>
-        <app-edit-post-text></app-edit-post-text>
+        <app-edit-post-text #editPost></app-edit-post-text>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Finish</button>
+          <button mat-button (click)="createPost()" matStepperNext>Finish</button>
         </div>
       </form>
     </mat-step>

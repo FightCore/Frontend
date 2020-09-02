@@ -1,1 +1,12 @@
-<p>edit-post-text works!</p>
+<div *ngIf="!chooseEditor else editor">
+    <button mat-button (click)="useMarkdownEditor()">Use Markdown</button>
+    <button mat-button (click)="useQuill()">Use fancy editor (Quill)</button>
+</div>
+<ng-template #editor>
+    <textarea *ngIf="useMarkdown; else quill" id="markdown-editor"> </textarea>
+</ng-template>
+
+
+<ng-template #quill>
+    <quill-editor [(ngModel)]="htmlContent"></quill-editor>
+</ng-template>

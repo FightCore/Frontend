@@ -1,7 +1,7 @@
 <mat-sidenav-container>
   <!-- Sidenav is only viewable on mobile. -->
   <mat-sidenav style="height: 100%; width: 50%" [(opened)]="opened">
-    <img class="logo" src="assets/FC.png" alt="FightCore logo" />
+    <img class="logo-mobile" src="assets/Fightcore_Logo.svg" alt="FightCore logo" />
     <span i18n>FightCore</span>
     <div class="p-1">
       <div *ngFor="let link of links">
@@ -41,8 +41,8 @@
           <div [routerLink]="['']">
             <img class="logo mouse-pointer" src="assets/Fightcore_Logo.svg" alt="FightCore logo" />
           </div>
-          <span *ngFor="let link of links" [routerLink]="link.route" i18n>
-            {{ link.name | translate }}</span
+          <a *ngFor="let link of links" [routerLink]="link.route" i18n>
+            {{ link.name | translate }}</a
           >
           <span class="spacer"></span>
           <div class="d-none d-md-block">

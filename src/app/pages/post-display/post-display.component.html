@@ -41,11 +41,13 @@
           </app-like-button>
 
           <div class="d-inline p-1" *ngIf="isPostFromUser()">
-            <button (click)="editPost()" mat-raised-button color="accent" i18n>
+            <span>Temporary disabled due to post rework.</span>
+            <button disabled (click)="editPost()" mat-raised-button color="accent" i18n>
               <em class="material-icons">edit</em> {{ 'Common.Edit' | translate }}
             </button>
 
             <button
+              disabled
               (click)="downloadPost()"
               mat-raised-button
               color="accent"

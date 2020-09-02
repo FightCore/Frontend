@@ -46,6 +46,7 @@ export class CharacterComponent implements OnInit {
 
   changeGameSelection(gameId: number): void {
     this.selectedGame = gameId;
+    UserOptions.setCurrentGame(gameId);
     this.filterCharacters();
   }
 

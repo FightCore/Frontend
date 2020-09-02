@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  AfterContentInit,
+} from '@angular/core';
 import { Post, CreatedPost } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post/post.service';
 import { ToastrService } from 'ngx-toastr';
@@ -17,15 +23,15 @@ import { GameService } from 'src/app/services/game/game.service';
 import { CharacterService } from 'src/app/services/character/character.service';
 import { User } from 'src/app/models/user';
 import * as SimpleMDE from 'simplemde';
+import { EditIntialPostComponent } from 'src/app/components/posts/editor/edit-intial-post/edit-intial-post.component';
+import { EditPostTextComponent } from 'src/app/components/posts/editor/edit-post-text/edit-post-text.component';
 
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss'],
 })
-export class CreatePostComponent implements OnInit {
-  @Input() post: Post;
-
+export class CreatePostComponent implements AfterContentInit {
   constructor(
     private postService: PostService,
     private toastrService: ToastrService,
@@ -35,166 +41,202 @@ export class CreatePostComponent implements OnInit {
     private gameService: GameService,
     private characterService: CharacterService
   ) {}
-  content = '';
-  useMarkdown = false;
-  title: string;
-  isPrivate: boolean;
-  isLoading = false;
-  gameId: number = this.getGameId();
-  converter: Showdown.Converter = new Showdown.Converter();
-  editor: SimpleMDE;
+  @ViewChild('initialPost') initialPost: EditIntialPostComponent;
+  @ViewChild('editPost') editPostText: EditPostTextComponent;
+  @Input() post: Post = null;
 
-  @ViewChild('characterPicker')
-  characterPicker: CharacterPickerComponent;
-  ngOnInit() {
-    if (this.post) {
-      this.title = this.post.title;
-      this.isPrivate = this.post.isPrivate;
-      this.gameId = this.post.gameId;
-      this.content = this.converter.makeHtml(this.post.body);
-    }
-  }
-
-  getGameId(): number {
-    if (this.post) {
-      return this.post.gameId;
-    }
-
-    return UserOptions.getCurrentGame() === 0
-      ? -1
-      : UserOptions.getCurrentGame();
-  }
-
-  getCharacterId(): number {
-    if (this.post && this.post.character) {
-      return this.post.character.id;
-    }
-
-    return -1;
-  }
-
-  createPost(): void {
-    if (this.post != null) {
-      this.updatePost();
+  ngAfterContentInit(): void {
+    if (this.post === null) {
       return;
     }
 
-    const post = new Post();
-    this.forgePost(post);
+    this.initialPost.formGroup.value.title = this.post.title;
+    this.initialPost.selectedCharacter = this.post.characterId;
+    this.initialPost.selectedGame = this.post.gameId;
+    this.editPostText.useMarkdownEditor(this.post.body);
+  }
 
-    this.isLoading = true;
+  forgePost(): Post {
+    const post = new Post();
+    post.title = this.initialPost.formGroup.value.title;
+    post.characterId = this.initialPost.selectedCharacter;
+    post.gameId = this.initialPost.selectedGame;
+    post.body = this.editPostText.getMarkdownContent();
+    return post;
+  }
+
+  createPost(): void {
+    const post = this.forgePost();
     this.postService.createPost(post).subscribe(
       (_) => {
         this.toastrService.success(PostText.createdPost);
         this.router.navigate([`/${StaticRoutes.posts}`]);
       },
       (error) => {
-        this.isLoading = false;
         this.toastrService.error(PostText.failedCreatePost);
       }
     );
   }
+  // content = '';
+  // useMarkdown = false;
+  // title: string;
+  // isPrivate: boolean;
+  // isLoading = false;
+  // gameId: number = this.getGameId();
+  // converter: Showdown.Converter = new Showdown.Converter();
+  // editor: SimpleMDE;
 
-  private updatePost(): void {
-    this.post = this.forgePost(this.post);
+  // @ViewChild('characterPicker')
+  // characterPicker: CharacterPickerComponent;
+  // ngOnInit() {
+  //   if (this.post) {
+  //     this.title = this.post.title;
+  //     this.isPrivate = this.post.isPrivate;
+  //     this.gameId = this.post.gameId;
+  //     this.content = this.converter.makeHtml(this.post.body);
+  //   }
+  // }
 
-    this.postService.updatePost(this.post).subscribe(
-      (_) => {
-        this.toastrService.success(PostText.updatedPost);
-        this.router.navigate([StaticRoutes.viewPostNoId, this.post.id]);
-      },
-      (error) => {
-        this.isLoading = false;
-        this.toastrService.error(PostText.failedUpdatePost);
-      }
-    );
-  }
+  // getGameId(): number {
+  //   if (this.post) {
+  //     return this.post.gameId;
+  //   }
 
-  private forgePost(post: Post): Post {
-    post.title = this.title;
-    post.isPrivate = this.isPrivate;
-    post.gameId = this.gameId;
-    post.characterId = this.characterPicker.getValue();
-    let postContent = this.content;
+  //   return UserOptions.getCurrentGame() === 0
+  //     ? -1
+  //     : UserOptions.getCurrentGame();
+  // }
 
-    // Use a local copy of the variable instead of the actual value to not
-    // destroy the HTML content while converting to Markdown.
-    if (!this.useMarkdown) {
-      postContent = this.converter.makeMarkdown(this.content);
-    } else {
-      postContent = this.editor.value();
-    }
+  // getCharacterId(): number {
+  //   if (this.post && this.post.character) {
+  //     return this.post.character.id;
+  //   }
 
-    post.body = postContent;
+  //   return -1;
+  // }
 
-    if (post.body.length <= 0 || post.title.length <= 0) {
-      this.toastrService.error('Please provide a title and write a body.');
-      return null;
-    }
+  // createPost(): void {
+  //   if (this.post != null) {
+  //     this.updatePost();
+  //     return;
+  //   }
 
-    return post;
-  }
+  //   const post = new Post();
+  //   this.forgePost(post);
 
-  openHelp(): void {
-    this.dialog.open(PostHelpComponent, {
-      width: '50em',
-    });
-  }
+  //   this.isLoading = true;
+  //   this.postService.createPost(post).subscribe(
+  //     (_) => {
+  //       this.toastrService.success(PostText.createdPost);
+  //       this.router.navigate([`/${StaticRoutes.posts}`]);
+  //     },
+  //     (error) => {
+  //       this.isLoading = false;
+  //       this.toastrService.error(PostText.failedCreatePost);
+  //     }
+  //   );
+  // }
 
-  onGameChange(id: number): void {
-    this.gameId = id;
-    this.characterPicker.updateGame(id);
-  }
+  // private updatePost(): void {
+  //   this.post = this.forgePost(this.post);
 
-  togglePreview(): void {
-    const post = this.forgePost(new Post());
-    post.author = new User();
-    post.author.name = this.authService.name;
+  //   this.postService.updatePost(this.post).subscribe(
+  //     (_) => {
+  //       this.toastrService.success(PostText.updatedPost);
+  //       this.router.navigate([StaticRoutes.viewPostNoId, this.post.id]);
+  //     },
+  //     (error) => {
+  //       this.isLoading = false;
+  //       this.toastrService.error(PostText.failedUpdatePost);
+  //     }
+  //   );
+  // }
 
-    this.gameService.getGame(post.gameId).subscribe((game) => {
-      post.game = game;
+  // private forgePost(post: Post): Post {
+  //   post.title = this.title;
+  //   post.isPrivate = this.isPrivate;
+  //   post.gameId = this.gameId;
+  //   post.characterId = this.characterPicker.getValue();
+  //   let postContent = this.content;
 
-      if (post.characterId && post.characterId !== 0) {
-        this.characterService.get(post.characterId).subscribe((character) => {
-          post.character = character;
-          this.createDialog(post);
-        });
-      } else {
-        this.createDialog(post);
-      }
-    });
-  }
+  //   // Use a local copy of the variable instead of the actual value to not
+  //   // destroy the HTML content while converting to Markdown.
+  //   if (!this.useMarkdown) {
+  //     postContent = this.converter.makeMarkdown(this.content);
+  //   } else {
+  //     postContent = this.editor.value();
+  //   }
 
-  private createDialog(post: Post) {
-    const dialogRef = this.dialog.open(PostPreviewDialogComponent, {
-      width: '40em',
-    });
+  //   post.body = postContent;
 
-    dialogRef.componentInstance.post = post;
-  }
+  //   if (post.body.length <= 0 || post.title.length <= 0) {
+  //     this.toastrService.error('Please provide a title and write a body.');
+  //     return null;
+  //   }
 
-  toggleMarkdown() {
-    if (!this.useMarkdown) {
-      this.content = this.editor.value();
-      this.content = this.converter.makeHtml(this.content);
-    } else {
-      this.content = this.converter.makeMarkdown(this.content);
-    }
+  //   return post;
+  // }
 
-    if (this.useMarkdown) {
-      setTimeout(() => this.createEditor(this.content));
-    } else {
-      if (this.editor) {
-        this.editor.toTextArea();
-      }
-    }
-  }
+  // openHelp(): void {
+  //   this.dialog.open(PostHelpComponent, {
+  //     width: '50em',
+  //   });
+  // }
 
-  private createEditor(text: string) {
-    this.editor = new SimpleMDE({
-      element: document.getElementById('markdown-editor'),
-      initialValue: text,
-      spellChecker: false,
-    });
-  }
+  // onGameChange(id: number): void {
+  //   this.gameId = id;
+  //   this.characterPicker.updateGame(id);
+  // }
+
+  // togglePreview(): void {
+  //   const post = this.forgePost(new Post());
+  //   post.author = new User();
+  //   post.author.name = this.authService.name;
+
+  //   this.gameService.getGame(post.gameId).subscribe((game) => {
+  //     post.game = game;
+
+  //     if (post.characterId && post.characterId !== 0) {
+  //       this.characterService.get(post.characterId).subscribe((character) => {
+  //         post.character = character;
+  //         this.createDialog(post);
+  //       });
+  //     } else {
+  //       this.createDialog(post);
+  //     }
+  //   });
+  // }
+
+  // private createDialog(post: Post) {
+  //   const dialogRef = this.dialog.open(PostPreviewDialogComponent, {
+  //     width: '40em',
+  //   });
+
+  //   dialogRef.componentInstance.post = post;
+  // }
+
+  // toggleMarkdown() {
+  //   if (!this.useMarkdown) {
+  //     this.content = this.editor.value();
+  //     this.content = this.converter.makeHtml(this.content);
+  //   } else {
+  //     this.content = this.converter.makeMarkdown(this.content);
+  //   }
+
+  //   if (this.useMarkdown) {
+  //     setTimeout(() => this.createEditor(this.content));
+  //   } else {
+  //     if (this.editor) {
+  //       this.editor.toTextArea();
+  //     }
+  //   }
+  // }
+
+  // private createEditor(text: string) {
+  //   this.editor = new SimpleMDE({
+  //     element: document.getElementById('markdown-editor'),
+  //     initialValue: text,
+  //     spellChecker: false,
+  //   });
+  // }
 }
