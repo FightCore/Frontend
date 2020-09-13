@@ -112,7 +112,17 @@
     "ShowHelp": "Show help",
     "ThisIsAPrivatePost": "This is a private post, only you can see it.",
     "UpdatePost": "Update post",
-    "WrittenBy": "Written By:"
+    "WrittenBy": "Written By:",
+    "Category": {
+      "NoCategory": "Uncategorised",
+      "Matchup": "Matchup",
+      "Techskill": "Techskill",
+      "Combos": "Combos",
+      "FrameData": "Frame data",
+      "PowerRanking": "Power ranking",
+      "Player": "Player(s)",
+      "Tournament": "Tournament"
+    }
   },
   "Socials": {
     "FollowUs": "Follow us"

@@ -112,7 +112,17 @@
       "ShowHelp": "Laat hulp zien",
       "ThisIsAPrivatePost": "Dit is een privé post, alleen u kan dit zien.",
       "UpdatePost": "Post bijwerken",
-      "WrittenBy": "Geschreven door:"
+      "WrittenBy": "Geschreven door:",
+      "Category": {
+        "NoCategory": "Geen categorie",
+        "Matchup": "Matchup",
+        "Techskill": "Techskill",
+        "Combos": "Combos",
+        "FrameData": "Frame data",
+        "PowerRanking": "Power ranking",
+        "Player": "Speler(s)",
+        "Tournament": "Toernooi"
+      }
     },
     "Socials": {
       "FollowUs": "Volg ons"

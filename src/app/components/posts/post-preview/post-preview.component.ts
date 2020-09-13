@@ -9,6 +9,7 @@ import { MarkdownService } from 'ngx-markdown';
 import { GameThemes } from 'src/styles/gameThemes';
 import { UserOptions } from 'src/app/options/userOptions';
 import { environment } from 'src/environments/environment';
+import { PostCategory } from 'src/app/models/post/post-category';
 
 @Component({
   selector: 'app-post-preview',
@@ -18,6 +19,16 @@ import { environment } from 'src/environments/environment';
 export class PostPreviewComponent implements OnInit {
   @Input() post: Post;
 
+  categories = [
+    { value: PostCategory.uncategorised, name: 'Posts.Category.NoCategory'},
+    { value: PostCategory.matchup, name: 'Posts.Category.Matchup'},
+    { value: PostCategory.techskill, name: 'Posts.Category.Techskill'},
+    { value: PostCategory.combos, name: 'Posts.Category.Combos'},
+    { value: PostCategory.frameData, name: 'Posts.Category.FrameData'},
+    { value: PostCategory.powerranking, name: 'Posts.Category.PowerRanking'},
+    { value: PostCategory.player, name: 'Posts.Category.Player'},
+    { value: PostCategory.tournament, name: 'Posts.Category.Tournament'},
+  ];
   constructor(
     private postService: PostService,
     private toastrService: ToastrService,
@@ -62,5 +73,11 @@ export class PostPreviewComponent implements OnInit {
 
   useAvatar(): boolean {
     return environment.enableAvatars;
+  }
+
+  getTranslationsForValue(): string {
+    const item = this.categories.find(category => category.value === this.post.category);
+
+    return item.name;
   }
 }

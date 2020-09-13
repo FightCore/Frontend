@@ -1,6 +1,7 @@
 import { User } from './user';
 import { Character } from './character';
 import { Game } from './game';
+import { PostCategory } from './post/post-category';
 
 export class Post {
     id: number;
@@ -14,6 +15,9 @@ export class Post {
     isPrivate: boolean;
     character?: Character;
     characterId?: number;
+    category: PostCategory;
+    tags: string[];
+    description: string;
 }
 
 export class CreatedPost {
