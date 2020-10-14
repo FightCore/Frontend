@@ -31,30 +31,14 @@ import { EditPostTextComponent } from 'src/app/components/posts/editor/edit-post
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss'],
 })
-export class CreatePostComponent implements AfterContentInit {
+export class CreatePostComponent {
   constructor(
     private postService: PostService,
     private toastrService: ToastrService,
     private router: Router,
-    private dialog: MatDialog,
-    private authService: AuthService,
-    private gameService: GameService,
-    private characterService: CharacterService
   ) {}
   @ViewChild('initialPost') initialPost: EditIntialPostComponent;
   @ViewChild('editPost') editPostText: EditPostTextComponent;
-  @Input() post: Post = null;
-
-  ngAfterContentInit(): void {
-    if (this.post === null) {
-      return;
-    }
-
-    this.initialPost.formGroup.value.title = this.post.title;
-    this.initialPost.selectedCharacter = this.post.characterId;
-    this.initialPost.selectedGame = this.post.gameId;
-    this.editPostText.useMarkdownEditor(this.post.body);
-  }
 
   forgePost(): Post {
     const post = new Post();

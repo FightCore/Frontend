@@ -12,7 +12,7 @@
     <mat-step>
       <form>
         <ng-template matStepLabel>Optional meta data</ng-template>
-        <app-edit-meta-data [post]="post"></app-edit-meta-data>
+        <app-edit-meta-data #postMetaData [post]="post"></app-edit-meta-data>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -25,7 +25,7 @@
         <app-edit-post-text [post]="post" #editPost></app-edit-post-text>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="(return)" matStepperNext>Finish</button>
+          <button mat-button (click)="createPost()" matStepperNext>Finish</button>
         </div>
       </form>
     </mat-step>

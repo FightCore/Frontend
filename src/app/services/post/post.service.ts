@@ -106,7 +106,7 @@ export class PostService extends BaseService {
       return this.returnFakeObserver();
     }
 
-    return this.httpClient.put<null>(this.baseUrl, post, this.getDefaultHttpOptions());
+    return this.httpClient.put<null>(`${this.baseUrl}/${post.id}`, post, this.getDefaultHttpOptions());
   }
 
   private generatePostList(iterations: number): Post[] {
