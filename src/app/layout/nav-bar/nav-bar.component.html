@@ -45,16 +45,14 @@
             {{ link.name | translate }}</a
           >
           <span class="spacer"></span>
-          <div class="d-none d-md-block">
             <app-language class="language-picker p-3"></app-language>
-            <span *ngIf="isAuthenticated(); else login" (click)="toUser()">
+            <a *ngIf="isAuthenticated(); else login" (click)="toUser()">
               <em class="material-icons">account_circle</em>
-              {{ getUserName() }}</span
+              {{ getUserName() }}</a
             >
-            <span *ngIf="isAuthenticated()" (click)="logout()" i18n>
-              {{ 'Authentication.Logout' | translate }}</span
+            <a *ngIf="isAuthenticated()" (click)="logout()" i18n>
+              {{ 'Authentication.Logout' | translate }}</a
             >
-          </div>
         </mat-toolbar-row>
       </mat-toolbar>
     </div>
@@ -87,8 +85,8 @@
 </mat-sidenav-container>
 
 <ng-template #login>
-  <span (click)="register()">{{ 'Authentication.Register' | translate }}</span>
-  <span (click)="goToLogin()">{{ 'Authentication.Login' | translate }}</span>
+  <a (click)="register()">{{ 'Authentication.Register' | translate }}</a>
+  <a (click)="goToLogin()">{{ 'Authentication.Login' | translate }}</a>
 </ng-template>
 
 <ng-template #mobileLogin>

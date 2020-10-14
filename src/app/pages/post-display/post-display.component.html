@@ -42,7 +42,7 @@
 
           <div class="d-inline p-1" *ngIf="isPostFromUser()">
             <span>Temporary disabled due to post rework.</span>
-            <button disabled (click)="editPost()" mat-raised-button color="accent" i18n>
+            <button (click)="editPost()" mat-raised-button color="accent" i18n>
               <em class="material-icons">edit</em> {{ 'Common.Edit' | translate }}
             </button>
 

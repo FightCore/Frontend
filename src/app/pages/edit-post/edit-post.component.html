@@ -1,5 +1,33 @@
-<div *ngIf="loading else editor"></div>
+<div *ngIf="loading; else editor"></div>
 
 <ng-template #editor>
-        <app-create-post [post]="post"></app-create-post>
+  <mat-horizontal-stepper #stepper>
+    <mat-step [stepControl]="initialPost.formGroup">
+      <ng-template matStepLabel>Select initial topics</ng-template>
+      <app-edit-intial-post [post]="post" #initialPost></app-edit-intial-post>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>Optional meta data</ng-template>
+        <app-edit-meta-data [post]="post"></app-edit-meta-data>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>Write the post</ng-template>
+        <app-edit-post-text [post]="post" #editPost></app-edit-post-text>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="(return)" matStepperNext>Finish</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
 </ng-template>

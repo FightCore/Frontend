@@ -10,6 +10,7 @@
     </mat-form-field>
     <mat-divider class="mb-2"></mat-divider>
     <h4>Game and optional character</h4>
-    <app-game-selector (selectionChange)="selectedGame = $event" [formGroupName]="'character'"></app-game-selector>
-    <app-character-picker *ngIf="selectedGame" (selectionChange)="selectedCharacter = $event" [gameId]="selectedGame"></app-character-picker>
+    <app-game-selector [selected]="selectedGame" (selectionChange)="selectedGame = $event"></app-game-selector>
+    <app-character-picker [selected]="selectedCharacter" *ngIf="selectedGame"
+        (selectionChange)="selectedCharacter = $event" [gameId]="selectedGame"></app-character-picker>
 </form>
