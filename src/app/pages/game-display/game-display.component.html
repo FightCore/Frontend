@@ -18,7 +18,7 @@
     <div class="col-lg-6">
       <mat-card>
         <mat-card-header>
-          <mat-card-title
+          <mat-card-title class="title"
             ><img *ngIf="game.icon" [src]="game.icon.url" alt="game icon" />
             {{ game.name }}</mat-card-title
           >
@@ -37,9 +37,9 @@
     <div class="col-lg-6">
       <mat-card>
         <mat-card-header>
-          <mat-card-title>{{ 'Posts.Posts' | translate }}</mat-card-title>
+          <mat-card-title class="title">{{ 'Posts.Posts' | translate }}</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content class="p-2">
           <app-loading *ngIf="postLoading; else postList"></app-loading>
         </mat-card-content>
       </mat-card>
@@ -48,7 +48,7 @@
 
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{ 'Characters.Characters' | translate }}</mat-card-title>
+      <mat-card-title class="title">{{ 'Characters.Characters' | translate }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <app-loading *ngIf="characterLoading; else characterList"></app-loading>
