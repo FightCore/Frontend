@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RegisterComponent } from 'src/app/pages/register/register.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserOptions } from 'src/app/options/userOptions';
+import { ThemeSchemeService } from 'src/app/services/theme/theme-scheme.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,7 +16,8 @@ export class NavBarComponent implements OnInit {
   constructor(
       private authService: AuthService,
       private dialog: MatDialog,
-      private router: Router) { }
+      private router: Router,
+      private themeService: ThemeSchemeService) { }
 
   userName: string;
   opened: boolean;
@@ -41,7 +43,7 @@ export class NavBarComponent implements OnInit {
   }
 
   toggleDarkMode(): void {
-    UserOptions.toggleDarkMode();
+    this.themeService.toggle();
   }
 
   getUserName(): string {
