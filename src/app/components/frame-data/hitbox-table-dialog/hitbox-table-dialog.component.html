@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Hitboxes for {{ moveName }}</h2>
-<mat-dialog-content class="mat-typography h-100">
+<mat-dialog-content>
   <div class="container-fluid p-1">
   <table
     *ngIf="hitboxDataSource"
@@ -68,3 +68,4 @@
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
   </div>
+</mat-dialog-content>

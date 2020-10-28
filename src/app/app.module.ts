@@ -177,14 +177,15 @@ export function createTranslateLoader(http: HttpClient) {
     EditMetaDataComponent,
     EditPostTextComponent,
     EditIntialPostComponent,
-    MoveDisplayComponent,
     HitboxTableDialogComponent,
+    MoveDisplayComponent,
     CharacterAttributesComponent
   ],
   entryComponents: [
     PostHelpComponent,
     RegisterComponent,
-    PostPreviewDialogComponent
+    PostPreviewDialogComponent,
+    HitboxTableDialogComponent
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent]

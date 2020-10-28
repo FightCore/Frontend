@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as SimpleMDE from 'simplemde';
 import * as Showdown from 'showdown';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-edit-post-text',
@@ -10,12 +11,16 @@ import * as Showdown from 'showdown';
 export class EditPostTextComponent implements OnInit {
 
   constructor() { }
+  @Input() post: Post;
   htmlContent = '';
   markdownEditor: SimpleMDE;
   useMarkdown: boolean;
   chooseEditor: boolean;
 
   ngOnInit(): void {
+    if (this.post) {
+      this.useMarkdownEditor(this.post.body);
+    }
   }
 
   useQuill(): void {

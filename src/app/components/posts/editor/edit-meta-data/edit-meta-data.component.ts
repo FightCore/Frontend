@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { PostCategory } from 'src/app/models/post/post-category';
 import { FormControl } from '@angular/forms';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-edit-meta-data',
@@ -11,6 +12,9 @@ import { FormControl } from '@angular/forms';
 })
 export class EditMetaDataComponent implements OnInit {
   constructor() {}
+
+  @Input() post: Post;
+
   categories = [
     { value: PostCategory.uncategorised, name: 'Posts.Category.NoCategory'},
     { value: PostCategory.matchup, name: 'Posts.Category.Matchup'},
@@ -25,6 +29,10 @@ export class EditMetaDataComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   tags: string[] = [];
   ngOnInit(): void {
+    if (this.post) {
+      this.categoryFormControl.setValue(this.post.category);
+      this.tags = this.post.tags;
+    }
   }
 
   add(event: MatChipInputEvent): void {

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Hitbox } from 'src/app/models/framedata/hitbox';
-import { I } from '@angular/cdk/keycodes';
 import { MatTableDataSource } from '@angular/material/table';
-import { ArrayDataSource } from '@angular/cdk/collections';
+import { UserOptions } from 'src/app/options/userOptions';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-hitbox-table-dialog',
@@ -10,7 +10,9 @@ import { ArrayDataSource } from '@angular/cdk/collections';
   styleUrls: ['./hitbox-table-dialog.component.scss'],
 })
 export class HitboxTableDialogComponent implements OnInit {
-  constructor() {}
+  constructor(
+    public dialogRef: MatDialogRef<HitboxTableDialogComponent>,
+  ) {}
   @Input() hitboxes: Hitbox[];
   @Input() moveName: string;
 
@@ -29,5 +31,9 @@ export class HitboxTableDialogComponent implements OnInit {
   hitboxDataSource: MatTableDataSource<Hitbox>;
   ngOnInit(): void {
     this.hitboxDataSource = new MatTableDataSource(this.hitboxes);
+  }
+
+  isDarkMode(): boolean {
+    return UserOptions.getDarkMode();
   }
 }

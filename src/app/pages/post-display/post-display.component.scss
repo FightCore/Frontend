@@ -3,8 +3,20 @@
 $post-border-radius: 1em;
 $post-border-radius: 0.5em;
 
+.centered {
+  text-align: center;
+}
+
+.post-title {
+  font-family: headshot;
+}
+
 .back-button {
   margin-top: 1em;
+}
+
+.mat-label-icon {
+  vertical-align: middle;
 }
 
 .description {
@@ -13,6 +25,7 @@ $post-border-radius: 0.5em;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .view-button {
   width: 100%;
 }

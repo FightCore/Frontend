@@ -1,6 +1,25 @@
 export class UserOptions {
     public static gameId = 6;
+    private static darkMode = false;
     private static minimalMode: boolean = false;
+
+    public static getDarkMode(): boolean {
+        const isDarkMode = localStorage.getItem('darkMode');
+        if (isDarkMode) {
+            const value = JSON.parse(isDarkMode);
+            this.darkMode = value;
+            return value;
+        }
+
+        localStorage.setItem('darkMode', this.darkMode.toString());
+
+        return this.darkMode;
+    }
+
+    public static toggleDarkMode(): void {
+        this.darkMode = !this.darkMode;
+        localStorage.setItem('darkMode', this.darkMode.toString());
+    }
 
     public static getCurrentGame(): number {
         const gameId = localStorage.getItem('gameId');
