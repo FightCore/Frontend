@@ -20,8 +20,4 @@ export class AppComponent implements OnInit {
     themeService.load();
   }
   ngOnInit(): void {}
-
-  isDarkMode(): boolean {
-    return UserOptions.getDarkMode();
-  }
 }
