@@ -1,7 +1,7 @@
 <button
   class="heart-container"
   mat-button
-  [color]="liked ? 'warn' : 'accent'"
+  [color]="liked ? 'primary' : 'default'"
   (click)="likePost()"
   [disabled]="!isLoggedIn()"
 >

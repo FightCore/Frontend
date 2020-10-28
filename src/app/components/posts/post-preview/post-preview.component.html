@@ -7,7 +7,7 @@
       [src]="post.character.stockIcon.url"
     />
     </div>
-    <mat-card-title class="mouse-pointer" (click)="viewPost(post.id)">
+    <mat-card-title class="mouse-pointer title" (click)="viewPost(post.id)">
       {{ post.title }}
     </mat-card-title>
     <mat-card-subtitle>
@@ -34,7 +34,7 @@
           [liked]="post.liked"
         >
         </app-like-button>
-        <button (click)="viewPost(post.id)" mat-button color="primary">
+        <button (click)="viewPost(post.id)" mat-button [color]="isDarkMode() ? 'default' : 'primary'">
           {{ 'Posts.ReadMore' | translate }}
         </button>
   </mat-card-actions>

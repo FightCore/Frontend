@@ -3,6 +3,7 @@ import { Hitbox } from 'src/app/models/framedata/hitbox';
 import { I } from '@angular/cdk/keycodes';
 import { MatTableDataSource } from '@angular/material/table';
 import { ArrayDataSource } from '@angular/cdk/collections';
+import { UserOptions } from 'src/app/options/userOptions';
 
 @Component({
   selector: 'app-hitbox-table-dialog',
@@ -29,5 +30,9 @@ export class HitboxTableDialogComponent implements OnInit {
   hitboxDataSource: MatTableDataSource<Hitbox>;
   ngOnInit(): void {
     this.hitboxDataSource = new MatTableDataSource(this.hitboxes);
+  }
+
+  isDarkMode(): boolean {
+    return UserOptions.getDarkMode();
   }
 }

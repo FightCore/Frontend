@@ -3,6 +3,7 @@ import { Character } from 'src/app/models/character';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { Router } from '@angular/router';
 import { GameThemes } from 'src/styles/gameThemes';
+import { UserOptions } from 'src/app/options/userOptions';
 
 @Component({
   selector: 'app-character-preview',
@@ -38,5 +39,9 @@ export class CharacterPreviewComponent implements OnInit {
 
   getGameClass(): string {
     return GameThemes.themeDictionary.get(this.character.game.id);
+  }
+
+  isDarkMode(): boolean {
+    return UserOptions.getDarkMode();
   }
 }

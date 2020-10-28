@@ -45,6 +45,7 @@
             {{ link.name | translate }}</a
           >
           <span class="spacer"></span>
+          <button (click)="toggleDarkMode()" mat-button>Toggle Dark</button>
             <app-language class="language-picker p-3"></app-language>
             <a *ngIf="isAuthenticated(); else login" (click)="toUser()">
               <em class="material-icons">account_circle</em>

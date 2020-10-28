@@ -3,6 +3,7 @@ import { Game } from 'src/app/models/game';
 import { GameThemes } from 'src/styles/gameThemes';
 import { Router } from '@angular/router';
 import { StaticRoutes } from 'src/app/routes/static-routes';
+import { UserOptions } from 'src/app/options/userOptions';
 
 @Component({
   selector: 'app-game-preview',
@@ -22,5 +23,9 @@ export class GamePreviewComponent implements OnInit {
 
   viewGame(): void {
     this.router.navigate([StaticRoutes.game, this.game.id]);
+  }
+
+  isDarkMode(): boolean {
+    return UserOptions.getDarkMode();
   }
 }

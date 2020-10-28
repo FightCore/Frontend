@@ -1,7 +1,6 @@
-@import "src/styles/variables.scss";
+@import 'src/styles/variables.scss';
 
 .post-content {
-  color: $secondary-text-color;
   margin: 1em;
   .post-markdown-text {
     max-height: 15em;

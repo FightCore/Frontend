@@ -1,2 +1,6 @@
-<app-nav-bar></app-nav-bar>
-<app-footer></app-footer>
+<div [class.dark-theme]="isDarkMode()">
+  <div class="main-container mat-drawer-container">
+    <app-nav-bar></app-nav-bar>
+    <app-footer></app-footer>
+  </div>
+</div>

@@ -47,6 +47,12 @@ $fightcore-app-theme: mat-light-theme(
   $fightcore-app-warn
 );
 
+$fightcore-dark-theme: mat-dark-theme(
+  $fightcore-app-primary,
+  $fightcore-app-accent,
+  $fightcore-app-warn
+);
+
 @mixin background-theme($theme) {
   // Extract the palettes you need from the theme definition.
   $primary: map-get($theme, primary);
@@ -71,6 +77,11 @@ $fightcore-app-theme: mat-light-theme(
   .color-accent {
     color: mat-color($accent);
   }
+}
+
+.dark-theme {
+  @include angular-material-theme($fightcore-dark-theme);
+  @include background-theme($fightcore-dark-theme);
 }
 
 // Include theme styles for core and each component used in your app.

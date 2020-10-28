@@ -9,6 +9,7 @@ import { MarkdownService } from 'ngx-markdown';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { GameThemes } from 'src/styles/gameThemes';
 import { saveAs } from 'file-saver';
+import { PostCategory } from 'src/app/models/post/post-category';
 
 @Component({
   selector: 'app-post-display',
@@ -19,6 +20,18 @@ export class PostDisplayComponent implements OnInit {
   post: Post;
   bodyHtml: string;
   loading: boolean = true;
+
+  categories = [
+    { value: PostCategory.uncategorised, name: 'Posts.Category.NoCategory'},
+    { value: PostCategory.matchup, name: 'Posts.Category.Matchup'},
+    { value: PostCategory.techskill, name: 'Posts.Category.Techskill'},
+    { value: PostCategory.combos, name: 'Posts.Category.Combos'},
+    { value: PostCategory.frameData, name: 'Posts.Category.FrameData'},
+    { value: PostCategory.powerranking, name: 'Posts.Category.PowerRanking'},
+    { value: PostCategory.player, name: 'Posts.Category.Player'},
+    { value: PostCategory.tournament, name: 'Posts.Category.Tournament'},
+  ];
+
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
@@ -88,7 +101,14 @@ export class PostDisplayComponent implements OnInit {
     const blob = new Blob([this.post.body], {type: 'text/markdown' });
     saveAs(blob, this.post.title + '.md');
   }
+
   viewAuthor(): void {
     this.router.navigate([StaticRoutes.viewUserNoId, this.post.author.id]);
+  }
+
+  getTranslationsForValue(): string {
+    const item = this.categories.find(category => category.value === this.post.category);
+
+    return item.name;
   }
 }

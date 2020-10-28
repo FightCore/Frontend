@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { RegisterComponent } from 'src/app/pages/register/register.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserOptions } from 'src/app/options/userOptions';
 
 @Component({
   selector: 'app-nav-bar',
@@ -37,6 +38,10 @@ export class NavBarComponent implements OnInit {
     }
   ];
   ngOnInit() {
+  }
+
+  toggleDarkMode(): void {
+    UserOptions.toggleDarkMode();
   }
 
   getUserName(): string {

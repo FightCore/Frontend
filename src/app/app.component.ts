@@ -20,4 +20,8 @@ export class AppComponent implements OnInit {
     translate.use('en');
   }
   ngOnInit(): void {}
+
+  isDarkMode(): boolean {
+    return UserOptions.getDarkMode();
+  }
 }

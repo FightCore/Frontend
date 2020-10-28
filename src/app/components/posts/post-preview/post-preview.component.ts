@@ -80,4 +80,8 @@ export class PostPreviewComponent implements OnInit {
 
     return item.name;
   }
+
+  isDarkMode(): boolean {
+    return UserOptions.getDarkMode();
+  }
 }
