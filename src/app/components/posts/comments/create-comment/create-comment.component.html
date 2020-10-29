@@ -1,0 +1,11 @@
+<mat-card>
+    <mat-card-title>{{ 'Posts.LeaveAComment' | translate }}</mat-card-title>
+    <mat-card-content>
+        <textarea class="w-100" mat-input [(ngModel)]="comment"></textarea>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="postComment()">
+            {{ 'Posts.PostComment' | translate }}
+        </button>
+    </mat-card-actions>
+</mat-card>

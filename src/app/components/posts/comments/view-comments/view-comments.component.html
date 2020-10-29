@@ -1,0 +1,15 @@
+<div *ngFor="let comment of comments" class="p-2">
+    <mat-card>
+        <mat-card-title>{{ comment.author.name }}</mat-card-title>
+        <mat-card-content>
+            <app-like-button *ngIf="false"></app-like-button>
+            {{ comment.content }}
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button *ngIf="isCommentFromUser(comment)" (click)="deleteComment(comment)">
+                <mat-icon>delete</mat-icon>
+                {{ 'Common.Delete' | translate}}
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

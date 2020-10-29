@@ -95,6 +95,16 @@
   "Posts": {
     "AboutMakingAPost": "About making a post",
     "BackToPosts": "Back to posts",
+    "Category": {
+      "Combos": "Combos",
+      "FrameData": "Frame data",
+      "Matchup": "Matchup",
+      "NoCategory": "Uncategorised",
+      "Player": "Player(s)",
+      "PowerRanking": "Power ranking",
+      "Techskill": "Techskill",
+      "Tournament": "Tournament"
+    },
     "CreateNewPost": "Create new post",
     "DownloadMarkdown": "Download markdown",
     "EditorMode": "Editor mode",
@@ -103,7 +113,9 @@
     "FeaturedPosts": "Featured posts",
     "FightCorePosts": "FightCore posts",
     "LatestPosts": "Latests posts",
+    "LeaveAComment": "Leave a comment",
     "MarkdownMode": "Markdown mode",
+    "PostComment": "Post comment",
     "Posts": "Posts",
     "PostsBy": "Posts by {{name}}",
     "Preview": "Preview",
@@ -113,17 +125,7 @@
     "SuccessfullyEdited": "Successfully saved the edit",
     "ThisIsAPrivatePost": "This is a private post, only you can see it.",
     "UpdatePost": "Update post",
-    "WrittenBy": "Written By:",
-    "Category": {
-      "NoCategory": "Uncategorised",
-      "Matchup": "Matchup",
-      "Techskill": "Techskill",
-      "Combos": "Combos",
-      "FrameData": "Frame data",
-      "PowerRanking": "Power ranking",
-      "Player": "Player(s)",
-      "Tournament": "Tournament"
-    }
+    "WrittenBy": "Written By:"
   },
   "Socials": {
     "FollowUs": "Follow us"
