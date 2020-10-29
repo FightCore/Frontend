@@ -61,6 +61,9 @@ export class PostDisplayComponent implements OnInit {
       }
     );
   }
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
 
   isPostFromUser(): boolean {
     return this.authService.isAuthenticated() && this.post.author.id === this.authService.id;

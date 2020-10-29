@@ -67,7 +67,11 @@
   </div>
   <mat-divider></mat-divider>
   <div class="mt-2 p-2">
-    <app-create-comment (createdComment)="post.comments.push($event)"  [postId]="post.id"></app-create-comment>
+    <app-create-comment
+      *ngIf="isLoggedIn()"
+      (createdComment)="post.comments.push($event)"
+      [postId]="post.id"
+    ></app-create-comment>
   </div>
 
   <app-view-comments [postId]="post.id" [comments]="post.comments"></app-view-comments>
