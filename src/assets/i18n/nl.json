@@ -95,6 +95,8 @@
     "Posts": {
         "AboutMakingAPost": "Over het maken van een post.",
         "BackToPosts": "Terug naar posts",
+        "ByLatest": "Nieuwste posts eerst",
+        "ByLikes": "Meest liked post eerst",
         "Category": {
             "Combos": "Combos",
             "FrameData": "Frame data",
@@ -115,6 +117,7 @@
         "LatestPosts": "Laatste posts",
         "LeaveAComment": "Laat een opmerking achter",
         "MarkdownMode": "Markdown modus",
+        "OrderBy": "Ordering",
         "PostComment": "Opmerking achterlaten",
         "Posts": "Posts",
         "PostsBy": "Posts geschreven door {{name}}",

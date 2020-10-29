@@ -95,6 +95,8 @@
   "Posts": {
     "AboutMakingAPost": "About making a post",
     "BackToPosts": "Back to posts",
+    "ByLatest": "Latest",
+    "ByLikes": "Likes",
     "Category": {
       "Combos": "Combos",
       "FrameData": "Frame data",
@@ -115,6 +117,7 @@
     "LatestPosts": "Latests posts",
     "LeaveAComment": "Leave a comment",
     "MarkdownMode": "Markdown mode",
+    "OrderBy": "Order by",
     "PostComment": "Post comment",
     "Posts": "Posts",
     "PostsBy": "Posts by {{name}}",

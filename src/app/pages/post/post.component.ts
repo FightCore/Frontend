@@ -29,6 +29,7 @@ export class PostComponent implements OnInit {
   searchTerm: string;
   gameId: number = UserOptions.getCurrentGame();
   characterId: number;
+  orderOptions = 0;
 
   ngOnInit() {
     this.postService.getPosts().subscribe(
@@ -46,7 +47,7 @@ export class PostComponent implements OnInit {
   private setupPosts(posts: Post[]): void {
     this.posts = posts;
     this.displayPosts = posts;
-    this.filterPosts();
+    this.filterAndOrderPosts();
   }
 
   onGameChange(gameId: number): void {
@@ -54,20 +55,25 @@ export class PostComponent implements OnInit {
     this.characterPicker.updateGame(gameId);
     this.characterId = this.characterPicker.getValue();
     UserOptions.setCurrentGame(gameId);
-    this.filterPosts();
+    this.filterAndOrderPosts();
   }
 
   onSearchChange(searchTerm: string): void {
     this.searchTerm = searchTerm;
-    this.filterPosts();
+    this.filterAndOrderPosts();
   }
 
   onCharacterChange(characterId: number): void {
     this.characterId = characterId;
-    this.filterPosts();
+    this.filterAndOrderPosts();
   }
 
-  private filterPosts(): void {
+  filterValueChanged(valueChanged: string): void {
+    this.orderOptions = parseFloat(valueChanged);
+    this.filterAndOrderPosts();
+  }
+
+  private filterAndOrderPosts(): void {
     if (this.gameId === 0) {
       this.displayPosts = this.posts;
     } else {
@@ -89,6 +95,15 @@ export class PostComponent implements OnInit {
         post => post.characterId === this.characterId
       );
     }
+
+    console.log(this.orderOptions);
+    this.displayPosts.sort((postA, postB) => {
+      if (this.orderOptions === 0) {
+        return postB.likes - postA.likes;
+      } else {
+        return postB.id - postA.id ? 1 : -1;
+      }
+    });
   }
 
   createPost() {
