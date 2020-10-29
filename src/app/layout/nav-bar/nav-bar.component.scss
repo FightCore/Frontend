@@ -13,6 +13,10 @@ span, a {
     font-family: headshot;
 }
 
+.centered {
+    align-items: center;
+}
+
 .language-picker {
     font-size: 15px;
 }
@@ -24,8 +28,4 @@ span, a {
 
 .example-spacer {
     flex: 1 1 auto;
-}
-
-.logo-mobile {
-    height: 1.5em;
 }
