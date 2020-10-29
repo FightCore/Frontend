@@ -70,5 +70,5 @@
     <app-create-comment (createdComment)="post.comments.push($event)"  [postId]="post.id"></app-create-comment>
   </div>
 
-  <app-view-comments [comments]="post.comments"></app-view-comments>
+  <app-view-comments [postId]="post.id" [comments]="post.comments"></app-view-comments>
 </ng-template>

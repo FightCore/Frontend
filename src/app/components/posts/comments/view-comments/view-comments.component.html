@@ -5,5 +5,11 @@
             <app-like-button></app-like-button>
             {{ comment.content }}
         </mat-card-content>
+        <mat-card-actions>
+            <button mat-stroked-button *ngIf="isCommentFromUser(comment)" (click)="deleteComment(comment)">
+                <mat-icon>delete</mat-icon>
+                {{ 'Common.Delete' | translate}}
+            </button>
+        </mat-card-actions>
     </mat-card>
 </div>
