@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post/post.service';
@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { GameThemes } from 'src/styles/gameThemes';
 import { saveAs } from 'file-saver';
 import { PostCategory } from 'src/app/models/post/post-category';
+import { CreateCommentComponent } from 'src/app/components/posts/comments/create-comment/create-comment.component';
 
 @Component({
   selector: 'app-post-display',
@@ -20,6 +21,7 @@ export class PostDisplayComponent implements OnInit {
   post: Post;
   bodyHtml: string;
   loading: boolean = true;
+  @ViewChild('createComments', { static: false }) createCommentsComponent: CreateCommentComponent;
 
   categories = [
     { value: PostCategory.uncategorised, name: 'Posts.Category.NoCategory'},
@@ -54,7 +56,6 @@ export class PostDisplayComponent implements OnInit {
         this.loading = false;
       },
       error => {
-        console.log(error);
         this.toastrService.error(PostText.postNotFound);
         this.router.navigate([StaticRoutes.posts]);
       }

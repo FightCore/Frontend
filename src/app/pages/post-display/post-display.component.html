@@ -1,77 +1,74 @@
 <div class="container-fluid">
   <div *ngIf="loading; else display"></div>
-  <button
-    mat-raised-button
-    class="back-button"
-    [routerLink]="['/post']"
-    color="primary"
-    i18n
-  >
-    <em class="material-icons">arrow_back</em> {{ 'Posts.BackToPosts' | translate }}
+  <button mat-raised-button class="back-button" [routerLink]="['/post']" color="primary" i18n>
+    <em class="material-icons">arrow_back</em>
+    {{ 'Posts.BackToPosts' | translate }}
   </button>
 </div>
 <app-top-scroller></app-top-scroller>
 
 <ng-template #display>
-  <div [class]="getGameClass()">
-    <div class="row">
-      <div class="col-lg-12">
-
-        <div class="p-2 mt-1">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="p-2 mt-1">
+        <div class="w-100">
           <div class="w-100">
-            <div class="w-100"><h1 class="post-title centered">{{ post.title }}</h1></div>
-            <div class="row">
-              <div class="col-lg-4 col-12">
-                <div class="mouse-pointer" (click)="viewAuthor()">
-                  {{ 'Posts.WrittenBy' | translate }} {{post.author.name}}
-                </div>
-              </div>
-              <div class="col-lg-4 col-12">
-                <div>
-                  <mat-icon class="mat-label-icon">sports_esports</mat-icon>
-                  {{ post.game.name }}</div>
-              </div>
-              <div class="col-lg-4 col-12">
-                <span *ngIf="this.post.category > 0" class="float-right">
-                  <mat-icon class="mat-label-icon">label</mat-icon>
-                  {{getTranslationsForValue() | translate}}
-                </span>
+            <h1 class="post-title centered">{{ post.title }}</h1>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 col-12">
+              <div class="mouse-pointer" (click)="viewAuthor()">
+                {{ 'Posts.WrittenBy' | translate }} {{ post.author.name }}
               </div>
             </div>
-            <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
-              <em class="material-icons">lock</em> {{ 'Posts.ThisIsAPrivatePost' | translate }}
-            </h5>
+            <div class="col-lg-4 col-12">
+              <div class="centered">
+                <mat-icon class="mat-label-icon">sports_esports</mat-icon>
+                {{ post.game.name }}
+              </div>
+            </div>
+            <div class="col-lg-4 col-12">
+              <span *ngIf="this.post.category > 0" class="float-right">
+                <mat-icon class="mat-label-icon">label</mat-icon>
+                {{ getTranslationsForValue() | translate }}
+              </span>
+            </div>
           </div>
-          <div>
-            <mat-divider></mat-divider>
-            <div [innerHTML]="bodyHtml"></div>
-          </div>
-          <mat-card-actions>
-            <app-like-button
-            [postId]="post.id"
-            [likes]="post.likes"
-            [liked]="post.liked"
-          >
-          </app-like-button>
-
-          <div class="d-inline p-1" *ngIf="isPostFromUser()">
-            <button (click)="editPost()" mat-raised-button color="accent" i18n>
-              <em class="material-icons">edit</em> {{ 'Common.Edit' | translate }}
-            </button>
-
-            <button
-              (click)="downloadPost()"
-              mat-raised-button
-              color="accent"
-              i18n
-              class="ml-2"
-            >
-              <em class="material-icons">cloud_download</em> {{ 'Posts.DownloadMarkdown' | translate }}
-            </button>
-          </div>
-          </mat-card-actions>
+          <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
+            <em class="material-icons">lock</em>
+            {{ 'Posts.ThisIsAPrivatePost' | translate }}
+          </h5>
         </div>
+        <div class="row mb-2">
+          <div class="col-lg-4 col-12">
+            <app-like-button [postId]="post.id" [likes]="post.likes" [liked]="post.liked"> </app-like-button>
+          </div>
+
+          <div class="col-lg-4 col-12">
+            <div class="centered" *ngIf="isPostFromUser()">
+              <button (click)="editPost()" mat-stroked-button>
+                <mat-icon>edit</mat-icon>
+                {{ 'Common.Edit' | translate }}
+              </button>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-12">
+            <button *ngIf="isPostFromUser()" class="float-right" (click)="downloadPost()" mat-stroked-button>
+              <mat-icon>cloud_download</mat-icon>
+              {{ 'Posts.DownloadMarkdown' | translate }}
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div [innerHTML]="bodyHtml"></div>
       </div>
     </div>
   </div>
+  <mat-divider></mat-divider>
+  <div class="mt-2 p-2">
+    <app-create-comment (createdComment)="post.comments.push($event)"  [postId]="post.id"></app-create-comment>
+  </div>
+
+  <app-view-comments [comments]="post.comments"></app-view-comments>
 </ng-template>

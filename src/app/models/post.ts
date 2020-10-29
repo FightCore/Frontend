@@ -18,6 +18,7 @@ export class Post {
     category: PostCategory;
     tags: string[];
     description: string;
+    comments: Comment[];
 }
 
 export class CreatedPost {
