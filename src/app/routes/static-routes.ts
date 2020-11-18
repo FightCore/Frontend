@@ -1,4 +1,6 @@
 export class StaticRoutes {
+  public static about: string = 'about';
+  public static edits: string = 'edits';
   public static posts: string = 'post';
   public static createPost: string = 'post/create';
   public static editPost: string = 'post/edit/:postId';

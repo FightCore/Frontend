@@ -1,0 +1,48 @@
+<div class="p-2">
+  <button mat-stroked-button (click)="createWebsite()" color="primary">
+    <mat-icon>add</mat-icon>
+    {{ 'Characters.NewWebsite' | translate }}
+  </button>
+  <p *ngIf="websites.length === 0">
+    {{ 'Characters.NoWebsitesYet' | translate }}
+  </p>
+  <hr />
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let website of websites" [expanded]="website.new">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ website.title }}</mat-panel-title>
+        <mat-panel-description>{{ website.websiteUrl }}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="website">
+        <mat-form-field class="name">
+          <input
+            matInput
+            [placeholder]="'Common.Title' | translate"
+            [(ngModel)]="website.title"
+            type="input"
+            [name]="'websiteName' + website.id"
+            required
+            [readonly]="!website.new"
+            [disabled]="!website.new"
+          />
+        </mat-form-field>
+        <mat-form-field class="description">
+          <input
+            matInput
+            [placeholder]="'Characters.Url' | translate"
+            [(ngModel)]="website.websiteUrl"
+            type="input"
+            [name]="'websitesUrl' + website.id"
+            required
+            [readonly]="!website.new"
+            [disabled]="!website.new"
+          />
+        </mat-form-field>
+        <button class="delete-button" mat-button color="accent" (click)="deleteWebsite(websites)">
+          <mat-icon>delete</mat-icon>
+          {{ 'Common.Delete' | translate }}
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

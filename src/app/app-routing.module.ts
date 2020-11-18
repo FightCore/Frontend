@@ -16,6 +16,7 @@ import { GameDisplayComponent } from './pages/game-display/game-display.componen
 import { GameComponent } from './pages/game/game.component';
 import { DashboardComponent } from './pages/edits/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AboutComponent } from './pages/about/about.component';
 
 const routes: Routes = [
   { path: StaticRoutes.createPost, component: CreatePostComponent, canActivate: [ AuthGuard ] },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: StaticRoutes.viewGame, component: GameDisplayComponent },
   { path: StaticRoutes.game, component: GameComponent },
   { path: StaticRoutes.home, component: HomeComponent },
-  { path: 'edits', component: DashboardComponent, canActivate: [ AuthGuard ] },
+  { path: StaticRoutes.edits, component: DashboardComponent, canActivate: [ AuthGuard ] },
+  { path: StaticRoutes.about, component: AboutComponent },
   { path: '**', redirectTo: StaticRoutes.home }
 ];
 

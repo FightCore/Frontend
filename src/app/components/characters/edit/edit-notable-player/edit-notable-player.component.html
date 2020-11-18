@@ -1,0 +1,65 @@
+<div class="p-2">
+  <button mat-stroked-button (click)="createPlayer()" color="primary">
+    <mat-icon>add</mat-icon>
+    {{ 'Characters.NewPlayer' | translate }}
+  </button>
+  <p *ngIf="notablePlayers.length === 0">
+    {{ 'Characters.NoPlayersYet' | translate }}
+  </p>
+  <hr />
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let player of notablePlayers" [expanded]="player.new">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ player.name }}
+          <span *ngIf="player.country" [class]="'ml-1 flag flag-icon flag-icon-' + player.country"></span>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ player.description }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="player">
+        <mat-form-field class="name">
+          <input
+            matInput
+            [placeholder]="'Common.Name' | translate"
+            [(ngModel)]="player.name"
+            type="input"
+            [name]="'playerName' + player.id"
+            [readonly]="!player.new"
+            [disabled]="!player.new"
+          />
+        </mat-form-field>
+        <mat-form-field class="country">
+          <input
+            maxlength="2"
+            matInput
+            [placeholder]="'Characters.Country' | translate"
+            [(ngModel)]="player.country"
+            (ngModelChange)="player.country = player.country.toLowerCase()"
+            type="input"
+            [name]="'playerDescription' + player.id"
+            [readonly]="!player.new"
+            [disabled]="!player.new"
+          />
+        </mat-form-field>
+        <span *ngIf="player.country" [class]="'flag flag-icon flag-icon-' + player.country"></span>
+        <mat-form-field class="description">
+          <input
+            matInput
+            [placeholder]="'Common.Description' | translate"
+            [(ngModel)]="player.description"
+            type="input"
+            [name]="'playerDescription' + player.id"
+            [readonly]="!player.new"
+            [disabled]="!player.new"
+          />
+        </mat-form-field>
+        <button class="delete-button" mat-button color="accent" (click)="deletePlayer(player)">
+          <mat-icon>delete</mat-icon>
+          {{ 'Common.Delete' | translate }}
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

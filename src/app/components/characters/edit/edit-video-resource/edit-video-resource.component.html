@@ -1,0 +1,52 @@
+<div class="p-2">
+  <button mat-stroked-button (click)="createVideo()" color="primary">
+    <mat-icon>add</mat-icon>
+    {{ 'Characters.NewVideo' | translate }}
+  </button>
+  <div>
+    <span [innerHTML]="'Characters.AboutYouTubeIds' | translate"></span>
+  </div>
+
+  <p *ngIf="videos.length === 0">
+    {{ 'Characters.NoVideosYet' | translate }}
+  </p>
+  <hr />
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let video of videos" [expanded]="video.new">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ video.name }} - {{ video.youtubeId }} </mat-panel-title>
+        <mat-panel-description>{{ video.description }}</mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="video">
+        <mat-form-field class="name">
+          <input
+            matInput
+            [placeholder]="'Common.Name' | translate"
+            [(ngModel)]="video.name"
+            type="input"
+            [name]="'videoName' + video.id"
+            required
+            [readonly]="!video.new"
+            [disabled]="!video.new"
+          />
+        </mat-form-field>
+        <mat-form-field class="description">
+          <input
+            matInput
+            [placeholder]="'Characters.YouTubeId' | translate"
+            [(ngModel)]="video.youtubeId"
+            type="input"
+            [name]="'youtubeId' + video.id"
+            required
+            [readonly]="!video.new"
+            [disabled]="!video.new"
+          />
+        </mat-form-field>
+        <button class="delete-button" mat-button color="accent" (click)="deleteVideo(video)">
+          <mat-icon>delete</mat-icon>
+          {{ 'Common.Delete' | translate }}
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

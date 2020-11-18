@@ -1,0 +1,13 @@
+<h1>{{ 'About.Contributors' | translate}}</h1>
+
+<mat-list>
+    <div mat-subheader>{{ 'About.Developers' | translate }}</div>
+    <mat-list-item *ngFor="let member of developers">
+      <div mat-line>{{member}}</div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <div mat-subheader>{{ 'About.FrameDataTeam' | translate }}</div>
+    <mat-list-item *ngFor="let member of frameDataTeam">
+      <div mat-line>{{member}}</div>
+    </mat-list-item>
+  </mat-list>

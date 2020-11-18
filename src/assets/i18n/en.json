@@ -1,4 +1,11 @@
 {
+  "About": {
+    "AboutFightCore": "About FightCore",
+    "Contributors": "Contributors",
+    "Developers": "Developers",
+    "Description": "TODO Improve, FightCore is the information hub for everything fighting games. Within our open source website, you can write about characters and techniques from your favourite games.",
+    "FrameDataTeam": "Frame data team"
+  },
   "Authentication": {
     "ConfirmPassword": "Confirm password",
     "CreateYourAccount": "Create your account",
@@ -88,6 +95,7 @@
     "LoadingGamesFailed": "Loading games failed, try refreshing."
   },
   "Nav": {
+    "AboutUs": "About",
     "Characters": "Characters",
     "Games": "Games",
     "Posts": "Posts"

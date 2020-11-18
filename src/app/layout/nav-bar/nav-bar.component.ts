@@ -5,6 +5,7 @@ import { RegisterComponent } from 'src/app/pages/register/register.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserOptions } from 'src/app/options/userOptions';
 import { ThemeSchemeService } from 'src/app/services/theme/theme-scheme.service';
+import { StaticRoutes } from 'src/app/routes/static-routes';
 
 @Component({
   selector: 'app-nav-bar',
@@ -25,18 +26,19 @@ export class NavBarComponent implements OnInit {
   links = [
     {
       name: 'Nav.Posts',
-      route: ['/post'],
-      icon: 'file'
+      route: ['/post']
     },
     {
       name: 'Nav.Characters',
-      route: ['/character'],
-      icon: 'mask'
+      route: ['/character']
     },
     {
       name: 'Nav.Games',
-      route: ['game'],
-      icon: 'gamepad'
+      route: ['game']
+    },
+    {
+      name: 'Nav.AboutUs',
+      route: [StaticRoutes.about]
     }
   ];
   ngOnInit() {
