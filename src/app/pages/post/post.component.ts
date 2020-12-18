@@ -32,22 +32,7 @@ export class PostComponent implements OnInit {
   orderOptions = 0;
 
   ngOnInit() {
-    this.postService.getPosts().subscribe(
-      postArray => {
-        this.setupPosts(postArray);
-        this.loading = false;
-      },
-      error => {
-        this.loading = false;
-        this.toastrService.error(PostText.failedPostsLoad);
-      }
-    );
-  }
-
-  private setupPosts(posts: Post[]): void {
-    this.posts = posts;
-    this.displayPosts = posts;
-    this.filterAndOrderPosts();
+    this.getPosts();
   }
 
   onGameChange(gameId: number): void {
@@ -56,6 +41,27 @@ export class PostComponent implements OnInit {
     this.characterId = this.characterPicker.getValue();
     UserOptions.setCurrentGame(gameId);
     this.filterAndOrderPosts();
+  }
+
+  getPosts(): void {
+    this.loading = true;
+    this.posts = [];
+    this.characterPicker?.updateGame(this.gameId);
+    if (this.gameId === 0) {
+      this.postService.getPosts().subscribe(posts => {
+        this.posts = posts;
+        this.filterAndOrderPosts();
+        this.loading = false;
+      })
+
+      return;
+    }
+
+    this.postService.getPostsForGame(this.gameId).subscribe(posts => {
+      this.posts = posts;
+      this.filterAndOrderPosts();
+      this.loading = false;
+    })
   }
 
   onSearchChange(searchTerm: string): void {
@@ -96,7 +102,6 @@ export class PostComponent implements OnInit {
       );
     }
 
-    console.log(this.orderOptions);
     this.displayPosts.sort((postA, postB) => {
       if (this.orderOptions === 0) {
         return postB.likes - postA.likes;

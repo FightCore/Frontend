@@ -1,0 +1,37 @@
+<h2>{{move.name}}</h2>
+<div class="row">
+    <div class="col-lg-6">
+        <img
+        #moveImage
+        mat-card-image
+        [src]="
+          'https://i.fightcore.gg/melee/moves/' +
+          characterName + '/' +
+          move.normalizedName +
+          '.gif'
+        "
+        width="100%"
+        onerror="this.src='https://i.fightcore.gg/melee/moves/notfound.jpg';"
+        [alt]="move.normalizedName + '-gif'"
+        />
+        <div class="w-25 d-inline">
+            <button mat-icon-button [disabled]="superGif?.get_playing()" (click)="previousFrame()"><mat-icon>skip_previous</mat-icon></button>
+            <button mat-icon-button (click)="pauseGif()"><mat-icon>{{ superGif?.get_playing() ? 'stop' : 'play_arrow'}}</mat-icon></button>
+            <button mat-icon-button [disabled]="superGif?.get_playing()" (click)="nextFrame()"><mat-icon>skip_next</mat-icon></button>
+        </div>
+        <div class="w-50 float-right text-right">
+            <p *ngIf="superGif">Frame in GIF (not in the move): {{superGif.get_current_frame()}}</p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div *ngFor="let attribute of attributes">
+            <div *ngIf="attribute.value">
+              {{ attribute.name }}: <div class="float-right">{{ attribute.value }}</div>
+              <hr />
+            </div>
+          </div>
+    </div>
+</div>
+<app-hitbox-table-dialog [moveName]="move.name" [hitboxes]="move.hitboxes">
+</app-hitbox-table-dialog>
+

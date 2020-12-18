@@ -3,7 +3,7 @@
     "AboutFightCore": "About FightCore",
     "Contributors": "Contributors",
     "Developers": "Developers",
-    "Description": "TODO Improve, FightCore is the information hub for everything fighting games. Within our open source website, you can write about characters and techniques from your favourite games.",
+    "Description": "FightCore is the open source information platform for the Super Smash Bros. Melee community. Our platform provides the ability to create informational content that is easily accessible and searchable by the community. With integration using services like Discord FightCore's information goes beyond the website.",
     "FrameDataTeam": "Frame data team"
   },
   "Authentication": {
@@ -98,7 +98,10 @@
     "AboutUs": "About",
     "Characters": "Characters",
     "Games": "Games",
-    "Posts": "Posts"
+    "Posts": "Posts",
+    "FrameData":"Frame data",
+    "Techniques": "Techniques",
+    "Tools": "Tools"
   },
   "Posts": {
     "AboutMakingAPost": "About making a post",
@@ -140,5 +143,10 @@
   },
   "Socials": {
     "FollowUs": "Follow us"
+  },
+  "Tools": {
+    "Tools": "Tools",
+    "Source": "Source",
+    "ProjectPage": "Project page"
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Move } from 'src/app/models/framedata/move';
 import { MatDialog } from '@angular/material/dialog';
 import { HitboxTableDialogComponent } from '../hitbox-table-dialog/hitbox-table-dialog.component';
+import { ViewMoveDialogComponent } from '../view-move-dialog/view-move-dialog.component';
 
 @Component({
   selector: 'app-move-display',
@@ -34,4 +35,9 @@ export class MoveDisplayComponent implements OnInit {
     dialog.componentInstance.moveName = move.name;
   }
 
+  openMove(move: Move): void {
+    const dialog = this.dialog.open(ViewMoveDialogComponent, { width: '1600px', maxHeight: '85vh'});
+    dialog.componentInstance.move = move;
+    dialog.componentInstance.characterName = this.characterName;
+  }
 }

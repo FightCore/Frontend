@@ -33,8 +33,16 @@ export class NavBarComponent implements OnInit {
       route: ['/character']
     },
     {
-      name: 'Nav.Games',
-      route: ['game']
+      name: 'Nav.FrameData',
+      route: ['/framedata']
+    },
+    {
+      name: 'Nav.Techniques',
+      route: ['/techniques']
+    },
+    {
+      name: 'Nav.Tools',
+      route: ['/tools']
     },
     {
       name: 'Nav.AboutUs',

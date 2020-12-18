@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <h2>{{ 'FrameData.FrameData' | translate }}</h2>
+    <p>
+      Original data from
+      <a href="http://meleeframedata.com"><strong>Melee frame data</strong></a>
+      and <a href="http://ikneeddata.com"><strong>I KneeData</strong></a>.
+    </p>
+    <hr />
+    <app-loading *ngIf="loading"></app-loading>
+    <div *ngIf="!loading">
+      <div class="row">
+        <app-character-attributes [frameDataCharacter]="frameData" class="w-100"></app-character-attributes>
+      </div>
+      <div *ngFor="let type of moveTypes" class="mb-2 row">
+        <mat-toolbar color="primary">
+          <h3>{{ type.name }}</h3>
+        </mat-toolbar>
+        <div
+          *ngFor="let move of getMovesForType(type.value)"
+          class="col-lg-2 p-1"
+        >
+          <app-move-display
+            [characterName]="frameData.normalizedName"
+            [move]="move"
+          ></app-move-display>
+        </div>
+      </div>
+    </div>
+  </div>

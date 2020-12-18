@@ -10,13 +10,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-character',
   templateUrl: './character.component.html',
-  styleUrls: ['./character.component.scss']
+  styleUrls: ['./character.component.scss'],
 })
 export class CharacterComponent implements OnInit {
-  constructor(
-    private characterService: CharacterService,
-    private gameService: GameService,
-    private router: Router) {}
+  constructor(private characterService: CharacterService, private gameService: GameService, private router: Router) {}
   loading: boolean = true;
   characters: Character[];
   displayedCharacters: Character[];
@@ -28,45 +25,55 @@ export class CharacterComponent implements OnInit {
   searchedName: string;
 
   ngOnInit() {
-    this.gameService.getAllGames().subscribe(games => {
+    this.gameService.getAllGames().subscribe((games) => {
       this.games = games;
+      this.changeGameSelection(this.selectedGame);
     });
-
-    this.characterService.getAll().subscribe(characters => {
-      this.characters = characters;
-      this.filterCharacters();
-      this.loading = false;
-    });
-
   }
 
   getCurrentGame(): Game {
-    return this.games.find(game => game.id === this.selectedGame);
+    return this.games.find((game) => game.id === this.selectedGame);
   }
 
   changeGameSelection(gameId: number): void {
     this.selectedGame = gameId;
     UserOptions.setCurrentGame(gameId);
-    this.filterCharacters();
+    this.getCharactersForGame(gameId);
+  }
+
+  getCharactersForGame(gameId: number): void {
+    this.loading = true;
+    this.characters = [];
+    if (gameId === 0) {
+      this.characterService.getAll().subscribe((characters) => (this.characters = characters));
+      this.loading = false;
+      return;
+    }
+
+    this.characterService.getForGame(gameId).subscribe((characters) => {
+      this.characters = characters;
+      this.filterCharacters();
+      this.loading = false;
+    });
   }
 
   onSearchChange(term: string): void {
     this.searchedName = term;
     this.filterCharacters();
+
   }
 
   viewCharacter(id: number): void {
     this.router.navigate([StaticRoutes.characters, id]);
   }
 
-
   filterCharacters(): void {
-    this.displayedCharacters = this.characters.filter(
-      character => this.selectedGame === 0 ? true : character.game.id === this.selectedGame
+    this.displayedCharacters = this.characters.filter((character) =>
+      this.selectedGame === 0 ? true : character.game.id === this.selectedGame
     );
     if (this.searchedName) {
-      this.displayedCharacters = this.displayedCharacters.filter(character =>
-        character.name.search(new RegExp(this.searchedName, 'i')) >= 0
+      this.displayedCharacters = this.displayedCharacters.filter(
+        (character) => character.name.search(new RegExp(this.searchedName, 'i')) >= 0
       );
     }
 
@@ -74,10 +81,6 @@ export class CharacterComponent implements OnInit {
       characterOne.game.id > characterTwo.game.id ? 1 : -1
     );
 
-    this.displayedCharacters.sort((characterOne, characterTwo) =>
-      characterOne.name > characterTwo.name ? 1 : -1
-    );
-
-
+    this.displayedCharacters.sort((characterOne, characterTwo) => (characterOne.name > characterTwo.name ? 1 : -1));
   }
 }

@@ -18,4 +18,8 @@ export class FrameDataService extends BaseService {
   getFrameDataForCharacter(characterId: number): Observable<FrameDataCharacter> {
     return this.httpClient.get<FrameDataCharacter>(`${environment.baseUrl}/framedata/${characterId}`);
   }
+
+  getCharacters(): Observable<FrameDataCharacter[]> {
+    return this.httpClient.get<FrameDataCharacter[]>(`${environment.baseUrl}/framedata/characters`);
+  }
 }

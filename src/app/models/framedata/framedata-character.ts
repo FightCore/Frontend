@@ -5,5 +5,6 @@ export class FrameDataCharacter {
     name: string;
     normalizedName: string;
     moves: Move[];
+    fightCoreId: number;
     characterStatistics: CharacterStatistics;
 }

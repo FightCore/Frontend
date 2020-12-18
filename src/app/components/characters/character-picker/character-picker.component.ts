@@ -5,6 +5,7 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-character-picker',
@@ -17,7 +18,6 @@ export class CharacterPickerComponent implements OnInit {
   @Output() selectionChange: EventEmitter<number> = new EventEmitter();
   @Input() addAllOptions: boolean = false;
   displayedCharacters: Observable<Character[]>;
-  gameCharacters: Character[];
   characters: Character[];
   loading = true;
   characterFormControl = new FormControl();
@@ -25,21 +25,16 @@ export class CharacterPickerComponent implements OnInit {
   constructor(private characterService: CharacterService) {}
 
   ngOnInit() {
-    this.characterService.getAll().subscribe(characters => {
-      this.characters = characters;
       this.loading = false;
       this.updateGame(this.gameId);
-
-      this.characterFormControl.setValue(this.getCharacterForId(this.selected));
 
       // Taken from the official example
       // https://material.angular.io/components/autocomplete/examples
       this.displayedCharacters = this.characterFormControl.valueChanges.pipe(
         startWith(''),
         map(value => (typeof value === 'string' ? value : value.name)),
-        map(name => (name ? this._filter(name) : this.gameCharacters.slice()))
+        map(name => (name ? this._filter(name) : this.characters.slice()))
       );
-    });
   }
 
   getValue(): number | null {
@@ -52,13 +47,30 @@ export class CharacterPickerComponent implements OnInit {
 
   updateGame(gameId: number): void {
     this.gameId = gameId;
-    this.gameCharacters = this.characters.filter(character =>
-      this.filterCharacterByGame(character, gameId)
-    );
-    this.gameCharacters.sort(this.sortCharacters);
+    this.loading = true;
+    this.getCharsForGame();
+  }
+
+  private getCharsForGame(): void {
+    if (this.gameId === 0) {
+      this.characterService.getAll().subscribe(characters => {
+        this.processCharacters(characters)
+      });
+    } else {
+      this.characterService.getForGame(this.gameId).subscribe(characters => {
+        this.processCharacters(characters);
+      });
+    }
+
+
+  }
+
+  private processCharacters(characters: Character[]) {
+    this.characters = characters;
+    this.characters.sort(this.sortCharacters);
 
     // Check if character that was previously picked is no longer in the dropdown.
-    const pickedCharacterIndex = this.gameCharacters.findIndex(character =>
+    const pickedCharacterIndex = this.characters.findIndex(character =>
       character.id === this.getValue());
 
     if (pickedCharacterIndex < 0) {
@@ -66,6 +78,8 @@ export class CharacterPickerComponent implements OnInit {
       this.characterFormControl.setValue('');
     }
 
+    this.characterFormControl.setValue(this.getCharacterForId(this.selected));
+    this.loading = false;
   }
 
   private getCharacterForId(id: number): Character {
@@ -92,7 +106,7 @@ export class CharacterPickerComponent implements OnInit {
 
   private _filter(name: string): Character[] {
     let characters = [];
-    characters = this.gameCharacters.filter(
+    characters = this.characters.filter(
       character =>
         this.filterCharacterByGame(character, this.gameId) &&
         character.name.search(new RegExp(name, 'i')) >= 0

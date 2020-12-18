@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <h2>{{ 'Tools.Tools' | translate }}</h2>
+    <div class="row">
+        <div *ngFor="let tool of tools" class="col-lg-4 p-2">
+            <mat-card class="mat-elevation-z5">
+                <mat-card-header>
+                    <img mat-card-avatar [src]="tool.image">
+                    <mat-card-title>{{tool.title}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    {{tool.description}}
+                </mat-card-content>
+                <mat-card-actions>
+                    <button color="primary" mat-button *ngIf="tool.source">
+                        {{ 'Tools.Source' | translate }}
+                    </button>
+                    <button color="primary" mat-button *ngIf="tool.projectPage">
+                        {{ 'Tools.ProjectPage' | translate }}
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
