@@ -86,7 +86,6 @@ import { ContributorsComponent } from './components/about/contributors/contribut
 import { EditNotablePlayerComponent } from './components/characters/edit/edit-notable-player/edit-notable-player.component';
 import { EditWebsiteResourceComponent } from './components/characters/edit/edit-website-resource/edit-website-resource.component';
 import { EditVideoResourceComponent } from './components/characters/edit/edit-video-resource/edit-video-resource.component';
-import { ToolsComponent } from './pages/tools/tools.component';
 import { FramedataOverviewComponent } from './pages/framedata/framedata-overview/framedata-overview.component';
 import { TechniquesComponent } from './pages/posts/techniques/techniques.component';
 import { FramedataCharacterComponent } from './pages/framedata/framedata-character/framedata-character.component';
@@ -200,7 +199,6 @@ export function createTranslateLoader(http: HttpClient) {
     EditNotablePlayerComponent,
     EditWebsiteResourceComponent,
     EditVideoResourceComponent,
-    ToolsComponent,
     FramedataOverviewComponent,
     TechniquesComponent,
     FramedataCharacterComponent,

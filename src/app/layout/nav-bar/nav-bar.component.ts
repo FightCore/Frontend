@@ -41,10 +41,6 @@ export class NavBarComponent implements OnInit {
       route: ['/techniques']
     },
     {
-      name: 'Nav.Tools',
-      route: ['/tools']
-    },
-    {
       name: 'Nav.AboutUs',
       route: [StaticRoutes.about]
     }

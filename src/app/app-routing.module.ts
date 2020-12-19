@@ -17,7 +17,6 @@ import { GameComponent } from './pages/game/game.component';
 import { DashboardComponent } from './pages/edits/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AboutComponent } from './pages/about/about.component';
-import { ToolsComponent } from './pages/tools/tools.component';
 import { FramedataOverviewComponent } from './pages/framedata/framedata-overview/framedata-overview.component';
 import { TechniquesComponent } from './pages/posts/techniques/techniques.component';
 import { FramedataCharacterComponent } from './pages/framedata/framedata-character/framedata-character.component';
@@ -38,7 +37,6 @@ const routes: Routes = [
   { path: StaticRoutes.home, component: HomeComponent },
   { path: StaticRoutes.edits, component: DashboardComponent, canActivate: [ AuthGuard ] },
   { path: StaticRoutes.about, component: AboutComponent },
-  { path: StaticRoutes.tools, component: ToolsComponent },
   { path: StaticRoutes.viewFrameData, component: FramedataCharacterComponent },
   { path: StaticRoutes.frameData, component: FramedataOverviewComponent },
   { path: StaticRoutes.techniques, component: TechniquesComponent },
