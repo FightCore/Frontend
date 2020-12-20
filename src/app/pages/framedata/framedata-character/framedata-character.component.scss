@@ -1,0 +1,15 @@
+.title {
+    font-family: headshot;
+  }
+
+  .category-container {
+    display: flex;
+    width: 100%;
+
+  }
+  .button-container {
+    flex-grow: 1;
+    button {
+      flex-grow: 1;
+    }
+  }

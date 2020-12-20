@@ -14,6 +14,7 @@ export class FramedataCharacterComponent implements OnInit {
 
   frameData: FrameDataCharacter;
   loading = true;
+  displayMoveGifs = true;
   moveTypes = [
     { name: 'Grounded attacks', value: MoveType.grounded},
     { name: 'Tilt attacks', value: MoveType.tilt},
@@ -27,6 +28,11 @@ export class FramedataCharacterComponent implements OnInit {
     private route: ActivatedRoute,
     private frameDataService: FrameDataService
   ) { }
+
+  scrollToCategory(type: MoveType): void {
+    const element = document.getElementById('category'+type);
+    element.scrollIntoView();
+  }
 
   ngOnInit(): void {
     const characterId = parseFloat(
