@@ -17,9 +17,8 @@ export class ViewMoveDialogComponent implements OnInit, AfterViewInit {
 
   constructor() { }
   ngAfterViewInit(): void {
-    console.log(this.moveImage);
     this.superGif = new SuperGif({ gif: this.moveImage.nativeElement } );
-    this.superGif.load(() => console.log('Wow it fucking works'));
+    this.superGif.load(() => {});
   }
 
   ngOnInit(): void {
