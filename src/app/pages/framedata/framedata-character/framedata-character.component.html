@@ -28,9 +28,9 @@
       <div class="row">
         <app-character-attributes [frameDataCharacter]="frameData" class="w-100"></app-character-attributes>
       </div>
-      <div *ngFor="let type of moveTypes" class="mb-2 row">
+      <div *ngFor="let type of moveTypes" [id]="'category'+type.value" class="mb-2 row">
         <mat-toolbar color="primary">
-          <h3>{{ type.name }}</h3>
+          <h3 class="title">{{ type.name }}</h3>
         </mat-toolbar>
         <div
           *ngFor="let move of getMovesForType(type.value)"
@@ -39,6 +39,7 @@
           <app-move-display
             [characterName]="frameData.normalizedName"
             [move]="move"
+            [displayMoveGifs]="displayMoveGifs"
           ></app-move-display>
         </div>
       </div>

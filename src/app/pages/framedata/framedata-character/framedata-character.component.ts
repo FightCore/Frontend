@@ -36,6 +36,11 @@ export class FramedataCharacterComponent implements OnInit {
     private characterService: CharacterService
   ) {}
 
+  scrollToCategory(type: MoveType): void {
+    const element = document.getElementById('category'+type);
+    element.scrollIntoView();
+  }
+
   ngOnInit(): void {
     this.characterService
       .getForGame(UserOptions.getCurrentGame())

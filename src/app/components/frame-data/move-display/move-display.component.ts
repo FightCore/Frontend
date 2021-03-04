@@ -14,14 +14,15 @@ export class MoveDisplayComponent implements OnInit {
   constructor(private dialog: MatDialog) { }
   @Input() move: Move;
   @Input() characterName: string;
+  @Input() displayMoveGifs: boolean;
   attributes: any[];
 
   ngOnInit(): void {
     this.attributes = [
-      { name: 'Start', value: this.move.start},
-      { name: 'End', value: this.move.end},
+      { name: 'Start', value: this.move.start, important: true},
+      { name: 'End', value: this.move.end, important: true},
+      { name: 'Total Frames', value: this.move.totalFrames, important: true},
       { name: 'IASA', value: this.move.iasa},
-      { name: 'Total Frames', value: this.move.totalFrames},
       { name: 'Land lag', value: this.move.landLag},
       { name: 'L-Canceled Land lag', value: this.move.lCanceledLandLang},
       { name: 'Auto cancel before', value: this.move.autoCancelBefore},
