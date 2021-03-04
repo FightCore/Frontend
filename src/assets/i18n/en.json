@@ -86,7 +86,8 @@
     "Description": "FightCore is the information hub for everything fighting games. Within our open source website, you can write about characters and techniques from your favourite games."
   },
   "FrameData": {
-    "FrameData": "Frame data"
+    "FrameData": "Frame data",
+    "PopularMoves": "Popular moves"
   },
   "Games": {
     "BackToGames": "Back to games",
