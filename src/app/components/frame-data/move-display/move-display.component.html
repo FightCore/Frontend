@@ -1,9 +1,11 @@
 <mat-card class="mat-elevation-z5">
     <mat-card-header>
-      <mat-card-title>{{ move.name }}</mat-card-title>
+      <mat-card-title class="title">{{ move.name }}</mat-card-title>
       <mat-card-subtitle>{{ move.normalizedName }}</mat-card-subtitle>
     </mat-card-header>
     <img
+    *ngIf="displayMoveGifs"
+      (click)="openMove(move)"
       mat-card-image
       class="frame-data-image"
       [src]="
@@ -17,14 +19,19 @@
     />
     <mat-card-content>
       <div *ngFor="let attribute of attributes">
-        <div *ngIf="attribute.value">
+        <div *ngIf="attribute.value" [class.important]="attribute.important">
           {{ attribute.name }}: <div class="float-right">{{ attribute.value }}</div>
           <hr />
         </div>
       </div>
+      <div *ngIf="move.notes">
+        Notes: <div>{{move.notes}}</div>
+        <hr/>
+      </div>
+      <a [href]="move.source">Source</a>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button mat-raised-button (click)="openHitboxes(move)">View hitboxes</button>
+      <button mat-raised-button color="primary" (click)="openMove(move)">View</button>
       <button class="float-right" mat-button>Edit</button>
     </mat-card-actions>
   </mat-card>

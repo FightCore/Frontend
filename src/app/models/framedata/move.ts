@@ -1,3 +1,4 @@
+import { FrameDataCharacter } from './framedata-character';
 import { Hitbox } from './hitbox';
 import { MoveType } from './move-type';
 
@@ -14,5 +15,7 @@ export class Move {
     type: MoveType;
     start?: number;
     end?: number;
-    notes?: string
+    notes?: string;
+    source?: string;
+    character?: FrameDataCharacter;
 }

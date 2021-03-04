@@ -8,7 +8,7 @@
 <ng-template #selector>
     <mat-form-field class="game-dropdown">
         <mat-label i18n>{{ 'Games.Game' | translate }}</mat-label>
-        <mat-select [(value)]="selected" (selectionChange)="onSelectChange($event)">
+        <mat-select disabled [(value)]="selected" (selectionChange)="onSelectChange($event)">
           <mat-option *ngIf="addAllOptions" [value]="0" i18n>
             {{ 'Common.All' | translate }}
           </mat-option>

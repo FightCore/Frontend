@@ -17,5 +17,8 @@ export class StaticRoutes {
   public static viewUserNoId: string = 'user/';
   public static game: string = 'game';
   public static viewGame: string = 'game/:gameId';
+  public static frameData = "framedata";
+  public static techniques = "techniques";
+  public static viewFrameData: string = 'framedata/:characterId';
   public static home: string = '';
 }

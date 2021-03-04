@@ -52,7 +52,8 @@
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js",
-              "node_modules/simplemde/dist/simplemde.min.js"
+              "node_modules/simplemde/dist/simplemde.min.js",
+              "src/scripts/libgif.js"
             ]
           },
           "configurations": {

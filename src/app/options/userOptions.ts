@@ -1,5 +1,5 @@
 export class UserOptions {
-    public static gameId = 6;
+    public static gameId = 2;
     private static darkMode = false;
     private static minimalMode: boolean = false;
 
@@ -22,12 +22,12 @@ export class UserOptions {
     }
 
     public static getCurrentGame(): number {
-        const gameId = localStorage.getItem('gameId');
-        if (gameId) {
-            return parseFloat(gameId);
-        }
+        // const gameId = localStorage.getItem('gameId');
+        // if (gameId) {
+        //     return parseFloat(gameId);
+        // }
 
-        localStorage.setItem('gameId', this.gameId.toString());
+        // localStorage.setItem('gameId', this.gameId.toString());
 
         return this.gameId;
     }
