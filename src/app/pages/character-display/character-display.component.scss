@@ -8,6 +8,10 @@
     object-fit: contain;
 }
 
+.header-text {
+    vertical-align: middle;
+}
+
 .stock-icon {
     // Override the border radius to just show the entire character.
     border-radius: 0%;

@@ -69,15 +69,6 @@ export class CharacterDisplayComponent implements OnInit {
       this.characterId = characterId;
       this.character = character;
       this.loading = false;
-
-      const videos = this.youtubeVideos();
-      videos.forEach(video => {
-        this.youtubeUrls.push(
-          this.sanitizer.bypassSecurityTrustResourceUrl(video)
-        );
-      });
-
-      this.youtubeLoading = false;
     });
 
     this.editService.getOpenEditsForCharacter(characterId).subscribe(edits => {
@@ -92,17 +83,8 @@ export class CharacterDisplayComponent implements OnInit {
       this.frameDataCharacter = frameDataCharacter);
   }
 
-  private youtubeVideos(): string[] {
-    const videos = [];
-    this.character.videos.forEach(video => {
-      videos.push(this.getEmbed(video.youtubeId));
-    });
-
-    return videos;
-  }
-
-  public getEmbed(youtubeId: string): string {
-    return 'https://www.youtube.com/embed/' + youtubeId;
+  public getUrl(youtubeId: string): string {
+    return 'https://www.youtube.com/watch?v=' + youtubeId;
   }
 
   getGameClass(): string {
