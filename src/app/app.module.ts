@@ -96,7 +96,6 @@ import { ViewMoveDialogComponent } from './components/frame-data/view-move-dialo
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
 @NgModule({
   imports: [
     CommonModule,

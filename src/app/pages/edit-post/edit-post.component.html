@@ -1,4 +1,6 @@
-<div *ngIf="loading; else editor"></div>
+<div class="container">
+  <div *ngIf="loading; else editor"></div>
+</div>
 
 <ng-template #editor>
   <mat-horizontal-stepper #stepper>
