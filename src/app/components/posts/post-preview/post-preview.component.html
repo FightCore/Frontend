@@ -1,45 +1,51 @@
-<mat-card class="mat-elevation-z5">
-  <mat-card-header>
-    <div *ngIf="post.character && post.character.stockIcon" mat-card-avatar>
-      <img
-      alt="Character stock icon"
-      class="fit-image-height"
-      [src]="post.character.stockIcon.url"
-    />
-    </div>
-    <mat-card-title class="mouse-pointer title" (click)="viewPost(post.id)">
-      {{ post.title }}
-    </mat-card-title>
-    <mat-card-subtitle>
-      {{ 'Posts.WrittenBy' | translate }} <strong>{{post.author.name}}</strong>
-      <div></div>
-    </mat-card-subtitle>
-  </mat-card-header>
+<mat-card
+  [class.mat-elevation-z10]="mouseOvered"
+  (mouseover)="mouseOvered = true"
+  (mouseout)="mouseOvered = false"
+  (click)="viewPost(post.id)"
+  class="mouse-pointer"
+>
   <mat-card-content class="post-content">
-    <div>
-      <span><mat-icon class="mat-label-icon">sports_esports</mat-icon> {{post.game.name}}</span>
-      <span *ngIf="this.post.category > 0" class="float-right"><mat-icon class="mat-label-icon">label</mat-icon>{{getTranslationsForValue() | translate}}</span>
-    </div>
-    <mat-divider class="mb-2"></mat-divider>
-    <p *ngIf="post.description else markdownContent">{{post.description}}</p>
-      <mat-chip-list>
-        <mat-chip *ngFor="let tag of post.tags" selected>{{tag}}</mat-chip>
-      </mat-chip-list>
-  </mat-card-content>
-  <mat-card-actions>
-    <app-like-button
-        class="like-button"
-          [postId]="post.id"
-          [likes]="post.likes"
-          [liked]="post.liked"
-        >
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        <div class="d-inline">
+          <img
+            alt="Character stock icon"
+            class="post-avatar"
+            [src]="
+              post.character && post.character.stockIcon
+                ? post.character.stockIcon.url
+                : 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Smash_Ball.png/1200px-Smash_Ball.png'
+            "
+          />
+        </div>
+        <h5 class="title d-inline" (click)="viewPost(post.id)">
+          {{ post.title }}
+        </h5>
+        <p>
+          {{ 'Posts.WrittenBy' | translate }} <strong>{{ post.author.name }}</strong>
+        </p>
+      </div>
+      <div class="col-lg-6 col-12">
+        <p class="d-none float-right">
+          <mat-icon class="mat-label-icon">sports_esports</mat-icon> {{ post.game.name }}
+        </p>
+        <p class="float-right">
+          <mat-icon class="mat-label-icon">label</mat-icon>{{ getTranslationsForValue() | translate }}
+        </p>
+      </div>
+      <div class="col-lg-6 col-12">
+        <mat-chip-list class="d-inline">
+          <mat-chip *ngFor="let tag of post.tags" selected>{{ tag }}</mat-chip>
+        </mat-chip-list>
+      </div>
+      <div class="col-lg-6 col-12">
+        <app-like-button class="d-inline float-right" [postId]="post.id" [likes]="post.likes" [liked]="post.liked">
         </app-like-button>
-        <button (click)="viewPost(post.id)" mat-button [color]="isDarkMode() ? 'default' : 'primary'">
-          {{ 'Posts.ReadMore' | translate }}
-        </button>
-  </mat-card-actions>
+      </div>
+    </div>
+  </mat-card-content>
 </mat-card>
-
 
 <ng-template #markdownContent>
   <p [innerHTML]="post.body" class="post-markdown-text"></p>

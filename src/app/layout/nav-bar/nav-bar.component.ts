@@ -3,9 +3,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { RegisterComponent } from 'src/app/pages/register/register.component';
 import { MatDialog } from '@angular/material/dialog';
-import { UserOptions } from 'src/app/options/userOptions';
 import { ThemeSchemeService } from 'src/app/services/theme/theme-scheme.service';
-import { StaticRoutes } from 'src/app/routes/static-routes';
 
 @Component({
   selector: 'app-nav-bar',
@@ -35,18 +33,6 @@ export class NavBarComponent implements OnInit {
     {
       name: 'Nav.FrameData',
       route: ['/framedata']
-    },
-    // {
-    //   name: 'Nav.Techniques',
-    //   route: ['/techniques']
-    // },
-    // {
-    //   name: 'Nav.Tools',
-    //   route: ['/tools']
-    // },
-    {
-      name: 'Nav.AboutUs',
-      route: [StaticRoutes.about]
     }
   ];
   ngOnInit() {

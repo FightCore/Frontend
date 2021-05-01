@@ -77,9 +77,9 @@
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
   <ng-template #postDisplay>
-    <div class="row equal">
-      <div class="col-lg-6" *ngFor="let post of displayPosts">
-        <app-post-preview class="post-preview" [post]="post"></app-post-preview>
+    <div class="row">
+      <div class="col-lg-12 mb-1" *ngFor="let post of displayPosts">
+        <app-post-preview [post]="post"></app-post-preview>
       </div>
     </div>
   </ng-template>

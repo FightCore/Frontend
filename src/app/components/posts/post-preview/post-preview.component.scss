@@ -1,18 +1,12 @@
 @import 'src/styles/variables.scss';
 
-.post-content {
-  margin: 1em;
-  .post-markdown-text {
-    max-height: 15em;
-    min-height: 15em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-bottom: 1em;
-  }
-}
 .spacer {
   flex-grow: 1;
 }
 .mat-label-icon {
   vertical-align: middle;
+}
+.post-avatar {
+  max-width: 3em;
+  min-width: 3em;
 }
