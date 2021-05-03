@@ -5,7 +5,7 @@ import { version } from '../../../../package.json';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
   version: string = version;
@@ -16,20 +16,20 @@ export class FooterComponent implements OnInit {
     },
     {
       icon: ['fab', 'docker'],
-      url: environment.links.dockerhub
+      url: environment.links.dockerhub,
     },
     {
       icon: ['fab', 'discord'],
-      url: environment.links.discord
+      url: environment.links.discord,
     },
     {
       icon: ['fas', 'mug-hot'],
-      url: environment.links.kofi
+      url: environment.links.kofi,
     },
     {
       icon: ['fab', 'twitter'],
-      url: environment.links.twitter
-    }
+      url: environment.links.twitter,
+    },
   ];
   constructor() {}
 
@@ -37,5 +37,9 @@ export class FooterComponent implements OnInit {
 
   openUrl(url: string) {
     window.open(url);
+  }
+
+  get currentYear(): number {
+    return new Date().getFullYear();
   }
 }

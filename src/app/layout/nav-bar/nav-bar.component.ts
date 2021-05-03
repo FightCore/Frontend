@@ -8,15 +8,15 @@ import { ThemeSchemeService } from 'src/app/services/theme/theme-scheme.service'
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-
   constructor(
-      private authService: AuthService,
-      private dialog: MatDialog,
-      private router: Router,
-      private themeService: ThemeSchemeService) { }
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private router: Router,
+    private themeService: ThemeSchemeService
+  ) {}
 
   userName: string;
   opened: boolean;
@@ -24,19 +24,18 @@ export class NavBarComponent implements OnInit {
   links = [
     {
       name: 'Nav.Posts',
-      route: ['/post']
+      route: ['/post'],
     },
     {
       name: 'Nav.Characters',
-      route: ['/character']
+      route: ['/character'],
     },
     {
       name: 'Nav.FrameData',
-      route: ['/framedata']
-    }
+      route: ['/framedata'],
+    },
   ];
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   toggleDarkMode(): void {
     this.themeService.toggle();
@@ -68,7 +67,7 @@ export class NavBarComponent implements OnInit {
 
   register() {
     this.dialog.open(RegisterComponent, {
-      width: '40em'
+      width: '40em',
     });
   }
 
@@ -79,5 +78,4 @@ export class NavBarComponent implements OnInit {
   goToLogin(): void {
     this.authService.login();
   }
-
 }

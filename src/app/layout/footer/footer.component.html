@@ -1,16 +1,8 @@
 <div class="container-fluid">
-    <div class="float-left">
-        © 2020 FightCore - {{ version }}
+  <div class="float-left">© {{ currentYear }} FightCore - {{ version }}</div>
+  <div class="float-right">
+    <div class="links" *ngFor="let link of links">
+      <fa-icon *ngIf="link.url" class="icons" size="2x" [icon]="link.icon" (click)="openUrl(link.url)"></fa-icon>
     </div>
-    <div class="float-right">
-        <div class="links" *ngFor="let link of links">
-                <fa-icon
-                *ngIf="link.url"
-                class="icons"
-                size="2x"
-                [icon]="link.icon"
-                (click)="openUrl(link.url)"></fa-icon>
-        </div>
-
-    </div>
+  </div>
 </div>
