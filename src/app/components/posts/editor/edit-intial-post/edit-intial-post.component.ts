@@ -6,14 +6,14 @@ import { Post } from 'src/app/models/post';
 @Component({
   selector: 'app-edit-intial-post',
   templateUrl: './edit-intial-post.component.html',
-  styleUrls: ['./edit-intial-post.component.scss']
+  styleUrls: ['./edit-intial-post.component.scss'],
 })
 export class EditIntialPostComponent implements OnInit {
   @Input() post: Post;
   formGroup: FormGroup;
 
   selectedCharacter: number;
-  selectedGame: number;
+  selectedGame: number = 2;
   constructor(formBuilder: FormBuilder) {
     this.formGroup = formBuilder.group({
       title: ['', Validators.required],
@@ -25,7 +25,7 @@ export class EditIntialPostComponent implements OnInit {
     if (this.post) {
       this.formGroup.setValue({
         title: this.post.title,
-        description: this.post.description
+        description: this.post.description,
       });
 
       this.selectedGame = this.post.gameId;
