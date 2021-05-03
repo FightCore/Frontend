@@ -1,198 +1,147 @@
-<div class="container-fluid mt-2 mb-2">
+<div class="container">
   <div *ngIf="loading; else postDisplay">
     <app-loading></app-loading>
   </div>
 </div>
-<app-top-scroller></app-top-scroller>
 
 <ng-template #postDisplay>
-  <mat-card>
-    <mat-card-header>
-      <img
-        mat-card-avatar
-        class="stock-icon"
-        [src]="character.stockIcon.url"
-        alt="Stock icon"
-      />
-      <mat-card-title class="title">{{ character.name }}</mat-card-title>
-      <mat-card-subtitle>{{ character.game.name }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-tab-group>
-        <mat-tab [label]="'Characters.GeneralInformation' | translate">
-          <div class="row w-100">
-            <div class="col-lg-3">
-              <div>
-                <!--Center this image.-->
-                <img
-                  *ngIf="character.characterImage"
-                  [src]="character.characterImage.url"
-                  alt="character-portrait"
-                  height="370em"
-                  class="profile-shot"
-                />
-                <hr />
-              </div>
-            </div>
-            <div class="col-lg-9">
-              <div>
-                <app-general-information
-                  [character]="character"
-                ></app-general-information>
-              </div>
-            </div>
-          </div>
-        </mat-tab>
-        <mat-tab [label]="'Characters.NotablePlayers' | translate">
-          <div>
-            <h2>{{ 'Characters.NotablePlayers' | translate }}</h2>
-            <h5 *ngIf="character.notablePlayers.length == 0">
-              {{ 'Characters.NoPlayersYet' | translate }}
-            </h5>
-            <div *ngFor="let player of character.notablePlayers">
-              <app-notable-player [player]="player"></app-notable-player>
-            </div>
-          </div>
-        </mat-tab>
-        <mat-tab [label]="'Posts.FightCorePosts' | translate">
-          <div class="m-1">
-            <h2>{{ 'Posts.FightCorePosts' | translate }}</h2>
-            <div *ngIf="!postLoading" class="row equal w-100">
-              <div *ngFor="let post of posts" class="col-lg-4">
-                <app-post-preview [post]="post"></app-post-preview>
-              </div>
-            </div>
-          </div>
-        </mat-tab>
-        <mat-tab [label]="'Characters.Resources' | translate">
-          <div *ngIf="!youtubeLoading">
-            <div>
-              <h2>{{ 'Characters.Websites' | translate }}</h2>
-              <p *ngIf="character.websites.length === 0">
-                {{ 'Characters.NoWebsitesYet' | translate }}
-              </p>
-              <button
-                *ngFor="let website of character.websites"
-                class="d-inline m-1"
-                color="primary"
-                mat-stroked-button
-                (click)="openUrl(website.websiteUrl)"
-              >
-                {{ website.title }}
-              </button>
-
-              <h2>{{ 'Characters.Videos' | translate }}</h2>
-              <h5 *ngIf="youtubeUrls.length == 0">
-                {{ 'Characters.NoVideosYet' | translate }}
-              </h5>
-              <div class="row w-100">
-                <div *ngFor="let video of youtubeUrls" class="col-lg-3">
-                  <div class="video">
-                    <iframe
-                      [src]="video"
-                      width="625em"
-                      height="350em"
-                      class="fit-image-max-width"
-                      title="youtube-video-embed"
-                      webkitallowfullscreen
-                      mozallowfullscreen
-                      allowfullscreen
-                    ></iframe>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </mat-tab>
-        <mat-tab>
-          <ng-template mat-tab-label>
-            {{ 'Characters.History' | translate }}
-          </ng-template>
-          <div *ngIf="characterId">
-            <app-edits-overview
-              *ngIf="allEdits"
-              [readOnly]="true"
-              [edits]="allEdits"
-              [characterId]="characterId"
-              [isContributor]="isContributor()"
-            >
-            </app-edits-overview>
-          </div>
-        </mat-tab>
-        <mat-tab *ngIf="isLoggedIn">
-          <ng-template mat-tab-label>
-            <mat-icon>build</mat-icon>
-            <span matBadge="edits ? edits.length : 0" matBadgeOverlap="false">{{
-              'Edits.Edits' | translate
-            }}</span>
-          </ng-template>
-          <div *ngIf="characterId">
-            <p>{{ 'Characters.ARefreshIsNeeded' | translate }}</p>
-            <app-edits-overview
-              *ngIf="openEdits"
-              [edits]="openEdits"
-              [characterId]="characterId"
-              [isContributor]="isContributor()"
-            >
-            </app-edits-overview>
-          </div>
-        </mat-tab>
-        <mat-tab *ngIf="frameDataCharacter" [label]="'FrameData.FrameData' | translate">
-          <div class="container-fluid">
-            <p>
-              Original data from
-              <a href="http://meleeframedata.com"><strong>Melee frame data</strong></a>
-              and <a href="http://ikneeddata.com"><strong>I KneeData</strong></a>.
-            </p>
-            <hr />
-            <div class="">
-              <div class="row">
-                <app-character-attributes [frameDataCharacter]="frameDataCharacter" class="w-100"></app-character-attributes>
-              </div>
-              <div *ngFor="let type of moveTypes" class="mb-2 row">
-                <mat-toolbar color="primary">
-                  <h3>{{ type.name }}</h3>
-                </mat-toolbar>
-                <div
-                  *ngFor="let move of getMovesForType(type.value)"
-                  class="col-lg-2 p-1"
-                >
-                  <app-move-display
-                    [characterName]="frameDataCharacter.normalizedName"
-                    [move]="move"
-                  ></app-move-display>
-                </div>
-              </div>
-            </div>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
-    <mat-card-actions>
-      <div class="row">
-        <div class="col-lg-6 col-md-12">
-          <app-contributor-list
-            [contributors]="character.contributors"
-          ></app-contributor-list>
+  <img mat-card-avatar class="stock-icon" [src]="character.stockIcon.url" alt="Stock icon" />
+  <h1 class="d-inline title header-text">{{ character.name }}</h1>
+  <mat-tab-group>
+    <mat-tab [label]="'Characters.GeneralInformation' | translate">
+      <div class="row w-100">
+        <div class="col-lg-12">
+          <app-general-information [character]="character"></app-general-information>
         </div>
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-6">
+          <h2>{{ 'Characters.Resources' | translate }}</h2>
           <button
-            mat-raised-button
+            *ngFor="let website of character.websites"
+            class="d-inline m-1 w-100"
             color="primary"
-            class="float-right"
-            (click)="editCharacter()"
-            i18n
-            [disabled]="!isLoggedIn"
+            mat-stroked-button
+            (click)="openUrl(website.websiteUrl)"
           >
-            <em class="material-icons">edit</em>
-            <div class="d-inline" *ngIf="isLoggedIn; else loginText">
-              {{ 'Characters.EditCharacter' | translate }}
-            </div>
+            {{ website.title }}
           </button>
         </div>
+        <div class="col-lg-6">
+          <h2>{{ 'Characters.Videos' | translate }}</h2>
+          <button
+            mat-stroked-button
+            *ngFor="let video of character.videos"
+            class="d-inline m-1 w-100"
+            color="primary"
+            target="_blank"
+            (click)="openUrl(getUrl(video.youtubeId))"
+          >
+            "{{ video.name }}" By NAME
+          </button>
+        </div>
+        <div class="col-lg-12">
+          <h2>{{ 'Posts.Posts' | translate }}</h2>
+          <div *ngFor="let post of posts" class="col-lg-6">
+            <app-post-preview [post]="post"></app-post-preview>
+          </div>
+        </div>
       </div>
-    </mat-card-actions>
-  </mat-card>
+    </mat-tab>
+    <mat-tab *ngIf="frameDataCharacter" [label]="'FrameData.FrameData' | translate">
+      <div class="container-fluid">
+        <p>
+          Original data from
+          <a href="http://meleeframedata.com"><strong>Melee frame data</strong></a>
+          and <a href="http://ikneeddata.com"><strong>I KneeData</strong></a
+          >.
+        </p>
+        <hr />
+        <div class="">
+          <div class="row">
+            <app-character-attributes
+              [frameDataCharacter]="frameDataCharacter"
+              class="w-100"
+            ></app-character-attributes>
+          </div>
+          <div *ngFor="let type of moveTypes" class="mb-2 row">
+            <mat-toolbar color="primary">
+              <h3>{{ type.name }}</h3>
+            </mat-toolbar>
+            <div *ngFor="let move of getMovesForType(type.value)" class="col-lg-4 col-12 p-1 p-1">
+              <app-move-display [characterName]="frameDataCharacter.normalizedName" [move]="move"></app-move-display>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab [label]="'Characters.NotablePlayers' | translate">
+      <div>
+        <h2>{{ 'Characters.NotablePlayers' | translate }}</h2>
+        <h5 *ngIf="character.notablePlayers.length == 0">
+          {{ 'Characters.NoPlayersYet' | translate }}
+        </h5>
+        <div *ngFor="let player of character.notablePlayers">
+          <app-notable-player [player]="player"></app-notable-player>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab [label]="'Posts.Posts' | translate">
+      <div class="m-1">
+        <h2>{{ 'Posts.FightCorePosts' | translate }}</h2>
+        <div *ngIf="!postLoading" class="row equal w-100"></div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ 'Characters.History' | translate }}
+      </ng-template>
+      <div *ngIf="characterId" class="p-1">
+        <app-edits-overview
+          *ngIf="allEdits"
+          [readOnly]="true"
+          [edits]="allEdits"
+          [characterId]="characterId"
+          [isContributor]="isContributor()"
+        >
+        </app-edits-overview>
+      </div>
+    </mat-tab>
+    <mat-tab *ngIf="isLoggedIn">
+      <ng-template mat-tab-label>
+        <mat-icon>build</mat-icon>
+        <span matBadge="edits ? edits.length : 0" matBadgeOverlap="false">{{ 'Edits.Edits' | translate }}</span>
+      </ng-template>
+      <div *ngIf="characterId">
+        <p>{{ 'Characters.ARefreshIsNeeded' | translate }}</p>
+        <app-edits-overview
+          *ngIf="openEdits"
+          [edits]="openEdits"
+          [characterId]="characterId"
+          [isContributor]="isContributor()"
+        >
+        </app-edits-overview>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <app-contributor-list [contributors]="character.contributors"></app-contributor-list>
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <button
+        mat-raised-button
+        color="primary"
+        class="float-right"
+        (click)="editCharacter()"
+        i18n
+        [disabled]="!isLoggedIn"
+      >
+        <em class="material-icons">edit</em>
+        <div class="d-inline" *ngIf="isLoggedIn; else loginText">
+          {{ 'Characters.EditCharacter' | translate }}
+        </div>
+      </button>
+    </div>
+  </div>
 </ng-template>
 <ng-template #loginText>
   {{ 'Characters.LoginToEdit' | translate }}

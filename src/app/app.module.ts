@@ -81,8 +81,6 @@ import { HitboxTableDialogComponent } from './components/frame-data/hitbox-table
 import { CharacterAttributesComponent } from './components/frame-data/character-attributes/character-attributes.component';
 import { CreateCommentComponent } from './components/posts/comments/create-comment/create-comment.component';
 import { ViewCommentsComponent } from './components/posts/comments/view-comments/view-comments.component';
-import { AboutComponent } from './pages/about/about.component';
-import { ContributorsComponent } from './components/about/contributors/contributors.component';
 import { EditNotablePlayerComponent } from './components/characters/edit/edit-notable-player/edit-notable-player.component';
 import { EditWebsiteResourceComponent } from './components/characters/edit/edit-website-resource/edit-website-resource.component';
 import { EditVideoResourceComponent } from './components/characters/edit/edit-video-resource/edit-video-resource.component';
@@ -96,7 +94,6 @@ import { ViewMoveDialogComponent } from './components/frame-data/view-move-dialo
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
-
 @NgModule({
   imports: [
     CommonModule,
@@ -194,8 +191,6 @@ export function createTranslateLoader(http: HttpClient) {
     CharacterAttributesComponent,
     CreateCommentComponent,
     ViewCommentsComponent,
-    AboutComponent,
-    ContributorsComponent,
     EditNotablePlayerComponent,
     EditWebsiteResourceComponent,
     EditVideoResourceComponent,
