@@ -18,7 +18,7 @@ import { PostCategory } from 'src/app/models/post/post-category';
 })
 export class PostPreviewComponent implements OnInit {
   @Input() post: Post;
-
+  mouseOvered: boolean;
   categories = [
     { value: PostCategory.uncategorised, name: 'Posts.Category.NoCategory'},
     { value: PostCategory.matchup, name: 'Posts.Category.Matchup'},
@@ -35,7 +35,6 @@ export class PostPreviewComponent implements OnInit {
     private router: Router,
     private markdownService: MarkdownService
     ) { }
-
   ngOnInit() {
     this.post.body = this.markdownService.compile(this.post.body);
   }

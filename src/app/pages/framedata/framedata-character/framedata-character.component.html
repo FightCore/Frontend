@@ -7,7 +7,7 @@
     </p>
     <hr />
     <app-loading *ngIf="charactersLoading"></app-loading>
-    <mat-card *ngIf="!charactersLoading" class="mat-elevation-z10 mb-3">
+    <mat-card *ngIf="!charactersLoading" class="mb-3">
       <mat-card-header>
         <mat-card-title class="title">{{ 'Characters.QuickCharacterSelector' | translate }}</mat-card-title>
       </mat-card-header>
@@ -34,7 +34,7 @@
         </mat-toolbar>
         <div
           *ngFor="let move of getMovesForType(type.value)"
-          class="col-lg-2 p-1"
+          class="col-lg-4 col-12 p-1"
         >
           <app-move-display
             [characterName]="frameData.normalizedName"

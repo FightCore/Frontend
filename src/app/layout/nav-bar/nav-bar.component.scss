@@ -1,31 +1,38 @@
-.spacer {
-    flex: 1 1 auto;
-}
-.height-spacer {
-    flex-grow: 1;
+::ng-deep
+body:not(.dark-theme) .mat-drawer-container {
+  background-color: #eeeeee;
+  min-height: 100vh;
 }
 
-span, a {
-    margin-right: 1em;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    font-family: headshot;
+.spacer {
+  flex: 1 1 auto;
+}
+.height-spacer {
+  flex-grow: 1;
+}
+
+span,
+a {
+  margin-right: 1em;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  font-family: headshot;
 }
 
 .centered {
-    align-items: center;
+  align-items: center;
 }
 
 .language-picker {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 .logo {
-    height: 2em;
-    margin-right: 0.5em;
+  height: 2em;
+  margin-right: 0.5em;
 }
 
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }

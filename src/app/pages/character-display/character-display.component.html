@@ -46,6 +46,33 @@
         </div>
       </div>
     </mat-tab>
+    <mat-tab *ngIf="frameDataCharacter" [label]="'FrameData.FrameData' | translate">
+      <div class="container-fluid">
+        <p>
+          Original data from
+          <a href="http://meleeframedata.com"><strong>Melee frame data</strong></a>
+          and <a href="http://ikneeddata.com"><strong>I KneeData</strong></a
+          >.
+        </p>
+        <hr />
+        <div class="">
+          <div class="row">
+            <app-character-attributes
+              [frameDataCharacter]="frameDataCharacter"
+              class="w-100"
+            ></app-character-attributes>
+          </div>
+          <div *ngFor="let type of moveTypes" class="mb-2 row">
+            <mat-toolbar color="primary">
+              <h3>{{ type.name }}</h3>
+            </mat-toolbar>
+            <div *ngFor="let move of getMovesForType(type.value)" class="col-lg-4 col-12 p-1 p-1">
+              <app-move-display [characterName]="frameDataCharacter.normalizedName" [move]="move"></app-move-display>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
     <mat-tab [label]="'Characters.NotablePlayers' | translate">
       <div>
         <h2>{{ 'Characters.NotablePlayers' | translate }}</h2>
@@ -67,7 +94,7 @@
       <ng-template mat-tab-label>
         {{ 'Characters.History' | translate }}
       </ng-template>
-      <div *ngIf="characterId">
+      <div *ngIf="characterId" class="p-1">
         <app-edits-overview
           *ngIf="allEdits"
           [readOnly]="true"
@@ -92,33 +119,6 @@
           [isContributor]="isContributor()"
         >
         </app-edits-overview>
-      </div>
-    </mat-tab>
-    <mat-tab *ngIf="frameDataCharacter" [label]="'FrameData.FrameData' | translate">
-      <div class="container-fluid">
-        <p>
-          Original data from
-          <a href="http://meleeframedata.com"><strong>Melee frame data</strong></a>
-          and <a href="http://ikneeddata.com"><strong>I KneeData</strong></a
-          >.
-        </p>
-        <hr />
-        <div class="">
-          <div class="row">
-            <app-character-attributes
-              [frameDataCharacter]="frameDataCharacter"
-              class="w-100"
-            ></app-character-attributes>
-          </div>
-          <div *ngFor="let type of moveTypes" class="mb-2 row">
-            <mat-toolbar color="primary">
-              <h3>{{ type.name }}</h3>
-            </mat-toolbar>
-            <div *ngFor="let move of getMovesForType(type.value)" class="col-lg-6 p-1">
-              <app-move-display [characterName]="frameDataCharacter.normalizedName" [move]="move"></app-move-display>
-            </div>
-          </div>
-        </div>
       </div>
     </mat-tab>
   </mat-tab-group>

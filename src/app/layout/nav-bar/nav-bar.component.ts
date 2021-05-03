@@ -3,22 +3,20 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
 import { RegisterComponent } from 'src/app/pages/register/register.component';
 import { MatDialog } from '@angular/material/dialog';
-import { UserOptions } from 'src/app/options/userOptions';
 import { ThemeSchemeService } from 'src/app/services/theme/theme-scheme.service';
-import { StaticRoutes } from 'src/app/routes/static-routes';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.scss']
+  styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-
   constructor(
-      private authService: AuthService,
-      private dialog: MatDialog,
-      private router: Router,
-      private themeService: ThemeSchemeService) { }
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private router: Router,
+    private themeService: ThemeSchemeService
+  ) {}
 
   userName: string;
   opened: boolean;
@@ -26,31 +24,18 @@ export class NavBarComponent implements OnInit {
   links = [
     {
       name: 'Nav.Posts',
-      route: ['/post']
+      route: ['/post'],
     },
     {
       name: 'Nav.Characters',
-      route: ['/character']
+      route: ['/character'],
     },
     {
       name: 'Nav.FrameData',
-      route: ['/framedata']
+      route: ['/framedata'],
     },
-    // {
-    //   name: 'Nav.Techniques',
-    //   route: ['/techniques']
-    // },
-    // {
-    //   name: 'Nav.Tools',
-    //   route: ['/tools']
-    // },
-    {
-      name: 'Nav.AboutUs',
-      route: [StaticRoutes.about]
-    }
   ];
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   toggleDarkMode(): void {
     this.themeService.toggle();
@@ -82,7 +67,7 @@ export class NavBarComponent implements OnInit {
 
   register() {
     this.dialog.open(RegisterComponent, {
-      width: '40em'
+      width: '40em',
     });
   }
 
@@ -93,5 +78,4 @@ export class NavBarComponent implements OnInit {
   goToLogin(): void {
     this.authService.login();
   }
-
 }
