@@ -8,17 +8,17 @@ import { UserOptions } from 'src/app/options/userOptions';
 @Component({
   selector: 'app-character-preview',
   templateUrl: './character-preview.component.html',
-  styleUrls: ['./character-preview.component.scss']
+  styleUrls: ['./character-preview.component.scss'],
 })
 export class CharacterPreviewComponent implements OnInit {
   @Input() character: Character;
-  constructor(private router: Router) { }
+  mouseOver: boolean = false;
+  constructor(private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  viewCharacter(id: number): void {
-    this.router.navigate([StaticRoutes.characters, id]);
+  viewCharacter(): void {
+    this.router.navigate([StaticRoutes.characters, this.character.id]);
   }
 
   characterIcon(): string {

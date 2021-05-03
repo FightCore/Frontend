@@ -1,8 +1,8 @@
-@import "src/styles/variables.scss";
+@import 'src/styles/variables.scss';
 
 .description {
-  max-height: 10.5em;
-  min-height: 10.5em;
+  max-height: 6em;
+  min-height: 6em;
   overflow: hidden;
   text-overflow: ellipsis;
 }

@@ -1,19 +1,25 @@
-<mat-card>
+<mat-card
+  [class.mat-elevation-z10]="mouseOver"
+  (mouseover)="mouseOver = true"
+  (mouseout)="mouseOver = false"
+  class="mouse-pointer"
+  (click)="viewCharacter()"
+>
   <mat-card-header>
     <div mat-card-avatar>
-      <img class="fit-image-height" alt="character profile shot" [src]="characterIcon()" >
+      <img class="fit-image-height" alt="character profile shot" [src]="characterIcon()" />
     </div>
     <mat-card-title class="title">{{ character.name }}</mat-card-title>
-    <mat-card-subtitle>{{character.game.name}}</mat-card-subtitle>
+    <mat-card-subtitle>{{ character.game.name }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
+    <strong
+      >We are looking for new text to put here. Reach out to us on discord if you are interested in writing for
+      FightCore.
+    </strong>
+    <hr />
     <div class="description">
       {{ character.generalInformation }}
     </div>
   </mat-card-content>
-  <mat-card-actions>
-    <button (click)="viewCharacter(character.id)" mat-button [color]="isDarkMode() ? 'default' : 'primary'">
-      {{ 'Common.View' | translate }}
-    </button>
-  </mat-card-actions>
 </mat-card>

@@ -25,10 +25,11 @@ export class CharacterComponent implements OnInit {
   searchedName: string;
 
   ngOnInit() {
-    this.gameService.getAllGames().subscribe((games) => {
-      this.games = games;
-      this.changeGameSelection(this.selectedGame);
-    });
+    this.getCharactersForGame(2);
+    // this.gameService.getAllGames().subscribe((games) => {
+    //   this.games = games;
+    //   this.changeGameSelection(this.selectedGame);
+    // });
   }
 
   getCurrentGame(): Game {
@@ -52,6 +53,7 @@ export class CharacterComponent implements OnInit {
 
     this.characterService.getForGame(gameId).subscribe((characters) => {
       this.characters = characters;
+      console.log(this.characters);
       this.filterCharacters();
       this.loading = false;
     });
@@ -60,7 +62,6 @@ export class CharacterComponent implements OnInit {
   onSearchChange(term: string): void {
     this.searchedName = term;
     this.filterCharacters();
-
   }
 
   viewCharacter(id: number): void {
