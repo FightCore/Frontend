@@ -28,6 +28,7 @@ export class EditPostTextComponent implements OnInit {
       this.useMarkdownEditor(this.post.markdown);
     } else if (this.post && this.post.html?.length > 0) {
       this.htmlContent = this.post.html;
+      this.useQuill();
     }
   }
 
