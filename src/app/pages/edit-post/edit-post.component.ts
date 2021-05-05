@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-edit-post',
   templateUrl: './edit-post.component.html',
-  styleUrls: ['./edit-post.component.scss']
+  styleUrls: ['./edit-post.component.scss'],
 })
 export class EditPostComponent implements OnInit {
   post: Post;
@@ -35,12 +35,11 @@ export class EditPostComponent implements OnInit {
     const postId = this.route.snapshot.paramMap.get('postId');
 
     this.postService.getPost(parseFloat(postId)).subscribe(
-      post => {
+      (post) => {
         this.post = post;
         this.loading = false;
       },
-      error => {
-        console.log(error);
+      (error) => {
         this.toastrService.error(PostText.postNotFound);
         this.router.navigate([StaticRoutes.posts]);
       }
@@ -54,7 +53,8 @@ export class EditPostComponent implements OnInit {
     post.title = this.initialPost.formGroup.value.title;
     post.characterId = this.initialPost.selectedCharacter;
     post.gameId = this.initialPost.selectedGame;
-    post.body = this.editPostText.getMarkdownContent();
+    post.markdown = this.editPostText.getMarkdownContent();
+    post.html = this.editPostText.getHtmlContent();
     post.tags = this.postMetaData.tags;
     post.category = this.postMetaData.categoryFormControl.value;
     post.description = this.initialPost.formGroup.value.description;
@@ -62,7 +62,7 @@ export class EditPostComponent implements OnInit {
   }
 
   createPost(): void {
-    this.postService.updatePost(this.forgePost()).subscribe(result => {
+    this.postService.updatePost(this.forgePost()).subscribe((result) => {
       this.toastrService.success(this.translateService.instant('Posts.SuccessfullyEdited'));
       this.router.navigate([StaticRoutes.posts, this.post.id]);
     });

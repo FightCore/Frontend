@@ -1,22 +1,23 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="initialPost.formGroup">
+<div class="container mt-3">
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="initialPost.formGroup">
       <ng-template matStepLabel>Select initial topics</ng-template>
       <app-edit-intial-post #initialPost></app-edit-intial-post>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
-  </mat-step>
-  <mat-step>
-    <form>
-      <ng-template matStepLabel>Optional meta data</ng-template>
-      <app-edit-meta-data></app-edit-meta-data>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
+    </mat-step>
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>Optional meta data</ng-template>
+        <app-edit-meta-data></app-edit-meta-data>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
       <form>
         <ng-template matStepLabel>Write the post</ng-template>
         <app-edit-post-text #editPost></app-edit-post-text>
@@ -26,4 +27,5 @@
         </div>
       </form>
     </mat-step>
-</mat-horizontal-stepper>
+  </mat-horizontal-stepper>
+</div>

@@ -1,11 +1,8 @@
-@import "src/styles/variables.scss";
+@import 'src/styles/variables.scss';
+@import 'src/styles/editor-style.scss';
 
 $post-border-radius: 1em;
 $post-border-radius: 0.5em;
-
-.centered {
-  text-align: center;
-}
 
 .post-title {
   font-family: headshot;
@@ -17,6 +14,11 @@ $post-border-radius: 0.5em;
 
 .mat-label-icon {
   vertical-align: middle;
+}
+
+.header-container {
+  background-color: #96153a;
+  color: white;
 }
 
 .description {

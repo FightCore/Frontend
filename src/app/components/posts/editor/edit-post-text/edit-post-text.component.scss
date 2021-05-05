@@ -1,10 +1,5 @@
-::ng-deep
-.ql-video {
-    width: 70vh;
-    height: 40vh;
-}
+@import 'src/styles/editor-style.scss';
 
-::ng-deep
-.ql-snow .ql-tooltip {
-    transform: translateX(7vw) translateY(10px);
+::ng-deep .ql-snow .ql-tooltip {
+  transform: translateX(7vw) translateY(10px);
 }

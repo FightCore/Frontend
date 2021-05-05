@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  Input,
-  AfterContentInit,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, Input, AfterContentInit } from '@angular/core';
 import { Post, CreatedPost } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post/post.service';
 import { ToastrService } from 'ngx-toastr';
@@ -32,11 +26,7 @@ import { EditPostTextComponent } from 'src/app/components/posts/editor/edit-post
   styleUrls: ['./create-post.component.scss'],
 })
 export class CreatePostComponent {
-  constructor(
-    private postService: PostService,
-    private toastrService: ToastrService,
-    private router: Router,
-  ) {}
+  constructor(private postService: PostService, private toastrService: ToastrService, private router: Router) {}
   @ViewChild('initialPost') initialPost: EditIntialPostComponent;
   @ViewChild('editPost') editPostText: EditPostTextComponent;
 
@@ -45,7 +35,8 @@ export class CreatePostComponent {
     post.title = this.initialPost.formGroup.value.title;
     post.characterId = this.initialPost.selectedCharacter;
     post.gameId = this.initialPost.selectedGame;
-    post.body = this.editPostText.getMarkdownContent();
+    post.markdown = this.editPostText.getMarkdownContent();
+    post.html = this.editPostText.getHtmlContent();
     return post;
   }
 

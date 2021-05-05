@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-3">
   <div *ngIf="loading; else display"></div>
   <button mat-raised-button class="back-button" [routerLink]="['/post']" color="primary" i18n>
     <em class="material-icons">arrow_back</em>
@@ -8,63 +8,42 @@
 <app-top-scroller></app-top-scroller>
 
 <ng-template #display>
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="p-2 mt-1">
-        <div class="w-100">
-          <div class="w-100">
-            <h1 class="post-title centered">{{ post.title }}</h1>
-          </div>
-          <div class="row">
-            <div class="col-lg-4 col-12">
-              <div class="mouse-pointer" (click)="viewAuthor()">
-                {{ 'Posts.WrittenBy' | translate }} {{ post.author.name }}
-              </div>
-            </div>
-            <div class="col-lg-4 col-12">
-              <div class="centered">
-                <mat-icon class="mat-label-icon">sports_esports</mat-icon>
-                {{ post.game.name }}
-              </div>
-            </div>
-            <div class="col-lg-4 col-12">
-              <span *ngIf="this.post.category > 0" class="float-right">
-                <mat-icon class="mat-label-icon">label</mat-icon>
-                {{ getTranslationsForValue() | translate }}
-              </span>
-            </div>
-          </div>
-          <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
-            <em class="material-icons">lock</em>
-            {{ 'Posts.ThisIsAPrivatePost' | translate }}
-          </h5>
+  <mat-card class="header-container">
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        <h1 class="post-title">{{ post.title }}</h1>
+        <div class="mouse-pointer" (click)="viewAuthor()">
+          {{ 'Posts.WrittenBy' | translate }} {{ post.author.name }}
         </div>
-        <div class="row mb-2">
-          <div class="col-lg-4 col-12">
-            <app-like-button [postId]="post.id" [likes]="post.likes" [liked]="post.liked"> </app-like-button>
-          </div>
-
-          <div class="col-lg-4 col-12">
-            <div class="centered" *ngIf="isPostFromUser()">
-              <button (click)="editPost()" mat-stroked-button>
-                <mat-icon>edit</mat-icon>
-                {{ 'Common.Edit' | translate }}
-              </button>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-12">
-            <button *ngIf="isPostFromUser()" class="float-right" (click)="downloadPost()" mat-stroked-button>
-              <mat-icon>cloud_download</mat-icon>
-              {{ 'Posts.DownloadMarkdown' | translate }}
-            </button>
-          </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="float-right">
+          <span>
+            <mat-icon class="mat-label-icon">label</mat-icon>
+            {{ getTranslationsForValue() | translate }}
+          </span>
+          <app-like-button [postId]="post.id" [likes]="post.likes" [liked]="post.liked"> </app-like-button>
+          <button *ngIf="isPostFromUser()" (click)="editPost()" mat-stroked-button>
+            <mat-icon>edit</mat-icon>
+            {{ 'Common.Edit' | translate }}
+          </button>
         </div>
-        <mat-divider></mat-divider>
-        <div [innerHTML]="bodyHtml"></div>
+        <!-- Game is not needed as of right now due to melee only
+                  <div class="float-right">
+                  <mat-icon class="mat-label-icon">sports_esports</mat-icon>
+                  {{ post.game.name }}
+                </div> -->
       </div>
     </div>
-  </div>
+    <h5 class="subtitle" *ngIf="post.isPrivate" i18n>
+      <em class="material-icons">lock</em>
+      {{ 'Posts.ThisIsAPrivatePost' | translate }}
+    </h5>
+  </mat-card>
+  <mat-card>
+    <div *ngIf="isMarkdown; else showHtml" [innerHTML]="markdownContent"></div>
+  </mat-card>
+
   <mat-divider></mat-divider>
   <div class="mt-2 p-2">
     <app-create-comment
@@ -75,4 +54,8 @@
   </div>
 
   <app-view-comments [postId]="post.id" [comments]="post.comments"></app-view-comments>
+</ng-template>
+
+<ng-template #showHtml>
+  <quill-view [content]="htmlContent"></quill-view>
 </ng-template>

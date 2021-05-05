@@ -53,7 +53,6 @@ export class CharacterComponent implements OnInit {
 
     this.characterService.getForGame(gameId).subscribe((characters) => {
       this.characters = characters;
-      console.log(this.characters);
       this.filterCharacters();
       this.loading = false;
     });

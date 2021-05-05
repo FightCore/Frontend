@@ -15,23 +15,25 @@ import { CreateCommentComponent } from 'src/app/components/posts/comments/create
 @Component({
   selector: 'app-post-display',
   templateUrl: './post-display.component.html',
-  styleUrls: ['./post-display.component.scss']
+  styleUrls: ['./post-display.component.scss'],
 })
 export class PostDisplayComponent implements OnInit {
   post: Post;
-  bodyHtml: string;
+  htmlContent: string;
+  markdownContent: string;
+  isMarkdown = false;
   loading: boolean = true;
   @ViewChild('createComments', { static: false }) createCommentsComponent: CreateCommentComponent;
 
   categories = [
-    { value: PostCategory.uncategorised, name: 'Posts.Category.NoCategory'},
-    { value: PostCategory.matchup, name: 'Posts.Category.Matchup'},
-    { value: PostCategory.techskill, name: 'Posts.Category.Techskill'},
-    { value: PostCategory.combos, name: 'Posts.Category.Combos'},
-    { value: PostCategory.frameData, name: 'Posts.Category.FrameData'},
-    { value: PostCategory.powerranking, name: 'Posts.Category.PowerRanking'},
-    { value: PostCategory.player, name: 'Posts.Category.Player'},
-    { value: PostCategory.tournament, name: 'Posts.Category.Tournament'},
+    { value: PostCategory.uncategorised, name: 'Posts.Category.NoCategory' },
+    { value: PostCategory.matchup, name: 'Posts.Category.Matchup' },
+    { value: PostCategory.techskill, name: 'Posts.Category.Techskill' },
+    { value: PostCategory.combos, name: 'Posts.Category.Combos' },
+    { value: PostCategory.frameData, name: 'Posts.Category.FrameData' },
+    { value: PostCategory.powerranking, name: 'Posts.Category.PowerRanking' },
+    { value: PostCategory.player, name: 'Posts.Category.Player' },
+    { value: PostCategory.tournament, name: 'Posts.Category.Tournament' },
   ];
 
   constructor(
@@ -51,11 +53,11 @@ export class PostDisplayComponent implements OnInit {
     const postId = this.route.snapshot.paramMap.get('postId');
 
     this.postService.getPost(parseFloat(postId)).subscribe(
-      post => {
+      (post) => {
         this.setupPost(post);
         this.loading = false;
       },
-      error => {
+      (error) => {
         this.toastrService.error(PostText.postNotFound);
         this.router.navigate([StaticRoutes.posts]);
       }
@@ -75,7 +77,12 @@ export class PostDisplayComponent implements OnInit {
 
   setupPost(post: Post) {
     this.post = post;
-    this.bodyHtml = this.markdownService.compile(post.body);
+    if (post.markdown?.length > 0) {
+      this.isMarkdown = true;
+      this.markdownContent = this.markdownService.compile(post.markdown);
+    } else {
+      this.htmlContent = this.post.html;
+    }
   }
 
   getGameClass(): string {
@@ -84,12 +91,8 @@ export class PostDisplayComponent implements OnInit {
 
   likePost(): void {
     this.postService.likePost(this.post.id).subscribe(
-      _ => {
-        console.log('Liked!');
-      },
-      error => {
-        console.log('Something went wrong');
-      }
+      () => {},
+      () => {}
     );
   }
 
@@ -102,7 +105,7 @@ export class PostDisplayComponent implements OnInit {
   }
 
   downloadPost(): void {
-    const blob = new Blob([this.post.body], {type: 'text/markdown' });
+    const blob = new Blob([this.post.markdown], { type: 'text/markdown' });
     saveAs(blob, this.post.title + '.md');
   }
 
@@ -111,7 +114,7 @@ export class PostDisplayComponent implements OnInit {
   }
 
   getTranslationsForValue(): string {
-    const item = this.categories.find(category => category.value === this.post.category);
+    const item = this.categories.find((category) => category.value === this.post.category);
 
     return item.name;
   }

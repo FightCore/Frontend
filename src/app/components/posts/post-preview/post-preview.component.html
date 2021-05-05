@@ -34,6 +34,9 @@
           <mat-icon class="mat-label-icon">label</mat-icon>{{ getTranslationsForValue() | translate }}
         </p>
       </div>
+      <div class="col-12">
+        <p>{{ post.description }}</p>
+      </div>
       <div class="col-lg-6 col-12">
         <mat-chip-list class="d-inline">
           <mat-chip *ngFor="let tag of post.tags" selected>{{ tag }}</mat-chip>

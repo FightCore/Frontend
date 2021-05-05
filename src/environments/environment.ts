@@ -11,7 +11,7 @@ export const environment = {
     authUrl: 'https://localhost:5000',
     callbackUrl: 'http://localhost:4200/auth-callback',
     redirectUrl: 'http://localhost:4200/',
-    clientId: 'fightcore_dev'
+    clientId: 'fightcore_dev',
   },
   // TODO Move this to a possible environment.json
   links: {
@@ -19,8 +19,8 @@ export const environment = {
     github: 'https://github.com/fightcore',
     dockerhub: 'https://hub.docker.com/r/fightcore/frontend',
     kofi: 'https://ko-fi.com/bartdebever',
-    twitter: null
-  }
+    twitter: null,
+  },
 };
 
 /*
