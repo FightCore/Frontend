@@ -2,7 +2,7 @@
   <!-- Sidenav is only viewable on mobile. -->
   <mat-sidenav style="height: 100vh; width: 50%" [(opened)]="opened">
     <div class="p-2">
-      <img class="logo mouse-pointer" src="assets/Fightcore_Logo.svg" alt="FightCore logo" />
+      <img class="logo mouse-pointer" src="assets/Fightcore_Wordmark_white.svg" alt="FightCore logo" />
       <span>FightCore</span>
     </div>
     <div class="p-1">
@@ -36,7 +36,7 @@
       <mat-toolbar color="primary">
         <mat-toolbar-row>
           <div [routerLink]="['']">
-            <img class="logo mouse-pointer" src="assets/Fightcore_Logo.svg" alt="FightCore logo" />
+            <img class="logo mouse-pointer" src="assets/Fightcore_Wordmark_white.svg" alt="FightCore logo" />
           </div>
           <a *ngFor="let link of links" [routerLink]="link.route" i18n> {{ link.name | translate }}</a>
           <span class="spacer"></span>
@@ -58,7 +58,7 @@
         </button>
         <div class="d-inline-block centered">
           <div class="d-inline" [routerLink]="['']">
-            <img class="logo mouse-pointer" src="assets/Fightcore_Logo.svg" alt="FightCore logo" />
+            <img class="logo mouse-pointer" src="assets/Fightcore_Wordmark_white.svg" alt="FightCore logo" />
             <span>FightCore</span>
           </div>
         </div>
