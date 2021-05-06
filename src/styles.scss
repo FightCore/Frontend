@@ -6,10 +6,17 @@ body {
 
 @font-face {
   font-family: headshot;
-  src: url(/assets/fonts/headshot.ttf);
+  src: url(assets/fonts/headshot.ttf) format('ttf'), url(assets/fonts/Headshot.woff2) format('woff2'),
+    url(assets/fonts/Headshot.woff) format('woff');
 }
 
-h1, h2, h3, h4, h5, h6, .title {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title {
   font-family: headshot;
 }
 

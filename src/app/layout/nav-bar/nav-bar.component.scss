@@ -1,5 +1,4 @@
-::ng-deep
-body:not(.dark-theme) .mat-drawer-container {
+::ng-deep body:not(.dark-theme) .mat-drawer-container {
   background-color: #eeeeee;
   min-height: 100vh;
 }
@@ -17,7 +16,7 @@ a {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  font-family: headshot;
+  font-family: 'Headshot';
 }
 
 .centered {
