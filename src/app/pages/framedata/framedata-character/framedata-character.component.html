@@ -1,47 +1,41 @@
 <div class="container">
-    <h2>{{ 'FrameData.FrameData' | translate }}</h2>
-    <p>
-      Original data from
-      <a href="http://meleeframedata.com"><strong>Melee frame data</strong></a>
-      and <a href="http://ikneeddata.com"><strong>I KneeData</strong></a>.
-    </p>
-    <hr />
-    <app-loading *ngIf="charactersLoading"></app-loading>
-    <mat-card *ngIf="!charactersLoading" class="mb-3">
-      <mat-card-header>
-        <mat-card-title class="title">{{ 'Characters.QuickCharacterSelector' | translate }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="character-stock-icon" *ngFor="let character of characters">
-          <img
-            class="mouse-pointer"
-            *ngIf="character.stockIcon"
-            [src]="character.stockIcon.url"
-            (click)="viewCharacter(character.id)"
-            [alt]="character.name"
-          />
-        </div>
-      </mat-card-content>
-    </mat-card>
-    <app-loading *ngIf="loading"></app-loading>
-    <div *ngIf="!loading">
-      <div class="row">
-        <app-character-attributes [frameDataCharacter]="frameData" class="w-100"></app-character-attributes>
+  <h2>{{ 'FrameData.FrameData' | translate }}</h2>
+  <p>
+    Original data from
+    <a href="http://meleeframedata.com"><strong>Melee frame data</strong></a>
+    and <a href="http://ikneeddata.com"><strong>I KneeData</strong></a
+    >.
+  </p>
+  <hr />
+  <app-loading *ngIf="charactersLoading"></app-loading>
+  <mat-card *ngIf="!charactersLoading" class="mb-3">
+    <mat-card-header>
+      <mat-card-title class="title">{{ 'Characters.QuickCharacterSelector' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="character-stock-icon" *ngFor="let character of characters">
+        <img
+          class="mouse-pointer"
+          *ngIf="character.stockIcon"
+          [src]="character.stockIcon.url"
+          (click)="viewCharacter(character.id)"
+          [alt]="character.name"
+        />
       </div>
-      <div *ngFor="let type of moveTypes" [id]="'category'+type.value" class="mb-2 row">
-        <mat-toolbar color="primary">
-          <h3 class="title">{{ type.name }}</h3>
-        </mat-toolbar>
-        <div
-          *ngFor="let move of getMovesForType(type.value)"
-          class="col-lg-4 col-12 p-1"
-        >
-          <app-move-display
-            [characterName]="frameData.normalizedName"
-            [move]="move"
-            [displayMoveGifs]="displayMoveGifs"
-          ></app-move-display>
-        </div>
+    </mat-card-content>
+  </mat-card>
+  <app-loading *ngIf="loading"></app-loading>
+  <div *ngIf="!loading">
+    <div class="row">
+      <app-character-attributes [frameDataCharacter]="frameData" class="w-100"></app-character-attributes>
+    </div>
+    <div *ngFor="let type of moveTypes" [id]="'category' + type.value" class="mb-2 row">
+      <mat-toolbar color="primary">
+        <h3 class="title">{{ type.name }}</h3>
+      </mat-toolbar>
+      <div *ngFor="let move of getMovesForType(type.value)" class="col-lg-4 col-12 p-1">
+        <app-move-display [characterName]="frameData.normalizedName" [move]="move"></app-move-display>
       </div>
     </div>
   </div>
+</div>

@@ -7,12 +7,7 @@
 </ng-template>
 
 <ng-template #quill>
-  <quill-editor
-    [styles]="editorStyles"
-    (onEditorCreated)="created($event)"
-    [modules]="modules"
-    [(ngModel)]="htmlContent"
-  >
+  <quill-editor (onEditorCreated)="created($event)" [modules]="modules" [(ngModel)]="htmlContent">
     <div quill-editor-toolbar class="ql-toolbar">
       <span class="ql-formats">
         <select class="ql-size">

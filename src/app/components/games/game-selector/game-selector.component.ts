@@ -6,10 +6,10 @@ import { MatSelectChange } from '@angular/material/select';
 @Component({
   selector: 'app-game-selector',
   templateUrl: './game-selector.component.html',
-  styleUrls: ['./game-selector.component.scss']
+  styleUrls: ['./game-selector.component.scss'],
 })
 export class GameSelectorComponent implements OnInit {
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService) {}
   @Output() selectionChange: EventEmitter<number> = new EventEmitter();
   @Input() addAllOptions: boolean = false;
   @Input() selected: number;
@@ -19,19 +19,20 @@ export class GameSelectorComponent implements OnInit {
   games: Game[];
 
   ngOnInit() {
-    this.gameService.getAllGames().subscribe((games: Game[]) =>
-      this.processGames(games),
-      error => this.failed = true);
+    this.gameService.getAllGames().subscribe(
+      (games: Game[]) => this.processGames(games),
+      (error) => (this.failed = true)
+    );
+  }
+
+  onSelectChange(change: MatSelectChange): void {
+    if (this.selectionChange) {
+      this.selectionChange.emit(change.value);
+    }
   }
 
   private processGames(games: Game[]): void {
     this.games = games;
     this.loading = false;
-  }
-
-  protected onSelectChange(change: MatSelectChange): void {
-    if (this.selectionChange) {
-      this.selectionChange.emit(change.value);
-    }
   }
 }

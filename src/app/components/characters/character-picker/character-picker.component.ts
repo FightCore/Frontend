@@ -10,7 +10,7 @@ import { ThrowStmt } from '@angular/compiler';
 @Component({
   selector: 'app-character-picker',
   templateUrl: './character-picker.component.html',
-  styleUrls: ['./character-picker.component.scss']
+  styleUrls: ['./character-picker.component.scss'],
 })
 export class CharacterPickerComponent implements OnInit {
   @Input() selected: number;
@@ -25,16 +25,16 @@ export class CharacterPickerComponent implements OnInit {
   constructor(private characterService: CharacterService) {}
 
   ngOnInit() {
-      this.loading = false;
-      this.updateGame(this.gameId);
+    this.loading = false;
+    this.updateGame(this.gameId);
 
-      // Taken from the official example
-      // https://material.angular.io/components/autocomplete/examples
-      this.displayedCharacters = this.characterFormControl.valueChanges.pipe(
-        startWith(''),
-        map(value => (typeof value === 'string' ? value : value.name)),
-        map(name => (name ? this._filter(name) : this.characters.slice()))
-      );
+    // Taken from the official example
+    // https://material.angular.io/components/autocomplete/examples
+    this.displayedCharacters = this.characterFormControl.valueChanges.pipe(
+      startWith(''),
+      map((value) => (typeof value === 'string' ? value : value.name)),
+      map((name) => (name ? this._filter(name) : this.characters.slice()))
+    );
   }
 
   getValue(): number | null {
@@ -53,16 +53,14 @@ export class CharacterPickerComponent implements OnInit {
 
   private getCharsForGame(): void {
     if (this.gameId === 0) {
-      this.characterService.getAll().subscribe(characters => {
-        this.processCharacters(characters)
+      this.characterService.getAll().subscribe((characters) => {
+        this.processCharacters(characters);
       });
     } else {
-      this.characterService.getForGame(this.gameId).subscribe(characters => {
+      this.characterService.getForGame(this.gameId).subscribe((characters) => {
         this.processCharacters(characters);
       });
     }
-
-
   }
 
   private processCharacters(characters: Character[]) {
@@ -70,8 +68,7 @@ export class CharacterPickerComponent implements OnInit {
     this.characters.sort(this.sortCharacters);
 
     // Check if character that was previously picked is no longer in the dropdown.
-    const pickedCharacterIndex = this.characters.findIndex(character =>
-      character.id === this.getValue());
+    const pickedCharacterIndex = this.characters.findIndex((character) => character.id === this.getValue());
 
     if (pickedCharacterIndex < 0) {
       // Reset the dropdown.
@@ -83,14 +80,14 @@ export class CharacterPickerComponent implements OnInit {
   }
 
   private getCharacterForId(id: number): Character {
-    return this.characters.find(character => character.id === id);
+    return this.characters.find((character) => character.id === id);
   }
 
   /**
    * Method called when the value of the autocomplete has changed.
    * @param change the change from the original value to the option selected.
    */
-  protected onSelectChange(change: MatAutocompleteSelectedEvent): void {
+  onSelectChange(change: MatAutocompleteSelectedEvent): void {
     if (this.selectionChange && change.option.value) {
       this.selectionChange.emit(change.option.value.id);
     }
@@ -107,9 +104,8 @@ export class CharacterPickerComponent implements OnInit {
   private _filter(name: string): Character[] {
     let characters = [];
     characters = this.characters.filter(
-      character =>
-        this.filterCharacterByGame(character, this.gameId) &&
-        character.name.search(new RegExp(name, 'i')) >= 0
+      (character) =>
+        this.filterCharacterByGame(character, this.gameId) && character.name.search(new RegExp(name, 'i')) >= 0
     );
     characters.sort(this.sortCharacters);
 
@@ -117,17 +113,11 @@ export class CharacterPickerComponent implements OnInit {
   }
 
   //#region Filters
-  private sortCharacters(
-    characterOne: Character,
-    characterTwo: Character
-  ): number {
+  private sortCharacters(characterOne: Character, characterTwo: Character): number {
     return characterOne.name > characterTwo.name ? 1 : -1;
   }
 
-  private filterCharacterByGame(
-    character: Character,
-    gameId: number
-  ): ConstrainBoolean {
+  private filterCharacterByGame(character: Character, gameId: number): ConstrainBoolean {
     if (character == null || character.game == null) {
       return false;
     }

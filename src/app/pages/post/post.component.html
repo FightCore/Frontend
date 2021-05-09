@@ -33,7 +33,7 @@
         <div class="w-100 float-right">
           <mat-form-field class="w-100">
             <mat-label>{{ 'Common.Search' | translate }}</mat-label>
-            <input (input)="onSearchChange($event.target.value)" matInput name="search" />
+            <input #search (input)="onSearchChange(search.value)" matInput name="search" />
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
         </div>

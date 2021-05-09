@@ -1,23 +1,10 @@
-@import "src/styles/variables.scss";
-
-.profile-shot {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    object-fit: contain;
-}
+@import 'src/styles/variables.scss';
 
 .header-text {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 .stock-icon {
-    // Override the border radius to just show the entire character.
-    border-radius: 0%;
-}
-
-.frame-data-image {
-    // max-height: 300px;
-    // max-width: 300px;
+  // Override the border radius to just show the entire character.
+  border-radius: 0%;
 }

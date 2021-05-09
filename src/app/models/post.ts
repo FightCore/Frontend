@@ -2,6 +2,7 @@ import { User } from './user';
 import { Character } from './character';
 import { Game } from './game';
 import { PostCategory } from './post/post-category';
+import { Comment } from './post/comment';
 
 export class Post {
   id: number;

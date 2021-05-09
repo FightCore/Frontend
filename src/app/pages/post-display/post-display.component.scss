@@ -1,9 +1,6 @@
 @import 'src/styles/variables.scss';
 @import 'src/styles/editor-style.scss';
 
-$post-border-radius: 1em;
-$post-border-radius: 0.5em;
-
 .back-button {
   margin-top: 1em;
 }
@@ -15,15 +12,4 @@ $post-border-radius: 0.5em;
 .header-container {
   background-color: #96153a;
   color: white;
-}
-
-.description {
-  color: $secondary-text-color;
-  max-height: 10.5em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.view-button {
-  width: 100%;
 }
