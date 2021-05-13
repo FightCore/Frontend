@@ -1,29 +1,22 @@
-<div class="container-fluid">
-    <div class="mb-2">
-        <app-title-bar></app-title-bar>
+<div class="container">
+  <div class="mb-2 mt-3">
+    <mat-card>
+      <app-title-bar></app-title-bar>
+    </mat-card>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <app-socials></app-socials>
     </div>
-    <div class="row equal">
-        <div class="col-lg-8">
-            <h2 class="title">{{ 'Characters.PopularCharacters' | translate }}</h2>
-            <div class="row">
-                <div *ngFor="let character of popularCharacters" class="col-lg-4">
-                    <app-character-preview [character]="character"></app-character-preview>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-lg-4">
-            <app-socials></app-socials>
-            <app-top-contributors class="mt-1 h-100"></app-top-contributors>
-        </div>
-
-        <div class="col-lg-12 mt-2 mb-1">
-            <app-latest-posts></app-latest-posts>
-        </div>
-        <div class="col-lg-12 mt-2 mb-1">
-            <app-featured-posts></app-featured-posts>
-        </div>
+    <div class="col-lg-12 mt-2 mb-1">
+      <app-featured-posts></app-featured-posts>
     </div>
-
+    <div class="col-lg-12">
+      <app-top-contributors class="mt-1 h-100"></app-top-contributors>
+    </div>
+    <div class="col-lg-12 mt-2 mb-1">
+      <app-latest-posts></app-latest-posts>
+    </div>
+  </div>
 </div>
 <app-top-scroller></app-top-scroller>

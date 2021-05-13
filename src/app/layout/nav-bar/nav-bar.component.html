@@ -2,8 +2,7 @@
   <!-- Sidenav is only viewable on mobile. -->
   <mat-sidenav style="height: 100vh; width: 50%" [(opened)]="opened">
     <div class="p-2">
-      <img class="logo mouse-pointer" src="assets/Fightcore_Wordmark_white.svg" alt="FightCore logo" />
-      <span>FightCore</span>
+      <img class="mouse-pointer" width="100%" src="assets/Fightcore_Wordmark.png" alt="FightCore logo" />
     </div>
     <div class="p-1">
       <div *ngFor="let link of links">
@@ -20,7 +19,7 @@
       </div>
       <div *ngIf="isAuthenticated(); else mobileLogin">
         <button color="accent" mat-flat-button class="text-center w-100 mb-1" (click)="hideSidebar(); toUser()" i18n>
-          <em class="material-icons">account_circle</em>
+          <mat-icon>account_circle</mat-icon>
           {{ getUserName() }}
         </button>
 
@@ -43,7 +42,7 @@
           <button (click)="toggleDarkMode()" mat-button><mat-icon>nights_stay</mat-icon></button>
           <app-language class="language-picker p-3"></app-language>
           <a *ngIf="isAuthenticated(); else login" (click)="toUser()">
-            <em class="material-icons">account_circle</em>
+            <mat-icon>account_circle</mat-icon>
             {{ getUserName() }}</a
           >
           <a *ngIf="isAuthenticated()" (click)="logout()" i18n> {{ 'Authentication.Logout' | translate }}</a>
@@ -51,17 +50,12 @@
       </mat-toolbar>
     </div>
     <!-- Toolbar for the non-desktop displays -->
-    <mat-toolbar class="d-md-block d-lg-none" color="primary">
-      <div class="w-100 pt-2">
-        <button class="d-inline" mat-button (click)="opened = true">
-          <em class="material-icons"> menu </em>
-        </button>
-        <div class="d-inline-block centered">
-          <div class="d-inline" [routerLink]="['']">
-            <img class="logo mouse-pointer" src="assets/Fightcore_Wordmark_white.svg" alt="FightCore logo" />
-            <span>FightCore</span>
-          </div>
-        </div>
+    <mat-toolbar class="d-lg-none" color="primary">
+      <button class="d-inline" mat-icon-button (click)="opened = true">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="d-inline" [routerLink]="['']">
+        <img class="logo mouse-pointer" src="assets/Fightcore_Wordmark_white.svg" alt="FightCore logo" />
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
