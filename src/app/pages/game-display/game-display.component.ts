@@ -7,47 +7,40 @@ import { Game } from 'src/app/models/game';
 import { Character } from 'src/app/models/character';
 import { Post } from 'src/app/models/post';
 import { GameThemes } from 'src/styles/gameThemes';
+import { zip } from 'rxjs';
 
 @Component({
   selector: 'app-game-display',
   templateUrl: './game-display.component.html',
-  styleUrls: ['./game-display.component.scss']
+  styleUrls: ['./game-display.component.scss'],
 })
 export class GameDisplayComponent implements OnInit {
   game: Game;
   loading: boolean = true;
   characters: Character[];
-  characterLoading: boolean = true;
   posts: Post[];
-  postLoading: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
     private gameService: GameService,
     private postService: PostService,
-    private characterService: CharacterService) { }
+    private characterService: CharacterService
+  ) {}
 
   ngOnInit() {
     const gameId = parseFloat(this.route.snapshot.paramMap.get('gameId'));
-    this.gameService.getGame(gameId).subscribe(game => {
+
+    zip(
+      this.gameService.getGame(gameId),
+      this.characterService.getForGame(gameId),
+      this.postService.getPostsForGame(gameId)
+    ).subscribe(([game, characters, posts]) => {
       this.game = game;
+      this.characters = characters.sort((characterOne, characterTwo) =>
+        characterOne.name > characterTwo.name ? 1 : -1
+      );
+      this.posts = posts;
       this.loading = false;
-
-      this.characterService.getForGame(gameId).subscribe(characters => {
-          this.characters = characters.sort((characterOne, characterTwo) =>
-            characterOne.name > characterTwo.name ? 1 : -1);
-          this.characterLoading = false;
-        });
-
-      this.postService.getPostsForGame(gameId).subscribe(posts => {
-          this.posts = posts;
-          this.postLoading = false;
-        });
     });
   }
-
-  getGameClass(): string {
-    return GameThemes.getThemeForGameId(this.game.id, true);
-  }
-
 }
