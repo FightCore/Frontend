@@ -9,33 +9,31 @@ import { CreateUser } from 'src/app/models/createUser';
 import { User } from 'src/app/models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService extends BaseService {
-
   private baseUrl = `${environment.baseUrl}/accounts`;
-  constructor(private httpClient: HttpClient,
-              authService: AuthService) {
+  constructor(private httpClient: HttpClient, authService: AuthService) {
     super(authService);
-   }
+  }
 
-   /**
-    * Gets the posts that are written by the user.
-    * @param userId the id of the user.
-    */
-   public getPosts(userId: number): Observable<Post[]> {
+  /**
+   * Gets the posts that are written by the user.
+   * @param userId the id of the user.
+   */
+  public getPosts(userId: number): Observable<Post[]> {
     return this.httpClient.get<Post[]>(`${this.baseUrl}/${userId}/posts`, this.getDefaultHttpOptions());
-   }
+  }
 
-   public get(userId: number): Observable<User> {
+  public get(userId: number): Observable<User> {
     return this.httpClient.get<User>(`${this.baseUrl}/${userId}`, this.getDefaultHttpOptions());
-   }
+  }
 
-   /**
-    * Registers and creates an user.
-    * @param user the user to be created.
-    */
-   public createUser(user: CreateUser): Observable<void> {
+  /**
+   * Registers and creates an user.
+   * @param user the user to be created.
+   */
+  public createUser(user: CreateUser): Observable<void> {
     return this.httpClient.post<void>(`${this.baseUrl}/`, user, this.getDefaultHttpOptions());
-   }
+  }
 }

@@ -36,21 +36,24 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
+            ],
             "styles": [
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/quill/dist/quill.core.css",
-              "node_modules/quill/dist/quill.snow.css",
               "node_modules/simplemde/dist/simplemde.min.css",
               "src/styles/flag/flag-icon.scss"
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js",
               "node_modules/simplemde/dist/simplemde.min.js",
-              "src/scripts/libgif.js"
+              "src/scripts/libgif.js",
+              "node_modules/tinymce/tinymce.min.js"
             ]
           },
           "configurations": {

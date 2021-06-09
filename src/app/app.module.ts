@@ -6,15 +6,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MaterialModules } from './material-modules';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-  faMugHot
-} from '@fortawesome/free-solid-svg-icons';
-import {
-  faGithub,
-  faDocker,
-  faDiscord,
-  faTwitter
-} from '@fortawesome/free-brands-svg-icons';
+import { faMugHot } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faDocker, faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 import { PostComponent } from './pages/post/post.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -53,7 +46,6 @@ import { GameChipComponent } from './components/games/game-chip/game-chip.compon
 import { GameDisplayComponent } from './pages/game-display/game-display.component';
 import { GamePreviewComponent } from './components/games/game-preview/game-preview.component';
 import { GameComponent } from './pages/game/game.component';
-import { QuillModule } from 'ngx-quill';
 import { PostPreviewDialogComponent } from './components/posts/post-preview-dialog/post-preview-dialog.component';
 import { GeneralInformationComponent } from './components/characters/general-information/general-information.component';
 import { NotablePlayerComponent } from './components/characters/notable-player/notable-player.component';
@@ -89,6 +81,7 @@ import { TechniquesComponent } from './pages/posts/techniques/techniques.compone
 import { FramedataCharacterComponent } from './pages/framedata/framedata-character/framedata-character.component';
 import { FramedataViewMoveComponent } from './pages/framedata/framedata-view-move/framedata-view-move.component';
 import { ViewMoveDialogComponent } from './components/frame-data/view-move-dialog/view-move-dialog.component';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -117,23 +110,23 @@ export function createTranslateLoader(http: HttpClient) {
           pedantic: false,
           sanitize: false, // enable marked built-in html sanitizer
           smartLists: true,
-          smartypants: false
-        }
-      }
+          smartypants: false,
+        },
+      },
     }),
-    QuillModule.forRoot(),
     AvatarModule,
     MatPasswordStrengthModule.forRoot(),
     NgxTextDiffModule,
     NgxFlagPickerModule,
+    EditorModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient],
       },
-      defaultLanguage: 'en'
-  })
+      defaultLanguage: 'en',
+    }),
   ],
   declarations: [
     AppComponent,
@@ -198,25 +191,14 @@ export function createTranslateLoader(http: HttpClient) {
     TechniquesComponent,
     FramedataCharacterComponent,
     FramedataViewMoveComponent,
-    ViewMoveDialogComponent
+    ViewMoveDialogComponent,
   ],
-  entryComponents: [
-    PostHelpComponent,
-    RegisterComponent,
-    PostPreviewDialogComponent,
-    HitboxTableDialogComponent
-  ],
-  providers: [AppComponent],
-  bootstrap: [AppComponent]
+  entryComponents: [PostHelpComponent, RegisterComponent, PostPreviewDialogComponent, HitboxTableDialogComponent],
+  providers: [AppComponent, { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(
-      faMugHot,
-      faGithub,
-      faDiscord,
-      faDocker,
-      faTwitter
-    );
+    library.addIcons(faMugHot, faGithub, faDiscord, faDocker, faTwitter);
   }
 }

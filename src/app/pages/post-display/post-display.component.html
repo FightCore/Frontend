@@ -57,5 +57,16 @@
 </ng-template>
 
 <ng-template #showHtml>
-  <quill-view [content]="htmlContent"></quill-view>
+  <editor
+    class="text-editor"
+    [init]="{
+      base_url: '/tinymce',
+      suffix: '.min',
+      height: '100%',
+      content_css: '/assets/editor.css'
+    }"
+    [disabled]="true"
+    [inline]="true"
+    [(ngModel)]="htmlContent"
+  ></editor>
 </ng-template>

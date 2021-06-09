@@ -1,0 +1,19 @@
+@font-face {
+  font-family: headshot;
+  src: url(fonts/headshot.ttf) format('ttf'), url(fonts/Headshot.woff2) format('woff2'),
+    url(fonts/Headshot.woff) format('woff');
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong > span {
+  font-family: headshot, Roboto;
+}
+
+p {
+  font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

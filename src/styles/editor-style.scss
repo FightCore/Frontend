@@ -7,12 +7,18 @@
   transform: translateX(7vw) translateY(10px);
 }
 
-::ng-deep .ql-editor .ql-size-large,
-::ng-deep .ql-editor .ql-size-huge {
+::ng-deep #tinymce > p > strong > span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong > span {
   font-family: headshot;
 }
 
-::ng-deep .ql-editor p {
+::ng-deep p {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   font-size: 1rem;
   font-weight: 400;
