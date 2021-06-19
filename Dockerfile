@@ -2,7 +2,7 @@
 # Docker file meant for "production" use.
 
 # base image
-FROM node:12.2.0 as build
+FROM node:12.14.0 as build
 
 RUN apt-get update
 

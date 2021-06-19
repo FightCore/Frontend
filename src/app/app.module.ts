@@ -34,7 +34,6 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { TitlebarComponent } from './components/common/titlebar/titlebar.component';
 import { CharacterPickerComponent } from './components/characters/character-picker/character-picker.component';
-import { AvatarModule } from 'ngx-avatar';
 import { HomeComponent } from './pages/home/home.component';
 import { TitleBarComponent } from './components/frontpage/title-bar/title-bar.component';
 import { FeaturedPostsComponent } from './components/posts/featured-posts/featured-posts.component';
@@ -53,7 +52,6 @@ import { ContributorListComponent } from './components/characters/contributor-li
 import { SocialsComponent } from './components/frontpage/socials/socials.component';
 import { EditsOverviewComponent } from './components/characters/edits-overview/edits-overview.component';
 import { NgxTextDiffModule } from 'ngx-text-diff';
-import { NgxFlagPickerModule } from 'ngx-flag-picker';
 import { DashboardComponent } from './pages/edits/dashboard/dashboard.component';
 import { CharacterEditOverviewComponent } from './components/edits/character-edit-overview/character-edit-overview.component';
 import { NotablePlayerEditComponent } from './components/edits/view/notable-player-edit/notable-player-edit.component';
@@ -114,10 +112,8 @@ export function createTranslateLoader(http: HttpClient) {
         },
       },
     }),
-    AvatarModule,
     MatPasswordStrengthModule.forRoot(),
     NgxTextDiffModule,
-    NgxFlagPickerModule,
     EditorModule,
     TranslateModule.forRoot({
       loader: {

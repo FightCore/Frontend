@@ -9,22 +9,23 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { EditDto } from 'src/app/models/edits/edit-dto';
 import { EditService } from 'src/app/services/edits/edit.service';
-import { FrameDataCharacter} from 'src/app/models/framedata/framedata-character';
+import { FrameDataCharacter } from 'src/app/models/framedata/framedata-character';
 import { FrameDataService } from 'src/app/services/framedata/frame-data.service';
 import { MoveType } from 'src/app/models/framedata/move-type';
 import { Move } from 'src/app/models/framedata/move';
+import { EMPTY, zip } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-character-display',
   templateUrl: './character-display.component.html',
-  styleUrls: ['./character-display.component.scss']
+  styleUrls: ['./character-display.component.scss'],
 })
 export class CharacterDisplayComponent implements OnInit {
   loading: boolean = true;
   character: Character;
   characterId: number;
-
-  postLoading = true;
   posts: Post[];
 
   youtubeLoading = true;
@@ -35,13 +36,13 @@ export class CharacterDisplayComponent implements OnInit {
 
   frameDataCharacter: FrameDataCharacter;
   moveTypes = [
-    { name: 'Grounded attacks', value: MoveType.grounded},
-    { name: 'Tilt attacks', value: MoveType.tilt},
-    { name: 'Aerial attacks', value: MoveType.air},
-    { name: 'Special attacks', value: MoveType.special},
-    { name: 'Throws', value: MoveType.throw},
-    { name: 'Dodges', value: MoveType.dodge},
-    { name: 'Unknown', value: MoveType.unknown}
+    { name: 'Grounded attacks', value: MoveType.grounded },
+    { name: 'Tilt attacks', value: MoveType.tilt },
+    { name: 'Aerial attacks', value: MoveType.air },
+    { name: 'Special attacks', value: MoveType.special },
+    { name: 'Throws', value: MoveType.throw },
+    { name: 'Dodges', value: MoveType.dodge },
+    { name: 'Unknown', value: MoveType.unknown },
   ];
 
   constructor(
@@ -52,35 +53,27 @@ export class CharacterDisplayComponent implements OnInit {
     private authService: AuthService,
     private editService: EditService,
     private frameDataService: FrameDataService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    const characterId = parseFloat(
-      this.route.snapshot.paramMap.get('characterId')
-    );
-    this.characterService
-      .getPosts(characterId)
-      .subscribe(posts => {
-        this.posts = posts;
-        this.postLoading = false;
-      });
-
-    this.characterService.get(characterId).subscribe(character => {
-      this.characterId = characterId;
+    const characterId = parseFloat(this.route.snapshot.paramMap.get('characterId'));
+    this.characterId = characterId;
+    zip(
+      this.characterService.getPosts(characterId),
+      this.characterService.get(characterId),
+      this.editService.getOpenEditsForCharacter(characterId).pipe(catchError(() => of([]))),
+      this.editService.getHistoryForCharacter(characterId).pipe(catchError(() => of([])))
+    ).subscribe(([posts, character, openEdits, allEdits]) => {
       this.character = character;
+      this.posts = posts;
+      this.openEdits = openEdits;
+      this.allEdits = allEdits;
       this.loading = false;
     });
 
-    this.editService.getOpenEditsForCharacter(characterId).subscribe(edits => {
-      this.openEdits = edits;
-    });
-
-    this.editService.getHistoryForCharacter(characterId).subscribe(edits => {
-      this.allEdits = edits;
-    });
-
-    this.frameDataService.getFrameDataForCharacter(characterId).subscribe(frameDataCharacter =>
-      this.frameDataCharacter = frameDataCharacter);
+    this.frameDataService
+      .getFrameDataForCharacter(characterId)
+      .subscribe((frameDataCharacter) => (this.frameDataCharacter = frameDataCharacter));
   }
 
   public getUrl(youtubeId: string): string {
@@ -97,10 +90,10 @@ export class CharacterDisplayComponent implements OnInit {
 
   isContributor(): boolean {
     const foundContributor = this.character.contributors.find(
-      contributor => contributor.user.id === this.authService.id
+      (contributor) => contributor.user.id === this.authService.id
     );
 
-    return (foundContributor != (null || undefined));
+    return foundContributor != (null || undefined);
   }
 
   editCharacter(): void {
@@ -112,7 +105,7 @@ export class CharacterDisplayComponent implements OnInit {
 
   getMovesForType(moveType: MoveType): Move[] {
     return this.frameDataCharacter.moves
-      .filter(move => move.type === moveType)
+      .filter((move) => move.type === moveType)
       .sort((moveA, moveB) => moveA.name.localeCompare(moveB.name));
   }
 }

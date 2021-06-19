@@ -82,7 +82,7 @@
       <mat-tab [label]="'Posts.Posts' | translate">
         <div class="m-1">
           <h2>{{ 'Posts.FightCorePosts' | translate }}</h2>
-          <div *ngIf="!postLoading" class="row equal w-100"></div>
+          <div class="row equal w-100"></div>
         </div>
       </mat-tab>
       <mat-tab>
@@ -125,7 +125,7 @@
         <button
           mat-raised-button
           color="primary"
-          class="float-right"
+          class="float-end"
           (click)="editCharacter()"
           i18n
           [disabled]="!isLoggedIn"

@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { PostText } from 'src/app/text/post.text';
 import { StaticRoutes } from 'src/app/routes/static-routes';
-import { MarkdownService } from 'ngx-markdown';
 import { GameThemes } from 'src/styles/gameThemes';
 import { UserOptions } from 'src/app/options/userOptions';
 import { environment } from 'src/environments/environment';
@@ -29,15 +28,8 @@ export class PostPreviewComponent implements OnInit {
     { value: PostCategory.player, name: 'Posts.Category.Player' },
     { value: PostCategory.tournament, name: 'Posts.Category.Tournament' },
   ];
-  constructor(
-    private postService: PostService,
-    private toastrService: ToastrService,
-    private router: Router,
-    private markdownService: MarkdownService
-  ) {}
-  ngOnInit() {
-    //this.post.body = this.markdownService.compile(this.post.body);
-  }
+  constructor(private postService: PostService, private toastrService: ToastrService, private router: Router) {}
+  ngOnInit() {}
 
   likePost(heartIcon: HTMLElement, post: Post): void {
     this.postService.likePost(post.id).subscribe(

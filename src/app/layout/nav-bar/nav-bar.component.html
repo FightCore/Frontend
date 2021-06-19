@@ -72,13 +72,7 @@
   <button color="accent" class="text-center w-100 mb-1" mat-raised-button (click)="hideSidebar(); register()">
     {{ 'Authentication.Register' | translate }}
   </button>
-  <button
-    class="text-center w-100 mb-1"
-    color="accent"
-    mat-raised-button
-    (click)="hideSidebar()"
-    [routerLink]="['/login']"
-  >
+  <button class="text-center w-100" color="accent" mat-raised-button (click)="hideSidebar()" [routerLink]="['/login']">
     {{ 'Authentication.Login' | translate }}
   </button>
 </ng-template>

@@ -27,10 +27,8 @@
         </p>
       </div>
       <div class="col-lg-6 col-12">
-        <p class="d-none float-right">
-          <mat-icon class="mat-label-icon">sports_esports</mat-icon> {{ post.game.name }}
-        </p>
-        <p class="float-right">
+        <p class="d-none float-end"><mat-icon class="mat-label-icon">sports_esports</mat-icon> {{ post.game.name }}</p>
+        <p class="float-end">
           <mat-icon class="mat-label-icon">label</mat-icon>{{ getTranslationsForValue() | translate }}
         </p>
       </div>
@@ -43,7 +41,7 @@
         </mat-chip-list>
       </div>
       <div class="col-lg-6 col-12">
-        <app-like-button class="d-inline float-right" [postId]="post.id" [likes]="post.likes" [liked]="post.liked">
+        <app-like-button class="d-inline float-end" [postId]="post.id" [likes]="post.likes" [liked]="post.liked">
         </app-like-button>
       </div>
     </div>

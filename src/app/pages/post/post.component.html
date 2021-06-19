@@ -5,7 +5,7 @@
         <app-titlebar [title]="'Posts.Posts' | translate"></app-titlebar>
       </div>
       <div class="col-lg-6 col-12">
-        <button class="float-right" (click)="createPost()" mat-raised-button color="primary" i18n>
+        <button class="float-end" (click)="createPost()" mat-raised-button color="primary" i18n>
           <em class="material-icons"> add </em>
           {{ 'Posts.CreateNewPost' | translate }}
         </button>
@@ -20,7 +20,7 @@
         ></app-game-selector>
       </div>
       <div class="col-lg-4 col-xs-12">
-        <div class="float-right w-100">
+        <div class="float-end w-100">
           <app-character-picker
             class="w-100"
             #characterPicker
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="col-lg-4 col-xs-12">
-        <div class="w-100 float-right">
+        <div class="w-100 float-end">
           <mat-form-field class="w-100">
             <mat-label>{{ 'Common.Search' | translate }}</mat-label>
             <input #search (input)="onSearchChange(search.value)" matInput name="search" />
