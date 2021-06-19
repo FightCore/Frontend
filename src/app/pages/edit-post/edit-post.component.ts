@@ -3,7 +3,6 @@ import { Post } from 'src/app/models/post';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from 'src/app/services/post/post.service';
 import { ToastrService } from 'ngx-toastr';
-import { MarkdownService } from 'ngx-markdown';
 import { PostText } from 'src/app/text/post.text';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { EditPostTextComponent } from 'src/app/components/posts/editor/edit-post-text/edit-post-text.component';

@@ -13,7 +13,9 @@ import { FrameDataCharacter } from 'src/app/models/framedata/framedata-character
 import { FrameDataService } from 'src/app/services/framedata/frame-data.service';
 import { MoveType } from 'src/app/models/framedata/move-type';
 import { Move } from 'src/app/models/framedata/move';
-import { zip } from 'rxjs';
+import { EMPTY, zip } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-character-display',
@@ -59,8 +61,8 @@ export class CharacterDisplayComponent implements OnInit {
     zip(
       this.characterService.getPosts(characterId),
       this.characterService.get(characterId),
-      this.editService.getOpenEditsForCharacter(characterId),
-      this.editService.getHistoryForCharacter(characterId)
+      this.editService.getOpenEditsForCharacter(characterId).pipe(catchError(() => of([]))),
+      this.editService.getHistoryForCharacter(characterId).pipe(catchError(() => of([])))
     ).subscribe(([posts, character, openEdits, allEdits]) => {
       this.character = character;
       this.posts = posts;

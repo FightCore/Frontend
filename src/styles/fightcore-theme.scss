@@ -1,10 +1,11 @@
+@use '~@angular/material' as mat;
 @import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat-core();
+@include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -21,7 +22,7 @@ $mat-primary: (
   )
 );
 
-$fightcore-app-primary: mat-palette($mat-primary, main, lighter, darker);
+$fightcore-app-primary: mat.define-palette($mat-primary, main, lighter, darker);
 
 $mat-accent: (
   main: #110011,
@@ -35,19 +36,19 @@ $mat-accent: (
   )
 );
 
-$fightcore-app-accent: mat-palette($mat-accent, main, lighter, darker);
+$fightcore-app-accent: mat.define-palette($mat-accent, main, lighter, darker);
 
 // The warn palette is optional (defaults to red).
-$fightcore-app-warn: mat-palette($mat-red);
+$fightcore-app-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$fightcore-app-theme: mat-light-theme(
+$fightcore-app-theme: mat.define-light-theme(
   $fightcore-app-primary,
   $fightcore-app-accent,
   $fightcore-app-warn
 );
 
-$fightcore-dark-theme: mat-dark-theme(
+$fightcore-dark-theme: mat.define-dark-theme(
   $fightcore-app-primary,
   $fightcore-app-accent,
   $fightcore-app-warn
@@ -59,33 +60,33 @@ $fightcore-dark-theme: mat-dark-theme(
   $accent: map-get($theme, accent);
 
   .background-color-primary {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
   }
 
   .background-color-accent {
-    background-color: mat-color($accent);
+    background-color: mat.get-color-from-palette($accent);
   }
   .avatar-accent {
     .avatar-content {
-        background-color: mat-color($accent) !important;
+        background-color: mat.get-color-from-palette($accent) !important;
     }
   }
   .color-primary {
-    color: mat-color($primary);
+    color: mat.get-color-from-palette($primary);
   }
 
   .color-accent {
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
   }
 }
 
 .dark-theme {
-  @include angular-material-theme($fightcore-dark-theme);
+  @include mat.all-component-themes($fightcore-dark-theme);
   @include background-theme($fightcore-dark-theme);
 }
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($fightcore-app-theme);
+@include mat.all-component-themes($fightcore-app-theme);
 @include background-theme($fightcore-app-theme);

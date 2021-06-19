@@ -1,22 +1,10 @@
-import { Component, OnInit, ViewChild, Input, AfterContentInit } from '@angular/core';
-import { Post, CreatedPost } from 'src/app/models/post';
+import { Component, ViewChild } from '@angular/core';
+import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post/post.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { PostHelpComponent } from 'src/app/components/posts/post-help/post-help.component';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { PostText } from 'src/app/text/post.text';
-import { AuthService } from 'src/app/services/auth/auth.service';
-import { UserOptions } from 'src/app/options/userOptions';
-import { CharacterPickerComponent } from 'src/app/components/characters/character-picker/character-picker.component';
-import { MarkdownService } from 'ngx-markdown';
-import * as Showdown from 'showdown';
-import { PostPreviewDialogComponent } from 'src/app/components/posts/post-preview-dialog/post-preview-dialog.component';
-import { GameService } from 'src/app/services/game/game.service';
-import { CharacterService } from 'src/app/services/character/character.service';
-import { User } from 'src/app/models/user';
-import * as SimpleMDE from 'simplemde';
 import { EditIntialPostComponent } from 'src/app/components/posts/editor/edit-intial-post/edit-intial-post.component';
 import { EditPostTextComponent } from 'src/app/components/posts/editor/edit-post-text/edit-post-text.component';
 
