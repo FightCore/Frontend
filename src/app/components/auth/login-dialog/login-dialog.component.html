@@ -1,0 +1,20 @@
+<h2>Login</h2>
+<p *ngIf="loginErrored">Unable to log in</p>
+<form [formGroup]="formGroup">
+  <mat-form-field class="w-100">
+    <mat-label>Enter your email</mat-label>
+    <input formControlName="email" matInput required />
+    <mat-error *ngIf="formGroup.hasError('email')">Invalid email</mat-error>
+  </mat-form-field>
+  <mat-form-field class="w-100">
+    <mat-label>Enter your password</mat-label>
+    <input formControlName="password" type="password" matInput required />
+    <mat-error *ngIf="formGroup.hasError('email')">Invalid password</mat-error>
+  </mat-form-field>
+</form>
+<button class="w-100" (click)="loginWithEmailAndPassword()" color="primary" mat-raised-button>
+  <mat-icon>login</mat-icon>
+  Login
+</button>
+<hr />
+<button class="w-100" (click)="loginWithGoogle()" color="primary" mat-raised-button>Login with Google</button>

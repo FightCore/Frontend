@@ -1,100 +1,99 @@
-// eslint-disable-next-line max-len
-// Original source: https://github.com/mmacneil/AngularASPNETCoreOAuth/blob/master/src/Spa/oauth-client/src/app/core/authentication/auth.service.ts
-
-import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { UserManager, UserManagerSettings, User } from 'oidc-client';
-import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase';
+import { from, Observable, of } from 'rxjs';
+import { first, switchMap, tap } from 'rxjs/operators';
+import { User } from 'src/app/models/user';
+import { UserService } from '../user/user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  // Observable navItem source
-  private authNavStatusSource = new BehaviorSubject<boolean>(false);
-  // Observable navItem stream
-  authNavStatus$ = this.authNavStatusSource.asObservable();
-  authenticationDone = new EventEmitter<boolean>();
-  isAuthenticationDone: boolean;
-  private manager = new UserManager(getClientSettings());
-  private user: User | null;
-
-  constructor(private http: HttpClient) {
-    this.manager.getUser().then(user => {
-      this.user = user;
-      this.authNavStatusSource.next(this.isAuthenticated());
-      this.authenticationDone.emit(this.isAuthenticated());
-      this.isAuthenticationDone = true;
-    });
+  private user?: firebase.default.User;
+  private fightCoreUser: User;
+  constructor(private angularFireAuth: AngularFireAuth, private userService: UserService) {
+    angularFireAuth.user
+      .pipe(
+        first(),
+        tap((user) => (this.user = user)),
+        switchMap(() => this.userService.getCurrentUser())
+      )
+      .subscribe((user) => {
+        this.fightCoreUser = user;
+        console.log(user);
+      });
   }
 
-  login() {
-    if (environment.mocking) {
-      return;
+  getIdToken(): Observable<string> {
+    if (this.user) {
+      return from(this.user.getIdToken());
     }
 
-    return this.manager.signinRedirect();
-  }
-
-  async completeAuthentication() {
-    this.user = await this.manager.signinRedirectCallback();
-    this.authNavStatusSource.next(this.isAuthenticated());
-  }
-
-  register(userRegistration: any) {
-    return this.http
-      .post(environment.authentication.authUrl + '/account', userRegistration);
-  }
-
-  isAuthenticated(): boolean {
-    return this.user != null && !this.user.expired;
-  }
-
-  get authorizationHeaderValue(): string {
-    if (!this.isAuthenticated()) {
-      return '';
-    }
-
-    return `${this.user.token_type} ${this.user.access_token}`;
-  }
-
-  get name(): string {
-    if (!this.isAuthenticated()) {
-      return '';
-    }
-
-    return this.user != null ? this.user.profile.name : '';
+    return of(null);
   }
 
   get id(): number {
-    if (!this.isAuthenticated()) {
-      return 5;
-    }
-
-    return this.user != null ? parseFloat(this.user.profile.sub) : 0;
+    return this.fightCoreUser?.id;
   }
 
-  signout() {
-    if (environment.mocking) {
-      return;
-    }
-
-    this.manager.signoutRedirect();
+  get userName(): string {
+    return this.fightCoreUser?.name;
   }
-}
 
-export function getClientSettings(): UserManagerSettings {
-  return {
-    authority: environment.authentication.authUrl,
-    client_id: environment.authentication.clientId,
-    redirect_uri: environment.authentication.callbackUrl,
-    post_logout_redirect_uri: environment.authentication.redirectUrl,
-    response_type: 'id_token token',
-    scope: 'openid profile fightcore-backend',
-    filterProtocolClaims: true,
-    loadUserInfo: true,
-    automaticSilentRenew: true,
-    silent_redirect_uri: 'http://localhost:4200/silent-refresh.html'
-  };
+  isAuthenticated(): boolean {
+    return this.user != null;
+  }
+
+  emailAndPasswordRegister(email: string, password: string): Observable<User> {
+    const authPromise = firebase.default.auth().createUserWithEmailAndPassword(email, password);
+
+    return from(authPromise).pipe(
+      first(),
+      tap((user) => (this.user = user.user)),
+      switchMap(() => this.userService.getCurrentUser()),
+      tap((user) => (this.fightCoreUser = user))
+    );
+  }
+
+  emailAndPasswordLogin(email: string, password: string): Observable<User> {
+    const authPromise = firebase.default
+      .auth()
+      .setPersistence(firebase.default.auth.Auth.Persistence.SESSION)
+      .then(() => this.angularFireAuth.signInWithEmailAndPassword(email, password));
+
+    return from(authPromise).pipe(
+      first(),
+      tap((user) => (this.user = user.user)),
+      switchMap(() => this.userService.getCurrentUser()),
+      tap((user) => (this.fightCoreUser = user))
+    );
+  }
+
+  googleLogin(): Observable<User> {
+    const authPromise = firebase.default
+      .auth()
+      .setPersistence(firebase.default.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        const provider = new firebase.default.auth.GoogleAuthProvider();
+        return this.angularFireAuth.signInWithPopup(provider);
+      });
+
+    return from(authPromise).pipe(
+      first(),
+      tap((user) => (this.user = user.user)),
+      switchMap(() => this.userService.getCurrentUser()),
+      tap((user) => (this.fightCoreUser = user))
+    );
+  }
+
+  logout(): void {
+    from(this.angularFireAuth.signOut()).subscribe(() => {
+      this.user = null;
+    });
+  }
+
+  updateUser(user: User): void {
+    this.fightCoreUser = user;
+  }
 }

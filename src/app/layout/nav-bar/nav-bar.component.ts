@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { RegisterComponent } from 'src/app/pages/register/register.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ThemeSchemeService } from 'src/app/services/theme/theme-scheme.service';
+import { LoginDialogComponent } from 'src/app/components/auth/login-dialog/login-dialog.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,7 +18,6 @@ export class NavBarComponent implements OnInit {
     private themeService: ThemeSchemeService
   ) {}
 
-  userName: string;
   opened: boolean;
 
   links = [
@@ -42,14 +41,7 @@ export class NavBarComponent implements OnInit {
   }
 
   getUserName(): string {
-    if (this.userName) {
-      return this.userName;
-    }
-
-    if (this.authService.isAuthenticated()) {
-      this.userName = this.authService.name;
-      return this.userName;
-    }
+    return this.authService.userName;
   }
 
   isAuthenticated(): boolean {
@@ -58,17 +50,11 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     localStorage.setItem('PreviousUrl', this.router.url);
-    return this.authService.signout();
+    this.authService.logout();
   }
 
   toUser() {
     this.router.navigate(['user', this.authService.id]);
-  }
-
-  register() {
-    this.dialog.open(RegisterComponent, {
-      width: '40em',
-    });
   }
 
   hideSidebar() {
@@ -76,6 +62,6 @@ export class NavBarComponent implements OnInit {
   }
 
   goToLogin(): void {
-    this.authService.login();
+    this.dialog.open(LoginDialogComponent);
   }
 }

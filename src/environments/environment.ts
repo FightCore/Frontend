@@ -13,6 +13,15 @@ export const environment = {
     redirectUrl: 'http://localhost:4200/',
     clientId: 'fightcore_dev',
   },
+  firebase: {
+    apiKey: 'AIzaSyC60bgr4xktHZZgdgy0slA4-rnSFEpNj8w',
+    authDomain: 'fightcore.firebaseapp.com',
+    projectId: 'fightcore',
+    storageBucket: 'fightcore.appspot.com',
+    messagingSenderId: '597172083785',
+    appId: '1:597172083785:web:a07e5541d83b37d3c83398',
+    measurementId: 'G-QGRHJHJW7L',
+  },
   // TODO Move this to a possible environment.json
   links: {
     discord: 'https://discord.gg/CVqDy6c',
