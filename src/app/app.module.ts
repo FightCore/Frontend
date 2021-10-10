@@ -83,6 +83,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { TokenInterceptor } from 'src/app/interceptors/http-token-interceptor';
 import { LoginDialogComponent } from './components/auth/login-dialog/login-dialog.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { StoreModule } from '@ngrx/store';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -128,6 +129,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    StoreModule.forRoot({}, {}),
   ],
   declarations: [
     AppComponent,
