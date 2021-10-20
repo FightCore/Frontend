@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ThemeSchemeService } from 'src/app/services/theme/theme-scheme.service';
 import { LoginDialogComponent } from 'src/app/components/auth/login-dialog/login-dialog.component';
+import { UserService } from 'src/app/services/user/user.service';
+import { Store } from '@ngrx/store';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,13 +14,6 @@ import { LoginDialogComponent } from 'src/app/components/auth/login-dialog/login
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private dialog: MatDialog,
-    private router: Router,
-    private themeService: ThemeSchemeService
-  ) {}
-
   opened: boolean;
 
   links = [
@@ -34,6 +30,21 @@ export class NavBarComponent implements OnInit {
       route: ['/framedata'],
     },
   ];
+
+  currentUser: User;
+
+  constructor(
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private router: Router,
+    private themeService: ThemeSchemeService,
+    private store: Store<{ user: User }>
+  ) {
+    this.store.select('user').subscribe((user) => {
+      this.currentUser = user;
+    });
+  }
+
   ngOnInit() {}
 
   toggleDarkMode(): void {
@@ -41,7 +52,7 @@ export class NavBarComponent implements OnInit {
   }
 
   getUserName(): string {
-    return this.authService.userName;
+    return this.currentUser.name;
   }
 
   isAuthenticated(): boolean {
@@ -54,7 +65,7 @@ export class NavBarComponent implements OnInit {
   }
 
   toUser() {
-    this.router.navigate(['user', this.authService.id]);
+    this.router.navigate(['user', this.currentUser.id]);
   }
 
   hideSidebar() {

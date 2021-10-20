@@ -17,10 +17,10 @@
           {{ link.name | translate }}
         </button>
       </div>
-      <div *ngIf="isAuthenticated(); else mobileLogin">
+      <div *ngIf="currentUser; else mobileLogin">
         <button color="accent" mat-flat-button class="text-center w-100 mb-1" (click)="hideSidebar(); toUser()" i18n>
           <mat-icon>account_circle</mat-icon>
-          {{ getUserName() }}
+          {{ currentUser.name }}
         </button>
 
         <button color="accent" mat-flat-button class="text-center w-100 mb-1" (click)="hideSidebar(); logout()" i18n>
@@ -41,11 +41,11 @@
           <span class="spacer"></span>
           <button (click)="toggleDarkMode()" mat-button><mat-icon>nights_stay</mat-icon></button>
           <app-language class="d-none language-picker p-3"></app-language>
-          <a *ngIf="isAuthenticated(); else login" (click)="toUser()">
+          <a *ngIf="currentUser; else login" (click)="toUser()">
             <mat-icon>account_circle</mat-icon>
-            {{ getUserName() }}</a
+            {{ currentUser.name }}</a
           >
-          <a *ngIf="isAuthenticated()" (click)="logout()" i18n> {{ 'Authentication.Logout' | translate }}</a>
+          <a *ngIf="currentUser" (click)="logout()" i18n> {{ 'Authentication.Logout' | translate }}</a>
         </mat-toolbar-row>
       </mat-toolbar>
     </div>

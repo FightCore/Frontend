@@ -84,8 +84,11 @@ import { TokenInterceptor } from 'src/app/interceptors/http-token-interceptor';
 import { LoginDialogComponent } from './components/auth/login-dialog/login-dialog.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { StoreModule } from '@ngrx/store';
+import { userReducer } from 'src/app/store/user/user.reducer';
+import { ChangeUsernameDialogComponent } from './components/user/change-username-dialog/change-username-dialog.component';
 
 // AoT requires an exported function for factories
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -129,7 +132,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ user: userReducer }),
   ],
   declarations: [
     AppComponent,
@@ -194,6 +197,7 @@ export function createTranslateLoader(http: HttpClient) {
     ViewMoveDialogComponent,
     LoginDialogComponent,
     RegisterComponent,
+    ChangeUsernameDialogComponent,
   ],
   entryComponents: [PostHelpComponent, PostPreviewDialogComponent, HitboxTableDialogComponent],
   providers: [

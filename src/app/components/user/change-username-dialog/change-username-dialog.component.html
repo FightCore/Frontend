@@ -1,0 +1,6 @@
+<h2>Change username</h2>
+<mat-form-field>
+  <mat-label>New username</mat-label>
+  <input type="text" [(ngModel)]="username" matInput />
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="changeUserName(username)">Update</button>

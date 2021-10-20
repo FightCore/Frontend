@@ -37,7 +37,9 @@ export class LoginDialogComponent implements OnInit {
     }
 
     this.authService.emailAndPasswordLogin(this.formGroup.value.email, this.formGroup.value.password).subscribe(
-      (user) => {},
+      (user) => {
+        this.dialogRef.close();
+      },
       () => {
         this.loginErrored = true;
       }

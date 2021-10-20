@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Store } from '@ngrx/store';
 import * as firebase from 'firebase';
 import { from, Observable, of } from 'rxjs';
 import { first, switchMap, tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
+import { clearUser, setUser } from 'src/app/store/user/user.actions';
 import { UserService } from '../user/user.service';
 
 @Injectable({
@@ -12,7 +14,7 @@ import { UserService } from '../user/user.service';
 export class AuthService {
   private user?: firebase.default.User;
   private fightCoreUser: User;
-  constructor(private angularFireAuth: AngularFireAuth, private userService: UserService) {
+  constructor(private angularFireAuth: AngularFireAuth, private userService: UserService, private store: Store) {
     angularFireAuth.user
       .pipe(
         first(),
@@ -20,8 +22,7 @@ export class AuthService {
         switchMap(() => this.userService.getCurrentUser())
       )
       .subscribe((user) => {
-        this.fightCoreUser = user;
-        console.log(user);
+        this.store.dispatch(setUser({ user }));
       });
   }
 
@@ -52,7 +53,9 @@ export class AuthService {
       first(),
       tap((user) => (this.user = user.user)),
       switchMap(() => this.userService.getCurrentUser()),
-      tap((user) => (this.fightCoreUser = user))
+      tap((user) => {
+        this.store.dispatch(setUser({ user }));
+      })
     );
   }
 
@@ -66,7 +69,9 @@ export class AuthService {
       first(),
       tap((user) => (this.user = user.user)),
       switchMap(() => this.userService.getCurrentUser()),
-      tap((user) => (this.fightCoreUser = user))
+      tap((user) => {
+        this.store.dispatch(setUser({ user }));
+      })
     );
   }
 
@@ -83,17 +88,15 @@ export class AuthService {
       first(),
       tap((user) => (this.user = user.user)),
       switchMap(() => this.userService.getCurrentUser()),
-      tap((user) => (this.fightCoreUser = user))
+      tap((user) => {
+        this.store.dispatch(setUser({ user }));
+      })
     );
   }
 
   logout(): void {
     from(this.angularFireAuth.signOut()).subscribe(() => {
-      this.user = null;
+      this.store.dispatch(clearUser());
     });
-  }
-
-  updateUser(user: User): void {
-    this.fightCoreUser = user;
   }
 }
