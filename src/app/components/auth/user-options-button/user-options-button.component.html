@@ -1,0 +1,20 @@
+<button mat-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <a>
+    <mat-icon>account_circle</mat-icon>
+    {{ currentUser.name }}</a
+  >
+</button>
+<mat-menu #menu="matMenu">
+  <button (click)="toUser()" mat-menu-item>
+    <mat-icon>person</mat-icon>
+    <span>View my account</span>
+  </button>
+  <button (click)="editUser()" mat-menu-item>
+    <mat-icon>manage_accounts</mat-icon>
+    <span>Edit account details</span>
+  </button>
+  <button (click)="logout()" mat-menu-item>
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

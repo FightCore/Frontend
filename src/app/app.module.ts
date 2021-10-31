@@ -86,6 +86,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from 'src/app/store/user/user.reducer';
 import { ChangeUsernameDialogComponent } from './components/user/change-username-dialog/change-username-dialog.component';
+import { UserOptionsButtonComponent } from './components/auth/user-options-button/user-options-button.component';
+import { EditUserComponent } from './pages/users/edit-user/edit-user.component';
 
 // AoT requires an exported function for factories
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
@@ -198,6 +200,8 @@ export function createTranslateLoader(http: HttpClient) {
     LoginDialogComponent,
     RegisterComponent,
     ChangeUsernameDialogComponent,
+    UserOptionsButtonComponent,
+    EditUserComponent,
   ],
   entryComponents: [PostHelpComponent, PostPreviewDialogComponent, HitboxTableDialogComponent],
   providers: [

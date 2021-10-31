@@ -7,6 +7,7 @@ import { LoginDialogComponent } from 'src/app/components/auth/login-dialog/login
 import { UserService } from 'src/app/services/user/user.service';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/user';
+import { selectUser } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-nav-bar',
@@ -38,9 +39,9 @@ export class NavBarComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private themeService: ThemeSchemeService,
-    private store: Store<{ user: User }>
+    private store: Store
   ) {
-    this.store.select('user').subscribe((user) => {
+    this.store.select(selectUser).subscribe((user) => {
       this.currentUser = user;
     });
   }
@@ -49,14 +50,6 @@ export class NavBarComponent implements OnInit {
 
   toggleDarkMode(): void {
     this.themeService.toggle();
-  }
-
-  getUserName(): string {
-    return this.currentUser.name;
-  }
-
-  isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
   }
 
   logout() {
@@ -72,7 +65,7 @@ export class NavBarComponent implements OnInit {
     this.opened = false;
   }
 
-  goToLogin(): void {
+  onOpenLoginClick(): void {
     this.dialog.open(LoginDialogComponent);
   }
 }

@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangeUsernameDialogComponent } from 'src/app/components/user/change-username-dialog/change-username-dialog.component';
+import { selectUser } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-user',
@@ -22,7 +23,7 @@ export class UserComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private store: Store<{ user: User }>,
+    private store: Store,
     private dialog: MatDialog
   ) {}
 
@@ -38,7 +39,7 @@ export class UserComponent implements OnInit {
       this.loading = false;
     });
 
-    this.store.select('user').subscribe((currentUser: User) => {
+    this.store.select(selectUser).subscribe((currentUser: User) => {
       this.isCurrentUser = currentUser?.id === this.user?.id;
     });
   }

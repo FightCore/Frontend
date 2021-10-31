@@ -18,6 +18,7 @@ import { FramedataOverviewComponent } from './pages/framedata/framedata-overview
 import { TechniquesComponent } from './pages/posts/techniques/techniques.component';
 import { FramedataCharacterComponent } from './pages/framedata/framedata-character/framedata-character.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { EditUserComponent } from './pages/users/edit-user/edit-user.component';
 
 const routes: Routes = [
   { path: StaticRoutes.createPost, component: CreatePostComponent, canActivate: [AuthGuard] },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: StaticRoutes.editCharacter, component: CharacterEditComponent, canActivate: [AuthGuard] },
   { path: StaticRoutes.viewCharacter, component: CharacterDisplayComponent },
   { path: StaticRoutes.viewUser, component: UserComponent },
+  { path: StaticRoutes.editUser, component: EditUserComponent, canActivate: [AuthGuard] },
   { path: StaticRoutes.viewGame, component: GameDisplayComponent },
   { path: StaticRoutes.game, component: GameComponent },
   { path: StaticRoutes.home, component: HomeComponent },
