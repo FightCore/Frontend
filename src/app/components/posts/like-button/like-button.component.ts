@@ -2,12 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from 'src/app/services/post/post.service';
 import { PostText } from 'src/app/text/post.text';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { selectUser } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-like-button',
   templateUrl: './like-button.component.html',
-  styleUrls: ['./like-button.component.scss']
+  styleUrls: ['./like-button.component.scss'],
 })
 export class LikeButtonComponent implements OnInit {
   /**
@@ -24,30 +25,31 @@ export class LikeButtonComponent implements OnInit {
    * If the post is liked by the current user.
    */
   @Input() liked: boolean;
-  constructor(
-    private postService: PostService,
-    private toastrService: ToastrService,
-    private authService: AuthService
-  ) { }
 
-  ngOnInit() {
+  isLoggedIn: boolean;
+
+  constructor(private postService: PostService, private toastrService: ToastrService, private store: Store) {
+    this.store.select(selectUser).subscribe((user) => {
+      this.isLoggedIn = user?.id > 0;
+    });
   }
 
-  isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
-  }
+  ngOnInit() {}
 
   likePost(): void {
-    this.postService.likePost(this.postId).subscribe(() => {
-      if (this.liked) {
-        this.likes--;
-        this.liked = false;
-      } else {
-        this.likes++;
-        this.liked = true;
+    this.postService.likePost(this.postId).subscribe(
+      () => {
+        if (this.liked) {
+          this.likes--;
+          this.liked = false;
+        } else {
+          this.likes++;
+          this.liked = true;
+        }
+      },
+      () => {
+        this.toastrService.error(PostText.failedPostLike);
       }
-    }, () => {
-      this.toastrService.error(PostText.failedPostLike);
-    });
+    );
   }
 }

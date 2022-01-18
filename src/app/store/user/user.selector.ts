@@ -5,6 +5,10 @@ export interface UserState {
   user: User;
 }
 
-export const selectUserSelector = (state: UserState) => state.user;
+export interface ApplicationState {
+  user: UserState;
+}
 
-export const selectUser = createSelector(selectUserSelector, (user: User) => user);
+export const selectUserSelector = (state: ApplicationState) => state.user;
+
+export const selectUser = createSelector(selectUserSelector, (userState: UserState) => userState?.user);

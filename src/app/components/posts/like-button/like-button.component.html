@@ -1,12 +1,12 @@
-<button
-  class="heart-container"
-  mat-button
-  [color]="liked ? 'primary' : 'default'"
-  (click)="likePost()"
-  [disabled]="!isLoggedIn()"
->
-  <em class="material-icons">
-    favorite
-  </em>
-  {{ likes }}
-</button>
+<span matTooltip="Register or login to enable liking a post" [matTooltipDisabled]="isLoggedIn">
+  <button
+    class="heart-container"
+    mat-button
+    [color]="liked ? 'warn' : 'default'"
+    (click)="likePost(); $event.stopImmediatePropagation(); $event.preventDefault()"
+    [disabled]="!isLoggedIn"
+  >
+    <em class="material-icons"> favorite </em>
+    {{ likes }}
+  </button>
+</span>

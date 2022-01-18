@@ -33,7 +33,6 @@ export class EditUserComponent implements OnInit {
   changeUserName(username: string): void {
     const user = JSON.parse(JSON.stringify(this.currentUser)) as User;
     user.name = username;
-    this.store.dispatch(setUser({ user }));
     this.userService.updateUser({ username }).subscribe(noop, () => {
       this.store.dispatch(setUser({ user: this.currentUser }));
       this.snackBar.open('Failed to update the user', null, { duration: 3000 });

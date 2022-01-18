@@ -7,6 +7,10 @@ import { Observable } from 'rxjs';
 import { CreateUser } from 'src/app/models/createUser';
 import { User } from 'src/app/models/user';
 import { UpdateUser } from 'src/app/models/users/update-user';
+import { AuthService } from '../auth/auth.service';
+import { Store } from '@ngrx/store';
+import { setUser } from 'src/app/store/user/user.actions';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +18,7 @@ import { UpdateUser } from 'src/app/models/users/update-user';
 export class UserService {
   private baseUrl = `${environment.baseUrl}/accounts`;
   private userUrl = `${environment.baseUrl}/users`;
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private store: Store) {}
 
   /**
    * Gets the posts that are written by the user.
@@ -34,6 +38,7 @@ export class UserService {
 
   /**
    * Registers and creates an user.
+   *
    * @param user the user to be created.
    */
   createUser(user: CreateUser): Observable<void> {
@@ -41,6 +46,12 @@ export class UserService {
   }
 
   updateUser(user: UpdateUser): Observable<User> {
-    return this.httpClient.put<User>(`${this.userUrl}/me`, user);
+    return this.httpClient.put<User>(`${this.userUrl}/me`, user).pipe(
+      tap((newUser) => {
+        this.store.dispatch(setUser({ user: newUser }));
+        sessionStorage.setItem(AuthService.userKey, JSON.stringify(newUser));
+        return newUser;
+      })
+    );
   }
 }

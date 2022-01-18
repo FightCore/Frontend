@@ -3,9 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CharacterService } from 'src/app/services/character/character.service';
 import { Character } from 'src/app/models/character';
 import { Post } from 'src/app/models/post';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { GameThemes } from 'src/styles/gameThemes';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { StaticRoutes } from 'src/app/routes/static-routes';
 import { EditDto } from 'src/app/models/edits/edit-dto';
 import { EditService } from 'src/app/services/edits/edit.service';
@@ -13,9 +12,10 @@ import { FrameDataCharacter } from 'src/app/models/framedata/framedata-character
 import { FrameDataService } from 'src/app/services/framedata/frame-data.service';
 import { MoveType } from 'src/app/models/framedata/move-type';
 import { Move } from 'src/app/models/framedata/move';
-import { EMPTY, zip } from 'rxjs';
+import { zip, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectUser } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-character-display',
@@ -23,7 +23,7 @@ import { of } from 'rxjs';
   styleUrls: ['./character-display.component.scss'],
 })
 export class CharacterDisplayComponent implements OnInit {
-  loading: boolean = true;
+  loading = true;
   character: Character;
   characterId: number;
   posts: Post[];
@@ -45,15 +45,20 @@ export class CharacterDisplayComponent implements OnInit {
     { name: 'Unknown', value: MoveType.unknown },
   ];
 
+  private userId: number;
+
   constructor(
     private route: ActivatedRoute,
     private characterService: CharacterService,
     private router: Router,
-    private sanitizer: DomSanitizer,
-    private authService: AuthService,
     private editService: EditService,
-    private frameDataService: FrameDataService
-  ) {}
+    private frameDataService: FrameDataService,
+    private store: Store
+  ) {
+    this.store.select(selectUser).subscribe((user) => {
+      this.userId = user?.id;
+    });
+  }
 
   ngOnInit() {
     const characterId = parseFloat(this.route.snapshot.paramMap.get('characterId'));
@@ -85,15 +90,13 @@ export class CharacterDisplayComponent implements OnInit {
   }
 
   get isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+    return this.userId > 0;
   }
 
   isContributor(): boolean {
-    const foundContributor = this.character.contributors.find(
-      (contributor) => contributor.user.id === this.authService.id
-    );
+    const foundContributor = this.character.contributors.find((contributor) => contributor.user.id === this.userId);
 
-    return foundContributor != (null || undefined);
+    return foundContributor != null;
   }
 
   editCharacter(): void {

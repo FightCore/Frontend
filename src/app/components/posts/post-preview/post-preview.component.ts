@@ -29,12 +29,15 @@ export class PostPreviewComponent implements OnInit {
     { value: PostCategory.tournament, name: 'Posts.Category.Tournament' },
   ];
   constructor(private postService: PostService, private toastrService: ToastrService, private router: Router) {}
-  ngOnInit() {}
+
+  ngOnInit() {
+    // Temporary fix for the empty tag bug.
+    this.post.tags = this.post.tags.filter((tag) => tag !== '');
+  }
 
   likePost(heartIcon: HTMLElement, post: Post): void {
     this.postService.likePost(post.id).subscribe(
       () => {
-        // this.toastrService.success('Post has been liked successfully.');
         if (post.liked) {
           post.likes--;
           post.liked = false;

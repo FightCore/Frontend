@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Store } from '@ngrx/store';
 import * as firebase from 'firebase';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { first, switchMap, tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { clearUser, setUser } from 'src/app/store/user/user.actions';
@@ -12,17 +12,32 @@ import { UserService } from '../user/user.service';
   providedIn: 'root',
 })
 export class AuthService {
+  public static userKey = 'fightcore_user';
   private user?: firebase.default.User;
-  private fightCoreUser: User;
   constructor(private angularFireAuth: AngularFireAuth, private userService: UserService, private store: Store) {
     angularFireAuth.user
       .pipe(
-        first(),
-        tap((user) => (this.user = user)),
-        switchMap(() => this.userService.getCurrentUser())
+        switchMap((firebaseUser) => {
+          if (firebaseUser == null) {
+            return of(null);
+          }
+
+          this.user = firebaseUser;
+          const user = sessionStorage.getItem(AuthService.userKey);
+          if (user != null) {
+            return of(JSON.parse(user) as User);
+          }
+
+          return this.userService.getCurrentUser();
+        })
       )
       .subscribe((user) => {
-        this.store.dispatch(setUser({ user }));
+        if (user == null) {
+          this.store.dispatch(clearUser());
+          return;
+        }
+
+        this.dispatchUser(user);
       });
   }
 
@@ -31,72 +46,82 @@ export class AuthService {
       return from(this.user.getIdToken());
     }
 
-    return of(null);
-  }
+    return this.angularFireAuth.user.pipe(
+      switchMap((user) => {
+        if (user) {
+          return user.getIdToken();
+        }
 
-  get id(): number {
-    return this.fightCoreUser?.id;
-  }
-
-  get userName(): string {
-    return this.fightCoreUser?.name;
+        return of(null);
+      })
+    );
   }
 
   isAuthenticated(): boolean {
     return this.user != null;
   }
 
-  emailAndPasswordRegister(email: string, password: string): Observable<User> {
-    const authPromise = firebase.default.auth().createUserWithEmailAndPassword(email, password);
+  emailAndPasswordRegister(email: string, password: string): Observable<firebase.default.auth.UserCredential> {
+    return from(firebase.default.auth().createUserWithEmailAndPassword(email, password));
+  }
 
-    return from(authPromise).pipe(
-      first(),
-      tap((user) => (this.user = user.user)),
-      switchMap(() => this.userService.getCurrentUser()),
-      tap((user) => {
-        this.store.dispatch(setUser({ user }));
-      })
+  emailAndPasswordLogin(email: string, password: string): Observable<firebase.default.auth.UserCredential> {
+    return from(
+      firebase.default
+        .auth()
+        .setPersistence(firebase.default.auth.Auth.Persistence.SESSION)
+        .then(() => this.angularFireAuth.signInWithEmailAndPassword(email, password))
+        .then((firebaseResponse) => {
+          if (firebaseResponse == null) {
+            throw new Error('Failed to login');
+          }
+
+          return firebaseResponse;
+        })
     );
   }
 
-  emailAndPasswordLogin(email: string, password: string): Observable<User> {
-    const authPromise = firebase.default
-      .auth()
-      .setPersistence(firebase.default.auth.Auth.Persistence.SESSION)
-      .then(() => this.angularFireAuth.signInWithEmailAndPassword(email, password));
+  forgotPassword(email: string): void {
+    from(firebase.default.auth().sendPasswordResetEmail(email)).subscribe(
+      () => {},
+      (error) => {
+        if (error.code === 'auth/user-not-found') {
+          throw new Error('User not found');
+        }
 
-    return from(authPromise).pipe(
-      first(),
-      tap((user) => (this.user = user.user)),
-      switchMap(() => this.userService.getCurrentUser()),
-      tap((user) => {
-        this.store.dispatch(setUser({ user }));
-      })
+        throw error;
+      }
     );
   }
 
-  googleLogin(): Observable<User> {
-    const authPromise = firebase.default
-      .auth()
-      .setPersistence(firebase.default.auth.Auth.Persistence.SESSION)
-      .then(() => {
-        const provider = new firebase.default.auth.GoogleAuthProvider();
-        return this.angularFireAuth.signInWithPopup(provider);
-      });
+  googleLogin(): Observable<firebase.default.auth.UserCredential> {
+    return from(
+      firebase.default
+        .auth()
+        .setPersistence(firebase.default.auth.Auth.Persistence.SESSION)
+        .then(() => {
+          const provider = new firebase.default.auth.GoogleAuthProvider();
+          return this.angularFireAuth.signInWithPopup(provider);
+        })
+        .then((firebaseResponse) => {
+          if (firebaseResponse == null) {
+            throw new Error('Failed to login');
+          }
 
-    return from(authPromise).pipe(
-      first(),
-      tap((user) => (this.user = user.user)),
-      switchMap(() => this.userService.getCurrentUser()),
-      tap((user) => {
-        this.store.dispatch(setUser({ user }));
-      })
+          return firebaseResponse;
+        })
     );
   }
 
   logout(): void {
+    sessionStorage.removeItem(AuthService.userKey);
     from(this.angularFireAuth.signOut()).subscribe(() => {
-      this.store.dispatch(clearUser());
+      this.user = null;
     });
+  }
+
+  private dispatchUser(user: User): void {
+    this.store.dispatch(setUser({ user }));
+    sessionStorage.setItem(AuthService.userKey, JSON.stringify(user));
   }
 }
