@@ -6,11 +6,24 @@
         <mat-card>
           <mat-card-content>
             <h3>Create an account</h3>
+            <div class="mb-2" *ngIf="errorCode != null" [ngSwitch]="errorCode">
+              <mat-error *ngSwitchCase="errorCodes.weakPassword">
+                The used password is too weak and should at least be 6 characters long, consider using a password
+                manager.
+              </mat-error>
+              <mat-error *ngSwitchCase="errorCodes.emailAlreadyInUse"> The email address is already in use. </mat-error>
+              <mat-error *ngSwitchCase="errorCodes.invalidEmail"> The email address is invalid. </mat-error>
+              <mat-error *ngSwitchDefault> An unknown error has occurred. </mat-error>
+            </div>
             <mat-form-field class="w-100">
               <mat-label>Enter your username</mat-label>
-              <input formControlName="username" matInput required />
+              <input (focusout)="onFocusoutCheckUsername()" formControlName="username" matInput required />
               <mat-error *ngIf="registerForm.get('username').hasError('required')"> Username is required </mat-error>
+              <mat-error *ngIf="registerForm.get('username').hasError('taken')"
+                >Current username is already taken</mat-error
+              >
             </mat-form-field>
+
             <mat-form-field class="w-100">
               <mat-label>Enter your email</mat-label>
               <input formControlName="email" matInput required />

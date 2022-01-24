@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Store } from '@ngrx/store';
-import * as firebase from 'firebase';
-import { from, Observable, of, throwError } from 'rxjs';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import { from, Observable, of } from 'rxjs';
 import { first, switchMap, tap } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { clearUser, setUser } from 'src/app/store/user/user.actions';
@@ -13,7 +14,7 @@ import { UserService } from '../user/user.service';
 })
 export class AuthService {
   public static userKey = 'fightcore_user';
-  private user?: firebase.default.User;
+  private user?: firebase.User;
   constructor(private angularFireAuth: AngularFireAuth, private userService: UserService, private store: Store) {
     angularFireAuth.user
       .pipe(
@@ -61,15 +62,15 @@ export class AuthService {
     return this.user != null;
   }
 
-  emailAndPasswordRegister(email: string, password: string): Observable<firebase.default.auth.UserCredential> {
-    return from(firebase.default.auth().createUserWithEmailAndPassword(email, password));
+  emailAndPasswordRegister(email: string, password: string): Observable<firebase.auth.UserCredential> {
+    return from(firebase.auth().createUserWithEmailAndPassword(email, password));
   }
 
-  emailAndPasswordLogin(email: string, password: string): Observable<firebase.default.auth.UserCredential> {
+  emailAndPasswordLogin(email: string, password: string): Observable<firebase.auth.UserCredential> {
     return from(
-      firebase.default
+      firebase
         .auth()
-        .setPersistence(firebase.default.auth.Auth.Persistence.SESSION)
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(() => this.angularFireAuth.signInWithEmailAndPassword(email, password))
         .then((firebaseResponse) => {
           if (firebaseResponse == null) {
@@ -82,7 +83,7 @@ export class AuthService {
   }
 
   forgotPassword(email: string): void {
-    from(firebase.default.auth().sendPasswordResetEmail(email)).subscribe(
+    from(firebase.auth().sendPasswordResetEmail(email)).subscribe(
       () => {},
       (error) => {
         if (error.code === 'auth/user-not-found') {
@@ -94,13 +95,13 @@ export class AuthService {
     );
   }
 
-  googleLogin(): Observable<firebase.default.auth.UserCredential> {
+  googleLogin(): Observable<firebase.auth.UserCredential> {
     return from(
-      firebase.default
+      firebase
         .auth()
-        .setPersistence(firebase.default.auth.Auth.Persistence.SESSION)
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
         .then(() => {
-          const provider = new firebase.default.auth.GoogleAuthProvider();
+          const provider = new firebase.auth.GoogleAuthProvider();
           return this.angularFireAuth.signInWithPopup(provider);
         })
         .then((firebaseResponse) => {

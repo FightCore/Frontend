@@ -17,6 +17,7 @@ import { selectUser } from 'src/app/store/user/user.selector';
 export class ChangeUsernameDialogComponent implements OnInit {
   currentUser: User;
   username: string;
+  isUsernameTaken: boolean;
 
   constructor(
     private dialogRef: MatDialogRef<ChangeUsernameDialogComponent>,
@@ -34,9 +35,16 @@ export class ChangeUsernameDialogComponent implements OnInit {
   ngOnInit(): void {}
 
   changeUserName(username: string): void {
+    this.isUsernameTaken = false;
     const user = JSON.parse(JSON.stringify(this.currentUser)) as User;
     user.name = username;
-    this.userService.updateUser({ username }).subscribe(noop, () => {
+    this.userService.updateUser({ username }).subscribe(noop, (error) => {
+      console.log(error);
+      if (error.code === 409) {
+        this.isUsernameTaken = true;
+        return;
+      }
+
       this.store.dispatch(setUser({ user: this.currentUser }));
       this.snackBar.open('Failed to update the user', null, { duration: 3000 });
     });

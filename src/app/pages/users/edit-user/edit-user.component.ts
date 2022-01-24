@@ -16,6 +16,7 @@ import { selectUser } from 'src/app/store/user/user.selector';
 export class EditUserComponent implements OnInit {
   currentUser: User;
   username: string;
+  isUsernameTaken = false;
 
   constructor(
     private store: Store,
@@ -31,9 +32,15 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {}
   changeUserName(username: string): void {
+    this.isUsernameTaken = false;
     const user = JSON.parse(JSON.stringify(this.currentUser)) as User;
     user.name = username;
-    this.userService.updateUser({ username }).subscribe(noop, () => {
+    this.userService.updateUser({ username }).subscribe(noop, (error) => {
+      if (error.status === 409) {
+        this.isUsernameTaken = true;
+        console.log(error);
+        return;
+      }
       this.store.dispatch(setUser({ user: this.currentUser }));
       this.snackBar.open('Failed to update the user', null, { duration: 3000 });
     });

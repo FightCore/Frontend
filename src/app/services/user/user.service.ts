@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../base.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Post } from 'src/app/models/post';
@@ -34,6 +33,10 @@ export class UserService {
 
   getCurrentUser(): Observable<User> {
     return this.httpClient.get<User>(`${this.userUrl}/me`);
+  }
+
+  isUsernameAvailable(username: string): Observable<never> {
+    return this.httpClient.post<never>(`${this.userUrl}/available`, { username });
   }
 
   /**

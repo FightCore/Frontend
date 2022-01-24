@@ -1,11 +1,15 @@
 <div class="container">
   <h2>Edit account details</h2>
   <mat-card>
-    <mat-form-field class="w-100">
-      <mat-label>Username</mat-label>
-      <input type="text" [(ngModel)]="username" matInput />
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="changeUserName(username)">Update</button>
+    <form (submit)="changeUserName(username)">
+      <mat-form-field class="w-100">
+        <mat-label>Username</mat-label>
+        <input type="text" [(ngModel)]="username" name="username" matInput />
+      </mat-form-field>
+      <mat-error *ngIf="isUsernameTaken">Current username is taken.</mat-error>
+      <button mat-raised-button color="primary">Update</button>
+    </form>
+
     <hr />
     <em>
       In future updates we want to supply more customization with things like pronouns, bio, mains, etc. Please feel

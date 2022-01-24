@@ -2,5 +2,6 @@
 <mat-form-field>
   <mat-label>New username</mat-label>
   <input type="text" [(ngModel)]="username" matInput />
+  <mat-error *ngIf="isUsernameTaken">Current username is taken.</mat-error>
 </mat-form-field>
 <button mat-raised-button color="primary" (click)="changeUserName(username)">Update</button>

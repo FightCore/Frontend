@@ -19,4 +19,5 @@ export enum AuthErrors {
   providerAlreadyLinked = 'auth/provider-already-linked',
   credentialNotFound = 'auth/credential-not-found',
   tooManyRequests = 'auth/too-many-requests',
+  unknown = 'auth/unknown',
 }
