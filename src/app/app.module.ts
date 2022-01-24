@@ -2,10 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModules } from './material-modules';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMugHot } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faDocker, faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
@@ -17,8 +16,6 @@ import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { GameSelectorComponent } from './components/games/game-selector/game-selector.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostHelpComponent } from './components/posts/post-help/post-help.component';
-import { LoginComponent } from './pages/login/login.component';
-import { AuthCallbackComponent } from './pages/auth-callback/auth-callback.component';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { PostDisplayComponent } from './pages/post-display/post-display.component';
 import { LikeButtonComponent } from './components/posts/like-button/like-button.component';
@@ -30,7 +27,6 @@ import { CharacterDisplayComponent } from './pages/character-display/character-d
 import { CharacterEditComponent } from './pages/character-edit/character-edit.component';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './pages/user/user.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { TitlebarComponent } from './components/common/titlebar/titlebar.component';
 import { CharacterPickerComponent } from './components/characters/character-picker/character-picker.component';
@@ -80,8 +76,20 @@ import { FramedataCharacterComponent } from './pages/framedata/framedata-charact
 import { FramedataViewMoveComponent } from './pages/framedata/framedata-view-move/framedata-view-move.component';
 import { ViewMoveDialogComponent } from './components/frame-data/view-move-dialog/view-move-dialog.component';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { TokenInterceptor } from 'src/app/interceptors/http-token-interceptor';
+import { LoginDialogComponent } from './components/auth/login-dialog/login-dialog.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from 'src/app/store/user/user.reducer';
+import { ChangeUsernameDialogComponent } from './components/user/change-username-dialog/change-username-dialog.component';
+import { UserOptionsButtonComponent } from './components/auth/user-options-button/user-options-button.component';
+import { EditUserComponent } from './pages/users/edit-user/edit-user.component';
 
 // AoT requires an exported function for factories
+// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -123,6 +131,9 @@ export function createTranslateLoader(http: HttpClient) {
       },
       defaultLanguage: 'en',
     }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    StoreModule.forRoot({ user: userReducer }),
   ],
   declarations: [
     AppComponent,
@@ -132,8 +143,6 @@ export function createTranslateLoader(http: HttpClient) {
     CreatePostComponent,
     GameSelectorComponent,
     PostHelpComponent,
-    LoginComponent,
-    AuthCallbackComponent,
     PostDisplayComponent,
     LikeButtonComponent,
     EditPostComponent,
@@ -143,7 +152,6 @@ export function createTranslateLoader(http: HttpClient) {
     CharacterDisplayComponent,
     CharacterEditComponent,
     UserComponent,
-    RegisterComponent,
     TitlebarComponent,
     CharacterPickerComponent,
     HomeComponent,
@@ -188,9 +196,22 @@ export function createTranslateLoader(http: HttpClient) {
     FramedataCharacterComponent,
     FramedataViewMoveComponent,
     ViewMoveDialogComponent,
+    LoginDialogComponent,
+    RegisterComponent,
+    ChangeUsernameDialogComponent,
+    UserOptionsButtonComponent,
+    EditUserComponent,
   ],
-  entryComponents: [PostHelpComponent, RegisterComponent, PostPreviewDialogComponent, HitboxTableDialogComponent],
-  providers: [AppComponent, { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
+  entryComponents: [PostHelpComponent, PostPreviewDialogComponent, HitboxTableDialogComponent],
+  providers: [
+    AppComponent,
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

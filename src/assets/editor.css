@@ -11,7 +11,7 @@ h4,
 h5,
 h6,
 strong > span {
-  font-family: headshot, Roboto;
+  font-family: headshot, Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 p {

@@ -1,0 +1,33 @@
+<h2>Login</h2>
+<div class="mb-2" *ngIf="loginError != null" [ngSwitch]="loginError">
+  <mat-error *ngSwitchCase="loginErrorType.invalidCredentials">
+    The email and password combination is invalid, please enter a valid combination and try again
+  </mat-error>
+  <mat-error *ngSwitchCase="loginErrorType.userDisabled"
+    >Your account has been disabled, please contact an administrator for the reason why</mat-error
+  >
+  <mat-error *ngSwitchCase="loginErrorType.unknownError">
+    An unknown error has occurred, please try again later
+  </mat-error>
+  <mat-error *ngSwitchCase="loginErrorType.tooManyLogins">
+    Too many login attempts have been made, Please try again later
+  </mat-error>
+</div>
+<form [formGroup]="formGroup" (submit)="loginWithEmailAndPassword()">
+  <mat-form-field class="w-100">
+    <mat-label>Enter your email</mat-label>
+    <input formControlName="email" matInput required />
+    <mat-error *ngIf="formGroup.hasError('email', 'email')">Please enter a valid email</mat-error>
+    <mat-error *ngIf="formGroup.hasError('required', 'email')">An email is required</mat-error>
+  </mat-form-field>
+  <mat-form-field class="w-100">
+    <mat-label>Enter your password</mat-label>
+    <input formControlName="password" type="password" matInput required />
+    <mat-error *ngIf="formGroup.hasError('required', 'password')">A password is required</mat-error>
+  </mat-form-field>
+  <button class="w-100 mb-1" type="submit" color="primary" mat-raised-button>Login</button>
+</form>
+
+<button class="w-100" disabled color="accent" mat-raised-button>Forgot Password</button>
+<hr />
+<button class="w-100" (click)="loginWithGoogle()" color="primary" mat-raised-button>Login with Google</button>

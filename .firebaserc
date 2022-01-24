@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "fightcore": {
+      "hosting": {
+        "FightCore": [
+          "fightcore"
+        ]
+      }
+    }
+  }
+}

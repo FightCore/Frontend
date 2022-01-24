@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { UpdateWebsiteEditComponent } from '../../edits/edit/update-website-edit/update-website-edit.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Editable } from 'src/app/models/edits/editable';
+import { Store } from '@ngrx/store';
+import { selectUser } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-edits-overview',
@@ -14,16 +16,22 @@ import { Editable } from 'src/app/models/edits/editable';
   styleUrls: ['./edits-overview.component.scss'],
 })
 export class EditsOverviewComponent implements OnInit {
-  constructor(
-    private editService: EditService,
-    private dialog: MatDialog,
-    private authService: AuthService,
-    private toastrService: ToastrService
-  ) {}
   @Input() characterId: number;
   @Input() isContributor: boolean;
   @Input() readOnly = false;
   @Input() edits: EditDto[];
+  private userId: number;
+
+  constructor(
+    private editService: EditService,
+    private dialog: MatDialog,
+    private toastrService: ToastrService,
+    private store: Store
+  ) {
+    this.store.select(selectUser).subscribe((user) => {
+      this.userId = user?.id;
+    });
+  }
 
   ngOnInit(): void {}
 
@@ -68,6 +76,6 @@ export class EditsOverviewComponent implements OnInit {
   }
 
   isEdit(edit: EditDto): boolean {
-    return this.authService.id === edit.userId;
+    return this.userId === edit.userId;
   }
 }

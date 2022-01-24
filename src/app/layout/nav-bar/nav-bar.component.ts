@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
-import { RegisterComponent } from 'src/app/pages/register/register.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ThemeSchemeService } from 'src/app/services/theme/theme-scheme.service';
+import { LoginDialogComponent } from 'src/app/components/auth/login-dialog/login-dialog.component';
+import { Store } from '@ngrx/store';
+import { User } from 'src/app/models/user';
+import { selectUser } from 'src/app/store/user/user.selector';
+import { DialogSize } from 'src/app/helpers/dialog-size';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,14 +15,6 @@ import { ThemeSchemeService } from 'src/app/services/theme/theme-scheme.service'
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private dialog: MatDialog,
-    private router: Router,
-    private themeService: ThemeSchemeService
-  ) {}
-
-  userName: string;
   opened: boolean;
 
   links = [
@@ -35,47 +31,41 @@ export class NavBarComponent implements OnInit {
       route: ['/framedata'],
     },
   ];
+
+  currentUser: User;
+
+  constructor(
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private router: Router,
+    private themeService: ThemeSchemeService,
+    private store: Store
+  ) {
+    this.store.select(selectUser).subscribe((user) => {
+      this.currentUser = user;
+    });
+  }
+
   ngOnInit() {}
 
   toggleDarkMode(): void {
     this.themeService.toggle();
   }
 
-  getUserName(): string {
-    if (this.userName) {
-      return this.userName;
-    }
-
-    if (this.authService.isAuthenticated()) {
-      this.userName = this.authService.name;
-      return this.userName;
-    }
-  }
-
-  isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
-  }
-
   logout() {
     localStorage.setItem('PreviousUrl', this.router.url);
-    return this.authService.signout();
+    this.authService.logout();
   }
 
   toUser() {
-    this.router.navigate(['user', this.authService.id]);
-  }
-
-  register() {
-    this.dialog.open(RegisterComponent, {
-      width: '40em',
-    });
+    this.router.navigate(['user', this.currentUser.id]);
   }
 
   hideSidebar() {
     this.opened = false;
   }
 
-  goToLogin(): void {
-    this.authService.login();
+  onOpenLoginClick(): void {
+    this.dialog.open(LoginDialogComponent, { width: DialogSize.smallWidth });
   }
 }

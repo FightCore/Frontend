@@ -1,82 +1,60 @@
-<h2 mat-dialog-title class="title">{{ 'Authentication.CreateYourAccount' | translate }}</h2>
-<mat-dialog-content>
-  <form class="user-form">
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'Authentication.Email' | translate }}</mat-label>
-      <input
-        matInput
-        [formControl]="email"
-        required
-      />
-      <mat-error *ngIf="email.invalid">{{ getErrorMessage(email) }}</mat-error>
-    </mat-form-field>
+<div class="container">
+  <h2>Register</h2>
+  <div class="row">
+    <div class="col-lg-6 col-12">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <mat-card>
+          <mat-card-content>
+            <h3>Create an account</h3>
+            <div class="mb-2" *ngIf="errorCode != null" [ngSwitch]="errorCode">
+              <mat-error *ngSwitchCase="errorCodes.weakPassword">
+                The used password is too weak and should at least be 6 characters long, consider using a password
+                manager.
+              </mat-error>
+              <mat-error *ngSwitchCase="errorCodes.emailAlreadyInUse"> The email address is already in use. </mat-error>
+              <mat-error *ngSwitchCase="errorCodes.invalidEmail"> The email address is invalid. </mat-error>
+              <mat-error *ngSwitchDefault> An unknown error has occurred. </mat-error>
+            </div>
+            <mat-form-field class="w-100">
+              <mat-label>Enter your username</mat-label>
+              <input (focusout)="onFocusoutCheckUsername()" formControlName="username" matInput required />
+              <mat-error *ngIf="registerForm.get('username').hasError('required')"> Username is required </mat-error>
+              <mat-error *ngIf="registerForm.get('username').hasError('taken')"
+                >Current username is already taken</mat-error
+              >
+            </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'Authentication.Username' | translate }}</mat-label>
-      <input
-        matInput
-        [formControl]="username"
-        required
-      />
-      <mat-error *ngIf="username.invalid">{{
-        getErrorMessage(username)
-      }}</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'Authentication.Password' | translate }}</mat-label>
-      <input
-        matInput
-        [formControl]="password"
-        type="password"
-        required
-      />
-      <mat-error *ngIf="password.invalid">{{
-        getErrorMessage(password)
-      }}</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>{{ 'Authentication.ConfirmPassword' | translate }}</mat-label>
-      <input
-        matInput
-        placeholder="Confirm your password"
-        [formControl]="confirmPassword"
-        type="password"
-        required
-      />
-      <mat-error *ngIf="confirmPassword.invalid">{{
-        getErrorMessage(confirmPassword)
-      }}</mat-error>
-    </mat-form-field>
-    <!-- Password validations -->
-    <mat-hint align="end" aria-live="polite">
-      {{ password.value.length }} / 25
-    </mat-hint>
-    <mat-password-strength #passwordComponent [password]="password.value">
-    </mat-password-strength>
-    <mat-checkbox [(ngModel)]="showPasswordInfo" name="showPasswordInfo" i18n
-      >{{ 'Authentication.ShowDetails' | translate }}
-    </mat-checkbox>
-    <mat-password-strength-info
-      *ngIf="showPasswordInfo"
-      [passwordComponent]="passwordComponent"
-    >
-    </mat-password-strength-info>
-    <!-- End Password Validation -->
-    <div class="p-2">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="register()"
-        class="register-button"
-        i18n
-      >
-      {{ 'Authentication.Register' | translate }}
-      </button>
-      <button type="button" mat-raised-button (click)="login()" class="register-button">
-        {{ 'Authentication.Login' | translate }}
-      </button>
+            <mat-form-field class="w-100">
+              <mat-label>Enter your email</mat-label>
+              <input formControlName="email" matInput required />
+              <mat-error *ngIf="registerForm.get('email').hasError('required')"> Email is required </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Enter your Password</mat-label>
+              <input type="password" formControlName="password" matInput required />
+              <mat-error *ngIf="registerForm.get('password').hasError('required')"> Password is required </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+              <mat-label>Confirm your password</mat-label>
+              <input type="password" formControlName="confirmPassword" matInput required />
+              <mat-error *ngIf="registerForm.get('confirmPassword').hasError('required')">
+                Confirming the password is required
+              </mat-error>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button type="submit" color="primary" mat-raised-button>Submit</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
     </div>
-  </form>
-</mat-dialog-content>
+    <div class="col-lg-6 col-12">
+      <mat-card>
+        <mat-card-content>
+          <h3>Benefits of having an account</h3>
+          <p></p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

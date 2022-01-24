@@ -1,100 +1,128 @@
-// eslint-disable-next-line max-len
-// Original source: https://github.com/mmacneil/AngularASPNETCoreOAuth/blob/master/src/Spa/oauth-client/src/app/core/authentication/auth.service.ts
-
-import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { UserManager, UserManagerSettings, User } from 'oidc-client';
-import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Store } from '@ngrx/store';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import { from, Observable, of } from 'rxjs';
+import { first, switchMap, tap } from 'rxjs/operators';
+import { User } from 'src/app/models/user';
+import { clearUser, setUser } from 'src/app/store/user/user.actions';
+import { UserService } from '../user/user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  // Observable navItem source
-  private authNavStatusSource = new BehaviorSubject<boolean>(false);
-  // Observable navItem stream
-  authNavStatus$ = this.authNavStatusSource.asObservable();
-  authenticationDone = new EventEmitter<boolean>();
-  isAuthenticationDone: boolean;
-  private manager = new UserManager(getClientSettings());
-  private user: User | null;
+  public static userKey = 'fightcore_user';
+  private user?: firebase.User;
+  constructor(private angularFireAuth: AngularFireAuth, private userService: UserService, private store: Store) {
+    angularFireAuth.user
+      .pipe(
+        switchMap((firebaseUser) => {
+          if (firebaseUser == null) {
+            return of(null);
+          }
 
-  constructor(private http: HttpClient) {
-    this.manager.getUser().then(user => {
-      this.user = user;
-      this.authNavStatusSource.next(this.isAuthenticated());
-      this.authenticationDone.emit(this.isAuthenticated());
-      this.isAuthenticationDone = true;
-    });
+          this.user = firebaseUser;
+          const user = sessionStorage.getItem(AuthService.userKey);
+          if (user != null) {
+            return of(JSON.parse(user) as User);
+          }
+
+          return this.userService.getCurrentUser();
+        })
+      )
+      .subscribe((user) => {
+        if (user == null) {
+          this.store.dispatch(clearUser());
+          return;
+        }
+
+        this.dispatchUser(user);
+      });
   }
 
-  login() {
-    if (environment.mocking) {
-      return;
+  getIdToken(): Observable<string> {
+    if (this.user) {
+      return from(this.user.getIdToken());
     }
 
-    return this.manager.signinRedirect();
-  }
+    return this.angularFireAuth.user.pipe(
+      switchMap((user) => {
+        if (user) {
+          return user.getIdToken();
+        }
 
-  async completeAuthentication() {
-    this.user = await this.manager.signinRedirectCallback();
-    this.authNavStatusSource.next(this.isAuthenticated());
-  }
-
-  register(userRegistration: any) {
-    return this.http
-      .post(environment.authentication.authUrl + '/account', userRegistration);
+        return of(null);
+      })
+    );
   }
 
   isAuthenticated(): boolean {
-    return this.user != null && !this.user.expired;
+    return this.user != null;
   }
 
-  get authorizationHeaderValue(): string {
-    if (!this.isAuthenticated()) {
-      return '';
-    }
-
-    return `${this.user.token_type} ${this.user.access_token}`;
+  emailAndPasswordRegister(email: string, password: string): Observable<firebase.auth.UserCredential> {
+    return from(firebase.auth().createUserWithEmailAndPassword(email, password));
   }
 
-  get name(): string {
-    if (!this.isAuthenticated()) {
-      return '';
-    }
+  emailAndPasswordLogin(email: string, password: string): Observable<firebase.auth.UserCredential> {
+    return from(
+      firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => this.angularFireAuth.signInWithEmailAndPassword(email, password))
+        .then((firebaseResponse) => {
+          if (firebaseResponse == null) {
+            throw new Error('Failed to login');
+          }
 
-    return this.user != null ? this.user.profile.name : '';
+          return firebaseResponse;
+        })
+    );
   }
 
-  get id(): number {
-    if (!this.isAuthenticated()) {
-      return 5;
-    }
+  forgotPassword(email: string): void {
+    from(firebase.auth().sendPasswordResetEmail(email)).subscribe(
+      () => {},
+      (error) => {
+        if (error.code === 'auth/user-not-found') {
+          throw new Error('User not found');
+        }
 
-    return this.user != null ? parseFloat(this.user.profile.sub) : 0;
+        throw error;
+      }
+    );
   }
 
-  signout() {
-    if (environment.mocking) {
-      return;
-    }
+  googleLogin(): Observable<firebase.auth.UserCredential> {
+    return from(
+      firebase
+        .auth()
+        .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+        .then(() => {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          return this.angularFireAuth.signInWithPopup(provider);
+        })
+        .then((firebaseResponse) => {
+          if (firebaseResponse == null) {
+            throw new Error('Failed to login');
+          }
 
-    this.manager.signoutRedirect();
+          return firebaseResponse;
+        })
+    );
   }
-}
 
-export function getClientSettings(): UserManagerSettings {
-  return {
-    authority: environment.authentication.authUrl,
-    client_id: environment.authentication.clientId,
-    redirect_uri: environment.authentication.callbackUrl,
-    post_logout_redirect_uri: environment.authentication.redirectUrl,
-    response_type: 'id_token token',
-    scope: 'openid profile fightcore-backend',
-    filterProtocolClaims: true,
-    loadUserInfo: true,
-    automaticSilentRenew: true,
-    silent_redirect_uri: 'http://localhost:4200/silent-refresh.html'
-  };
+  logout(): void {
+    sessionStorage.removeItem(AuthService.userKey);
+    from(this.angularFireAuth.signOut()).subscribe(() => {
+      this.user = null;
+    });
+  }
+
+  private dispatchUser(user: User): void {
+    this.store.dispatch(setUser({ user }));
+    sessionStorage.setItem(AuthService.userKey, JSON.stringify(user));
+  }
 }

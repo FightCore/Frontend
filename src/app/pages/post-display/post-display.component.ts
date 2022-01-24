@@ -11,6 +11,8 @@ import { GameThemes } from 'src/styles/gameThemes';
 import { saveAs } from 'file-saver';
 import { PostCategory } from 'src/app/models/post/post-category';
 import { CreateCommentComponent } from 'src/app/components/posts/comments/create-comment/create-comment.component';
+import { Store } from '@ngrx/store';
+import { selectUser } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-post-display',
@@ -18,12 +20,13 @@ import { CreateCommentComponent } from 'src/app/components/posts/comments/create
   styleUrls: ['./post-display.component.scss'],
 })
 export class PostDisplayComponent implements OnInit {
+  @ViewChild('createComments', { static: false }) createCommentsComponent: CreateCommentComponent;
+
   post: Post;
   htmlContent: string;
   markdownContent: string;
   isMarkdown = false;
-  loading: boolean = true;
-  @ViewChild('createComments', { static: false }) createCommentsComponent: CreateCommentComponent;
+  loading = true;
 
   categories = [
     { value: PostCategory.uncategorised, name: 'Posts.Category.NoCategory' },
@@ -36,14 +39,21 @@ export class PostDisplayComponent implements OnInit {
     { value: PostCategory.tournament, name: 'Posts.Category.Tournament' },
   ];
 
+  private userId: number;
+
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
     private router: Router,
     private toastrService: ToastrService,
     private markdownService: MarkdownService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private store: Store
+  ) {
+    this.store.select(selectUser).subscribe((user) => {
+      this.userId = user?.id;
+    });
+  }
 
   ngOnInit() {
     this.markdownService.renderer.image = (href: string, title: string, text: string) => {
@@ -63,12 +73,13 @@ export class PostDisplayComponent implements OnInit {
       }
     );
   }
+
   isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+    return this.userId > 0;
   }
 
   isPostFromUser(): boolean {
-    return this.authService.isAuthenticated() && this.post.author.id === this.authService.id;
+    return this.post.author.id === this.userId;
   }
 
   editPost() {

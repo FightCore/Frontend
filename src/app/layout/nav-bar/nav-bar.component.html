@@ -17,10 +17,10 @@
           {{ link.name | translate }}
         </button>
       </div>
-      <div *ngIf="isAuthenticated(); else mobileLogin">
+      <div *ngIf="currentUser; else mobileLogin">
         <button color="accent" mat-flat-button class="text-center w-100 mb-1" (click)="hideSidebar(); toUser()" i18n>
           <mat-icon>account_circle</mat-icon>
-          {{ getUserName() }}
+          {{ currentUser.name }}
         </button>
 
         <button color="accent" mat-flat-button class="text-center w-100 mb-1" (click)="hideSidebar(); logout()" i18n>
@@ -40,12 +40,11 @@
           <a *ngFor="let link of links" [routerLink]="link.route" i18n> {{ link.name | translate }}</a>
           <span class="spacer"></span>
           <button (click)="toggleDarkMode()" mat-button><mat-icon>nights_stay</mat-icon></button>
-          <app-language class="language-picker p-3"></app-language>
-          <a *ngIf="isAuthenticated(); else login" (click)="toUser()">
-            <mat-icon>account_circle</mat-icon>
-            {{ getUserName() }}</a
-          >
-          <a *ngIf="isAuthenticated()" (click)="logout()" i18n> {{ 'Authentication.Logout' | translate }}</a>
+          <app-language class="d-none language-picker p-3"></app-language>
+          <app-user-options-button
+            *ngIf="currentUser; else login"
+            [currentUser]="currentUser"
+          ></app-user-options-button>
         </mat-toolbar-row>
       </mat-toolbar>
     </div>
@@ -64,12 +63,18 @@
 </mat-sidenav-container>
 
 <ng-template #login>
-  <a (click)="register()">{{ 'Authentication.Register' | translate }}</a>
-  <a (click)="goToLogin()">{{ 'Authentication.Login' | translate }}</a>
+  <a [routerLink]="['/register']">{{ 'Authentication.Register' | translate }}</a>
+  <a (click)="onOpenLoginClick()">{{ 'Authentication.Login' | translate }}</a>
 </ng-template>
 
 <ng-template #mobileLogin>
-  <button color="accent" class="text-center w-100 mb-1" mat-raised-button (click)="hideSidebar(); register()">
+  <button
+    color="accent"
+    class="text-center w-100 mb-1"
+    mat-raised-button
+    (click)="hideSidebar()"
+    [routerLink]="['/register']"
+  >
     {{ 'Authentication.Register' | translate }}
   </button>
   <button class="text-center w-100" color="accent" mat-raised-button (click)="hideSidebar()" [routerLink]="['/login']">

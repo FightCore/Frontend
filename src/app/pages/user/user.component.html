@@ -1,23 +1,16 @@
 <div class="container-fluid">
-    <h1 class="title" *ngIf="user">
-        {{ user.name }}
-    </h1>
+  <h1 class="title" *ngIf="user">
+    {{ user.name }}
+    <mat-icon *ngIf="isCurrentUser" (click)="openEdit()">edit</mat-icon>
+  </h1>
   <app-loading *ngIf="loading; else postDisplay"></app-loading>
 </div>
 
 <ng-template #postDisplay>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>
-        <h2>{{ 'Posts.PostsBy' | translate:{name: user.name} }}</h2>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div *ngFor="let post of posts" class="col-lg-4 col-xs-12 p-2">
-          <app-post-preview [post]="post"></app-post-preview>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <h2>{{ 'Posts.PostsBy' | translate: { name: user.name } }}</h2>
+  <div class="row">
+    <div *ngFor="let post of posts" class="col-lg-4 col-xs-12 p-2">
+      <app-post-preview [post]="post"></app-post-preview>
+    </div>
+  </div>
 </ng-template>

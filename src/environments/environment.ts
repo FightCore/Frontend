@@ -7,13 +7,7 @@ export const environment = {
   mocking: false,
   enableAvatars: false,
   baseUrl: 'https://localhost:5001',
-  authentication: {
-    authUrl: 'https://localhost:5000',
-    callbackUrl: 'http://localhost:4200/auth-callback',
-    redirectUrl: 'http://localhost:4200/',
-    clientId: 'fightcore_dev',
-  },
-  // TODO Move this to a possible environment.json
+  firebase: {},
   links: {
     discord: 'https://discord.gg/CVqDy6c',
     github: 'https://github.com/fightcore',
